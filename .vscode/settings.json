@@ -6,6 +6,8 @@
         "asset_cache.h": "c",
         "landing_page.h": "c",
         "asset.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "stdlib.h": "c",
+        "sdl_wrapper.h": "c"
     }
 }

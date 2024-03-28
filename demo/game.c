@@ -14,12 +14,6 @@ const vector_t SDL_MIN = {0, 0};
 const vector_t SDL_MAX = {1000, 500};
 const vector_t SDL_CENTER = {500, 250};
 
-typedef struct cell
-{
-    size_t x;
-    size_t y;
-} cell_t;
-
 typedef struct _stack
 {
     cell_t *cell;
