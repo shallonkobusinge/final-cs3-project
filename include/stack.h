@@ -1,16 +1,21 @@
-typedef struct stack stack_t
+#ifndef __STACK_H__
+#define __STACK_H__
 
+#include "cell.h"
+
+typedef struct stack stack_t;
 
 /**
- * 
+ * Add a new cell to the start of the stack
+ * @param cell cell to push to stack
+ */ 
 void push_stack(cell_t *cell);
 
 
-cell_t *pop_stack()
-{
-    cell_t *removed = first_cell->cell;
-    stack_t *p = first_cell;
-    first_cell = first_cell->next;
-    free(p);
-    return removed;
-}
+/**
+ * Remove a cell at the start of the stack
+ * @param cell cell to pop from stack
+ */ 
+cell_t *pop_stack();
+
+#endif // #ifndef __STACK_H__

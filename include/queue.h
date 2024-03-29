@@ -1,37 +1,21 @@
 
-typedef struct _queue
-{
-    cell_t *cell;
-    struct _queue *next;
-} queue_t;
+#ifndef __QUEUE_H__
+#define __QUEUE_H__
 
-static queue_t *firstCell;
+#include "cell.h"
 
-void enqueue(cell_t *cell)
-{
-    queue_t *newCell = malloc(sizeof(cell_t));
-    newCell->cell = cell;
-    newCell->next = NULL;
-    if (firstCell == NULL)
-    {
-        firstCell = newCell;
-        return;
-    }
-    queue_t *p = firstCell;
-    queue_t *predCell;
-    while (p != NULL)
-    {
-        predCell = p;
-        p = p->next;
-    }
-    predCell->next = newCell;
-}
+typedef struct queue queue_t;
 
-cell_t *dequeue()
-{
-    cell_t *removedCell = firstCell->cell;
-    queue_t *p = firstCell;
-    firstCell = firstCell->next;
-    free(p);
-    return removedCell;
-}
+/**
+ * Add a new cell to the end of a queue
+ * @param cell cell to add to queue
+ */ 
+void enqueue(cell_t *cell);
+
+/**
+ * Remove a cell at the start of the queue 
+ */
+cell_t *dequeue();
+
+
+#endif // #ifndef __QUEUE_H__
