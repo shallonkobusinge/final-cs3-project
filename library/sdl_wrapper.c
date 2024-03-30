@@ -346,17 +346,17 @@ void render_line(int x, int y, int w, int h)
   SDL_RenderDrawLine(renderer, x, y, w, h);
 }
 
-void draw_color(rgb_color_t color)
+void render_color(rgb_color_t color)
 {
   SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, 255);
 }
 
-void render_present()
-{
-  SDL_RenderPresent(renderer);
-}
+// void render_present()
+// {
+//   SDL_RenderPresent(renderer);
+// }
 
-void show()
-{
-  SDL_RenderPresent(renderer);
-}
+// void show()
+// {
+//   SDL_RenderPresent(renderer);
+// }

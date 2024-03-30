@@ -8,6 +8,9 @@
         "asset.h": "c",
         "string.h": "c",
         "stdlib.h": "c",
-        "sdl_wrapper.h": "c"
+        "sdl_wrapper.h": "c",
+        "generate_maze.h": "c",
+        "vector.h": "c",
+        "stack.h": "c"
     }
 }
