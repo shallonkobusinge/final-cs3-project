@@ -103,11 +103,27 @@ static void remove_wall(cell_t *cell, cell_t *neighbor)
     SDL_Delay(30);
 }
 
-/**
- * Generates maze using DFS.
- * Calls the init_maze function, creates and marks the first cell as visited.
- * Runs the DFS using a stack and it processes the cells until the stack is emptied.
- */
-void generate_maze();
+void generate_maze()
+{
+    init_maze();
 
-#endif // #ifndef __GENERATE_MAZE_H__
+    cell_t *cell = malloc(sizeof(cell_t));
+    cell->x = 1;
+    cell->y = 1;
+    visited[cell->x][cell->y] = true;
+
+    push_stack(cell);
+    while (head != NULL)
+    {
+        cell = pop_stack();
+        if (get_neighbor(cell) != NULL)
+        {
+            push_stack(cell);
+            cell_t *neighbor = get_neighbor(cell);
+            remove_wall(cell, neighbor);
+            visited[neighbor->x][neighbor->y] = true;
+            adjacency(cell, neighbor);
+            push_stack(neighbor);
+        }
+    }
+}
