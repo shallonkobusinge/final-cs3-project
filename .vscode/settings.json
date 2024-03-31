@@ -13,6 +13,7 @@
         "vector.h": "c",
         "stack.h": "c",
         "time.h": "c",
-        "cell.h": "c"
+        "cell.h": "c",
+        "stdio.h": "c"
     }
 }

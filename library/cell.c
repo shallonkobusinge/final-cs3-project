@@ -9,7 +9,11 @@ typedef struct cell
     size_t y;
 } cell_t;
 
-void adjacency(cell_t *current, cell_t *neighbor)
+const int grid_width = 25;
+const int grid_height = 12;
+const int num_cells = grid_width * grid_height;
+
+void adjacency(cell_t *current, cell_t *neighbor, bool adj_matrix[][num_cells])
 {
     int curr_pos = (current->x - 1) * grid_height + (current->y - 1);
     int neighbor_pos = (neighbor->x - 1) * grid_height + (neighbor->y - 1);
@@ -17,14 +21,14 @@ void adjacency(cell_t *current, cell_t *neighbor)
     adj_matrix[neighbor_pos][curr_pos] = true;
 }
 
-bool isAdjacency(cell_t *current, cell_t *neighbor)
+bool isAdjacency(cell_t *current, cell_t *neighbor, bool adj_matrix[][num_cells])
 {
     int curr_pos = (current->x - 1) * grid_height + (current->y - 1);
     int neighbor_pos = (neighbor->x - 1) * grid_height + (neighbor->y - 1);
     return adj_matrix[curr_pos][neighbor_pos];
 }
 
-cell_t *get_neighbor(cell_t *current)
+cell_t *get_neighbor(cell_t *current, bool visited[][grid_height + 2])
 {
     cell_t *neighbor = malloc(sizeof(cell_t));
 

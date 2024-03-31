@@ -14,7 +14,6 @@ const int window_width = (grid_width * grid_cell_size) + 1;
 const int window_height = (grid_height * grid_cell_size) + 1;
 const int num_cells = grid_width * grid_height;
 
-static stack_t *first_cell;
 bool visited[grid_width + 2][grid_height + 2];
 bool adj_matrix[num_cells][num_cells];
 cell_t *parent[grid_width][grid_height];
