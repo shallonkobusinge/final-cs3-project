@@ -20,8 +20,7 @@ bool visited[GRID_WIDTH + 2][GRID_HEIGHT + 2];
 bool adj_matrix[NUM_CELLS][NUM_CELLS];
 cell_t *parent[GRID_WIDTH][GRID_HEIGHT];
 
-SDL_Rect start_cell = (SDL_Rect){(GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
-;
+SDL_Rect hider_cell = (SDL_Rect){(GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
 
 static stack_t *head;
 typedef struct state
@@ -71,7 +70,7 @@ static void init_grid()
     }
 
     render_color((rgb_color_t){0, 0, 0});
-    render_rect(&start_cell);
+    render_rect(&hider_cell);
 
     SDL_Rect terminal_cell;
     terminal_cell.x = ((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
@@ -127,31 +126,30 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
         {
         case LEFT_ARROW:
         {
-            start_cell.x -= GRID_CELL_SIZE;
-            render_color((rgb_color_t){0, 0, 0});
-            render_rect(&start_cell);
-            printf("going left\n");
+            if (hider_cell.x - GRID_CELL_SIZE >= 0)
+            {
+                hider_cell.x -= GRID_CELL_SIZE;
+            }
+            hider_cell.x -= GRID_CELL_SIZE;
+            render_rect(&hider_cell);
             break;
         }
         case RIGHT_ARROW:
         {
-            start_cell.x += GRID_CELL_SIZE;
-            render_rect(&start_cell);
-            printf("going right\n");
+            hider_cell.x += GRID_CELL_SIZE;
+            render_rect(&hider_cell);
             break;
         }
         case UP_ARROW:
         {
-            start_cell.y -= GRID_CELL_SIZE;
-            render_rect(&start_cell);
-            printf("going up\n");
+            hider_cell.y -= GRID_CELL_SIZE;
+            render_rect(&hider_cell);
             break;
         }
         case DOWN_ARROW:
         {
-            start_cell.y += GRID_CELL_SIZE;
-            render_rect(&start_cell);
-            printf("going down\n");
+            hider_cell.y += GRID_CELL_SIZE;
+            render_rect(&hider_cell);
             break;
         }
         }
