@@ -72,13 +72,13 @@ static void init_grid()
     render_color((rgb_color_t){0, 255, 0});
     render_rect(&hider_cell);
 
-    render_color((rgb_color_t){0, 0, 0});
-
     SDL_Rect terminal_cell;
     terminal_cell.x = ((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
     terminal_cell.y = ((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
     terminal_cell.w = GRID_CELL_SIZE / 2;
     terminal_cell.h = GRID_CELL_SIZE / 2;
+
+    render_color((rgb_color_t){0, 0, 0});
     render_rect(&terminal_cell);
 
     sdl_show();
