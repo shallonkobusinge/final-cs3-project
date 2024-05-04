@@ -5,11 +5,10 @@
 #include <string.h>
 #include <time.h>
 
-#include "landing_page.h"
-#include "generate_maze.h"
 #include "asset_cache.h"
 #include "sdl_wrapper.h"
-#include "stack.h"
+#include "landing_page.h"
+#include "maze.h"
 
 const vector_t MIN = {0, 0};
 const vector_t MAX = {1000, 500};
