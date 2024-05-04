@@ -38,7 +38,7 @@ state_t *emscripten_init()
     state->scene = scene_init();
     state->page = 1;
     state->maze_state = maze_init();
-    state->landing_page_state = maze_init();
+    state->landing_page_state = landing_page_init();
 
     return state;
 }
@@ -47,11 +47,11 @@ bool emscripten_main(state_t *state)
 {
     sdl_clear();
 
-    if (state->page == 0)
+    if (state->page == 1)
     {
         show_landing_page();
     }
-    else if (state->page == 1)
+    else if (state->page == 2)
     {
         show_maze(state->maze_state);
     }

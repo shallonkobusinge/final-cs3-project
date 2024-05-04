@@ -10,13 +10,14 @@ typedef struct btn_element btn_element_t;
 typedef struct landing_page_state landing_page_state_t;
 
 /**
- * Display the landing page
+ * Display and renders all the assets on the landing page.
+ * @param page_state state of the page
  */
-void show_landing_page();
+void show_landing_page(landing_page_state_t *page_state);
 
 /**
- * Initialize landing page assets
- * @return state of the landing page
+ * Initialize landing page images, buttons and texts.
+ * @return state of the landing page.
  */
 landing_page_state_t *landing_page_init();
 

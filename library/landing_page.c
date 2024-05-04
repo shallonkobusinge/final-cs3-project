@@ -197,23 +197,22 @@ static list_t *build_btn_assets()
     return assets;
 }
 
-void show_landing_page()
+void show_landing_page(landing_page_state_t *page_state)
 {
-    list_t *imgs = build_img_assets();
+    list_t *imgs = page_state->imgs;
     for (size_t i = 0; i < list_size(imgs); i++)
     {
         asset_render(list_get(imgs, i));
     }
 
-    list_t *texts = build_text_assets();
-
+    list_t *texts = page_state->texts;
     for (size_t i = 0; i < list_size(texts); i++)
     {
 
         asset_render(list_get(texts, i));
     }
 
-    list_t *btns = build_btn_assets();
+    list_t *btns = page_state->btns;
     for (size_t i = 0; i < list_size(btns); i++)
     {
         asset_render(list_get(btns, i));
