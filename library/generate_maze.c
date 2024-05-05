@@ -201,7 +201,7 @@ void remove_wall(cell_t *cell, cell_t *neighbor)
 {
     if (cell->x == neighbor->x)
     {
-        render_color((rgb_color_t){255, 0, 0});
+        render_color((rgb_color_t){22, 22, 22});
         size_t y = find_max(cell->y, neighbor->y);
         render_line((cell->x - 1) * GRID_CELL_SIZE,
                     (y - 1) * GRID_CELL_SIZE,
@@ -211,7 +211,7 @@ void remove_wall(cell_t *cell, cell_t *neighbor)
 
     else if (cell->y == neighbor->y)
     {
-        render_color((rgb_color_t){255, 0, 0});
+        render_color((rgb_color_t){22, 22, 22});
 
         int x = find_max(cell->x, neighbor->x);
         render_line((x - 1) * GRID_CELL_SIZE,
@@ -229,27 +229,27 @@ bool generate_maze(state_t *state)
     printf("Page: %d\n", state->page);
 
     init_grid();
-    // init_maze();
+    init_maze();
 
-    // cell_t *cell = malloc(sizeof(cell_t));
-    // cell->x = 1;
-    // cell->y = 1;
-    // visited[cell->x][cell->y] = true;
+    cell_t *cell = malloc(sizeof(cell_t));
+    cell->x = 1;
+    cell->y = 1;
+    visited[cell->x][cell->y] = true;
 
-    // push_stack(&head, cell);
+    push_stack(&head, cell);
 
-    // while (head != NULL)
-    // {
-    //     cell = pop_stack(&head);
-    //     if (get_neighbor(cell, visited) != NULL)
-    //     {
-    //         push_stack(&head, cell);
-    //         cell_t *neighbor = get_neighbor(cell, visited);
-    //         remove_wall(cell, neighbor);
-    //         visited[neighbor->x][neighbor->y] = true;
-    //         adjacency(cell, neighbor, adj_matrix);
-    //         push_stack(&head, neighbor);
-    //     }
-    // }
+    while (head != NULL)
+    {
+        cell = pop_stack(&head);
+        if (get_neighbor(cell, visited) != NULL)
+        {
+            push_stack(&head, cell);
+            cell_t *neighbor = get_neighbor(cell, visited);
+            remove_wall(cell, neighbor);
+            visited[neighbor->x][neighbor->y] = true;
+            adjacency(cell, neighbor, adj_matrix);
+            push_stack(&head, neighbor);
+        }
+    }
     return false;
 }
