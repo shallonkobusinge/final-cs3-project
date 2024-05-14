@@ -19,10 +19,7 @@ const size_t NUM_BUILDINGS = 2;
 
 SDL_Rect hider = (SDL_Rect){(GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
 
-typedef struct state
-{
-    maze_state_t *maze_state;
-} state_t;
+typedef struct state state_t;
 
 typedef struct maze
 {

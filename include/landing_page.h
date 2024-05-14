@@ -7,9 +7,17 @@ typedef struct img_element img_element_t;
 
 typedef struct btn_element btn_element_t;
 
+typedef struct landing_page_state landing_page_state_t;
+
 /**
- * Build all assets of the landing page
+ * Display the landing page
  */
-void build_landing_page();
+void show_landing_page();
+
+/**
+ * Initialize landing page assets
+ * @return state of the landing page
+ */
+landing_page_state_t *landing_page_init();
 
 #endif // #ifndef __LANDING_PAGE_H__

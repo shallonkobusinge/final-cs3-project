@@ -30,6 +30,13 @@ typedef struct btn_element
     button_handler_t handler;
 } btn_element_t;
 
+typedef struct landing_page_state
+{
+    list_t *imgs;
+    list_t *btns;
+    list_t *texts;
+} landing_page_state_t;
+
 /**
  * Load game screen
  */
@@ -37,7 +44,6 @@ static void load_game_screen(state_t *state)
 {
     printf("Next screen\n");
 }
-
 
 btn_element_t btn_elements[] = {
     {
@@ -121,7 +127,7 @@ img_element_t img_elements[] = {
  * Build text assets from text templates
  * @return list of text assets
  */
-static list_t *build_landing_text_assets()
+static list_t *build_text_assets()
 {
     list_t *assets = list_init(LANDING_PAGE_TEXT_ELEMENTS, free);
     for (size_t i = 0; i < LANDING_PAGE_TEXT_ELEMENTS; i++)
@@ -138,7 +144,7 @@ static list_t *build_landing_text_assets()
  * Build image assets from image templates
  * @return list of image assets
  */
-static list_t *build_landing_img_assets()
+static list_t *build_img_assets()
 {
     list_t *assets = list_init(LANDING_PAGE_IMG_ELEMENTS, free);
     for (size_t i = 0; i < LANDING_PAGE_IMG_ELEMENTS; i++)
@@ -180,7 +186,7 @@ static asset_t *create_btn(btn_element_t btn_element)
  * Build buttons assets from buttons templates
  * @return list of button assets
  */
-static list_t *build_landing_btn_assets()
+static list_t *build_btn_assets()
 {
     list_t *assets = list_init(LANDING_PAGE_BTN_ELEMENTS, (free_func_t)asset_destroy);
     for (size_t i = 0; i < LANDING_PAGE_BTN_ELEMENTS; i++)
@@ -191,25 +197,36 @@ static list_t *build_landing_btn_assets()
     return assets;
 }
 
-void build_landing_page()
+void show_landing_page()
 {
-     list_t *imgs = build_landing_img_assets();
+    list_t *imgs = build_img_assets();
     for (size_t i = 0; i < list_size(imgs); i++)
     {
         asset_render(list_get(imgs, i));
     }
 
-    list_t *texts = build_landing_text_assets();
-    
+    list_t *texts = build_text_assets();
+
     for (size_t i = 0; i < list_size(texts); i++)
     {
-       
+
         asset_render(list_get(texts, i));
     }
-   
-    list_t *btns = build_landing_btn_assets();
+
+    list_t *btns = build_btn_assets();
     for (size_t i = 0; i < list_size(btns); i++)
     {
         asset_render(list_get(btns, i));
     }
+}
+
+landing_page_state_t *landing_page_init()
+{
+    landing_page_state_t *page_state = malloc(sizeof(landing_page_state_t));
+
+    page_state->imgs = build_img_assets();
+    page_state->texts = build_text_assets();
+    page_state->btns = build_btn_assets();
+
+    return page_state;
 }
