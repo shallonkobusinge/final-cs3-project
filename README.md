@@ -2,8 +2,8 @@
 
 ## TITLE: Trash Trivia
 ## MEMBERS:
-    1. [Divin Irakiza](https://gitlab.caltech.edu/dirakiza "Gitlab profile")
-    2. [Shallon Kobusinge](https://gitlab.caltech.edu/skobusin "Gitlab profile")
+    1. [DivinIrakiza](https://gitlab.caltech.edu/dirakiza)
+    2. [ShallonKobusinge](https://gitlab.caltech.edu/skobusin)
 ## CONCEPT STATEMENT: Trivia gets trashy! Sort recyclables and make the environment greener. Answer questions on sustainability & win! 
 
 # GAMEPLAY
