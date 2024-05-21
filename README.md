@@ -20,13 +20,13 @@ Our physics engine will use vectors to represent velocity, acceleration, positio
 ## FEATURE SET
 | #      | Feature | Description | Priority | Member |
 | ----------- | ----------- |   ----------- |   ----------- |   ----------- | 
-| 1      | Physics engine        | - Implementing vectors to represent velocity, acceleration and position of moving objects. <br> - Collision detection. | 1 | Divin Irakiza |
+| 1      | Physics engine        | - Implementing vectors to represent velocity, acceleration and position of moving objects. <br> - Collision detection. | 1 | Divin |
 | 2|  Game window initialization | - Initialization of game window and loading background images related to sustainability themes. | 1 | Shallon | 
 |3 | Object Rendering | - Attaching images of trash items and bins (Shallon). <br> - Displaying the name of the trash items along with trash items (Divin). | 1 | Divin, Shallon  |
 |4 | Keyboard handling | - Handling user’s keyboard movements of objects to the correct bin. | 2 | Divin |
 | 5 | Score management | - Keeping track of the user’s points based on their long and correct answers | 2 | Shallon |
 | 6 | Scene management | - Handling different scenes in the game including the start screen, game play, end screen. | 3 | Shallon |
-| 7 | Feedback | - Displaying education messages, feedback to the user based on their correct and incorrect answers from the game. | 3 | Shallon | 
+| 7 | Feedback | - Displaying education messages, feedback to the user based on their correct and incorrect answers from the game. | 3 | Divin | 
 | 8 | Game screen customization. | - Handling “Choose object speed” and “Choose background environment” options. <br> - Mouse handling for setting preference values.  <br> -  Pause the game on the space bar and click the button. | 4| Divin |
 | 9 | Sound effects. | Playing background music | 4 | Shallon |
 
@@ -51,8 +51,8 @@ Our physics engine will use vectors to represent velocity, acceleration, positio
 | Week 1      |  Shallon |  - Game window initialization. <br> - Scene management. |
 | Week 2      |  Divin |  - Rendering titles to trash items. <br> - Collision Detection. |
 | Week 2      |  Shallon |  - Object rendering: Attaching images to the bodies. <br> - Score management. |
-| Week 3      |  Divin |  - Game screen customization. |
-| Week 3      |  Shallon |  - Feedback. <br> - Sound effects. |
+| Week 3      |  Divin |  - Game screen customization. <br> - Feedback |
+| Week 3      |  Shallon | - Sound effects. |
 
 
 ## DISASTER RECOVERY
