@@ -22,7 +22,7 @@ Our physics engine will use vectors to represent velocity, acceleration, positio
 | ----------- | ----------- |   ----------- |   ----------- |   ----------- | 
 | 1      | Physics engine        | - Implementing vectors to represent velocity, acceleration and position of moving objects. <br> - Collision detection. | 1 | Divin Irakiza |
 | 2|  Game window initialization | - Initialization of game window and loading background images related to sustainability themes. | 1 | Shallon | 
-|3 | Object Rendering | - Attaching images of trash items and bins. <br> - Displaying the name of the trash items along with trash items. | 1 | Divin  |
+|3 | Object Rendering | - Attaching images of trash items and bins (Shallon). <br> - Displaying the name of the trash items along with trash items (Divin). | 1 | Divin, Shallon  |
 |4 | Keyboard handling | - Handling user’s keyboard movements of objects to the correct bin. | 2 | Divin |
 | 5 | Score management | - Keeping track of the user’s points based on their long and correct answers | 2 | Shallon |
 | 6 | Scene management | - Handling different scenes in the game including the start screen, game play, end screen. | 3 | Shallon |
