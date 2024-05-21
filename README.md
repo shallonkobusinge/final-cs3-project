@@ -49,7 +49,7 @@ Our physics engine will use vectors to represent velocity, acceleration, positio
 | ------ | ----- | ------ | 
 | Week 1      |  Divin |  - Physics Engine. <br> - Keyboard Handling. |
 | Week 1      |  Shallon |  - Game window initialization. <br> - Scene management. |
-| Week 2      |  Divin |  - Rendering titles to trash items. <br> - Collision Detection. |
+| Week 2      |  Divin |  - Object rendering: Rendering titles to trash items. <br> - Collision Detection. |
 | Week 2      |  Shallon |  - Object rendering: Attaching images to the bodies. <br> - Score management. |
 | Week 3      |  Divin |  - Game screen customization. |
 | Week 3      |  Shallon |  - Feedback. <br> - Sound effects. |
