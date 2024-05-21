@@ -56,7 +56,7 @@ Our physics engine will use vectors to represent velocity, acceleration, positio
 
 
 ## DISASTER RECOVERY
-<u>Shallon Kobusinge</u>: If I fall behind, before we start implementing I plan to explain our game design to my section TA “Max” such that incase I get stuck he can be the second hand I go to for clarification or ideas on how to push back.
+<u>Shallon Kobusinge</u>: If I fall behind, before we start implementing I plan to explain our game design to my section TA “Max” such that incase I get stuck he can be the second hand I go to for clarification or ideas on how to push back along with consulting my teammate for any issue that might arise. 
 <br>
 <u>Divin Irakiza</u>: Falling behind is not on my bucket list. However, misfortunes do happen. When this happens, I plan to consult my teammate on what to do inorder not to get her stuck. 
 
