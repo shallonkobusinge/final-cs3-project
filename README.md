@@ -6,7 +6,7 @@
 [Divin Irakiza](https://gitlab.caltech.edu/dirakiza) <br>[Shallon Kobusinge](https://gitlab.caltech.edu/skobusin)
 
 ### Concept Note
-Hide and discover the best places at caltech. (To be revised)
+Hide and discover the best parts of caltech. (To be revised)
 
 
 ## GAMEPLAY
