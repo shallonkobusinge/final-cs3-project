@@ -6,7 +6,8 @@
 [Divin Irakiza](https://gitlab.caltech.edu/dirakiza) <br>[Shallon Kobusinge](https://gitlab.caltech.edu/skobusin)
 
 ### Concept Note
-Hide and discover caltech.
+Hide and discover the best places at caltech. (To be revised)
+
 
 ## GAMEPLAY
 [TODO]
@@ -20,6 +21,7 @@ Hide and discover caltech.
 - Hider Tagging
 - Scene management 
 - Object Traversal
+- Mission management
 
 ## TIMELINE
 [TODO]
