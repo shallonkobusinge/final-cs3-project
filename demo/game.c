@@ -22,7 +22,7 @@ struct state
     scene_t *scene;
 };
 
-const size_t LANDING_PAGE_IMG_ELEMENTS = 5;
+const size_t LANDING_PAGE_IMG_ELEMENTS = 4;
 const size_t LANDING_PAGE_TEXT_ELEMENTS = 5;
 const size_t LANDING_PAGE_BTN_ELEMENTS = 5;
 
@@ -107,11 +107,11 @@ text_element_t text_elements[] = {
 img_element_t img_elements[] = {
     {
         .file_path = "assets/images/common/nav_line.png",
-        .frame = (SDL_Rect){0, 80, MAX.x, 2},
+        .frame = (SDL_Rect){0, 80, MAX.x, 1},
     },
     {
         .file_path = "assets/images/landing-page/how_to_bg.png",
-        .frame = (SDL_Rect){0, 400, 100, 100},
+        .frame = (SDL_Rect){10, 400, MAX.x, 100},
     },
     {
         .file_path = "assets/images/common/footer_bg.png",
