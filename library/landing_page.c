@@ -9,6 +9,10 @@ const size_t LANDING_PAGE_IMG_ELEMENTS = 5;
 const size_t LANDING_PAGE_TEXT_ELEMENTS = 7;
 const size_t LANDING_PAGE_BTN_ELEMENTS = 1;
 
+typedef struct landing_page_state
+{
+    state_t *state,
+} landing_page_state_t;
 typedef struct text_element
 {
     const char *text;
@@ -35,7 +39,7 @@ typedef struct btn_element
  */
 void load_game_screen(state_t *state)
 {
-    // state->page = 1;
+    state->page = 1;
 }
 
 btn_element_t btn_elements[] = {
@@ -192,8 +196,10 @@ static list_t *build_landing_btn_assets()
     return assets;
 }
 
-void build_landing_page()
+void build_landing_page(state_t *state)
 {
+    landing_page_state_t *page_state = malloc(sizeof(landing_page_state_t));
+    page_state->state = state;
 
     list_t *imgs = build_landing_img_assets();
     for (size_t i = 0; i < list_size(imgs); i++)
