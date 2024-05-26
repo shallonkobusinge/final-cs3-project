@@ -10,6 +10,6 @@ typedef struct btn_element btn_element_t;
 /**
  * Build all assets of the landing page
  */
-void build_landing_page(state_t *state);
+void build_landing_page();
 
 #endif // #ifndef __LANDING_PAGE_H__
