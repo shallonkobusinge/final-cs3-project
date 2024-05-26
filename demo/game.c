@@ -74,7 +74,7 @@ text_element_t text_elements[] = {
         .text = "Welcome to The Caltech Hideout",
         .font_path = "assets/fonts/Inter-Regular.ttf",
         .color = (rgb_color_t){0, 0, 1},
-        .frame = (SDL_Rect){0, 400, TEXT_FRAME.x, TEXT_FRAME.y},
+        .frame = (SDL_Rect){270, 360, TEXT_FRAME.x, TEXT_FRAME.y},
     },
     {
         .text = "HOW TO PLAY",
@@ -234,6 +234,7 @@ bool emscripten_main(state_t *state)
 {
     sdl_clear();
     build_landing_page();
+
     sdl_show();
     return false;
 }
