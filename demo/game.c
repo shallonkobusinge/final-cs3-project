@@ -166,15 +166,16 @@ static asset_t *create_btn(btn_element_t btn_element)
     asset_t *img_asset = NULL;
     asset_t *text_asset = NULL;
 
-    if (btn_element.img.file_path != NULL)
-    {
-        printf("%c\n", btn_element.img.file_path);
-        img_asset = asset_make_image(btn_element.img.file_path, btn_element.img.frame);
-    }
     if (btn_element.text.font_path != NULL)
     {
         text_asset = asset_make_text(btn_element.text.font_path, btn_element.text.frame, btn_element.text.text,
                                      btn_element.text.color);
+    }
+
+    if (btn_element.img.file_path != NULL)
+    {
+        printf("%c\n", btn_element.img.file_path);
+        img_asset = asset_make_image(btn_element.img.file_path, btn_element.img.frame);
     }
 
     asset_t *asset =
