@@ -59,7 +59,7 @@ load_game_screen()
 
 btn_element_t btn_elements[] = {
     {
-        .text.frame = (SDL_Rect){0, 400, TEXT_FRAME.x, TEXT_FRAME.y},
+        .text.frame = (SDL_Rect){0, 400, 200, 48},
         .text.font_path = "assets/fonts/Inter-Regular.ttf",
         .text.color = (rgb_color_t){0, 0, 0},
         .text.text = "Play",
@@ -73,7 +73,7 @@ text_element_t text_elements[] = {
     {
         .text = "Welcome to The Caltech Hideout",
         .font_path = "assets/fonts/Inter-Regular.ttf",
-        .color = (rgb_color_t){0, 0, 1},
+        .color = (rgb_color_t){0, 0, 0},
         .frame = (SDL_Rect){270, 360, TEXT_FRAME.x, TEXT_FRAME.y},
     },
     {
