@@ -20,12 +20,6 @@ struct state
     size_t page;
 };
 
-void load_game_screen(state_t *state)
-{
-    printf("page: 1 ");
-    // build_landing_page(1);
-    printf("page: 2");
-}
 state_t *emscripten_init()
 {
     asset_cache_init();
