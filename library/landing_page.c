@@ -1,6 +1,9 @@
 #include "landing_page.h"
 #include "asset.h"
 
+const vector_t MAX = {1000, 500};
+const vector_t CENTER = {500, 250};
+
 const size_t LANDING_PAGE_IMG_ELEMENTS = 5;
 const size_t LANDING_PAGE_TEXT_ELEMENTS = 7;
 const size_t LANDING_PAGE_BTN_ELEMENTS = 1;
