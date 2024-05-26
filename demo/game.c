@@ -20,6 +20,11 @@ struct state
     size_t page;
 };
 
+void load_game_screen(state_t *state)
+{
+    state->page = 1;
+}
+
 state_t *emscripten_init()
 {
     asset_cache_init();
