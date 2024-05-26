@@ -60,10 +60,10 @@ load_game_screen()
 btn_element_t btn_elements[] = {
     {
         .text.frame = (SDL_Rect){0, 400, TEXT_FRAME.x, TEXT_FRAME.y},
-        .text.font_path = "assets/fonts/lato.ttf",
+        .text.font_path = "assets/fonts/Inter-Regular.ttf",
         .text.color = (rgb_color_t){0, 0, 0},
         .text.text = "Play",
-        .img.file_path = "assets/common/play.png",
+        .img.file_path = "assets/landing-page/play_btn.png",
         .img.frame = (SDL_Rect){0, 400, 100, 100},
         .handler = (void *)load_game_screen,
     },
@@ -113,7 +113,7 @@ img_element_t img_elements[] = {
         .frame = (SDL_Rect){0, 400, 100, 100},
     },
     {
-        .file_path = "assets/common/copyright_icon.png",
+        .file_path = "assets/common/copyright.png",
         .frame = (SDL_Rect){0, 400, 100, 100},
     },
 };
