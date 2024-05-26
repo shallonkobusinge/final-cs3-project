@@ -52,7 +52,7 @@ typedef struct btn_element
  */
 void load_game_screen(state_t *state)
 {
-    printf("New screen");
+    // printf("New screen");
     // destroy the screen and build landing_a new one.
 }
 
@@ -185,7 +185,6 @@ static asset_t *create_btn(btn_element_t btn_element)
 
     if (btn_element.img.file_path != NULL)
     {
-        printf("%s\n", btn_element.img.file_path);
         img_asset = asset_make_image(btn_element.img.file_path, btn_element.img.frame);
     }
 
