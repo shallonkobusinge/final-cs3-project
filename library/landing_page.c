@@ -36,6 +36,7 @@ typedef struct btn_element
 static void load_game_screen(state_t *state)
 {
     printf("Change game screen\n");
+    build_landing_page(1);
 }
 
 btn_element_t btn_elements[] = {
@@ -192,8 +193,10 @@ static list_t *build_landing_btn_assets()
     return assets;
 }
 
-void build_landing_page()
+size_t build_landing_page(size_t page)
 {
+    if (page == 1)
+        return 1;
     list_t *imgs = build_landing_img_assets();
     for (size_t i = 0; i < list_size(imgs); i++)
     {
