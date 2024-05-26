@@ -80,7 +80,7 @@ text_element_t text_elements[] = {
         .text = "HOW TO PLAY",
         .font_path = "assets/fonts/Inter-Regular.ttf",
         .color = (rgb_color_t){255, 255, 255},
-        .frame = (SDL_Rect){23, 100, 280, 48},
+        .frame = (SDL_Rect){23, 200, 280, 48},
     },
 
     {
