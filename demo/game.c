@@ -106,7 +106,7 @@ text_element_t text_elements[] = {
         .text = "2024",
         .font_path = "assets/fonts/Inter-Regular.ttf",
         .color = (rgb_color_t){255, 255, 255},
-        .frame = (SDL_Rect){60, 440, 60, 28},
+        .frame = (SDL_Rect){60, 450, 60, 28},
     },
     {
         .text = "By Shallon & Divin.",
