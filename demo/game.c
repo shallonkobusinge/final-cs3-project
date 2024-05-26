@@ -22,7 +22,7 @@ struct state
 
 state_t *emscripten_init()
 {
-    asset_cache_init();
+    // asset_cache_init();
     sdl_init(MIN, MAX);
     state_t *state = malloc(sizeof(state_t));
     state->page = 0;
