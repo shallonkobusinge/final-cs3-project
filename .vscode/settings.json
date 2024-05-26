@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "state.h": "c",
+        "math.h": "c",
+        "sdl.h": "c",
+        "asset_cache.h": "c",
+        "landing_page.h": "c",
+        "asset.h": "c"
+    }
+}
