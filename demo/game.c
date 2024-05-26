@@ -107,7 +107,7 @@ text_element_t text_elements[] = {
 img_element_t img_elements[] = {
     {
         .file_path = "assets/images/common/nav_line.png",
-        .frame = (SDL_Rect){0, 55, MAX.x, 5},
+        .frame = (SDL_Rect){0, 55, MAX.x, 2},
     },
     {
         .file_path = "assets/images/landing-page/how_to_bg.png",
