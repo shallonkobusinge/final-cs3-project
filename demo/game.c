@@ -165,7 +165,7 @@ static asset_t *create_btn(btn_element_t btn_element)
     {
         img_asset = asset_make_image(btn_element.img.file_path, btn_element.img.frame);
     }
-    if (btn_element.text != NULL && btn_element.text.font_path != NULL)
+    if (btn_element.text.font_path != NULL)
     {
         text_asset = asset_make_text(btn_element.text.font_path, btn_element.text.frame, btn_element.text.text,
                                      btn_element.text.color);
