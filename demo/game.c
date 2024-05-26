@@ -127,7 +127,7 @@ img_element_t img_elements[] = {
     },
     {
         .file_path = "assets/images/common/footer_bg.png",
-        .frame = (SDL_Rect){0, 400, MAX.x, 50},
+        .frame = (SDL_Rect){0, 500, MAX.x, 70},
     },
     {
         .file_path = "assets/images/common/copyright.png",
