@@ -24,7 +24,7 @@ struct state
 
 const size_t LANDING_PAGE_IMG_ELEMENTS = 5;
 const size_t LANDING_PAGE_TEXT_ELEMENTS = 7;
-const size_t LANDING_PAGE_BTN_ELEMENTS = 5;
+const size_t LANDING_PAGE_BTN_ELEMENTS = 1;
 
 typedef struct text_element
 {
@@ -91,14 +91,14 @@ text_element_t text_elements[] = {
     {
         .text = "Recycling one aluminum can saves enough energy to power a television for three hours.",
         .color = (rgb_color_t){255, 255, 255},
-        .frame = (SDL_Rect){48, 155, 580, 30},
+        .frame = (SDL_Rect){48, 165, 580, 30},
         .font_path = "assets/fonts/Inter-Regular.ttf",
     },
 
     {
         .text = "Recycling one aluminum can saves enough energy to power a television for three hours.",
         .color = (rgb_color_t){255, 255, 255},
-        .frame = (SDL_Rect){48, 160, 580, 30},
+        .frame = (SDL_Rect){48, 180, 580, 30},
         .font_path = "assets/fonts/Inter-Regular.ttf",
     },
 
