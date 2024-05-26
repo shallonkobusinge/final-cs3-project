@@ -31,13 +31,14 @@ typedef struct btn_element
 } btn_element_t;
 
 typedef struct state state_t;
+
 /**
  * Load game screen
  */
 void load_game_screen(state_t *state)
 {
     printf("page: 1 ");
-    build_landing_page(1);
+    // build_landing_page(1);
     printf("page: 2");
 }
 
