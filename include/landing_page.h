@@ -14,6 +14,6 @@ typedef struct state state_t;
 /**
  * Build all assets of the landing page
  */
-size_t build_landing_page(size_t page)
+size_t build_landing_page(size_t page);
 
 #endif // #ifndef __LANDING_PAGE_H__
