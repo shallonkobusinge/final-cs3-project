@@ -168,6 +168,7 @@ static asset_t *create_btn(btn_element_t btn_element)
 
     if (btn_element.img.file_path != NULL)
     {
+        printf("%c\n", btn_element.img.file_path);
         img_asset = asset_make_image(btn_element.img.file_path, btn_element.img.frame);
     }
     if (btn_element.text.font_path != NULL)
