@@ -10,6 +10,7 @@
 #include <time.h>
 #include "vector.h"
 #include "assert.h"
+#include "asset_cache.h"
 
 const vector_t MIN = {0, 0};
 const vector_t MAX = {1000, 500};
@@ -51,30 +52,29 @@ body_t *make_seeker(double radius, vector_t center) {
 }
 
 void on_key(char key, key_event_type_t type, double held_time, state_t *state, size_t seeker_idx) {
-    assert(state != NULL)
     assert(seeker_idx < scene_bodies(state->scene));
-  body_t *seeker = scene_get_body(state->scene, seeker_idx);
-  vector_t translation = (vector_t){0, 0};
-  if (type == KEY_PRESSED && type != KEY_RELEASED) {
-    switch (key) {
-    case LEFT_ARROW:
-      translation.x = -H_STEP;
-      break;
-    case RIGHT_ARROW:
-      translation.x = H_STEP;
-      break;
-    case UP_ARROW:
-      translation.y = V_STEP;
-      break;
-    case DOWN_ARROW:
-      if (body_get_centroid(seeker).y > START_POS.y) {
-        translation.y = -V_STEP;
-      }
-      break;
+    body_t *seeker = scene_get_body(state->scene, seeker_idx);
+    vector_t translation = (vector_t){0, 0};
+    if (type == KEY_PRESSED && type != KEY_RELEASED) {
+        switch (key) {
+        case LEFT_ARROW:
+        translation.x = -H_STEP;
+        break;
+        case RIGHT_ARROW:
+        translation.x = H_STEP;
+        break;
+        case UP_ARROW:
+        translation.y = V_STEP;
+        break;
+        case DOWN_ARROW:
+        if (body_get_centroid(seeker).y > START_POS.y) {
+            translation.y = -V_STEP;
+        }
+        break;
+        }
+        vector_t new_centroid = vec_add(body_get_centroid(froggy), translation);
+        body_set_centroid(seeker, new_centroid);
     }
-    vector_t new_centroid = vec_add(body_get_centroid(froggy), translation);
-    body_set_centroid(seeker, new_centroid);
-  }
 }
 
 state_t *emscripten_init() {
