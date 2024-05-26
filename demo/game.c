@@ -59,10 +59,10 @@ load_game_screen()
 
 btn_element_t btn_elements[] = {
     {
-        .text.frame = (SDL_Rect){CENTER.x, CENTER.y, 90, 48},
+        .text.frame = (SDL_Rect){CENTER.x - 30, CENTER.y + 40, 90, 48},
         .text.font_path = "assets/fonts/Inter-Regular.ttf",
         .text.color = (rgb_color_t){0, 0, 0},
-        .text.text = "Play",
+        .text.text = "PLAY",
         .img.file_path = "assets/images/landing-page/play_btn.png",
         .img.frame = (SDL_Rect){CENTER.x - 50, CENTER.y + 30, 200, 80},
 
