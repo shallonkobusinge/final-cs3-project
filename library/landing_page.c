@@ -34,10 +34,7 @@ typedef struct btn_element
  */
 void load_game_screen(state_t *state)
 {
-    // sdl_clear();
     state->page = 1;
-    // printf("New screen");
-    // destroy the screen and build landing_a new one.
 }
 
 btn_element_t btn_elements[] = {
