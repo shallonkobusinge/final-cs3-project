@@ -22,8 +22,8 @@ struct state
     scene_t *scene;
 };
 
-const size_t LANDING_PAGE_IMG_ELEMENTS = 7;
-const size_t LANDING_PAGE_TEXT_ELEMENTS = 5;
+const size_t LANDING_PAGE_IMG_ELEMENTS = 5;
+const size_t LANDING_PAGE_TEXT_ELEMENTS = 7;
 const size_t LANDING_PAGE_BTN_ELEMENTS = 5;
 
 typedef struct text_element
