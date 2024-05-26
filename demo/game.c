@@ -35,8 +35,7 @@ bool emscripten_main(state_t *state)
 
     if (state->page == 0)
     {
-        printf("Page: %d\n", state->page);
-        build_landing_page();
+        state->page = build_landing_page();
     }
     else
     {

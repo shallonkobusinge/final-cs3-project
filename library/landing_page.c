@@ -35,7 +35,7 @@ typedef struct btn_element
  */
 void load_game_screen(state_t *state)
 {
-    printf("ngaho");
+    state->page = 1;
 }
 
 btn_element_t btn_elements[] = {
@@ -192,7 +192,7 @@ static list_t *build_landing_btn_assets()
     return assets;
 }
 
-void build_landing_page()
+size_t build_landing_page()
 {
     list_t *imgs = build_landing_img_assets();
     for (size_t i = 0; i < list_size(imgs); i++)
