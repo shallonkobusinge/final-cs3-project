@@ -16,13 +16,12 @@ const vector_t CENTER = {500, 250};
 
 struct state
 {
-    scene_t *scene;
     size_t page;
 };
 
 state_t *emscripten_init()
 {
-    // asset_cache_init();
+    asset_cache_init();
     sdl_init(MIN, MAX);
     state_t *state = malloc(sizeof(state_t));
     state->page = 0;
@@ -32,22 +31,16 @@ state_t *emscripten_init()
 bool emscripten_main(state_t *state)
 {
     sdl_clear();
-
     if (state->page == 0)
     {
         build_landing_page();
     }
-    else
-    {
-    }
-
     sdl_show();
     return false;
 }
 
 void emscripten_free(state_t *state)
 {
-    scene_free(state->scene);
     asset_cache_destroy();
     free(state);
 }
