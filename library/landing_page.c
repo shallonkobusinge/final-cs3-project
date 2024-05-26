@@ -41,6 +41,7 @@ void load_game_screen(state_t *state)
 {
     state->page = 1;
     printf("state\n");
+    build_landing_page(1);
 }
 
 btn_element_t btn_elements[] = {
@@ -199,6 +200,8 @@ static list_t *build_landing_btn_assets()
 
 size_t build_landing_page(size_t page)
 {
+    if (page == 1)
+        return page;
     list_t *imgs = build_landing_img_assets();
     for (size_t i = 0; i < list_size(imgs); i++)
     {
