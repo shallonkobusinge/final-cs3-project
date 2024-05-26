@@ -33,7 +33,10 @@ typedef struct btn_element
 /**
  * Load game screen
  */
-// void load_game_screen(state_t *state);
+void load_game_screen(state_t *state)
+{
+    printf("ngaho");
+}
 
 btn_element_t btn_elements[] = {
     {
