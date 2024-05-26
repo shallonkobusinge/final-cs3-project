@@ -105,7 +105,7 @@ text_element_t text_elements[] = {
     {
         .text = "2024",
         .font_path = "assets/fonts/Inter-Regular.ttf",
-        .color = (rgb_color_t){0, 0, 1},
+        .color = (rgb_color_t){255, 255, 255},
         .frame = (SDL_Rect){60, 460, 90, 48},
     },
     {
