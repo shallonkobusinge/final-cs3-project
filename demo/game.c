@@ -72,7 +72,7 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state, s
         }
         break;
         }
-        vector_t new_centroid = vec_add(body_get_centroid(froggy), translation);
+        vector_t new_centroid = vec_add(body_get_centroid(seeker), translation);
         body_set_centroid(seeker, new_centroid);
     }
 }
@@ -85,7 +85,7 @@ state_t *emscripten_init() {
     state->body_assets = list_init(2, (free_func_t)asset_destroy);
     body_t *seeker = make_seeker(S_RADIUS, START_POS);
     scene_add_body(state->scene, seeker);
-    asset_t *asset_seeker = asset_make_image(SEEKER_PATH, seeker);
+    asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
     list_add(state->body_assets, asset_seeker);
     sdl_on_key((key_handler_t)on_key);
     return state;
