@@ -15,7 +15,6 @@ const vector_t MAX = {1000, 500};
 const vector_t CENTER = {500, 250};
 
 const vector_t TEXT_FRAME = {100, 48};
-
 const size_t TEXT_SIZE = 18;
 
 struct state
@@ -32,13 +31,13 @@ typedef struct text_element
     const char *text;
     const char *font_path;
     rgb_color_t color;
-    frame_t frame,
+    SDL_Rect frame,
 } text_element_t;
 
 typedef struct img_element
 {
     const char *file_path;
-    frame_t frame,
+    SDL_Rect frame,
 } img_element_t;
 
 typedef struct btn_element
