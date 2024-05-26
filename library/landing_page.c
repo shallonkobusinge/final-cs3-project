@@ -30,6 +30,7 @@ typedef struct btn_element
     button_handler_t handler;
 } btn_element_t;
 
+typedef state state_t;
 /**
  * Load game screen
  */
