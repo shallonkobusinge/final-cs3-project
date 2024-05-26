@@ -5,10 +5,10 @@
 #include <string.h>
 #include <time.h>
 
-#include "landing_page.h"
 #include "asset.h"
 #include "asset_cache.h"
 #include "sdl_wrapper.h"
+#include "landing_page.h"
 
 const vector_t MIN = {0, 0};
 const vector_t MAX = {1000, 500};
