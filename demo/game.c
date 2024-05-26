@@ -79,8 +79,8 @@ text_element_t text_elements[] = {
     {
         .text = "HOW TO PLAY",
         .font_path = "assets/fonts/Inter-Regular.ttf",
-        .color = (rgb_color_t){0, 0, 0},
-        .frame = (SDL_Rect){28, 110, 180, 30},
+        .color = (rgb_color_t){255, 255, 255},
+        .frame = (SDL_Rect){35, 110, 180, 30},
     },
     {
         .text = "Recycling one aluminum can saves enough energy to power a television for three hours.This is because recycling aluminum saves 95% of the energy required to make the same amount of aluminum from raw materials.",
