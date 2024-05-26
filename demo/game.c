@@ -42,7 +42,6 @@ body_t *make_seeker(double radius, vector_t center) {
     for (size_t i = 0; i < S_NUM_POINTS; i++){
         double angle = 2 * M_PI * i / S_NUM_POINTS;
         vector_t *vert = malloc(sizeof(*vert));
-        assert(vert != NULL)
         *vert = (vector_t) {.x = center.x + radius * cos(angle),
                             .y = center.y + radius * cos(angle)};
         list_add(shape, vert);
