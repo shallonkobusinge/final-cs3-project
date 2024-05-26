@@ -20,6 +20,7 @@ const size_t TEXT_SIZE = 18;
 struct state
 {
     scene_t *scene;
+    size_t page;
 };
 
 const size_t LANDING_PAGE_IMG_ELEMENTS = 5;
@@ -238,14 +239,21 @@ state_t *emscripten_init()
     asset_cache_init();
     sdl_init(MIN, MAX);
     state_t *state = malloc(sizeof(state_t));
-    build_landing_page();
-
+    state->page = 0;
     return state;
 }
 
 bool emscripten_main(state_t *state)
 {
     sdl_clear();
+
+    if (state->page == 0)
+    {
+        build_landing_page();
+    }
+    else
+    {
+    }
 
     sdl_show();
     return false;
