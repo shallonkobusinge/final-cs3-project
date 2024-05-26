@@ -39,6 +39,7 @@ typedef struct state
  */
 void load_game_screen(state_t *state)
 {
+    state->page = 1;
 }
 
 btn_element_t btn_elements[] = {
@@ -214,4 +215,5 @@ size_t build_landing_page()
     {
         asset_render(list_get(btns, i));
     }
+    return state->page;
 }
