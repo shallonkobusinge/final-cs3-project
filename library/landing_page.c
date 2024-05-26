@@ -30,12 +30,15 @@ typedef struct btn_element
     button_handler_t handler;
 } btn_element_t;
 
+typedef struct state
+{
+    size_t page;
+} state_t;
 /**
  * Load game screen
  */
 void load_game_screen(state_t *state)
 {
-    state->page = 1;
 }
 
 btn_element_t btn_elements[] = {
