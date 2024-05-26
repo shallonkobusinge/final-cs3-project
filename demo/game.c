@@ -50,7 +50,7 @@ typedef struct btn_element
 /**
  * Load game screen
  */
-void load_game_screen(state *state)
+void load_game_screen(state_t *state)
 {
     printf("New screen");
     // destroy the screen and build landing_a new one.
