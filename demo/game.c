@@ -58,12 +58,12 @@ void load_game_screen(state_t *state)
 
 btn_element_t btn_elements[] = {
     {
-        .text.frame = (SDL_Rect){CENTER.x - 20, CENTER.y + 40, 90, 48},
+        .text.frame = (SDL_Rect){CENTER.x - 20, CENTER.y + 50, 90, 48},
         .text.font_path = "assets/fonts/Inter-Regular.ttf",
         .text.color = (rgb_color_t){0, 0, 0},
         .text.text = "PLAY",
         .img.file_path = "assets/images/landing-page/play_btn.png",
-        .img.frame = (SDL_Rect){CENTER.x - 50, CENTER.y + 25, 200, 80},
+        .img.frame = (SDL_Rect){CENTER.x - 50, CENTER.y + 30, 200, 80},
 
         .handler = (void *)load_game_screen,
     },
