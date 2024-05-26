@@ -73,7 +73,7 @@ text_element_t text_elements[] = {
     {
         .text = "Welcome to The Caltech Hideout",
         .font_path = "assets/fonts/Inter-Regular.ttf",
-        .color = (rgb_color_t){0, 0, 0},
+        .color = (rgb_color_t){241, 108, 45},
         .frame = (SDL_Rect){(CENTER.x - (280 / 2)), 15, 280, 48},
     },
     {
@@ -107,7 +107,7 @@ text_element_t text_elements[] = {
 img_element_t img_elements[] = {
     {
         .file_path = "assets/images/common/nav_line.png",
-        .frame = (SDL_Rect){0, 70, MAX.x, 2},
+        .frame = (SDL_Rect){0, 80, MAX.x, 2},
     },
     {
         .file_path = "assets/images/landing-page/how_to_bg.png",
