@@ -74,7 +74,7 @@ text_element_t text_elements[] = {
         .text = "Welcome to The Caltech Hideout",
         .font_path = "assets/fonts/Inter-Regular.ttf",
         .color = (rgb_color_t){0, 0, 0},
-        .frame = (SDL_Rect){270, 360, 250, 48},
+        .frame = (SDL_Rect){270, 360, 280, 48},
     },
     {
         .text = "HOW TO PLAY",
