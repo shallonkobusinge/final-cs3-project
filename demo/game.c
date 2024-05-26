@@ -30,7 +30,7 @@ const rgb_color_t seeker_color = (rgb_color_t){0.1, 0.9, 0.2};
 const char *SEEKER_PATH = "assets/seeker.png";
 
 
-typedef state {
+typedef struct state {
     list_t *body_assets;
     scene_t *scene;
 }state_t;
