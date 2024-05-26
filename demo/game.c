@@ -34,8 +34,7 @@ bool emscripten_main(state_t *state)
     if (state->page == 0)
     {
         state->page = build_landing_page(state->page);
-        printf("stat of page: %zu", state->page);
-    }
+        }
     sdl_show();
     return false;
 }

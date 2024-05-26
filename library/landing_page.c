@@ -35,7 +35,6 @@ typedef struct btn_element
  */
 static void load_game_screen(state_t *state)
 {
-    printf("Change game screen\n");
     build_landing_page(1);
 }
 
