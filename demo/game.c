@@ -5,7 +5,7 @@
 #include <string.h>
 #include <time.h>
 
-#include "pages/landing_page.h"
+#include "landing_page.h"
 #include "asset.h"
 #include "asset_cache.h"
 #include "sdl_wrapper.h"
