@@ -96,7 +96,7 @@ void introduce_new_seeker(state_t *state, double current_time){
     if (current_time - previous_time >= NEW_SEEKERS_INTERVAL) {
         body_t *new_seeker = make_seeker(S_RADIUS, START_POS);
         scene_add_body(state->scene, new_seeker);
-        asset_t *asset_seeker = asset_make_image(SEEKER_PATH, new_seeker);
+        asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, new_seeker);
         list_add(state->body_assets, asset_seeker);
     }
     previous_time = current_time;
