@@ -47,6 +47,15 @@ typedef struct btn_element
     button_handler_t handler;
 } btn_element_t;
 
+/**
+ * Load game screen
+ */
+static void
+load_game_screen(){
+    (void)
+    // destroy the screen and build landing_a new one.
+}
+
 btn_element_t btn_elements[] = {
     {
         .text.frame = (SDL_Rect){0, 400, TEXT_FRAME.x, TEXT_FRAME.y},
@@ -90,39 +99,30 @@ text_element_t text_elements[] = {
 };
 
 img_element_t img_elements[] = {
-    {
-        .file_path = "assets/common/nav_line.png",
-        .frame = (SDL_Rect){0, 400, 100, 100},
-    },
-    {
-        .file_path = "assets/landing-page/how_to_bg.png",
-        .frame = (SDL_Rect){0, 400, 100, 100},
-    },
-    {
-        .file_path = "assets/common/footer_bg.png",
-        .frame = (SDL_Rect){0, 400, 100, 100},
-    },
-    {
-        .file_path = "assets/common/copyright_icon.png",
-        .frame = (SDL_Rect){0, 400, 100, 100},
-    },
+                                   {
+                                       .file_path = "assets/common/nav_line.png",
+                                       .frame = (SDL_Rect){0, 400, 100, 100},
+                                   },
+                                   {
+                                       .file_path = "assets/landing-page/how_to_bg.png",
+                                       .frame = (SDL_Rect){0, 400, 100, 100},
+                                   },
+                                   {
+                                       .file_path = "assets/common/footer_bg.png",
+                                       .frame = (SDL_Rect){0, 400, 100, 100},
+                                   },
+                                   {
+                                       .file_path = "assets/common/copyright_icon.png",
+                                       .frame = (SDL_Rect){0, 400, 100, 100},
+                                   },
 }
 
-/**
- * Load game screen
- */
-static void
-load_game_screen()
-{
-    (void)
-    // destroy the screen and build landing_a new one.
-}
-
-/**
- * Build text assets from text templates
- * @return list of text assets
- */
-static list_t *build_landing_text_assets()
+                               /**
+                                * Build text assets from text templates
+                                * @return list of text assets
+                                */
+                               static list_t *
+                               build_landing_text_assets()
 {
     list_t *assets = list_init(LANDING_PAGE_TEXT_ELEMENTS, free);
     for (size_t i = 0; i < LANDING_PAGE_TEXT_ELEMENTS; i++)
