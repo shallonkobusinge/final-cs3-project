@@ -40,7 +40,7 @@ bool emscripten_main(state_t *state)
 
     if (state->page == 0)
     {
-        build_landing_page(state);
+        build_landing_page();
     }
     else
     {
