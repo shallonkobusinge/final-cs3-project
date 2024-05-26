@@ -214,4 +214,5 @@ size_t build_landing_page(size_t page)
     {
         asset_render(list_get(btns, i));
     }
+    return page;
 }
