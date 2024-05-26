@@ -64,7 +64,8 @@ btn_element_t btn_elements[] = {
         .text.color = (rgb_color_t){0, 0, 0},
         .text.text = "Play",
         .img.file_path = "assets/images/landing-page/play_btn.png",
-        .img.frame = (SDL_Rect){0, 400, 100, 100},
+        .img.frame = (SDL_Rect){CENTER.x, CENTER.y, 200, 200},
+
         .handler = (void *)load_game_screen,
     },
 };
@@ -98,10 +99,9 @@ text_element_t text_elements[] = {
     {
         .text = "Recycling one aluminum can saves enough energy to power a television for three hours.",
         .color = (rgb_color_t){255, 255, 255},
-        .frame = (SDL_Rect){48, 200, 580, 30},
+        .frame = (SDL_Rect){48, 200, 680, 30},
         .font_path = "assets/fonts/Inter-Regular.ttf",
     },
-
     {
         .text = "2024",
         .font_path = "assets/fonts/Inter-Regular.ttf",
@@ -227,11 +227,11 @@ void build_landing_page()
         asset_render(list_get(texts, i));
     }
 
-    // list_t *btns = build_landing_btn_assets();
-    // for (size_t i = 0; i < list_size(btns); i++)
-    // {
-    //     asset_render(list_get(btns, i));
-    // }
+    list_t *btns = build_landing_btn_assets();
+    for (size_t i = 0; i < list_size(btns); i++)
+    {
+        asset_render(list_get(btns, i));
+    }
 }
 
 state_t *emscripten_init()
