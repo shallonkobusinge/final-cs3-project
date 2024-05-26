@@ -35,7 +35,7 @@ typedef struct btn_element
  */
 void load_game_screen(state_t *state)
 {
-    state->page = 1;
+    // state->page = 1;
 }
 
 btn_element_t btn_elements[] = {
