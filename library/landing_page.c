@@ -1,5 +1,6 @@
 #include "landing_page.h"
 #include "asset.h"
+#include "asset_cache.h"
 
 const vector_t MAX = {1000, 500};
 const vector_t CENTER = {500, 250};
