@@ -11,7 +11,7 @@ const size_t LANDING_PAGE_BTN_ELEMENTS = 1;
 
 typedef struct landing_page_state
 {
-    state_t *state,
+    state_t *state;
 } landing_page_state_t;
 typedef struct text_element
 {
