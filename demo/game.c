@@ -72,11 +72,13 @@ btn_element_t btn_elements[] = {
 text_element_t text_elements[] = {
     {
         .text = "Welcome to The Caltech Hideout",
+        .font_path = "assets/fonts/Inter-Regular.ttf",
         .color = (rgb_color_t){0, 0, 1},
         .frame = (SDL_Rect){0, 400, TEXT_FRAME.x, TEXT_FRAME.y},
     },
     {
         .text = "HOW TO PLAY",
+        .font_path = "assets/fonts/Inter-Regular.ttf",
         .color = (rgb_color_t){0, 0, 1},
         .frame = (SDL_Rect){0, 400, TEXT_FRAME.x, TEXT_FRAME.y},
     },
@@ -84,16 +86,19 @@ text_element_t text_elements[] = {
     {
         .text = "Recycling one aluminum can saves enough energy to power a television for three hours.This is because recycling aluminum saves 95% of the energy required to make the same amount of aluminum from raw materials.",
         .color = (rgb_color_t){0, 0, 1},
+        .font_path = "assets/fonts/Inter-Regular.ttf",
         .frame = (SDL_Rect){0, 400, TEXT_FRAME.x, TEXT_FRAME.y},
     },
 
     {
         .text = "2024",
+        .font_path = "assets/fonts/Inter-Regular.ttf",
         .color = (rgb_color_t){0, 0, 1},
         .frame = (SDL_Rect){0, 400, TEXT_FRAME.x, TEXT_FRAME.y},
     },
     {
         .text = "By Shallon & Divin.",
+        .font_path = "assets/fonts/Inter-Regular.ttf",
         .color = (rgb_color_t){0, 0, 1},
         .frame = (SDL_Rect){0, 400, TEXT_FRAME.x, TEXT_FRAME.y},
     },
