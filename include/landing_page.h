@@ -14,6 +14,4 @@ typedef struct state state_t;
  */
 void build_landing_page();
 
-void load_game_screen(state_t *state);
-
 #endif // #ifndef __LANDING_PAGE_H__
