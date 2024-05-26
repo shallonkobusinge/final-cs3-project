@@ -112,7 +112,7 @@ text_element_t text_elements[] = {
         .text = "By Shallon & Divin.",
         .font_path = "assets/fonts/Inter-Regular.ttf",
         .color = (rgb_color_t){255, 255, 255},
-        .frame = (SDL_Rect){MAX.x - 150, 455, 150, 28},
+        .frame = (SDL_Rect){MAX.x - 180, 455, 150, 28},
     },
 };
 
