@@ -4,11 +4,13 @@
 #include <math.h>
 #include <stdlib.h>
 
-void test_body_init() {
+void test_body_init()
+{
   vector_t v[] = {{1, 1}, {2, 1}, {2, 2}, {1, 2}};
   const size_t VERTICES = sizeof(v) / sizeof(*v);
   list_t *shape = list_init(0, free);
-  for (size_t i = 0; i < VERTICES; i++) {
+  for (size_t i = 0; i < VERTICES; i++)
+  {
     vector_t *list_v = malloc(sizeof(*list_v));
     *list_v = v[i];
     list_add(shape, list_v);
@@ -17,7 +19,8 @@ void test_body_init() {
   body_t *body = body_init(shape, 3, color);
   list_t *shape2 = body_get_shape(body);
   assert(list_size(shape2) == VERTICES);
-  for (size_t i = 0; i < VERTICES; i++) {
+  for (size_t i = 0; i < VERTICES; i++)
+  {
     assert(vec_isclose(*(vector_t *)list_get(shape2, i), v[i]));
   }
   list_free(shape2);
@@ -30,7 +33,8 @@ void test_body_init() {
   body_free(body);
 }
 
-void test_body_setters() {
+void test_body_setters()
+{
   list_t *shape = list_init(3, free);
   vector_t *v = malloc(sizeof(*v));
   *v = (vector_t){+1, 0};
@@ -81,7 +85,8 @@ void test_body_setters() {
   body_free(body);
 }
 
-void test_body_tick() {
+void test_body_tick()
+{
   const vector_t A = {1, 2};
   const double DT = 1e-6;
   const int STEPS = 1000000;
@@ -101,7 +106,8 @@ void test_body_tick() {
   body_t *body = body_init(shape, 1, (rgb_color_t){0, 0, 0});
 
   // Apply constant acceleration and ensure position is (a / 2) * t ** 2
-  for (int i = 0; i < STEPS; i++) {
+  for (int i = 0; i < STEPS; i++)
+  {
     double t = i * DT;
     assert(vec_isclose(body_get_centroid(body), vec_multiply(t * t / 2, A)));
     body_set_velocity(body, vec_multiply(t + DT / 2, A));
@@ -122,7 +128,8 @@ void test_body_tick() {
   body_free(body);
 }
 
-void test_infinite_mass() {
+void test_infinite_mass()
+{
   list_t *shape = list_init(10, free);
   vector_t *v = malloc(sizeof(*v));
   *v = VEC_ZERO;
@@ -146,7 +153,8 @@ void test_infinite_mass() {
   body_free(body);
 }
 
-void test_forces() {
+void test_forces()
+{
   const double MASS = 10;
   const double DT = 0.1;
   list_t *shape = list_init(3, free);
@@ -179,7 +187,8 @@ void test_forces() {
   body_free(body);
 }
 
-void test_body_remove() {
+void test_body_remove()
+{
   list_t *shape = list_init(3, free);
   vector_t *v = malloc(sizeof(*v));
   *v = (vector_t){+1, 0};
@@ -199,7 +208,8 @@ void test_body_remove() {
   body_free(body);
 }
 
-void test_body_info() {
+void test_body_info()
+{
   list_t *shape = list_init(3, free);
   vector_t *v = malloc(sizeof(*v));
   *v = (vector_t){+1, 0};
@@ -219,7 +229,8 @@ void test_body_info() {
   free(info);
 }
 
-void test_body_info_freer() {
+void test_body_info_freer()
+{
   list_t *shape = list_init(3, free);
   vector_t *v = malloc(sizeof(*v));
   *v = (vector_t){+1, 0};
@@ -248,12 +259,14 @@ void test_body_info_freer() {
   body_free(body);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
   // Run all tests if there are no command-line arguments
   bool all_tests = argc == 1;
   // Read test name from file
   char testname[100];
-  if (!all_tests) {
+  if (!all_tests)
+  {
     read_testname(argv[1], testname, sizeof(testname));
   }
 
