@@ -29,8 +29,8 @@ state_t *emscripten_init()
     sdl_init(MIN, MAX);
     state_t *state = malloc(sizeof(state_t));
     state->scene = scene_init();
-
     build_landing_page();
+
     sdl_show();
 
     return state;
@@ -39,7 +39,6 @@ state_t *emscripten_init()
 bool emscripten_main(state_t *state)
 {
     sdl_clear();
-    sdl_show();
     return false;
 }
 
