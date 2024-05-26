@@ -2,8 +2,8 @@
 #include "asset.h"
 #include "asset_cache.h"
 
-const vector_t MAX = {1000, 500};
-const vector_t CENTER = {500, 250};
+const vector_t SCREEN_SCREEN_MAX = {1000, 500};
+const vector_t SCREEN_SCREEN_CENTER = {500, 250};
 
 const size_t LANDING_PAGE_IMG_ELEMENTS = 5;
 const size_t LANDING_PAGE_TEXT_ELEMENTS = 7;
@@ -40,12 +40,12 @@ void load_game_screen(state_t *state)
 
 btn_element_t btn_elements[] = {
     {
-        .text.frame = (SDL_Rect){CENTER.x - 20, CENTER.y + 45, 90, 48},
+        .text.frame = (SDL_Rect){SCREEN_CENTER.x - 20, SCREEN_CENTER.y + 45, 90, 48},
         .text.font_path = "assets/fonts/Inter-Regular.ttf",
         .text.color = (rgb_color_t){0, 0, 0},
         .text.text = "PLAY",
         .img.file_path = "assets/images/landing-page/play_btn.png",
-        .img.frame = (SDL_Rect){CENTER.x - 50, CENTER.y + 30, 200, 80},
+        .img.frame = (SDL_Rect){SCREEN_CENTER.x - 50, SCREEN_CENTER.y + 30, 200, 80},
 
         .handler = (void *)load_game_screen,
     },
@@ -56,7 +56,7 @@ text_element_t text_elements[] = {
         .text = "Welcome to The Caltech Hideout",
         .font_path = "assets/fonts/Inter-Regular.ttf",
         .color = (rgb_color_t){241, 108, 45},
-        .frame = (SDL_Rect){(CENTER.x - (280 / 2)), 15, 280, 48},
+        .frame = (SDL_Rect){(SCREEN_CENTER.x - (280 / 2)), 15, 280, 48},
     },
     {
         .text = "HOW TO PLAY",
@@ -93,22 +93,22 @@ text_element_t text_elements[] = {
         .text = "By Shallon & Divin.",
         .font_path = "assets/fonts/Inter-Regular.ttf",
         .color = (rgb_color_t){255, 255, 255},
-        .frame = (SDL_Rect){MAX.x - 180, 459, 150, 28},
+        .frame = (SDL_Rect){SCREEN_MAX.x - 180, 459, 150, 28},
     },
 };
 
 img_element_t img_elements[] = {
     {
         .file_path = "assets/images/common/nav_line.png",
-        .frame = (SDL_Rect){0, 80, MAX.x, 1},
+        .frame = (SDL_Rect){0, 80, SCREEN_MAX.x, 1},
     },
     {
         .file_path = "assets/images/landing-page/how_to_bg.png",
-        .frame = (SDL_Rect){23, 100, MAX.x - 50, 150},
+        .frame = (SDL_Rect){23, 100, SCREEN_MAX.x - 50, 150},
     },
     {
         .file_path = "assets/images/common/footer_bg.png",
-        .frame = (SDL_Rect){0, 450, MAX.x, 70},
+        .frame = (SDL_Rect){0, 450, SCREEN_MAX.x, 70},
     },
     {
         .file_path = "assets/images/common/copyright.png",
