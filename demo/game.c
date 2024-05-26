@@ -29,7 +29,7 @@ state_t *emscripten_init()
     sdl_init(MIN, MAX);
     state_t *state = malloc(sizeof(state_t));
     state->scene = scene_init();
-    build_landing_page();
+    // build_landing_page();
 
     sdl_show();
 
