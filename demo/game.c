@@ -238,6 +238,7 @@ state_t *emscripten_init()
     asset_cache_init();
     sdl_init(MIN, MAX);
     state_t *state = malloc(sizeof(state_t));
+    build_landing_page();
 
     return state;
 }
@@ -245,7 +246,6 @@ state_t *emscripten_init()
 bool emscripten_main(state_t *state)
 {
     sdl_clear();
-    build_landing_page();
 
     sdl_show();
     return false;
