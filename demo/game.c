@@ -63,7 +63,7 @@ btn_element_t btn_elements[] = {
         .text.font_path = "assets/fonts/Inter-Regular.ttf",
         .text.color = (rgb_color_t){0, 0, 0},
         .text.text = "Play",
-        .img.file_path = "assets/landing-page/play_btn.png",
+        .img.file_path = "assets/images/landing-page/play_btn.png",
         .img.frame = (SDL_Rect){0, 400, 100, 100},
         .handler = (void *)load_game_screen,
     },
@@ -106,19 +106,19 @@ text_element_t text_elements[] = {
 
 img_element_t img_elements[] = {
     {
-        .file_path = "assets/common/nav_line.png",
+        .file_path = "assets/images/common/nav_line.png",
         .frame = (SDL_Rect){0, 400, 100, 100},
     },
     {
-        .file_path = "assets/landing-page/how_to_bg.png",
+        .file_path = "assets/images/landing-page/how_to_bg.png",
         .frame = (SDL_Rect){0, 400, 100, 100},
     },
     {
-        .file_path = "assets/common/footer_bg.png",
+        .file_path = "assets/images/common/footer_bg.png",
         .frame = (SDL_Rect){0, 400, 100, 100},
     },
     {
-        .file_path = "assets/common/copyright.png",
+        .file_path = "assets/images/common/copyright.png",
         .frame = (SDL_Rect){0, 400, 100, 100},
     },
 };
