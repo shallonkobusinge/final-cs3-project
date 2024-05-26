@@ -7,7 +7,7 @@ typedef struct img_element img_element_t;
 
 typedef struct btn_element btn_element_t;
 
-typedef struct state_t state;
+typedef struct state state_t;
 
 /**
  * Build all assets of the landing page
