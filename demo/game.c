@@ -64,7 +64,7 @@ btn_element_t btn_elements[] = {
         .text.color = (rgb_color_t){0, 0, 0},
         .text.text = "Play",
         .img.file_path = "assets/images/landing-page/play_btn.png",
-        .img.frame = (SDL_Rect){CENTER.x, CENTER.y, 100, 100},
+        .img.frame = (SDL_Rect){CENTER.x - 100, CENTER.y + 30, 100, 100},
 
         .handler = (void *)load_game_screen,
     },
