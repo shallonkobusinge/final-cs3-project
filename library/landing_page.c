@@ -40,6 +40,7 @@ typedef struct state
 void load_game_screen(state_t *state)
 {
     state->page = 1;
+    printf("state\n");
 }
 
 btn_element_t btn_elements[] = {
