@@ -91,14 +91,14 @@ text_element_t text_elements[] = {
     {
         .text = "Recycling one aluminum can saves enough energy to power a television for three hours.",
         .color = (rgb_color_t){255, 255, 255},
-        .frame = (SDL_Rect){48, 165, 580, 30},
+        .frame = (SDL_Rect){48, 175, 580, 30},
         .font_path = "assets/fonts/Inter-Regular.ttf",
     },
 
     {
         .text = "Recycling one aluminum can saves enough energy to power a television for three hours.",
         .color = (rgb_color_t){255, 255, 255},
-        .frame = (SDL_Rect){48, 180, 580, 30},
+        .frame = (SDL_Rect){48, 190, 580, 30},
         .font_path = "assets/fonts/Inter-Regular.ttf",
     },
 
