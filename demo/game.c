@@ -31,13 +31,13 @@ typedef struct text_element
     const char *text;
     const char *font_path;
     rgb_color_t color;
-    SDL_Rect frame,
+    SDL_Rect frame;
 } text_element_t;
 
 typedef struct img_element
 {
     const char *file_path;
-    SDL_Rect frame,
+    SDL_Rect frame;
 } img_element_t;
 
 typedef struct btn_element
