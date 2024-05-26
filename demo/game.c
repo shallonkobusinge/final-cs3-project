@@ -175,7 +175,7 @@ static asset_t *create_btn(btn_element_t btn_element)
         asset_make_button(btn_element.img.frame, img_asset, text_asset, btn_element.handler);
     asset_cache_register_button(asset);
 
-    return button_asset;
+    return asset;
 }
 
 /**
