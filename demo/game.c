@@ -22,7 +22,7 @@ struct state
     scene_t *scene;
 };
 
-const size_t LANDING_PAGE_IMG_ELEMENTS = 4;
+const size_t LANDING_PAGE_IMG_ELEMENTS = 7;
 const size_t LANDING_PAGE_TEXT_ELEMENTS = 5;
 const size_t LANDING_PAGE_BTN_ELEMENTS = 5;
 
@@ -83,9 +83,22 @@ text_element_t text_elements[] = {
         .frame = (SDL_Rect){43, 110, 180, 30},
     },
     {
-        .text = "Recycling one aluminum can saves enough energy to power a television for three hours. This is because recycling aluminum saves 95% of the energy required to make the same amount of aluminum from raw materials.",
+        .text = "Recycling one aluminum can saves enough energy to power a television for three hours.",
         .color = (rgb_color_t){255, 255, 255},
-        .frame = (SDL_Rect){48, 130, 580, 30},
+        .frame = (SDL_Rect){48, 150, 580, 30},
+        .font_path = "assets/fonts/Inter-Regular.ttf",
+    },
+    {
+        .text = "Recycling one aluminum can saves enough energy to power a television for three hours.",
+        .color = (rgb_color_t){255, 255, 255},
+        .frame = (SDL_Rect){48, 155, 580, 30},
+        .font_path = "assets/fonts/Inter-Regular.ttf",
+    },
+
+    {
+        .text = "Recycling one aluminum can saves enough energy to power a television for three hours.",
+        .color = (rgb_color_t){255, 255, 255},
+        .frame = (SDL_Rect){48, 160, 580, 30},
         .font_path = "assets/fonts/Inter-Regular.ttf",
     },
 
