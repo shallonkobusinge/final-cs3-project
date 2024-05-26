@@ -1,8 +1,8 @@
 #ifndef __ASSET_H__
 #define __ASSET_H__
 
-// #include <SDL2/SDL_image.h>
-// #include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 #include <color.h>
 #include <sdl_wrapper.h>
 #include <stddef.h>
