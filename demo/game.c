@@ -131,7 +131,7 @@ img_element_t img_elements[] = {
     },
     {
         .file_path = "assets/images/common/copyright.png",
-        .frame = (SDL_Rect){23, 420, 30, 30},
+        .frame = (SDL_Rect){23, 460, 30, 30},
     },
 };
 
