@@ -214,11 +214,11 @@ void build_landing_page()
         asset_render(list_get(imgs, i));
     }
 
-    list_t *btns = build_landing_btn_assets();
-    for (size_t i = 0; i < list_size(btns); i++)
-    {
-        asset_render(list_get(btns, i));
-    }
+    // list_t *btns = build_landing_btn_assets();
+    // for (size_t i = 0; i < list_size(btns); i++)
+    // {
+    //     asset_render(list_get(btns, i));
+    // }
 }
 
 state_t *emscripten_init()
