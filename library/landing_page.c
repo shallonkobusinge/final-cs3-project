@@ -2,8 +2,8 @@
 #include "asset.h"
 #include "asset_cache.h"
 
-const vector_t SCREEN_SCREEN_MAX = {1000, 500};
-const vector_t SCREEN_SCREEN_CENTER = {500, 250};
+const vector_t SCREEN_MAX = {1000, 500};
+const vector_t SCREEN_CENTER = {500, 250};
 
 const size_t LANDING_PAGE_IMG_ELEMENTS = 5;
 const size_t LANDING_PAGE_TEXT_ELEMENTS = 7;
