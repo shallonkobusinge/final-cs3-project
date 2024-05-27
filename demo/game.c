@@ -86,7 +86,7 @@ bool emscripten_main(state_t *state) {
     if(state->last_seeker_time >= NEW_SEEKERS_INTERVAL){
       add_new_seeker(state, true);
     }
-   
+    printf(" ELAPSED TIME %f \n", state->last_seeker_time);
     sdl_clear();
     for (size_t i = 0; i < list_size(state->body_assets); i++) {
         asset_render(list_get(state->body_assets, i));
