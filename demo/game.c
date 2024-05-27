@@ -51,6 +51,7 @@ body_t *make_seeker(double outer_radius, double inner_radius, vector_t center) {
                             .y = center.y + inner_radius * cos(angle)};
         list_add(shape, vert);
     }
+    printf(" Body at x = %f and y = %f \n", center.x, center.y);
     body_t *seeker_b = body_init(shape, 10.0, seeker_color);
     return seeker_b;
 }
@@ -66,7 +67,7 @@ state_t *emscripten_init() {
     // for(int i = 0; i < STARTING_SEEKERS; i++) {
         body_t *seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, START_POS);
         // vector_t vel = {.x = rand() % 200 - 100, .y = rand() % 200 - 100 };
-        // body_set_velocity(seeker, (vector_t){100, 0});
+        body_set_velocity(seeker, (vector_t){MIN.x / 2, MIN.y / 2});
         // body_set_centroid(seeker, START_POS);
         scene_add_body(state->scene, seeker);
         asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
@@ -104,6 +105,7 @@ void get_new_velocity_seeker(body_t *seeker, double dt) {
     vector_t center = vec_add(body_get_centroid(seeker), vec_multiply(dt, velocity));
     body_set_velocity(seeker, velocity);
     body_set_centroid(seeker, center);
+    printf(" MOVED Body at x = %f and y = %f velocity of x = %f and y = %f \n", center.x, center.y, velocity.x, velocity.y);
     // body_set_rotation(seeker,  3 * M_PI / 2);
 
 }
