@@ -62,7 +62,7 @@ bool emscripten_main(state_t *state) {
         }
     for(size_t i = 0; i < scene_bodies(state->scene); i++) {
         body_t *seeker = scene_get_body(state->scene, i);
-        wrap_edges(seeker);
+        wrap_seeker_scene(seeker);
     }
     sdl_show();
     scene_tick(state->scene, dt);
