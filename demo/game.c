@@ -139,8 +139,9 @@ bool emscripten_main(state_t *state) {
         asset_render(list_get(assets_b, i));
         }
     
-    sdl_show();
+    
     scene_tick(state->scene, dt);
+    sdl_show();
   return false;
 }
 
