@@ -112,11 +112,11 @@ bool emscripten_main(state_t *state) {
     sdl_clear();
     double dt = time_since_last_tick();
    
-    for(size_t i = 0; i < scene_bodies(state->scene); i++) {
-        body_t *seeker = scene_get_body(state->scene, i);
-        get_new_velocity_seeker(seeker, dt);
+    // for(size_t i = 0; i < scene_bodies(state->scene); i++) {
+    //     body_t *seeker = scene_get_body(state->scene, i);
+    //     get_new_velocity_seeker(seeker, dt);
 
-    }
+    // }
      list_t *assets_b = state->body_assets;
     for (size_t i = 0; i < list_size(state->body_assets); i++) {
         asset_render(list_get(assets_b, i));
