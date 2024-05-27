@@ -33,8 +33,8 @@ bool emscripten_main(state_t *state)
     sdl_clear();
     if (state->page == 0)
     {
-        state->page = build_landing_page(state->page);
-        }
+        build_landing_page();
+    }
     sdl_show();
     return false;
 }
