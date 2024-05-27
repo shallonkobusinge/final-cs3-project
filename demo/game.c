@@ -65,8 +65,8 @@ body_t *make_seeker(double w, double h, vector_t center) {
 void wrap_edges(body_t *seeker) {
     char *text = "CHECKINGGG ";
     printf(" %s \n",text);
-  vector_t centroid = body_get_centroid(body);
-  vector_t velocity = body_get_velocity(body);
+  vector_t centroid = body_get_centroid(seeker);
+  vector_t velocity = body_get_velocity(seeker);
   
   if (centroid.x >= MAX.x || centroid.x <= MIN.x) {
         velocity.x = -velocity.x;
