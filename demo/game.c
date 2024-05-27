@@ -62,13 +62,17 @@ state_t *emscripten_init() {
     state->scene = scene_init();
     state->body_assets = list_init(MAX_SEEKERS, (free_func_t)asset_destroy);
     state->last_seeker_time = 0;
-    body_t *seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, VEC_ZERO);
-    vector_t vel = {.x = rand() % 200 - 100, .y = rand() % 200 - 100 };
-    body_set_velocity(seeker, vel);
-    body_set_centroid(seeker, START_POS);
-    scene_add_body(state->scene, seeker);
-    asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
-    list_add(state->body_assets, asset_seeker);
+    for(int i = 0; i < STARTING_SEEKERS; i++) {
+        body_t *seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, VEC_ZERO);
+        // vector_t vel = {.x = rand() % 200 - 100, .y = rand() % 200 - 100 };
+        body_set_velocity(seeker, (vector_t){100, 0});
+        body_set_rotation(seeker,  3 * M_PI / 2);
+        body_set_centroid(seeker, START_POS);
+        scene_add_body(state->scene, seeker);
+        asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
+        list_add(state->body_assets, asset_seeker);
+    }
+    
     return state;
 }
 
