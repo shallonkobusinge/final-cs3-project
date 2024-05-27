@@ -133,13 +133,13 @@ bool emscripten_main(state_t *state) {
         // get_new_velocity_seeker(seeker, dt);
         wrap_edges(seeker);
     }
-    
+    sdl_show();
      list_t *assets_b = state->body_assets;
     for (size_t i = 0; i < list_size(assets_b); i++) {
         asset_render(list_get(assets_b, i));
         }
     scene_tick(state->scene, dt);
-    sdl_show();
+    
     
   return false;
 }
