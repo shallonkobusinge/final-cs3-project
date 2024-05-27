@@ -1,8 +1,6 @@
 #ifndef __LANDING_PAGE_H__
 #define __LANDING_PAGE_H__
 
-#include <stdlib.h>
-
 typedef struct text_element text_element_t;
 
 typedef struct img_element img_element_t;
