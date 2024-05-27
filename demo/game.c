@@ -18,7 +18,7 @@ const vector_t MAX = {1000, 500};
 // SEEKING CONSTANTS
 #define STARTING_SEEKERS 1
 #define MAX_SEEKERS 50
-#define NEW_SEEKERS_INTERVAL 3
+#define NEW_SEEKERS_INTERVAL 30
 #define S_NUM_POINTS 20
 #define S_RADIUS 0.1
 
