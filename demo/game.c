@@ -8,7 +8,7 @@
 #include "asset.h"
 #include "asset_cache.h"
 #include "sdl_wrapper.h"
-#include "landing_page.h"
+// #include "landing_page.h"
 
 const vector_t MIN = {0, 0};
 const vector_t MAX = {1000, 500};
@@ -33,7 +33,7 @@ bool emscripten_main(state_t *state)
     sdl_clear();
     // if (state->page == 0)
     // {
-    build_landing_page();
+    // build_landing_page();
     // }
     sdl_show();
     return false;
