@@ -51,43 +51,43 @@ body_t *make_seeker(double radius, vector_t center) {
     return seeker_b;
 }
 
-void on_key(char key, key_event_type_t type, double held_time, state_t *state, size_t seeker_idx) {
-    assert(seeker_idx < scene_bodies(state->scene));
-    body_t *seeker = scene_get_body(state->scene, seeker_idx);
-    vector_t translation = (vector_t){0, 0};
-    if (type == KEY_PRESSED && type != KEY_RELEASED) {
-        switch (key) {
-        case LEFT_ARROW:
-        translation.x = -H_STEP;
-        break;
-        case RIGHT_ARROW:
-        translation.x = H_STEP;
-        break;
-        case UP_ARROW:
-        translation.y = V_STEP;
-        break;
-        case DOWN_ARROW:
-        if (body_get_centroid(seeker).y > START_POS.y) {
-            translation.y = -V_STEP;
-        }
-        break;
-        }
-        vector_t new_centroid = vec_add(body_get_centroid(seeker), translation);
-        body_set_centroid(seeker, new_centroid);
-    }
-}
+// void on_key(char key, key_event_type_t type, double held_time, state_t *state, size_t seeker_idx) {
+//     assert(seeker_idx < scene_bodies(state->scene));
+//     body_t *seeker = scene_get_body(state->scene, seeker_idx);
+//     vector_t translation = (vector_t){0, 0};
+//     if (type == KEY_PRESSED && type != KEY_RELEASED) {
+//         switch (key) {
+//         case LEFT_ARROW:
+//         translation.x = -H_STEP;
+//         break;
+//         case RIGHT_ARROW:
+//         translation.x = H_STEP;
+//         break;
+//         case UP_ARROW:
+//         translation.y = V_STEP;
+//         break;
+//         case DOWN_ARROW:
+//         if (body_get_centroid(seeker).y > START_POS.y) {
+//             translation.y = -V_STEP;
+//         }
+//         break;
+//         }
+//         vector_t new_centroid = vec_add(body_get_centroid(seeker), translation);
+//         body_set_centroid(seeker, new_centroid);
+//     }
+// }
 
 state_t *emscripten_init() {
-    asset_cache_init();
     sdl_init(MIN, MAX);
     state_t *state = malloc(sizeof(state_t));
+    asset_cache_init();
     state->scene = scene_init();
-    state->body_assets = list_init(2, (free_func_t)asset_destroy);
+    state->body_assets = list_init(1, (free_func_t)asset_destroy);
     body_t *seeker = make_seeker(S_RADIUS, START_POS);
     scene_add_body(state->scene, seeker);
     asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
     list_add(state->body_assets, asset_seeker);
-    sdl_on_key((key_handler_t)on_key);
+    // sdl_on_key((key_handler_t)on_key);
     return state;
 }
 
@@ -104,8 +104,9 @@ void introduce_new_seeker(state_t *state, double current_time){
 
 bool emscripten_main(state_t *state) {
   double dt = time_since_last_tick();
+  list_t *assets_b = state->body_assets;
   for (size_t i = 0; i < list_size(state->body_assets); i++){
-    asset_render(list_get(state->body_assets, i));
+    asset_render(list_get(assets_b, i));
   }
   sdl_show();
 
