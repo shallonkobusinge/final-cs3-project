@@ -56,6 +56,18 @@ body_t *make_seeker(double outer_radius, double inner_radius, vector_t center) {
     return seeker_b;
 }
 
+void wrap_edges(body_t *body) {
+  vector_t centroid = body_get_centroid(body);
+  if (centroid.x > MAX.x) {
+    body_set_centroid(body, (vector_t){MIN.x, centroid.y});
+  } else if (centroid.x < MIN.x) {
+    body_set_centroid(body, (vector_t){MAX.x, centroid.y});
+  } else if (centroid.y > MAX.y) {
+    body_set_centroid(body, (vector_t){centroid.x, MIN.y});
+  } else if (centroid.y < MIN.y) {
+    body_set_centroid(body, (vector_t){centroid.x, MAX.y});
+  }
+}
 
 state_t *emscripten_init() {
     sdl_init(MIN, MAX);
@@ -67,7 +79,7 @@ state_t *emscripten_init() {
     // for(int i = 0; i < STARTING_SEEKERS; i++) {
         body_t *seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, START_POS);
         // vector_t vel = {.x = rand() % 200 - 100, .y = rand() % 200 - 100 };
-        body_set_velocity(seeker, (vector_t){100, 0});
+        body_set_velocity(seeker, (vector_t){30, 0});
         // body_set_centroid(seeker, START_POS);
         scene_add_body(state->scene, seeker);
         asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
@@ -116,7 +128,8 @@ bool emscripten_main(state_t *state) {
    
     for(size_t i = 0; i < scene_bodies(state->scene); i++) {
         body_t *seeker = scene_get_body(state->scene, i);
-        get_new_velocity_seeker(seeker, dt);
+        wrap_edges(seeker);
+        // get_new_velocity_seeker(seeker, dt);
 
     }
      list_t *assets_b = state->body_assets;
