@@ -25,8 +25,8 @@ const vector_t MAX = {1000, 500};
 const vector_t START_POS = {500, 45};
 const int16_t H_STEP = 20;
 const int16_t V_STEP = 40;
-const double OUTER_RADIUS = 15;
-const double INNER_RADIUS = 15;
+const double OUTER_RADIUS = 60;
+const double INNER_RADIUS = 60;
 
 const rgb_color_t seeker_color = (rgb_color_t){0.1, 0.9, 0.2};
 
