@@ -90,6 +90,23 @@ double introduce_new_seeker(state_t *state, double previous_time, double current
     return previous_time;
 }
 
+void get_new_velocity_seeker(body_t *seeker, double dt) {
+    vector_t velocity = body_get_velocity(seeker);
+    vector_t displacement = vec_multiply(velocity, dt);
+    vector_t new_poisition = vec_add(body_get_centroid(seeker), displacement);
+
+    if(new_poisition.x < MIN.x || new_poisition.x > MAX.x) {
+        velocity.x = -velocity.x;
+    }
+    if(new_poisition.y < MIN.y || new_poisition.y > MIN.y) {
+        velocity.x = -velocity.y;
+    }
+    vector_t center = vec_add(body_get_centroid(seeker), vec_multiply(velocity, dt));
+    body_set_velocity(seeker, velocity);
+    body_set_centroid(seeker, center);
+
+}
+
 bool emscripten_main(state_t *state) {
     sdl_clear();
     double dt = time_since_last_tick();
@@ -97,8 +114,14 @@ bool emscripten_main(state_t *state) {
     for (size_t i = 0; i < list_size(state->body_assets); i++){
         asset_render(list_get(assets_b, i));
         }
-    double previous_time = 0;
-    previous_time = introduce_new_seeker(state, previous_time, dt);
+    for(size_t i = 0; i < scene_bodies(state->scene); i++) {
+        body_t *seeker = scene_get_body(state->scene, i);
+        get_new_velocity_seeker(seeker, dt);
+
+    }
+    // double previous_time = 0;
+    // previous_time = introduce_new_seeker(state, previous_time, dt);
+    scene_tick(state->scene, dt);
     sdl_show();
   return false;
 }
