@@ -58,6 +58,7 @@ body_t *make_seeker(double outer_radius, double inner_radius, vector_t center) {
 
 void wrap_edges(body_t *body) {
   vector_t centroid = body_get_centroid(body);
+  
   if (centroid.x > MAX.x) {
     body_set_centroid(body, (vector_t){MIN.x, centroid.y});
   } else if (centroid.x < MIN.x) {
@@ -67,6 +68,7 @@ void wrap_edges(body_t *body) {
   } else if (centroid.y < MIN.y) {
     body_set_centroid(body, (vector_t){centroid.x, MAX.y});
   }
+  printf(" Body moved at x = %f and y = %f ", body_get_centroid(body).x, body_get_centroid(body).y);
 }
 
 state_t *emscripten_init() {
