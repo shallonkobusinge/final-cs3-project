@@ -110,15 +110,17 @@ void get_new_velocity_seeker(body_t *seeker, double dt) {
 bool emscripten_main(state_t *state) {
     sdl_clear();
     double dt = time_since_last_tick();
-    list_t *assets_b = state->body_assets;
-    for (size_t i = 0; i < list_size(state->body_assets); i++){
-        asset_render(list_get(assets_b, i));
-        }
+   
     for(size_t i = 0; i < scene_bodies(state->scene); i++) {
         body_t *seeker = scene_get_body(state->scene, i);
         get_new_velocity_seeker(seeker, dt);
 
     }
+    
+     list_t *assets_b = state->body_assets;
+    for (size_t i = 0; i < list_size(state->body_assets); i++){
+        asset_render(list_get(assets_b, i));
+        }
     // double previous_time = 0;
     // previous_time = introduce_new_seeker(state, previous_time, dt);
     scene_tick(state->scene, dt);
