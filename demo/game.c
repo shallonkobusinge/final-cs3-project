@@ -120,9 +120,9 @@ bool emscripten_main(state_t *state) {
     state->last_seeker_time += dt;
     printf("NEW TIME %f \n", state->last_seeker_time);
     if(state->last_seeker_time >= NEW_SEEKERS_INTERVAL){
-      state->last_seeker_time = 0;
       add_new_seeker(state);
     }
+    state->last_seeker_time = 0;
     sdl_clear();
     for (size_t i = 0; i < list_size(state->body_assets); i++) {
         asset_render(list_get(state->body_assets, i));
