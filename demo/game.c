@@ -65,13 +65,13 @@ list_t *rect_shape(double width, double height, vector_t center) {
   return c;
 }
 
-body_t *make_seeker(vector_t center){
+body_t *make_seeker(state_t *state, vector_t center){
     list_t *seeker_p = list_init(0, free);
 
     list_t *head = rect_shape(2 * HUMAN_HEAD_RADIUS, 2 * HUMAN_HEAD_RADIUS, (vector_t){center.x, center.y + BODY_HEIGHT / 2 + HUMAN_HEAD_RADIUS});
   body_t *seeker_head = body_init(seeker_p, 1, seeker_color);
-  scene_add_body(seeker_p, seeker_head)
-//   body_set_centroid(seeker, center);
+//   scene_add_body(state->scene, seeker_head)
+  body_set_centroid(seeker_head, center);
   return seeker_head;
 }
 
