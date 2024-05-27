@@ -22,17 +22,9 @@ const vector_t MAX = {1000, 500};
 #define S_NUM_POINTS 20
 #define S_RADIUS 0.1
 
-const size_t SHIP_NUM_POINTS = 20;
-const double OUTER_RADIUS = 15;
-const double INNER_RADIUS = 15;
 const vector_t START_POS = {500, 30};
 const int16_t H_STEP = 20;
 const int16_t V_STEP = 40;
-const double EXTRA_VEL_MULT = 10;
-const double VEL_MULT_PROB = 0.2;
-const vector_t RESET_POS = {500, 45};
-
-const size_t ROWS = 8;
 
 const rgb_color_t seeker_color = (rgb_color_t){0.1, 0.9, 0.2};
 
@@ -45,52 +37,54 @@ typedef struct state {
 }state_t;
 
 
-body_t *make_seeker(double outer_radius, double inner_radius, vector_t center) {
-  center.y += inner_radius;
-  list_t *c = list_init(SHIP_NUM_POINTS, free);
-  for (size_t i = 0; i < SHIP_NUM_POINTS; i++) {
-    double angle = 2 * M_PI * i / SHIP_NUM_POINTS;
-    vector_t *v = malloc(sizeof(*v));
-    *v = (vector_t){center.x + inner_radius * cos(angle),
-                    center.y + outer_radius * sin(angle)};
-    list_add(c, v);
-  }
-  body_t *froggy = body_init(c, 1, seeker_color);
-  return froggy;
+body_t *make_seeker(double radius, vector_t center) {
+    list_t *shape = list_init(S_NUM_POINTS, free);
+
+    for (size_t i = 0; i < S_NUM_POINTS; i++){
+        double angle = 2 * M_PI * i / S_NUM_POINTS;
+        vector_t *vert = malloc(sizeof(*vert));
+        *vert = (vector_t) {.x = center.x + radius * cos(angle),
+                            .y = center.y + radius * cos(angle)};
+        list_add(shape, vert);
+    }
+    body_t *seeker_b = body_init(shape, 1.0, seeker_color);
+    return seeker_b;
 }
 
-// void on_key(char key, key_event_type_t type, double held_time, state_t *state) {
-//   body_t *froggy = scene_get_body(state->scene, 0);
-//   vector_t translation = (vector_t){0, 0};
-//   if (type == KEY_PRESSED && type != KEY_RELEASED) {
-//     switch (key) {
-//     case LEFT_ARROW:
-//       translation.x = -H_STEP;
-//       break;
-//     case RIGHT_ARROW:
-//       translation.x = H_STEP;
-//       break;
-//     case UP_ARROW:
-//       translation.y = V_STEP;
-//       break;
-//     case DOWN_ARROW:
-//       if (body_get_centroid(froggy).y > START_POS.y) {
-//         translation.y = -V_STEP;
-//       }
-//       break;
+// void on_key(char key, key_event_type_t type, double held_time, state_t *state, size_t seeker_idx) {
+//     assert(seeker_idx < scene_bodies(state->scene));
+//     body_t *seeker = scene_get_body(state->scene, seeker_idx);
+//     vector_t translation = (vector_t){0, 0};
+//     if (type == KEY_PRESSED && type != KEY_RELEASED) {
+//         switch (key) {
+//         case LEFT_ARROW:
+//         translation.x = -H_STEP;
+//         break;
+//         case RIGHT_ARROW:
+//         translation.x = H_STEP;
+//         break;
+//         case UP_ARROW:
+//         translation.y = V_STEP;
+//         break;
+//         case DOWN_ARROW:
+//         if (body_get_centroid(seeker).y > START_POS.y) {
+//             translation.y = -V_STEP;
+//         }
+//         break;
+//         }
+//         vector_t new_centroid = vec_add(body_get_centroid(seeker), translation);
+//         body_set_centroid(seeker, new_centroid);
 //     }
-//     vector_t new_centroid = vec_add(body_get_centroid(froggy), translation);
-//     body_set_centroid(froggy, new_centroid);
-//   }
 // }
+
 state_t *emscripten_init() {
     sdl_init(MIN, MAX);
     state_t *state = malloc(sizeof(state_t));
     asset_cache_init();
     state->scene = scene_init();
     state->body_assets = list_init(MAX_SEEKERS, (free_func_t)asset_destroy);
-    body_t *seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, VEC_ZERO);
-    body_set_centroid(seeker, RESET_POS);
+    body_t *seeker = make_seeker(S_RADIUS, START_POS);
+    // body_set_centroid()
     scene_add_body(state->scene, seeker);
     asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
     list_add(state->body_assets, asset_seeker);
@@ -101,7 +95,7 @@ state_t *emscripten_init() {
 double introduce_new_seeker(state_t *state, double previous_time, double current_time){
     if (current_time - previous_time >= NEW_SEEKERS_INTERVAL) {
         if(list_size(state->body_assets) < MAX_SEEKERS) {
-        body_t *new_seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, VEC_ZERO);
+        body_t *new_seeker = make_seeker(S_RADIUS, START_POS);
         scene_add_body(state->scene, new_seeker);
         asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, new_seeker);
         list_add(state->body_assets, asset_seeker);
@@ -121,7 +115,6 @@ bool emscripten_main(state_t *state) {
         }
     double previous_time = 0;
     previous_time = introduce_new_seeker(state, previous_time, dt);
-    // printf("PREVIOUS %f CURRENT TIME %f \n", previous_time, dt);
     sdl_show();
 
 //   
