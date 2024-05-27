@@ -49,7 +49,7 @@ body_t *make_seeker(double outer_radius, double inner_radius, vector_t center) {
                             .y = center.y + inner_radius * cos(angle)};
         list_add(shape, vert);
     }
-    body_t *seeker_b = body_init(shape, 1.0, seeker_color);
+    body_t *seeker_b = body_init(shape, 10.0, seeker_color);
     return seeker_b;
 }
 
