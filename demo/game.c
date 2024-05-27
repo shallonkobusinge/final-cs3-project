@@ -123,7 +123,7 @@ bool emscripten_main(state_t *state) {
     if(state->last_seeker_time >= NEW_SEEKERS_INTERVAL){
       add_new_seeker(state);
     }
-    printf("BODIES %zu \n", scene_bodies(state->scene));
+    // printf("BODIES %zu \n", scene_bodies(state->scene));
     for(size_t i = 0; i < scene_bodies(state->scene); i++) {
         body_t *seeker = scene_get_body(state->scene, i);
         wrap_edges(seeker);
