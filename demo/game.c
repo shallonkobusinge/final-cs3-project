@@ -27,6 +27,10 @@ const int16_t H_STEP = 20;
 const int16_t V_STEP = 40;
 const double OUTER_RADIUS = 60;
 const double INNER_RADIUS = 60;
+const double HUMAN_HEAD_RADIUS = 10
+const double BODY_HEIGHT = 30
+const double BODY_WIDTH = 15
+
 
 const rgb_color_t seeker_color = (rgb_color_t){0.1, 0.9, 0.2};
 
@@ -40,26 +44,32 @@ typedef struct state {
 }state_t;
 
 
-body_t *make_seeker(double w, double h, vector_t center) {
+list_t *rect_shape(double width, double height, vector_t center) {
     list_t *c = list_init(4, free);
   vector_t *v1 = malloc(sizeof(vector_t));
-  *v1 = (vector_t){0, 0};
+  *v1 = (vector_t){center.x - width / 2, center.y - width / 2};
   list_add(c, v1);
 
   vector_t *v2 = malloc(sizeof(vector_t));
-  *v2 = (vector_t){w, 0};
+  *v2 = (vector_t){center.x - width / 2, center.y - width / 2};
   list_add(c, v2);
 
   vector_t *v3 = malloc(sizeof(vector_t));
-  *v3 = (vector_t){w, h};
+  *v3 = (vector_t){center.x - width / 2, center.y - width / 2};
   list_add(c, v3);
 
   vector_t *v4 = malloc(sizeof(vector_t));
-  *v4 = (vector_t){0, h};
+  *v4 = (vector_t){center.x - width / 2, center.y - width / 2};
   list_add(c, v4);
-  body_t *obstacle = body_init(c, 1, seeker_color);
-  body_set_centroid(obstacle, center);
-  return obstacle;
+ 
+  return c;
+}
+
+body_t *make_seeker(vector_t center){
+    list_t *seeker_p = rect_shape(2 * HUMAN_RADIUS, 2 * HUMAN_RADIUS, (vector_t){center.x, center.y + BODY_HEIGHT / 2 + HUMAN_HEAD_RADIUS})
+  body_t *seeker = body_init(seeker_p, 1, seeker_color);
+  body_set_centroid(seeker, center);
+  return seeker
 }
 
 void wrap_edges(body_t *seeker) {
