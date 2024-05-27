@@ -82,7 +82,7 @@ state_t *emscripten_init() {
     state_t *state = malloc(sizeof(state_t));
     asset_cache_init();
     state->scene = scene_init();
-    state->body_assets = list_init(1, (free_func_t)asset_destroy);
+    state->body_assets = list_init(MAX_SEEKERS, (free_func_t)asset_destroy);
     body_t *seeker = make_seeker(S_RADIUS, START_POS);
     scene_add_body(state->scene, seeker);
     asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
@@ -91,15 +91,18 @@ state_t *emscripten_init() {
     return state;
 }
 
-void introduce_new_seeker(state_t *state, double current_time){
-    double previous_time = 0;
+double introduce_new_seeker(state_t *state, double previous_time, double current_time){
     if (current_time - previous_time >= NEW_SEEKERS_INTERVAL) {
+        if(list_size(state->body_assets) < MAX_SEEKERS) {
         body_t *new_seeker = make_seeker(S_RADIUS, START_POS);
         scene_add_body(state->scene, new_seeker);
         asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, new_seeker);
         list_add(state->body_assets, asset_seeker);
     }
+      
+}
     previous_time = current_time;
+    return previous_time;
 }
 
 bool emscripten_main(state_t *state) {
@@ -109,7 +112,9 @@ bool emscripten_main(state_t *state) {
     for (size_t i = 0; i < list_size(state->body_assets); i++){
         asset_render(list_get(assets_b, i));
         }
-    introduce_new_seeker(state, dt);
+    double previous_time = 0;
+    previous_time = introduce_new_seeker(state, previous_time, dt);
+    printf("PREVIOUS %d CURRENT TIME %d \n", previous_time, dt);
     sdl_show();
 
 //   
