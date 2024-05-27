@@ -120,7 +120,7 @@ bool emscripten_main(state_t *state) {
     }
     state->last_seeker_time += dt;
     printf("NEW TIME %f \n", state->last_seeker_time);
-    if(state->last_seeker_time == NEW_SEEKERS_INTERVAL){
+    if(state->last_seeker_time >= NEW_SEEKERS_INTERVAL){
       add_new_seeker(state);
     }
    
