@@ -104,8 +104,6 @@ void add_new_seeker(state_t *state){
         .x = rand() % (int)INITIAL_VELOCITY.x + 20,
         .y = rand() % (int)INITIAL_VELOCITY.y + 10
     };
-    printf(" POSITION x = %f y = %f \n", seeker_pos.x, seeker_pos.y);
-    printf(" VELOCITY x = %f y = %f \n", seeker_vel.x, seeker_vel.y);
 
     body_t *new_seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, seeker_pos);
     scene_add_body(state->scene, new_seeker);
@@ -121,7 +119,6 @@ bool emscripten_main(state_t *state) {
     double dt = time_since_last_tick();
    
     state->last_seeker_time += dt;
-    printf(" ELAPSED TIME %f \n", state->last_seeker_time);
     if(state->last_seeker_time >= NEW_SEEKERS_INTERVAL){
       add_new_seeker(state);
     }
