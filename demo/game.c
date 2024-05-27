@@ -57,6 +57,7 @@ body_t *make_seeker(double outer_radius, double inner_radius, vector_t center) {
 }
 
 void wrap_edges(body_t *body) {
+    printf(" %s \n"," HEREee ");
   vector_t centroid = body_get_centroid(body);
   
   if (centroid.x > MAX.x) {
@@ -125,7 +126,7 @@ state_t *emscripten_init() {
 // }
 
 bool emscripten_main(state_t *state) {
-    sdl_clear();
+
     double dt = time_since_last_tick();
     // printf("BODIES %zu \n", scene_bodies(state->scene));
     for(size_t i = 0; i < scene_bodies(state->scene); i++) {
@@ -133,14 +134,14 @@ bool emscripten_main(state_t *state) {
         // get_new_velocity_seeker(seeker, dt);
         wrap_edges(seeker);
     }
-    sdl_show();
+    sdl_clear();
      list_t *assets_b = state->body_assets;
     for (size_t i = 0; i < list_size(assets_b); i++) {
         asset_render(list_get(assets_b, i));
         }
+    
+    sdl_show();
     scene_tick(state->scene, dt);
-    
-    
   return false;
 }
 
