@@ -81,7 +81,7 @@ state_t *emscripten_init() {
     // for(int i = 0; i < STARTING_SEEKERS; i++) {
         body_t *seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, VEC_ZERO);
         // vector_t vel = {.x = rand() % 200 - 100, .y = rand() % 200 - 100 };
-        body_set_velocity(seeker, vec_multiply(10, (vector_t){30, 0}));
+        body_set_velocity(seeker, vec_multiply(1, (vector_t){30, 0}));
         // body_set_centroid(seeker, START_POS);
         scene_add_body(state->scene, seeker);
         asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
