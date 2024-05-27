@@ -18,6 +18,8 @@ const vector_t MIN = {0, 0};
 const vector_t MAX = {1000, 500};
 const double OUTER_RADIUS = 60;
 const double INNER_RADIUS = 60;
+const vector_t START_POS = {0, 45};
+const vector_t INITIAL_VELOCITY = {60, 20};
 
 #define NEW_SEEKERS_INTERVAL 30
 #define MAX_SEEKERS 50
