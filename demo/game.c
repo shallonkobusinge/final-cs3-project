@@ -28,6 +28,8 @@ const double INNER_RADIUS = 15;
 const vector_t START_POS = {500, 30};
 const int16_t H_STEP = 20;
 const int16_t V_STEP = 40;
+const double EXTRA_VEL_MULT = 10;
+const double VEL_MULT_PROB = 0.2;
 
 const rgb_color_t seeker_color = (rgb_color_t){0.1, 0.9, 0.2};
 
@@ -88,7 +90,21 @@ state_t *emscripten_init() {
     scene_add_body(state->scene, seeker);
     asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
     list_add(state->body_assets, asset_seeker);
+     for (size_t r = 3; r < ROWS + 3; r++) {
+    double cx = 0;
+    double cy = r * V_STEP + body_get_centroid(seeker).y;
+    double multiplier = 0;
+    if (r % 2 == 0) {
+      multiplier = 1;
+    } else {
+      multiplier = -1;
+    }
+    if ((double)rand() / RAND_MAX < VEL_MULT_PROB) {
+      multiplier *= EXTRA_VEL_MULT;
+    }
+  }
     sdl_on_key((key_handler_t)on_key);
+    
     return state;
 }
 
