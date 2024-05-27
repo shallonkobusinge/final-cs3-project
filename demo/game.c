@@ -114,7 +114,7 @@ void get_new_velocity_seeker(body_t *seeker, double dt) {
     if(new_poisition.y < MIN.y || new_poisition.y > MIN.y) {
         velocity.x = -velocity.y;
     }
-    vector_t center = vec_add(body_get_centroid(seeker), vec_multiply(dt, velocity));
+    // vector_t center = vec_add(body_get_centroid(seeker), vec_multiply(dt, velocity));
     body_set_velocity(seeker, velocity);
     // body_set_centroid(seeker, center);
     // printf(" MOVED Body at x = %f and y = %f velocity of x = %f and y = %f \n", center.x, center.y, velocity.x, velocity.y);
