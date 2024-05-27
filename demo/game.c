@@ -41,7 +41,7 @@ typedef struct state {
 
 
 body_t *make_seeker(double outer_radius, double inner_radius, vector_t center) {
-    center = vec_add(VEC_ZERO, center);
+    // center = vec_add(VEC_ZERO, center);
     center.y += inner_radius;
     list_t *shape = list_init(S_NUM_POINTS, free);
     for (size_t i = 0; i < S_NUM_POINTS; i++){
@@ -77,7 +77,7 @@ state_t *emscripten_init() {
     state->body_assets = list_init(MAX_SEEKERS, (free_func_t)asset_destroy);
     state->last_seeker_time = 0;
     // for(int i = 0; i < STARTING_SEEKERS; i++) {
-        body_t *seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, START_POS);
+        body_t *seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, VEC_ZERO);
         // vector_t vel = {.x = rand() % 200 - 100, .y = rand() % 200 - 100 };
         body_set_velocity(seeker, (vector_t){30, 0});
         // body_set_centroid(seeker, START_POS);
