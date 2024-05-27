@@ -69,7 +69,7 @@ body_t *make_seeker(vector_t center){
     list_t *seeker_p = rect_shape(2 * HUMAN_HEAD_RADIUS, 2 * HUMAN_HEAD_RADIUS, (vector_t){center.x, center.y + BODY_HEIGHT / 2 + HUMAN_HEAD_RADIUS});
   body_t *seeker = body_init(seeker_p, 1, seeker_color);
   body_set_centroid(seeker, center);
-  return seeker
+  return seeker;
 }
 
 void wrap_edges(body_t *seeker) {
@@ -93,7 +93,7 @@ state_t *emscripten_init() {
     state->scene = scene_init();
     state->body_assets = list_init(MAX_SEEKERS, (free_func_t)asset_destroy);
     state->last_seeker_time = 0;
-    body_t *seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, START_POS);
+    body_t *seeker = make_seeker(START_POS);
     body_set_velocity(seeker, (vector_t){.x = 60, .y = 20});
     scene_add_body(state->scene, seeker);
     asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
