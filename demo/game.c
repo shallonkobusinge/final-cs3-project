@@ -46,7 +46,6 @@ void add_new_seeker(state_t *state, bool is_new){
       seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, seeker_pos);
     }
     seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, START_POS);
-    // body_set_velocity(seeker, INITIAL_VELOCITY);
     seeker_vel = INITIAL_VELOCITY;
   
     scene_add_body(state->scene, seeker);
@@ -67,15 +66,6 @@ state_t *emscripten_init() {
     state->max_seekers = 50;
     state->body_assets = list_init(state->max_seekers, (free_func_t)asset_destroy);
     add_new_seeker(state, false);
-    // state->last_seeker_time = 0;
-    // body_t *seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, START_POS);
-    // body_set_velocity(seeker, INITIAL_VELOCITY);
-
-    // scene_add_body(state->scene, seeker);
-    // asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
-    // list_add(state->body_assets, asset_seeker);
-    
-    
     return state;
 }
 
