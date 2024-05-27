@@ -104,6 +104,7 @@ state_t *emscripten_init() {
 
 bool emscripten_main(state_t *state) {
 //   double dt = time_since_last_tick();
+  sdl_clear();
   list_t *assets_b = state->body_assets;
   for (size_t i = 0; i < list_size(state->body_assets); i++){
     asset_render(list_get(assets_b, i));
