@@ -68,7 +68,7 @@ void wrap_edges(body_t *body) {
   } else if (centroid.y < MIN.y) {
     body_set_centroid(body, (vector_t){centroid.x, MAX.y});
   }
-  printf(" Body moved at x = %f and y = %f ", body_get_centroid(body).x, body_get_centroid(body).y);
+  printf(" Body moved at x = %f and y = %f ", centroid.x, centroid.y);
 }
 
 state_t *emscripten_init() {
