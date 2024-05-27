@@ -93,6 +93,7 @@ state_t *emscripten_init() {
     asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
     list_add(state->body_assets, asset_seeker);
      for (size_t r = 3; r < ROWS + 3; r++) {
+    double multiplier = 0;
     if (r % 2 == 0) {
       multiplier = 1;
     } else {
