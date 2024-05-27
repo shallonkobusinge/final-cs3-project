@@ -114,16 +114,17 @@ void add_new_seeker(state_t *state){
 bool emscripten_main(state_t *state) {
 
     double dt = time_since_last_tick();
-    for(size_t i = 0; i < scene_bodies(state->scene); i++) {
-        body_t *seeker = scene_get_body(state->scene, i);
-        wrap_edges(seeker);
-    }
+   
     state->last_seeker_time += dt;
     printf("NEW TIME %f \n", state->last_seeker_time);
     if(state->last_seeker_time >= NEW_SEEKERS_INTERVAL){
       add_new_seeker(state);
     }
-   
+    printf("BODIES %zu \n", scene_bodies(state->scene));
+    for(size_t i = 0; i < scene_bodies(state->scene); i++) {
+        body_t *seeker = scene_get_body(state->scene, i);
+        wrap_edges(seeker);
+    }
     sdl_clear();
     for (size_t i = 0; i < list_size(state->body_assets); i++) {
         asset_render(list_get(state->body_assets, i));
