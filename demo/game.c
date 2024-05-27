@@ -20,6 +20,11 @@ const double INNER_RADIUS = 60;
 
 #define NEW_SEEKERS_INTERVAL 30
 #define MAX_SEEKERS 50
+typedef struct state state_t{
+    list_t *body_assets;
+    scene_t *scene;
+    double last_seeker_time;
+}state_t;
 
 state_t *emscripten_init() {
      asset_cache_init();
