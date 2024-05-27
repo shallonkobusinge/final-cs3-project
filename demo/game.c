@@ -50,7 +50,7 @@ body_t *make_seeker(double outer_radius, double inner_radius, vector_t center) {
                     center.y + outer_radius * sin(angle)};
     list_add(c, v);
   }
-  body_t *froggy = body_init(c, 1, frog_color);
+  body_t *froggy = body_init(c, 1, seeker_color);
   return froggy;
 }
 
@@ -86,7 +86,7 @@ state_t *emscripten_init() {
     asset_cache_init();
     state->scene = scene_init();
     state->body_assets = list_init(MAX_SEEKERS, (free_func_t)asset_destroy);
-    body_t *seeker = make_seeker(S_RADIUS, START_POS);
+    body_t *seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, VEC_ZERO);
     scene_add_body(state->scene, seeker);
     asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
     list_add(state->body_assets, asset_seeker);
