@@ -27,6 +27,7 @@ const int16_t H_STEP = 20;
 const int16_t V_STEP = 40;
 const double OUTER_RADIUS = 60;
 const double INNER_RADIUS = 60;
+const vector_t INITIAL_VELOCITY = {60, 20};
 
 const rgb_color_t seeker_color = (rgb_color_t){0.1, 0.9, 0.2};
 
@@ -67,13 +68,14 @@ void wrap_edges(body_t *seeker) {
   vector_t velocity = body_get_velocity(seeker);
   
   if (centroid.x >= MAX.x || centroid.x <= MIN.x) {
-        velocity.x = -velocity.x * 1.1;
+        velocity.x = -velocity.x;
   }
   if(centroid.y >= MAX.y || centroid.y <= MIN.y) {
-    velocity.y = -velocity.y * 1.1;
+    velocity.y = -velocity.y;
   }
   body_set_velocity(seeker, velocity);
 }
+
 
 state_t *emscripten_init() {
      asset_cache_init();
@@ -84,12 +86,28 @@ state_t *emscripten_init() {
     state->body_assets = list_init(MAX_SEEKERS, (free_func_t)asset_destroy);
     state->last_seeker_time = 0;
     body_t *seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, START_POS);
-    body_set_velocity(seeker, (vector_t){.x = 60, .y = 20});
+    body_set_velocity(seeker, INITIAL_VELOCITY);
     scene_add_body(state->scene, seeker);
     asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
     list_add(state->body_assets, asset_seeker);
     
     return state;
+}
+
+void add_new_seeker(state_t *state){
+    vector_t seeker_pos = (vector_t){
+        .x = rand() % (MAX.x - MIN.x) + MIN.x,
+        .y = rand() % (MAX.y - MIN.y) + MIN.y
+    };
+    vector_t seeker_vel = (vector_t){
+        .x = rand() % INITIAL_VELOCITY.x + INITIAL_VELOCITY.y,
+        .y = rand() % INITIAL_VELOCITY.y + INITIAL_VELOCITY.y
+    };
+    body_t *new_seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, seeker_pos);
+    body_set_velocity(new_seeker, seeker_vel);
+    asset_t *new_asset_seeker = asset_make_image_with_body(SEEKER_PATH, new_seeker);
+    list_add(state->body_assets, new_asset_seeker);
+  
 }
 
 bool emscripten_main(state_t *state) {
@@ -98,6 +116,11 @@ bool emscripten_main(state_t *state) {
     for(size_t i = 0; i < scene_bodies(state->scene); i++) {
         body_t *seeker = scene_get_body(state->scene, i);
         wrap_edges(seeker);
+    }
+    state->last_seeker_time += dt;
+    printf("NEW TIME %f \n", state->last_seeker_time);
+    if(state->last_seeker_time >= NEW_SEEKERS_INTERVAL){
+      add_new_seeker(state);
     }
     sdl_clear();
     for (size_t i = 0; i < list_size(state->body_assets); i++) {
