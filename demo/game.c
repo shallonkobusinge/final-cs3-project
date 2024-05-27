@@ -92,7 +92,7 @@ double introduce_new_seeker(state_t *state, double previous_time, double current
 
 void get_new_velocity_seeker(body_t *seeker, double dt) {
     vector_t velocity = body_get_velocity(seeker);
-    vector_t displacement = vec_multiply(velocity, dt);
+    vector_t displacement = vec_multiply(dt, velocity);
     vector_t new_poisition = vec_add(body_get_centroid(seeker), displacement);
 
     if(new_poisition.x < MIN.x || new_poisition.x > MAX.x) {
@@ -101,7 +101,7 @@ void get_new_velocity_seeker(body_t *seeker, double dt) {
     if(new_poisition.y < MIN.y || new_poisition.y > MIN.y) {
         velocity.x = -velocity.y;
     }
-    vector_t center = vec_add(body_get_centroid(seeker), vec_multiply(velocity, dt));
+    vector_t center = vec_add(body_get_centroid(seeker), vec_multiply(dt, velocity));
     body_set_velocity(seeker, velocity);
     body_set_centroid(seeker, center);
 
