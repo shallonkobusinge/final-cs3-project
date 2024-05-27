@@ -72,9 +72,9 @@ void wrap_edges(body_t *body) {
 }
 
 state_t *emscripten_init() {
+     asset_cache_init();
     sdl_init(MIN, MAX);
     state_t *state = malloc(sizeof(state_t));
-    asset_cache_init();
     state->scene = scene_init();
     state->body_assets = list_init(MAX_SEEKERS, (free_func_t)asset_destroy);
     state->last_seeker_time = 0;
@@ -126,7 +126,7 @@ state_t *emscripten_init() {
 
 bool emscripten_main(state_t *state) {
 
-    // double dt = time_since_last_tick();
+    double dt = time_since_last_tick();
     // printf("BODIES %zu \n", scene_bodies(state->scene));
     for(size_t i = 0; i < scene_bodies(state->scene); i++) {
         body_t *seeker = scene_get_body(state->scene, i);
@@ -139,9 +139,8 @@ bool emscripten_main(state_t *state) {
         asset_render(list_get(assets_b, i));
         }
     
-    
-    // scene_tick(state->scene, dt);
     sdl_show();
+    scene_tick(state->scene, dt);
   return false;
 }
 
