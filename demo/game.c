@@ -96,12 +96,12 @@ state_t *emscripten_init() {
 
 void add_new_seeker(state_t *state){
     vector_t seeker_pos = (vector_t){
-        .x = rand() % (MAX.x - MIN.x) + MIN.x,
-        .y = rand() % (MAX.y - MIN.y) + MIN.y
+        .x = rand() % (int)(MAX.x - MIN.x) + MIN.x,
+        .y = rand() % (int)(MAX.y - MIN.y) + MIN.y
     };
     vector_t seeker_vel = (vector_t){
-        .x = rand() % INITIAL_VELOCITY.x + INITIAL_VELOCITY.y,
-        .y = rand() % INITIAL_VELOCITY.y + INITIAL_VELOCITY.y
+        .x = rand() % (int)INITIAL_VELOCITY.x + INITIAL_VELOCITY.y,
+        .y = rand() % (int)INITIAL_VELOCITY.y + INITIAL_VELOCITY.y
     };
     body_t *new_seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, seeker_pos);
     body_set_velocity(new_seeker, seeker_vel);
