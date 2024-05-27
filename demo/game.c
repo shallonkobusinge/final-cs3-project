@@ -18,7 +18,7 @@ const vector_t MAX = {1000, 500};
 // SEEKING CONSTANTS
 #define STARTING_SEEKERS 1
 #define MAX_SEEKERS 50
-#define NEW_SEEKERS_INTERVAL 10
+#define NEW_SEEKERS_INTERVAL 3
 #define S_NUM_POINTS 20
 #define S_RADIUS 0.1
 
@@ -96,13 +96,16 @@ state_t *emscripten_init() {
 
 void add_new_seeker(state_t *state){
     vector_t seeker_pos = (vector_t){
-        .x = rand() % (int)(MAX.x - MIN.x) + MIN.x,
-        .y = rand() % (int)(MAX.y - MIN.y) + MIN.y
+        .x = rand() % (int)(MAX.x - MIN.x),
+        .y = rand() % (int)(MAX.y - MIN.y)
     };
     vector_t seeker_vel = (vector_t){
-        .x = rand() % (int)INITIAL_VELOCITY.x + INITIAL_VELOCITY.y,
-        .y = rand() % (int)INITIAL_VELOCITY.y + INITIAL_VELOCITY.y
+        .x = rand() % (int)INITIAL_VELOCITY.x,
+        .y = rand() % (int)INITIAL_VELOCITY.y
     };
+    printf(" POSITION x = %f y = %f \n", seeker_pos.x, seeker_pos.y);
+    printf(" VELOCITY x = %f y = %f \n", seeker_vel.x, seeker_vel.y);
+
     body_t *new_seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, seeker_pos);
     body_set_velocity(new_seeker, seeker_vel);
     asset_t *new_asset_seeker = asset_make_image_with_body(SEEKER_PATH, new_seeker);
@@ -117,7 +120,6 @@ bool emscripten_main(state_t *state) {
     double dt = time_since_last_tick();
    
     state->last_seeker_time += dt;
-    printf("NEW TIME %f \n", state->last_seeker_time);
     if(state->last_seeker_time >= NEW_SEEKERS_INTERVAL){
       add_new_seeker(state);
     }
