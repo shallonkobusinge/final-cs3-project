@@ -3,6 +3,9 @@
         "stdio.h": "c",
         "sdl_wrapper.h": "c",
         "string.h": "c",
-        "time.h": "c"
+        "time.h": "c",
+        "body.h": "c",
+        "color.h": "c",
+        "state.h": "c"
     }
 }
