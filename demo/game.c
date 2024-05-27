@@ -66,7 +66,6 @@ state_t *emscripten_init() {
         body_t *seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, VEC_ZERO);
         // vector_t vel = {.x = rand() % 200 - 100, .y = rand() % 200 - 100 };
         body_set_velocity(seeker, (vector_t){100, 0});
-        body_set_rotation(seeker,  3 * M_PI / 2);
         // body_set_centroid(seeker, START_POS);
         scene_add_body(state->scene, seeker);
         asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
@@ -76,19 +75,19 @@ state_t *emscripten_init() {
     return state;
 }
 
-double introduce_new_seeker(state_t *state, double previous_time, double current_time){
-    if (current_time - previous_time >= NEW_SEEKERS_INTERVAL) {
-        if(list_size(state->body_assets) < MAX_SEEKERS) {
-        body_t *new_seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, VEC_ZERO);
-        scene_add_body(state->scene, new_seeker);
-        asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, new_seeker);
-        list_add(state->body_assets, asset_seeker);
-    }
+// double introduce_new_seeker(state_t *state, double previous_time, double current_time){
+//     if (current_time - previous_time >= NEW_SEEKERS_INTERVAL) {
+//         if(list_size(state->body_assets) < MAX_SEEKERS) {
+//         body_t *new_seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, VEC_ZERO);
+//         scene_add_body(state->scene, new_seeker);
+//         asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, new_seeker);
+//         list_add(state->body_assets, asset_seeker);
+//     }
       
-}
-    previous_time = current_time;
-    return previous_time;
-}
+// }
+//     previous_time = current_time;
+//     return previous_time;
+// }
 
 // void get_new_velocity_seeker(body_t *seeker, double dt) {
 //     vector_t velocity = body_get_velocity(seeker);
