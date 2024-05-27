@@ -20,7 +20,7 @@ const vector_t MAX = {1000, 500};
 #define MAX_SEEKERS 50
 #define NEW_SEEKERS_INTERVAL 30
 #define S_NUM_POINTS 20
-#define S_RADIUS 15
+#define S_RADIUS 0.1
 
 const vector_t START_POS = {500, 30};
 const int16_t H_STEP = 20;
@@ -37,14 +37,14 @@ typedef struct state {
 }state_t;
 
 
-body_t *make_seeker(double radius) {
+body_t *make_seeker(double radius, vector_t center) {
     list_t *shape = list_init(S_NUM_POINTS, free);
 
     for (size_t i = 0; i < S_NUM_POINTS; i++){
         double angle = 2 * M_PI * i / S_NUM_POINTS;
         vector_t *vert = malloc(sizeof(*vert));
-        *vert = (vector_t) {.x = radius * cos(angle),
-                            .y = radius * cos(angle)};
+        *vert = (vector_t) {.x = center.x + radius * cos(angle),
+                            .y = center.y + radius * cos(angle)};
         list_add(shape, vert);
     }
     body_t *seeker_b = body_init(shape, 1.0, seeker_color);
@@ -83,7 +83,7 @@ state_t *emscripten_init() {
     asset_cache_init();
     state->scene = scene_init();
     state->body_assets = list_init(MAX_SEEKERS, (free_func_t)asset_destroy);
-    body_t *seeker = make_seeker(S_RADIUS);
+    body_t *seeker = make_seeker(S_RADIUS, VEC_ZERO);
     body_set_centroid(seeker, START_POS);
     scene_add_body(state->scene, seeker);
     asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
@@ -95,7 +95,7 @@ state_t *emscripten_init() {
 double introduce_new_seeker(state_t *state, double previous_time, double current_time){
     if (current_time - previous_time >= NEW_SEEKERS_INTERVAL) {
         if(list_size(state->body_assets) < MAX_SEEKERS) {
-        body_t *new_seeker = make_seeker(S_RADIUS);
+        body_t *new_seeker = make_seeker(S_RADIUS, VEC_ZERO);
         scene_add_body(state->scene, new_seeker);
         asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, new_seeker);
         list_add(state->body_assets, asset_seeker);
