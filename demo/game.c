@@ -96,12 +96,12 @@ state_t *emscripten_init() {
 
 void add_new_seeker(state_t *state){
     vector_t seeker_pos = (vector_t){
-        .x = rand() % (int)(MAX.x - MIN.x),
-        .y = rand() % (int)(MAX.y - MIN.y)
+        .x = rand() % (int)(MAX.x - MIN.x) + 40,
+        .y = rand() % (int)(MAX.y - MIN.y) + 40
     };
     vector_t seeker_vel = (vector_t){
-        .x = rand() % (int)INITIAL_VELOCITY.x,
-        .y = rand() % (int)INITIAL_VELOCITY.y
+        .x = rand() % (int)INITIAL_VELOCITY.x + 20,
+        .y = rand() % (int)INITIAL_VELOCITY.y + 10
     };
     printf(" POSITION x = %f y = %f \n", seeker_pos.x, seeker_pos.y);
     printf(" VELOCITY x = %f y = %f \n", seeker_vel.x, seeker_vel.y);
@@ -116,7 +116,6 @@ void add_new_seeker(state_t *state){
         body_t *seeker = scene_get_body(state->scene, i);
         wrap_edges(seeker);
     }
-  
 }
 
 bool emscripten_main(state_t *state) {
