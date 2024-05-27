@@ -123,7 +123,6 @@ bool emscripten_main(state_t *state) {
     if(state->last_seeker_time >= NEW_SEEKERS_INTERVAL){
       add_new_seeker(state);
     }
-    // printf("BODIES %zu \n", scene_bodies(state->scene));
    
     sdl_clear();
     for (size_t i = 0; i < list_size(state->body_assets); i++) {
