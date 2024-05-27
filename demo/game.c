@@ -65,7 +65,7 @@ state_t *emscripten_init() {
     srand(time(NULL));
     state->scene = scene_init();
     state->max_seekers = 50;
-    state->body_assets = list_init(MAX_SEEKERS, (free_func_t)asset_destroy);
+    state->body_assets = list_init(state->max_seekers, (free_func_t)asset_destroy);
     add_new_seeker(state, false);
     // state->last_seeker_time = 0;
     // body_t *seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, START_POS);
