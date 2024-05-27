@@ -25,6 +25,8 @@ const vector_t MAX = {1000, 500};
 const vector_t START_POS = {500, 30};
 const int16_t H_STEP = 20;
 const int16_t V_STEP = 40;
+const double OUTER_RADIUS = 15;
+const double INNER_RADIUS = 15;
 
 const rgb_color_t seeker_color = (rgb_color_t){0.1, 0.9, 0.2};
 
@@ -37,14 +39,14 @@ typedef struct state {
 }state_t;
 
 
-body_t *make_seeker(double radius, vector_t center) {
+body_t *make_seeker(double outer_radius, double inner_radius, vector_t center) {
     list_t *shape = list_init(S_NUM_POINTS, free);
 
     for (size_t i = 0; i < S_NUM_POINTS; i++){
         double angle = 2 * M_PI * i / S_NUM_POINTS;
         vector_t *vert = malloc(sizeof(*vert));
-        *vert = (vector_t) {.x = center.x + radius * cos(angle),
-                            .y = center.y + radius * cos(angle)};
+        *vert = (vector_t) {.x = center.x + outer_radius * cos(angle),
+                            .y = center.y + inner_radius * cos(angle)};
         list_add(shape, vert);
     }
     body_t *seeker_b = body_init(shape, 1.0, seeker_color);
