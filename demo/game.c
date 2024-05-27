@@ -63,7 +63,6 @@ body_t *make_seeker(double w, double h, vector_t center) {
 }
 
 void wrap_edges(body_t *seeker) {
-    char *text = "CHECKINGGG ";
     printf(" %s \n",text);
   vector_t centroid = body_get_centroid(seeker);
   vector_t velocity = body_get_velocity(seeker);
@@ -75,15 +74,6 @@ void wrap_edges(body_t *seeker) {
     velocity.y = -velocity.y;
   }
   body_set_velocity(seeker, velocity);
-//     body_set_centroid(body, (vector_t){MIN.x, centroid.y});
-//   } else if (centroid.x < MIN.x) {
-//     body_set_centroid(body, (vector_t){MAX.x, centroid.y});
-//   } else if (centroid.y > MAX.y) {
-//     body_set_centroid(body, (vector_t){centroid.x, MIN.y});
-//   } else if (centroid.y < MIN.y) {
-//     body_set_centroid(body, (vector_t){centroid.x, MAX.y});
-//   }
-  printf(" Body moved at x = %f and y = %f ", velocity.x, velocity.y);
 }
 
 state_t *emscripten_init() {
@@ -95,7 +85,7 @@ state_t *emscripten_init() {
     state->body_assets = list_init(MAX_SEEKERS, (free_func_t)asset_destroy);
     state->last_seeker_time = 0;
     body_t *seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, START_POS);
-    body_set_velocity(seeker, (vector_t){.x = 30, .y = 10});
+    body_set_velocity(seeker, (vector_t){.x = 40, .y = 40});
     scene_add_body(state->scene, seeker);
     asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
     list_add(state->body_assets, asset_seeker);
