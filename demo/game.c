@@ -22,6 +22,9 @@ const vector_t MAX = {1000, 500};
 #define S_NUM_POINTS 20
 #define S_RADIUS 0.1
 
+const size_t SHIP_NUM_POINTS = 20;
+const double OUTER_RADIUS = 15;
+const double INNER_RADIUS = 15;
 const vector_t START_POS = {500, 30};
 const int16_t H_STEP = 20;
 const int16_t V_STEP = 40;
@@ -37,18 +40,18 @@ typedef struct state {
 }state_t;
 
 
-body_t *make_seeker(double radius, vector_t center) {
-    list_t *shape = list_init(S_NUM_POINTS, free);
-
-    for (size_t i = 0; i < S_NUM_POINTS; i++){
-        double angle = 2 * M_PI * i / S_NUM_POINTS;
-        vector_t *vert = malloc(sizeof(*vert));
-        *vert = (vector_t) {.x = center.x + radius * cos(angle),
-                            .y = center.y + radius * cos(angle)};
-        list_add(shape, vert);
-    }
-    body_t *seeker_b = body_init(shape, 1.0, seeker_color);
-    return seeker_b;
+body_t *make_seeker(double outer_radius, double inner_radius, vector_t center) {
+  center.y += inner_radius;
+  list_t *c = list_init(SHIP_NUM_POINTS, free);
+  for (size_t i = 0; i < SHIP_NUM_POINTS; i++) {
+    double angle = 2 * M_PI * i / SHIP_NUM_POINTS;
+    vector_t *v = malloc(sizeof(*v));
+    *v = (vector_t){center.x + inner_radius * cos(angle),
+                    center.y + outer_radius * sin(angle)};
+    list_add(c, v);
+  }
+  body_t *froggy = body_init(c, 1, frog_color);
+  return froggy;
 }
 
 // void on_key(char key, key_event_type_t type, double held_time, state_t *state, size_t seeker_idx) {
@@ -94,7 +97,7 @@ state_t *emscripten_init() {
 double introduce_new_seeker(state_t *state, double previous_time, double current_time){
     if (current_time - previous_time >= NEW_SEEKERS_INTERVAL) {
         if(list_size(state->body_assets) < MAX_SEEKERS) {
-        body_t *new_seeker = make_seeker(S_RADIUS, START_POS);
+        body_t *new_seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, VEC_ZERO);
         scene_add_body(state->scene, new_seeker);
         asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, new_seeker);
         list_add(state->body_assets, asset_seeker);
