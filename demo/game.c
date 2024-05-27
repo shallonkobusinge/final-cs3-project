@@ -40,20 +40,26 @@ typedef struct state {
 }state_t;
 
 
-body_t *make_seeker(double outer_radius, double inner_radius, vector_t center) {
-    // center = vec_add(VEC_ZERO, center);
-    center.y += inner_radius;
-    list_t *shape = list_init(S_NUM_POINTS, free);
-    for (size_t i = 0; i < S_NUM_POINTS; i++){
-        double angle = 2 * M_PI * i / S_NUM_POINTS;
-        vector_t *vert = malloc(sizeof(*vert));
-        *vert = (vector_t) {.x = center.x + outer_radius * cos(angle),
-                            .y = center.y + inner_radius * cos(angle)};
-        list_add(shape, vert);
-    }
-    printf(" Body at x = %f and y = %f \n", center.x, center.y);
-    body_t *seeker_b = body_init(shape, 10.0, seeker_color);
-    return seeker_b;
+body_t *make_seeker(double w, double h, vector_t center) {
+    list_t *c = list_init(4, free);
+  vector_t *v1 = malloc(sizeof(vector_t));
+  *v1 = (vector_t){0, 0};
+  list_add(c, v1);
+
+  vector_t *v2 = malloc(sizeof(vector_t));
+  *v2 = (vector_t){w, 0};
+  list_add(c, v2);
+
+  vector_t *v3 = malloc(sizeof(vector_t));
+  *v3 = (vector_t){w, h};
+  list_add(c, v3);
+
+  vector_t *v4 = malloc(sizeof(vector_t));
+  *v4 = (vector_t){0, h};
+  list_add(c, v4);
+  body_t *obstacle = body_init(c, 1, seeker_color);
+  body_set_centroid(obstacle, center);
+  return obstacle;
 }
 
 void wrap_edges(body_t *body) {
@@ -81,65 +87,25 @@ state_t *emscripten_init() {
     state->scene = scene_init();
     state->body_assets = list_init(MAX_SEEKERS, (free_func_t)asset_destroy);
     state->last_seeker_time = 0;
-    // for(int i = 0; i < STARTING_SEEKERS; i++) {
-        body_t *seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, VEC_ZERO);
-        // vector_t vel = {.x = rand() % 200 - 100, .y = rand() % 200 - 100 };
-        body_set_velocity(seeker, (vector_t){.x = 30, .y = 0});
-        // body_set_centroid(seeker, START_POS);
-        scene_add_body(state->scene, seeker);
-        asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
-        list_add(state->body_assets, asset_seeker);
-    // }
+    body_t *seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, VEC_ZERO);
+    body_set_velocity(seeker, (vector_t){.x = 30, .y = 0});
+    scene_add_body(state->scene, seeker);
+    asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
+    list_add(state->body_assets, asset_seeker);
     
     return state;
 }
 
-// double introduce_new_seeker(state_t *state, double previous_time, double current_time){
-//     if (current_time - previous_time >= NEW_SEEKERS_INTERVAL) {
-//         if(list_size(state->body_assets) < MAX_SEEKERS) {
-//         body_t *new_seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, VEC_ZERO);
-//         scene_add_body(state->scene, new_seeker);
-//         asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, new_seeker);
-//         list_add(state->body_assets, asset_seeker);
-//     }
-      
-// }
-//     previous_time = current_time;
-//     return previous_time;
-// }
-
-// void get_new_velocity_seeker(body_t *seeker, double dt) {
-//     vector_t velocity = body_get_velocity(seeker);
-//     vector_t displacement = vec_multiply(dt, velocity);
-//     vector_t new_poisition = vec_add(body_get_centroid(seeker), displacement);
-
-//     if(new_poisition.x < MIN.x || new_poisition.x > MAX.x) {
-//         velocity.x = -velocity.x;
-//     }
-//     if(new_poisition.y < MIN.y || new_poisition.y > MIN.y) {
-//         velocity.x = -velocity.y;
-//     }
-//     // vector_t center = vec_add(body_get_centroid(seeker), vec_multiply(dt, velocity));
-//     body_set_velocity(seeker, velocity);
-//     // body_set_centroid(seeker, center);
-//     printf(" MOVED Body at velocity of x = %f and y = %f \n", velocity.x, velocity.y);
-//     // body_set_rotation(seeker,  3 * M_PI / 2);
-
-// }
-
 bool emscripten_main(state_t *state) {
 
     double dt = time_since_last_tick();
-    // printf("BODIES %zu \n", scene_bodies(state->scene));
     for(size_t i = 0; i < scene_bodies(state->scene); i++) {
         body_t *seeker = scene_get_body(state->scene, i);
-        // get_new_velocity_seeker(seeker, dt);
         wrap_edges(seeker);
     }
     sdl_clear();
-     list_t *assets_b = state->body_assets;
-    for (size_t i = 0; i < list_size(assets_b); i++) {
-        asset_render(list_get(assets_b, i));
+    for (size_t i = 0; i < list_size(state->body_assets); i++) {
+        asset_render(list_get(state->body_assets, i));
         }
     
     sdl_show();
