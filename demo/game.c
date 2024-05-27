@@ -138,9 +138,6 @@ bool emscripten_main(state_t *state) {
     for (size_t i = 0; i < list_size(assets_b); i++) {
         asset_render(list_get(assets_b, i));
         }
-    // double previous_time = 0;
-
-    // previous_time = introduce_new_seeker(state, previous_time, dt);
     
     sdl_show();
     scene_tick(state->scene, dt);
