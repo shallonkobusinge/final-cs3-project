@@ -31,6 +31,8 @@ const int16_t V_STEP = 40;
 const double EXTRA_VEL_MULT = 10;
 const double VEL_MULT_PROB = 0.2;
 
+const size_t ROWS = 8;
+
 const rgb_color_t seeker_color = (rgb_color_t){0.1, 0.9, 0.2};
 
 const char *SEEKER_PATH = "assets/seeker.png";
