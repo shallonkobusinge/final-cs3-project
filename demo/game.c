@@ -130,7 +130,7 @@ bool emscripten_main(state_t *state) {
    
     for(size_t i = 0; i < scene_bodies(state->scene); i++) {
         body_t *seeker = scene_get_body(state->scene, i);
-        get_new_velocity_seeker(seeker, dt);
+        // get_new_velocity_seeker(seeker, dt);
         wrap_edges(seeker);
     }
      list_t *assets_b = state->body_assets;
