@@ -22,7 +22,7 @@ const vector_t MAX = {1000, 500};
 #define S_NUM_POINTS 20
 #define S_RADIUS 0.1
 
-const vector_t START_POS = {500, 30};
+const vector_t START_POS = {500, 45};
 const int16_t H_STEP = 20;
 const int16_t V_STEP = 40;
 const double OUTER_RADIUS = 15;
@@ -40,8 +40,8 @@ typedef struct state {
 
 
 body_t *make_seeker(double outer_radius, double inner_radius, vector_t center) {
+    center.y += inner_radius;
     list_t *shape = list_init(S_NUM_POINTS, free);
-
     for (size_t i = 0; i < S_NUM_POINTS; i++){
         double angle = 2 * M_PI * i / S_NUM_POINTS;
         vector_t *vert = malloc(sizeof(*vert));
