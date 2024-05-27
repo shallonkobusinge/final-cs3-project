@@ -114,7 +114,7 @@ bool emscripten_main(state_t *state) {
         }
     double previous_time = 0;
     previous_time = introduce_new_seeker(state, previous_time, dt);
-    printf("PREVIOUS %d CURRENT TIME %d \n", previous_time, dt);
+    printf("PREVIOUS %f CURRENT TIME %f \n", previous_time, dt);
     sdl_show();
 
 //   
