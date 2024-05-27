@@ -27,10 +27,6 @@ const int16_t H_STEP = 20;
 const int16_t V_STEP = 40;
 const double OUTER_RADIUS = 60;
 const double INNER_RADIUS = 60;
-const double HUMAN_HEAD_RADIUS = 10;
-const double BODY_HEIGHT = 30;
-const double BODY_WIDTH = 15;
-
 
 const rgb_color_t seeker_color = (rgb_color_t){0.1, 0.9, 0.2};
 
@@ -44,33 +40,26 @@ typedef struct state {
 }state_t;
 
 
-list_t *rect_shape(double width, double height, vector_t center) {
+body_t *make_seeker(double w, double h, vector_t center) {
     list_t *c = list_init(4, free);
   vector_t *v1 = malloc(sizeof(vector_t));
-  *v1 = (vector_t){center.x - width / 2, center.y - width / 2};
+  *v1 = (vector_t){center.x, 0};
   list_add(c, v1);
 
   vector_t *v2 = malloc(sizeof(vector_t));
-  *v2 = (vector_t){center.x - width / 2, center.y - width / 2};
+  *v2 = (vector_t){w, 0};
   list_add(c, v2);
 
   vector_t *v3 = malloc(sizeof(vector_t));
-  *v3 = (vector_t){center.x - width / 2, center.y - width / 2};
+  *v3 = (vector_t){w, h};
   list_add(c, v3);
 
   vector_t *v4 = malloc(sizeof(vector_t));
-  *v4 = (vector_t){center.x - width / 2, center.y - width / 2};
+  *v4 = (vector_t){0, h};
   list_add(c, v4);
- 
-  return c;
-}
-
-body_t *make_seeker(state_t *state, vector_t center){
-
-    list_t *head = rect_shape(OUTER_RADIUS, INNER_RADIUS, (vector_t){center.x, center.y + BODY_HEIGHT / 2 + HUMAN_HEAD_RADIUS});
-  body_t *seeker_head = body_init(head, 1, seeker_color);
-  body_set_centroid(seeker_head, center);
-  return seeker_head;
+  body_t *obstacle = body_init(c, 1, seeker_color);
+  body_set_centroid(obstacle, center);
+  return obstacle;
 }
 
 void wrap_edges(body_t *seeker) {
@@ -94,7 +83,7 @@ state_t *emscripten_init() {
     state->scene = scene_init();
     state->body_assets = list_init(MAX_SEEKERS, (free_func_t)asset_destroy);
     state->last_seeker_time = 0;
-    body_t *seeker = make_seeker(state, START_POS);
+    body_t *seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, START_POS);
     body_set_velocity(seeker, (vector_t){.x = 60, .y = 20});
     scene_add_body(state->scene, seeker);
     asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
