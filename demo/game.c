@@ -95,7 +95,7 @@ state_t *emscripten_init() {
     state->scene = scene_init();
     state->body_assets = list_init(MAX_SEEKERS, (free_func_t)asset_destroy);
     state->last_seeker_time = 0;
-    body_t *seeker = make_seeker(START_POS);
+    body_t *seeker = make_seeker(state, START_POS);
     body_set_velocity(seeker, (vector_t){.x = 60, .y = 20});
     scene_add_body(state->scene, seeker);
     asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
