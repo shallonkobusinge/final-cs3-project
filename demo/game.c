@@ -30,7 +30,7 @@ const double INNER_RADIUS = 15;
 
 const rgb_color_t seeker_color = (rgb_color_t){0.1, 0.9, 0.2};
 
-const char *SEEKER_PATH = "assets/seeker.png";
+const char *SEEKER_PATH = "assets/seeker_bg.png";
 
 
 typedef struct state {
