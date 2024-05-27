@@ -96,7 +96,7 @@ state_t *emscripten_init() {
 
 void add_new_seeker(state_t *state){
     vector_t seeker_pos = (vector_t){
-        .x = rand() % 100,
+        .x = rand() % INITIAL_VELOCITY.x,
         .y = rand() % (int)(MAX.y),
     };
     vector_t seeker_vel = (vector_t){
