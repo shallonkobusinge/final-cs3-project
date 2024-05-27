@@ -63,7 +63,7 @@ state_t *emscripten_init() {
     state->body_assets = list_init(MAX_SEEKERS, (free_func_t)asset_destroy);
     state->last_seeker_time = 0;
     for(int i = 0; i < STARTING_SEEKERS; i++) {
-        body_t *seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, VEC_ZERO);
+        body_t *seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, START_POS);
         // vector_t vel = {.x = rand() % 200 - 100, .y = rand() % 200 - 100 };
         body_set_velocity(seeker, (vector_t){100, 0});
         body_set_centroid(seeker, START_POS);
@@ -122,6 +122,7 @@ bool emscripten_main(state_t *state) {
         asset_render(list_get(assets_b, i));
         }
     // double previous_time = 0;
+
     // previous_time = introduce_new_seeker(state, previous_time, dt);
     scene_tick(state->scene, dt);
     sdl_show();
