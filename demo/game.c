@@ -22,7 +22,7 @@ const vector_t MAX = {1000, 500};
 #define S_NUM_POINTS 20
 #define S_RADIUS 0.1
 
-const vector_t START_POS = {500, 45};
+const vector_t START_POS = {0, 45};
 const int16_t H_STEP = 20;
 const int16_t V_STEP = 40;
 const double OUTER_RADIUS = 60;
