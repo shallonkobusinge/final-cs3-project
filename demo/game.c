@@ -92,19 +92,7 @@ state_t *emscripten_init() {
     scene_add_body(state->scene, seeker);
     asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
     list_add(state->body_assets, asset_seeker);
-     for (size_t r = 3; r < ROWS + 3; r++) {
-    double multiplier = 0;
-    if (r % 2 == 0) {
-      multiplier = 1;
-    } else {
-      multiplier = -1;
-    }
-    if ((double)rand() / RAND_MAX < VEL_MULT_PROB) {
-      multiplier *= EXTRA_VEL_MULT;
-    }
-  }
     sdl_on_key((key_handler_t)on_key);
-    
     return state;
 }
 
