@@ -81,7 +81,7 @@ state_t *emscripten_init() {
     // for(int i = 0; i < STARTING_SEEKERS; i++) {
         body_t *seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, VEC_ZERO);
         // vector_t vel = {.x = rand() % 200 - 100, .y = rand() % 200 - 100 };
-        body_set_velocity(seeker, (vector_t){30, 0});
+        body_set_velocity(seeker, vec_multiply(10, (vector_t){30, 0}));
         // body_set_centroid(seeker, START_POS);
         scene_add_body(state->scene, seeker);
         asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
@@ -105,24 +105,24 @@ state_t *emscripten_init() {
 //     return previous_time;
 // }
 
-void get_new_velocity_seeker(body_t *seeker, double dt) {
-    vector_t velocity = body_get_velocity(seeker);
-    vector_t displacement = vec_multiply(dt, velocity);
-    vector_t new_poisition = vec_add(body_get_centroid(seeker), displacement);
+// void get_new_velocity_seeker(body_t *seeker, double dt) {
+//     vector_t velocity = body_get_velocity(seeker);
+//     vector_t displacement = vec_multiply(dt, velocity);
+//     vector_t new_poisition = vec_add(body_get_centroid(seeker), displacement);
 
-    if(new_poisition.x < MIN.x || new_poisition.x > MAX.x) {
-        velocity.x = -velocity.x;
-    }
-    if(new_poisition.y < MIN.y || new_poisition.y > MIN.y) {
-        velocity.x = -velocity.y;
-    }
-    // vector_t center = vec_add(body_get_centroid(seeker), vec_multiply(dt, velocity));
-    body_set_velocity(seeker, velocity);
-    // body_set_centroid(seeker, center);
-    // printf(" MOVED Body at x = %f and y = %f velocity of x = %f and y = %f \n", center.x, center.y, velocity.x, velocity.y);
-    // body_set_rotation(seeker,  3 * M_PI / 2);
+//     if(new_poisition.x < MIN.x || new_poisition.x > MAX.x) {
+//         velocity.x = -velocity.x;
+//     }
+//     if(new_poisition.y < MIN.y || new_poisition.y > MIN.y) {
+//         velocity.x = -velocity.y;
+//     }
+//     // vector_t center = vec_add(body_get_centroid(seeker), vec_multiply(dt, velocity));
+//     body_set_velocity(seeker, velocity);
+//     // body_set_centroid(seeker, center);
+//     // printf(" MOVED Body at x = %f and y = %f velocity of x = %f and y = %f \n", center.x, center.y, velocity.x, velocity.y);
+//     // body_set_rotation(seeker,  3 * M_PI / 2);
 
-}
+// }
 
 bool emscripten_main(state_t *state) {
 
