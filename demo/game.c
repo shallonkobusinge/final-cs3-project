@@ -57,7 +57,8 @@ body_t *make_seeker(double outer_radius, double inner_radius, vector_t center) {
 }
 
 void wrap_edges(body_t *body) {
-    printf(" %s \n"," HEREee ");
+    char *text = "CHECKINGGG ";
+    printf(" %s \n",text);
   vector_t centroid = body_get_centroid(body);
   
   if (centroid.x > MAX.x) {
