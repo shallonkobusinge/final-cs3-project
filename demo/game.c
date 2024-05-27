@@ -95,6 +95,7 @@ state_t *emscripten_init() {
 }
 
 void add_new_seeker(state_t *state){
+  printf(" ELAPSED TIME %f \n", state->last_seeker_time);
     vector_t seeker_pos = (vector_t){
         .x = rand() % (int)INITIAL_VELOCITY.x,
         .y = rand() % (int)(MAX.y),
