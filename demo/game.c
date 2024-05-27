@@ -140,7 +140,7 @@ bool emscripten_main(state_t *state) {
         }
     
     
-    scene_tick(state->scene, dt);
+    // scene_tick(state->scene, dt);
     sdl_show();
   return false;
 }
