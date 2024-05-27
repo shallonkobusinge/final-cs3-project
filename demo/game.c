@@ -62,21 +62,28 @@ body_t *make_seeker(double w, double h, vector_t center) {
   return obstacle;
 }
 
-void wrap_edges(body_t *body) {
+void wrap_edges(body_t *seeker) {
     char *text = "CHECKINGGG ";
     printf(" %s \n",text);
   vector_t centroid = body_get_centroid(body);
+  vector_t velocity = body_get_velocity(body);
   
-  if (centroid.x > MAX.x) {
-    body_set_centroid(body, (vector_t){MIN.x, centroid.y});
-  } else if (centroid.x < MIN.x) {
-    body_set_centroid(body, (vector_t){MAX.x, centroid.y});
-  } else if (centroid.y > MAX.y) {
-    body_set_centroid(body, (vector_t){centroid.x, MIN.y});
-  } else if (centroid.y < MIN.y) {
-    body_set_centroid(body, (vector_t){centroid.x, MAX.y});
+  if (centroid.x >= MAX.x || centroid.x <= MIN.x) {
+        velocity.x = -velocity.x;
   }
-  printf(" Body moved at x = %f and y = %f ", centroid.x, centroid.y);
+  if(centroid.y >= MAX.y || centroid.y <= MIN.y) {
+    velocity.y = -velocity.y;
+  }
+  body_set_velocity(seeker, velocity);
+//     body_set_centroid(body, (vector_t){MIN.x, centroid.y});
+//   } else if (centroid.x < MIN.x) {
+//     body_set_centroid(body, (vector_t){MAX.x, centroid.y});
+//   } else if (centroid.y > MAX.y) {
+//     body_set_centroid(body, (vector_t){centroid.x, MIN.y});
+//   } else if (centroid.y < MIN.y) {
+//     body_set_centroid(body, (vector_t){centroid.x, MAX.y});
+//   }
+  printf(" Body moved at x = %f and y = %f ", velocity.x, velocity.y);
 }
 
 state_t *emscripten_init() {
