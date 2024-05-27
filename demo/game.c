@@ -63,7 +63,6 @@ body_t *make_seeker(double w, double h, vector_t center) {
 }
 
 void wrap_edges(body_t *seeker) {
-    printf(" %s \n",text);
   vector_t centroid = body_get_centroid(seeker);
   vector_t velocity = body_get_velocity(seeker);
   
