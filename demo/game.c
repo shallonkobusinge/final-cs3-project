@@ -91,27 +91,28 @@ state_t *emscripten_init() {
     return state;
 }
 
-// void introduce_new_seeker(state_t *state, double current_time){
-//     double previous_time = 0;
-//     if (current_time - previous_time >= NEW_SEEKERS_INTERVAL) {
-//         body_t *new_seeker = make_seeker(S_RADIUS, START_POS);
-//         scene_add_body(state->scene, new_seeker);
-//         asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, new_seeker);
-//         list_add(state->body_assets, asset_seeker);
-//     }
-//     previous_time = current_time;
-// }
+void introduce_new_seeker(state_t *state, double current_time){
+    double previous_time = 0;
+    if (current_time - previous_time >= NEW_SEEKERS_INTERVAL) {
+        body_t *new_seeker = make_seeker(S_RADIUS, START_POS);
+        scene_add_body(state->scene, new_seeker);
+        asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, new_seeker);
+        list_add(state->body_assets, asset_seeker);
+    }
+    previous_time = current_time;
+}
 
 bool emscripten_main(state_t *state) {
-//   double dt = time_since_last_tick();
-  sdl_clear();
-  list_t *assets_b = state->body_assets;
-  for (size_t i = 0; i < list_size(state->body_assets); i++){
-    asset_render(list_get(assets_b, i));
-  }
-  sdl_show();
+    sdl_clear();
+    double dt = time_since_last_tick();
+    list_t *assets_b = state->body_assets;
+    for (size_t i = 0; i < list_size(state->body_assets); i++){
+        asset_render(list_get(assets_b, i));
+        }
+    introduce_new_seeker(state, dt);
+    sdl_show();
 
-//   introduce_new_seeker(state, dt);
+//   
 //   scene_tick(state->scene, dt);
   return false;
 }
