@@ -107,6 +107,7 @@ void add_new_seeker(state_t *state){
     body_set_velocity(new_seeker, seeker_vel);
     asset_t *new_asset_seeker = asset_make_image_with_body(SEEKER_PATH, new_seeker);
     list_add(state->body_assets, new_asset_seeker);
+    scene_add_body(state->scene, new_seeker);
     state->last_seeker_time = 0;
   
 }
