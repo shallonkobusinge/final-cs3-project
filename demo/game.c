@@ -67,10 +67,10 @@ void wrap_edges(body_t *seeker) {
   vector_t velocity = body_get_velocity(seeker);
   
   if (centroid.x >= MAX.x || centroid.x <= MIN.x) {
-        velocity.x = -velocity.x;
+        velocity.x = -velocity.x * 1.1;
   }
   if(centroid.y >= MAX.y || centroid.y <= MIN.y) {
-    velocity.y = -velocity.y;
+    velocity.y = -velocity.y * 1.1;
   }
   body_set_velocity(seeker, velocity);
 }
