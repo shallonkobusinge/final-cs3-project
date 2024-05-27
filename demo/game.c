@@ -23,11 +23,11 @@ const vector_t INITIAL_VELOCITY = {60, 20};
 const char *SEEKER_PATH = "assets/seeker_bg.png";
 
 #define NEW_SEEKERS_INTERVAL 30
-#define MAX_SEEKERS 50
 typedef struct state {
     list_t *body_assets;
     scene_t *scene;
     double last_seeker_time;
+    double max_seekers;
 }state_t;
 
 void add_new_seeker(state_t *state, bool is_new){
@@ -54,6 +54,7 @@ void add_new_seeker(state_t *state, bool is_new){
     asset_t *new_asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
     list_add(state->body_assets, new_asset_seeker);
     state->last_seeker_time = 0;
+    state->max_seekers += 1;
 
 }
 
@@ -63,6 +64,7 @@ state_t *emscripten_init() {
     state_t *state = malloc(sizeof(state_t));
     srand(time(NULL));
     state->scene = scene_init();
+    state->max_seekers = 50;
     state->body_assets = list_init(MAX_SEEKERS, (free_func_t)asset_destroy);
     add_new_seeker(state, false);
     // state->last_seeker_time = 0;
