@@ -27,6 +27,33 @@ typedef struct state {
     double last_seeker_time;
 }state_t;
 
+void add_new_seeker(state_t *state, bool is_new){
+
+   vector_t seeker_vel = {.x = 0.0, .y = 0.0};
+   body_t *seeker;
+    if(is_new){
+      vector_t seeker_pos = (vector_t){
+        .x = rand() % (int)INITIAL_VELOCITY.x,
+        .y = rand() % (int)(MAX.y),
+    };
+     seeker_vel = (vector_t){
+        .x = rand() % (int)INITIAL_VELOCITY.x + 20,
+        .y = rand() % (int)INITIAL_VELOCITY.y + 10
+    };
+      seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, seeker_pos);
+    }
+    seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, START_POS);
+    // body_set_velocity(seeker, INITIAL_VELOCITY);
+    seeker_vel = INITIAL_VELOCITY;
+  
+    scene_add_body(state->scene, seeker);
+    body_set_velocity(seeker, seeker_vel);
+    asset_t *new_asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
+    list_add(state->body_assets, new_asset_seeker);
+    state->last_seeker_time = 0;
+
+}
+
 state_t *emscripten_init() {
      asset_cache_init();
     sdl_init(MIN, MAX);
