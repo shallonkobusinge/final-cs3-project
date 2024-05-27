@@ -126,7 +126,7 @@ state_t *emscripten_init() {
 
 bool emscripten_main(state_t *state) {
 
-    double dt = time_since_last_tick();
+    // double dt = time_since_last_tick();
     // printf("BODIES %zu \n", scene_bodies(state->scene));
     for(size_t i = 0; i < scene_bodies(state->scene); i++) {
         body_t *seeker = scene_get_body(state->scene, i);
