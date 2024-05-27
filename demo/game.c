@@ -111,7 +111,7 @@ bool emscripten_main(state_t *state) {
   sdl_show();
 
 //   introduce_new_seeker(state, dt);
-  scene_tick(state->scene, dt);
+//   scene_tick(state->scene, dt);
   return false;
 }
 
