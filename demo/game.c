@@ -1,3 +1,4 @@
+#include "stdbool.h"
 #include "asset.h"
 #include "sdl_wrapper.h"
 #include <SDL2/SDL.h>
