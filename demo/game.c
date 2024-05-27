@@ -20,6 +20,7 @@ const double OUTER_RADIUS = 60;
 const double INNER_RADIUS = 60;
 const vector_t START_POS = {0, 45};
 const vector_t INITIAL_VELOCITY = {60, 20};
+const char *SEEKER_PATH = "assets/seeker_bg.png";
 
 #define NEW_SEEKERS_INTERVAL 30
 #define MAX_SEEKERS 50
