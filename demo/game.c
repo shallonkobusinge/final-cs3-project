@@ -101,9 +101,10 @@ void get_new_velocity_seeker(body_t *seeker, double dt) {
     if(new_poisition.y < MIN.y || new_poisition.y > MIN.y) {
         velocity.x = -velocity.y;
     }
-    vector_t center = vec_add(body_get_centroid(seeker), vec_multiply(dt, velocity));
+    // vector_t center = vec_add(body_get_centroid(seeker), vec_multiply(dt, velocity));
     body_set_velocity(seeker, velocity);
-    body_set_centroid(seeker, center);
+    // body_set_centroid(seeker, center);
+    body_set_rotation(seeker,  3 * M_PI / 2);
 
 }
 
@@ -116,9 +117,9 @@ bool emscripten_main(state_t *state) {
         get_new_velocity_seeker(seeker, dt);
 
     }
-    
+
      list_t *assets_b = state->body_assets;
-    for (size_t i = 0; i < list_size(state->body_assets); i++){
+    for (size_t i = 0; i < list_size(state->body_assets); i++) {
         asset_render(list_get(assets_b, i));
         }
     // double previous_time = 0;
