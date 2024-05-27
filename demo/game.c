@@ -54,32 +54,30 @@ body_t *make_seeker(double outer_radius, double inner_radius, vector_t center) {
   return froggy;
 }
 
-// void on_key(char key, key_event_type_t type, double held_time, state_t *state, size_t seeker_idx) {
-//     assert(seeker_idx < scene_bodies(state->scene));
-//     body_t *seeker = scene_get_body(state->scene, seeker_idx);
-//     vector_t translation = (vector_t){0, 0};
-//     if (type == KEY_PRESSED && type != KEY_RELEASED) {
-//         switch (key) {
-//         case LEFT_ARROW:
-//         translation.x = -H_STEP;
-//         break;
-//         case RIGHT_ARROW:
-//         translation.x = H_STEP;
-//         break;
-//         case UP_ARROW:
-//         translation.y = V_STEP;
-//         break;
-//         case DOWN_ARROW:
-//         if (body_get_centroid(seeker).y > START_POS.y) {
-//             translation.y = -V_STEP;
-//         }
-//         break;
-//         }
-//         vector_t new_centroid = vec_add(body_get_centroid(seeker), translation);
-//         body_set_centroid(seeker, new_centroid);
-//     }
-// }
-
+void on_key(char key, key_event_type_t type, double held_time, state_t *state) {
+  body_t *froggy = scene_get_body(state->scene, 0);
+  vector_t translation = (vector_t){0, 0};
+  if (type == KEY_PRESSED && type != KEY_RELEASED) {
+    switch (key) {
+    case LEFT_ARROW:
+      translation.x = -H_STEP;
+      break;
+    case RIGHT_ARROW:
+      translation.x = H_STEP;
+      break;
+    case UP_ARROW:
+      translation.y = V_STEP;
+      break;
+    case DOWN_ARROW:
+      if (body_get_centroid(froggy).y > START_POS.y) {
+        translation.y = -V_STEP;
+      }
+      break;
+    }
+    vector_t new_centroid = vec_add(body_get_centroid(froggy), translation);
+    body_set_centroid(froggy, new_centroid);
+  }
+}
 state_t *emscripten_init() {
     sdl_init(MIN, MAX);
     state_t *state = malloc(sizeof(state_t));
@@ -90,7 +88,7 @@ state_t *emscripten_init() {
     scene_add_body(state->scene, seeker);
     asset_t *asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
     list_add(state->body_assets, asset_seeker);
-    // sdl_on_key((key_handler_t)on_key);
+    sdl_on_key((key_handler_t)on_key);
     return state;
 }
 
