@@ -18,7 +18,7 @@ const vector_t MAX = {1000, 500};
 // SEEKING CONSTANTS
 #define STARTING_SEEKERS 1
 #define MAX_SEEKERS 50
-#define NEW_SEEKERS_INTERVAL 30
+#define NEW_SEEKERS_INTERVAL 10
 #define S_NUM_POINTS 20
 #define S_RADIUS 0.1
 
@@ -120,7 +120,7 @@ bool emscripten_main(state_t *state) {
     }
     state->last_seeker_time += dt;
     printf("NEW TIME %f \n", state->last_seeker_time);
-    if(state->last_seeker_time >= NEW_SEEKERS_INTERVAL){
+    if(state->last_seeker_time == NEW_SEEKERS_INTERVAL){
       add_new_seeker(state);
     }
    
