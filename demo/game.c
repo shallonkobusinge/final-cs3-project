@@ -112,6 +112,10 @@ void add_new_seeker(state_t *state){
     list_add(state->body_assets, new_asset_seeker);
     scene_add_body(state->scene, new_seeker);
     state->last_seeker_time = 0;
+    for(size_t i = 0; i < scene_bodies(state->scene); i++) {
+        body_t *seeker = scene_get_body(state->scene, i);
+        wrap_edges(seeker);
+    }
   
 }
 
@@ -126,10 +130,6 @@ bool emscripten_main(state_t *state) {
     // printf("BODIES %zu \n", scene_bodies(state->scene));
    
     sdl_clear();
-     for(size_t i = 0; i < scene_bodies(state->scene); i++) {
-        body_t *seeker = scene_get_body(state->scene, i);
-        wrap_edges(seeker);
-    }
     for (size_t i = 0; i < list_size(state->body_assets); i++) {
         asset_render(list_get(state->body_assets, i));
         }
