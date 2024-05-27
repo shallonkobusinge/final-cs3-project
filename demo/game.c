@@ -20,7 +20,7 @@ const double INNER_RADIUS = 60;
 
 #define NEW_SEEKERS_INTERVAL 30
 #define MAX_SEEKERS 50
-typedef struct state state_t{
+typedef struct state {
     list_t *body_assets;
     scene_t *scene;
     double last_seeker_time;
