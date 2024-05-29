@@ -35,6 +35,7 @@ void draw_maze()
 
     int maze[20][20] = {/* Your maze array here */};
 
+    printf("hrdsa\n");
     for (int i = 0; i < 20; ++i)
     {
         for (int j = 0; j < 20; ++j)
@@ -55,6 +56,8 @@ state_t *emscripten_init()
     state_t *state = malloc(sizeof(state_t));
     state->page = 0;
 
+    draw_maze();
+
     return state;
 }
 
@@ -63,7 +66,6 @@ bool emscripten_main(state_t *state)
     sdl_clear();
     // if (state->page == 0)
     // {
-    draw_maze();
     // build_landing_p2age();
     // }
     sdl_show();
