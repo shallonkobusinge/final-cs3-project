@@ -41,6 +41,10 @@ typedef struct state {
 }state_t;
 
 void init_sound() {
+  if(SDL_Init(SDL_INIT_AUDIO) < 0) {
+    printf("SDL could not initiliaze! SDL_mixer Error: %s \n", Mix_GetError());
+    exit(1);
+  }
   if(Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
     printf("SDL_mixer could not initiliaze! SDL_mixer Error: %s \n", Mix_GetError());
     exit(1);
