@@ -154,18 +154,24 @@ SDL_Texture *get_img(const char IMG_PATH[]);
 SDL_Texture *get_text(const char text[], TTF_Font *font, rgb_color_t rgb_color);
 
 /**
- * Render text
+ * Render text.
  * @param text text to render
  * @param frame frame of the text
  */
 void render_text(SDL_Texture *text, SDL_Rect *frame);
 
 /**
- * Render image
+ * Render image.
  * @param Img image to render
  * @param frame frame of the image
  */
 void render_image(SDL_Texture *Img, SDL_Rect *frame);
+
+/**
+ * Render rect.
+ * @param frame frame of the image
+ */
+void render_rect(SDL_Rect *frame);
 
 /**
  * SDl on click

@@ -42,7 +42,8 @@ void draw_maze()
             if (maze[i][j] == 1)
             {
                 SDL_Rect rect = {j * 200, i * 200, 200, 200};
-                        }
+                render_rect(&rect);
+            }
         }
     }
 }

@@ -283,6 +283,11 @@ void render_image(SDL_Texture *Img, SDL_Rect *frame)
   SDL_RenderCopy(renderer, Img, NULL, frame);
 }
 
+void render_rect(SDL_Rect *frame)
+{
+  SDL_RenderFillRect(renderer, frame);
+}
+
 void sdl_on_click(mouse_handler_t handler) { mouse_handler = handler; }
 
 SDL_Rect get_bounding_box(body_t *body)
