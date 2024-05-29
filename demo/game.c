@@ -59,14 +59,15 @@ sound_effect_t load_game_sounds() {
   }
   sounds->tagged_sound = Mix_LoadWAV(TAGGED_SOUND_PATH);
   if(sounds->tagged_sound == NULL) {
+    printf(" %s \n", "EERROR HERE");
     printf("Failed to tagged sound effect! SDL_mixer Error: %s \n", Mix_GetError());
   }
   return *sounds;
 }
 
-void free_sound(sound_effect_t *sound_effect){
-  Mix_FreeMusic(sound_effect->game_sound);
-  Mix_FreeChunk(sound_effect->tagged_sound);
+void free_sound(sound_effect_t sound_effect){
+  Mix_FreeMusic(sound_effect.game_sound);
+  Mix_FreeChunk(sound_effect.tagged_sound);
 }
 
 void add_new_seeker(state_t *state, bool is_new){
@@ -137,6 +138,7 @@ bool emscripten_main(state_t *state) {
 void emscripten_free(state_t *state) {
   list_free(state->body_assets);
   scene_free(state->scene);
+  free_sound(state->sound_effect);
   asset_cache_destroy();
   free(state);
 }
