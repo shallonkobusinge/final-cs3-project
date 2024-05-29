@@ -27,6 +27,11 @@ const char *GAME_SOUND_EFFECT = "assets/sound_effects/hide_and_seek.mp3";
 
 #define NEW_SEEKERS_INTERVAL 30
 
+typedef struct sound_effect {
+  Mix_Music *game_sound;
+  Mix_Music *tagged_sound;
+} sound_effect_t;
+
 typedef struct state {
     list_t *body_assets;
     scene_t *scene;
@@ -35,15 +40,10 @@ typedef struct state {
     sound_effect_t sound_effect;
 }state_t;
 
-typedef struct sound_effect {
-  Mix_Music *game_sound;
-  Mix_Music *tagged_sound;
-} sound_effect_t;
-
 void init_sound() {
   if(Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
     printf("SDL_mixer could not initiliaze! SDL_mixer Error: %s \n", Mix_GetError());
-    exi(1);
+    exit(1);
   }
 }
 
