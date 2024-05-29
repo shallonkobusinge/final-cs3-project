@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL2_gfxPrimitives.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,14 +22,48 @@ const double INNER_RADIUS = 60;
 const vector_t START_POS = {0, 45};
 const vector_t INITIAL_VELOCITY = {60, 20};
 const char *SEEKER_PATH = "assets/seeker_bg.png";
+const char *TAGGED_SOUND_PATH = "assets/sound_effects/tagged.mp3";
+const char *GAME_SOUND_EFFECT = "assets/sound_effects/hide_and_seek.mp3";
 
 #define NEW_SEEKERS_INTERVAL 30
+
 typedef struct state {
     list_t *body_assets;
     scene_t *scene;
     double last_seeker_time;
     double max_seekers;
+    sound_effect_t sound_effect;
 }state_t;
+
+typedef struct sound_effect {
+  Mix_Music *game_sound;
+  Mix_Music *tagged_sound;
+} sound_effect_t;
+
+void init_sound() {
+  if(Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
+    printf("SDL_mixer could not initiliaze! SDL_mixer Error: %s \n", Mix_GetError());
+    exi(1);
+  }
+}
+
+sound_effect_t load_game_sounds() {
+  sound_effect_t *sounds = malloc(sizeof(sound_effect_t));
+  sounds->game_sound = Mix_LoadMUS(GAME_SOUND_EFFECT);
+  if(sounds->game_sound == NULL) {
+    printf("Failed to load game sound effect! SDL_mixer Error: %s \n", Mix_GetError());
+  }
+  sounds->tagged_sound = Mix_LoadMUS(TAGGED_SOUND_PATH);
+  if(sounds->tagged_sound == NULL) {
+    printf("Failed to tagged sound effect! SDL_mixer Error: %s \n", Mix_GetError());
+  }
+  return *sounds;
+}
+
+void free_sound(sound_effect_t *sound_effect){
+  Mix_FreeMusic(sound_effect->game_sound);
+  Mix_FreeMuic(sound_effect->tagged_sound);
+}
 
 void add_new_seeker(state_t *state, bool is_new){
 
@@ -58,14 +93,17 @@ void add_new_seeker(state_t *state, bool is_new){
 }
 
 state_t *emscripten_init() {
-     asset_cache_init();
+    asset_cache_init();
     sdl_init(MIN, MAX);
+    init_sound();
     state_t *state = malloc(sizeof(state_t));
     srand(time(NULL));
     state->scene = scene_init();
     state->max_seekers = 50;
     state->body_assets = list_init(state->max_seekers, (free_func_t)asset_destroy);
     add_new_seeker(state, false);
+    state->sound_effect = load_game_sounds();
+    Mix_PlayMusic(state->sound_effect.game_sound, -1);
     return state;
 }
 
@@ -77,6 +115,7 @@ bool emscripten_main(state_t *state) {
     state->last_seeker_time += dt;
     if(state->last_seeker_time >= NEW_SEEKERS_INTERVAL){
       add_new_seeker(state, true);
+      Mix_PlayChannel(-1, state->sound_effect.tagged_sound, 0);
     }
     sdl_clear();
     for (size_t i = 0; i < list_size(state->body_assets); i++) {
