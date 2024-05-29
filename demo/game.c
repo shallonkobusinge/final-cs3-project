@@ -53,7 +53,7 @@ void init_sound() {
 
 sound_effect_t load_game_sounds() {
   sound_effect_t *sounds = malloc(sizeof(sound_effect_t));
-  sounds->game_sound = Mix_LoadMUS(GAME_SOUND_EFFECT);
+  sounds->game_sound = Mix_LoadMUS_RW(GAME_SOUND_EFFECT);
   if(sounds->game_sound == NULL) {
     printf("Failed to load game sound effect! SDL_mixer Error: %s \n", Mix_GetError());
   }
