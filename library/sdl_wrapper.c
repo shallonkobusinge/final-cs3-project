@@ -285,13 +285,7 @@ void render_image(SDL_Texture *Img, SDL_Rect *frame)
 
 void render_rect(SDL_Rect *frame)
 {
-  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-  SDL_RenderClear(renderer);
-
-  printf("lieing\n");
-  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_RenderFillRect(renderer, frame);
-  SDL_RenderPresent(renderer);
 }
 
 void sdl_on_click(mouse_handler_t handler) { mouse_handler = handler; }
