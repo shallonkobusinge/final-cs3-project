@@ -57,7 +57,7 @@ sound_effect_t load_game_sounds() {
   if(sounds->game_sound == NULL) {
     printf("Failed to load game sound effect! SDL_mixer Error: %s \n", Mix_GetError());
   }
-  sounds->tagged_sound = Mix_LoadWAV(TAGGED_SOUND_PATH);
+  sounds->tagged_sound = Mix_LoadWAV("assets/sound_effects/hide_and_seek.wav");
   if(sounds->tagged_sound == NULL) {
     printf(" %s \n", "EERROR HERE");
     printf("Failed to tagged sound effect! SDL_mixer Error: %s \n", Mix_GetError());
