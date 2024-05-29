@@ -28,8 +28,8 @@ const char *GAME_SOUND_EFFECT = "assets/sound_effects/hide_and_seek.mp3";
 #define NEW_SEEKERS_INTERVAL 30
 
 typedef struct sound_effect {
-  Mix_Music *game_sound;
-  Mix_Music *tagged_sound;
+  Mix_Chunk *game_sound;
+  Mix_Chunk *tagged_sound;
 } sound_effect_t;
 
 typedef struct state {
