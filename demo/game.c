@@ -62,7 +62,7 @@ sound_effect_t load_game_sounds() {
 
 void free_sound(sound_effect_t *sound_effect){
   Mix_FreeMusic(sound_effect->game_sound);
-  Mix_FreeMuic(sound_effect->tagged_sound);
+  Mix_FreeMusic(sound_effect->tagged_sound);
 }
 
 void add_new_seeker(state_t *state, bool is_new){
