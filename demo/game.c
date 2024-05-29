@@ -53,7 +53,7 @@ sound_effect_t load_game_sounds() {
   if(sounds->game_sound == NULL) {
     printf("Failed to load game sound effect! SDL_mixer Error: %s \n", Mix_GetError());
   }
-  sounds->tagged_sound = Mix_LoadWav(TAGGED_SOUND_PATH);
+  sounds->tagged_sound = Mix_LoadMUS(TAGGED_SOUND_PATH);
   if(sounds->tagged_sound == NULL) {
     printf("Failed to tagged sound effect! SDL_mixer Error: %s \n", Mix_GetError());
   }
