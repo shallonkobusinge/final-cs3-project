@@ -286,6 +286,7 @@ void render_image(SDL_Texture *Img, SDL_Rect *frame)
 void render_rect(SDL_Rect *frame)
 {
   printf("lieing\n");
+  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_RenderFillRect(renderer, frame);
 }
 
