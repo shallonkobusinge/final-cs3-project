@@ -168,12 +168,6 @@ void render_text(SDL_Texture *text, SDL_Rect *frame);
 void render_image(SDL_Texture *Img, SDL_Rect *frame);
 
 /**
- * Render rect.
- * @param frame frame of the image
- */
-void render_rect(SDL_Rect *frame);
-
-/**
  * SDl on click
  */
 void sdl_on_click(mouse_handler_t handler);
@@ -182,5 +176,17 @@ void sdl_on_click(mouse_handler_t handler);
  * Return the bounding box of a body
  */
 SDL_Rect get_bounding_box(body_t *body);
+
+/**
+ * Render rect.
+ * @param frame frame of the image
+ */
+void render_rect(SDL_Rect *frame);
+
+void render_line(int x, int y, int w, int h);
+
+void draw_color();
+
+void render_present();
 
 #endif // #ifndef __SDL_WRAPPER_H__

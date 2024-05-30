@@ -14,39 +14,45 @@ const vector_t MIN = {0, 0};
 const vector_t MAX = {1000, 500};
 const vector_t CENTER = {500, 250};
 
-#define WIDTH 800
-#define HEIGHT 800
-#define CELL_SIZE 20
-
-typedef struct
-{
-    int x, y;
-} Cell;
+const int grid_cell_size = 40;
+const int grid_width = 25;
+const int grid_height = 15;
+const int window_width = (grid_width * grid_cell_size) + 1;
+const int window_height = (grid_height * grid_cell_size) + 1;
+const int number_of_cells = grid_width * grid_height;
 
 struct state
 {
     size_t page;
 };
 
-void draw_maze()
+void init_grid()
 {
-    // Draw the maze walls (hardcoded example).
-    // You can replace this with your maze generation algorithm.
-
-    int maze[20][20] = {/* Your maze array here */};
-
-    printf("hrdsa\n");
-    for (int i = 0; i < 20; ++i)
+    for (int x = 0; x < window_width; x += grid_cell_size)
     {
-        for (int j = 0; j < 20; ++j)
-        {
-            if (maze[i][j] == 1)
-            {
-                SDL_Rect rect = {j * 200, i * 200, 200, 200};
-                render_rect(&rect);
-            }
-        }
+        render_line(x, 0, x, window_height);
     }
+    for (int y = 0; y < window_height; y += grid_cell_size)
+    {
+        render_line(0, y, window_width, y);
+    }
+
+    SDL_Rect start_cell = {(grid_cell_size / 4), (grid_cell_size / 4), (grid_cell_size / 2), (grid_cell_size / 2)};
+    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+
+    draw_color();
+
+    render_rect(&start_cell);
+
+    SDL_Rect terminal_cell;
+    terminal_cell.x = ((grid_width - 1) * grid_cell_size) + (grid_cell_size / 4);
+    terminal_cell.y = ((grid_height - 1) * grid_cell_size) + (grid_cell_size / 4);
+    terminal_cell.w = grid_cell_size / 2;
+    terminal_cell.h = grid_cell_size / 2;
+
+    render_rect(&terminal_cell);
+
+    SDL_RenderPresent(renderer);
 }
 
 state_t *emscripten_init()
@@ -56,8 +62,6 @@ state_t *emscripten_init()
     state_t *state = malloc(sizeof(state_t));
     state->page = 0;
 
-    draw_maze();
-
     return state;
 }
 
@@ -66,6 +70,9 @@ bool emscripten_main(state_t *state)
     sdl_clear();
     // if (state->page == 0)
     // {
+    // draw_maze();
+    init_grid();
+
     // build_landing_p2age();
     // }
     sdl_show();

@@ -283,11 +283,6 @@ void render_image(SDL_Texture *Img, SDL_Rect *frame)
   SDL_RenderCopy(renderer, Img, NULL, frame);
 }
 
-void render_rect(SDL_Rect *frame)
-{
-  SDL_RenderFillRect(renderer, frame);
-}
-
 void sdl_on_click(mouse_handler_t handler) { mouse_handler = handler; }
 
 SDL_Rect get_bounding_box(body_t *body)
@@ -338,4 +333,25 @@ SDL_Rect get_bounding_box(body_t *body)
   box_rect_fields.y = (int)window_top_left_sdl.y;
 
   return box_rect_fields;
+}
+
+void render_rect(SDL_Rect *frame)
+{
+  SDL_RenderFillRect(renderer, frame);
+  SDL_RenderDrawRect(renderer, frame);
+}
+
+void render_line(int x, int y, int w, int h)
+{
+  SDL_RenderDrawLine(renderer, x, y, w, h);
+}
+
+void draw_color()
+{
+  SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+}
+
+void render_present()
+{
+  SDL_RenderPresent(renderer);
 }
