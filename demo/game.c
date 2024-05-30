@@ -53,11 +53,11 @@ void init_sound() {
 
 sound_effect_t load_game_sounds() {
   sound_effect_t *sounds = malloc(sizeof(sound_effect_t));
-  sounds->game_sound = Mix_LoadMUS("assets/sound_effects/hide_and_seek.mp3");
+  sounds->game_sound = Mix_LoadMUS("assets/sound_effects/game-fail.wav");
   if(sounds->game_sound == NULL) {
     printf("Failed to load game sound effect! SDL_mixer Error: %s \n", Mix_GetError());
   }
-  sounds->tagged_sound = Mix_LoadWAV("assets/sound_effects/hide_and_seek.mp3");
+  sounds->tagged_sound = Mix_LoadWAV("assets/sound_effects/game-fail.wav");
   if(sounds->tagged_sound == NULL) {
     printf(" %s \n", "EERROR HERE");
     printf("Failed to tagged sound effect! SDL_mixer Error: %s \n", Mix_GetError());
