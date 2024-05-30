@@ -101,35 +101,6 @@ void init_maze()
     srand(time(NULL));
 }
 
-void generate_maze()
-{
-    bool first_look = false;
-    bool generate = false;
-
-    init_maze();
-
-    cell_t *cell = malloc(sizeof(cell_t));
-    cell->x = 1;
-    cell->y = 1;
-    visited[cell->x][cell->y] = true;
-    push_stack(cell);
-    while (first_cell != NULL)
-    {
-        cell = pop_stack();
-        if (vecNeighbor(cell) != NULL)
-        {
-            push_stack(cell);
-            cell_t *neighbor = vecNeighbor(cell);
-            removeWall(cell, neighbor);
-            visited[neighbor->x][neighbor->y] = true;
-            adjacency(cell, neighbor);
-            push_stack(neighbor);
-        }
-    }
-    // solve = SDL_TRUE;
-    // generate = SDL_TRUE;
-}
-
 void push_stack(cell_t *vector)
 {
     stack_t *s = malloc((sizeof(stack_t)));
@@ -208,6 +179,35 @@ void removeWall(cell_t *cell, cell_t *neighbour)
                     (cell->y - 1) * grid_cell_size + grid_cell_size);
     }
     SDL_Delay(30);
+}
+
+void generate_maze()
+{
+    bool first_look = false;
+    bool generate = false;
+
+    init_maze();
+
+    cell_t *cell = malloc(sizeof(cell_t));
+    cell->x = 1;
+    cell->y = 1;
+    visited[cell->x][cell->y] = true;
+    push_stack(cell);
+    while (first_cell != NULL)
+    {
+        cell = pop_stack();
+        if (vecNeighbor(cell) != NULL)
+        {
+            push_stack(cell);
+            cell_t *neighbor = vecNeighbor(cell);
+            removeWall(cell, neighbor);
+            visited[neighbor->x][neighbor->y] = true;
+            adjacency(cell, neighbor);
+            push_stack(neighbor);
+        }
+    }
+    // solve = SDL_TRUE;
+    // generate = SDL_TRUE;
 }
 
 state_t *emscripten_init()
