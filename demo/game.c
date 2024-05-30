@@ -38,6 +38,11 @@ struct state
     size_t page;
 };
 
+int findMax(int a, int b)
+{
+    return (a > b) ? a : b;
+}
+
 void init_grid()
 {
     // draw_color((rgb_color_t){22, 22, 22});
@@ -175,7 +180,7 @@ void removeWall(cell_t *cell, cell_t *neighbour)
     if (cell->x == neighbour->x)
     {
         draw_color((rgb_color_t){22, 22, 22});
-        int y = MAX(cell->y, neighbour->y);
+        int y = findMax(cell->y, neighbour->y);
         render_line((cell->x - 1) * grid_cell_size,
                     (y - 1) * grid_cell_size,
                     (cell->x - 1) * grid_cell_size + grid_cell_size,
@@ -186,7 +191,7 @@ void removeWall(cell_t *cell, cell_t *neighbour)
     {
         draw_color((rgb_color_t){22, 22, 22});
 
-        int x = max(cell->x, neighbour->x);
+        int x = findMax(cell->x, neighbour->x);
         render_line((x - 1) * grid_cell_size,
                     (cell->y - 1) * grid_cell_size,
                     (x - 1) * grid_cell_size,
