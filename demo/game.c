@@ -11,7 +11,7 @@
 #include "sdl_wrapper.h"
 
 const vector_t MIN = {0, 0};
-const vector_t MAX = {1000, 500};
+const vector_t MAX = {1000, 800};
 const vector_t CENTER = {500, 250};
 
 const int grid_cell_size = 40;
@@ -28,7 +28,7 @@ struct state
 
 void init_grid()
 {
-    // draw_color((rgb_color_t){22, 22, 22});
+    draw_color((rgb_color_t){22, 22, 22});
 
     draw_color((rgb_color_t){210, 210, 210});
 
