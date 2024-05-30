@@ -14,9 +14,15 @@ const vector_t MIN = {0, 0};
 const vector_t MAX = {1000, 500};
 const vector_t CENTER = {500, 250};
 
+typedef struct cell
+{
+    size_t x;
+    size_t y;
+} cell_t;
+
 typedef struct _stack
 {
-    vector_t *vector;
+    cell_t *cell;
     struct _stack *next;
 } stack_t;
 
@@ -102,7 +108,7 @@ void generate_maze()
 
     init_maze();
 
-    vector_t *cell = malloc(sizeof(vector_t));
+    cell_t *cell = malloc(sizeof(cell_t));
     cell->x = 1;
     cell->y = 1;
     visited[cell->x][cell->y] = true;
@@ -113,7 +119,7 @@ void generate_maze()
         if (vecNeighbor(cell) != NULL)
         {
             push_stack(cell);
-            vector_t *neighbor = vecNeighbor(cell);
+            cell_t *neighbor = vecNeighbor(cell);
             removeWall(cell, neighbor);
             visited[neighbor->x][neighbor->y] = true;
             adjacency(cell, neighbor);
@@ -124,7 +130,7 @@ void generate_maze()
     // generate = SDL_TRUE;
 }
 
-void push_stack(vector_t *vector)
+void push_stack(cell_t *vector)
 {
     stack_t *s = malloc((sizeof(stack_t)));
     s->vector = vector;
@@ -132,19 +138,19 @@ void push_stack(vector_t *vector)
     first_cell = s;
 }
 
-vector_t *pop_stack()
+cell_t *pop_stack()
 {
-    vector_t *removed = first_cell->vector;
+    cell_t *removed = first_cell->vector;
     stack_t *p = first_cell;
     first_cell = first_cell->next;
     free(p);
     return removed;
 }
 
-vector_t *vecNeighbor(vector_t *vector)
+cell_t *vecNeighbor(cell_t *vector)
 {
-    vector_t *neighbor_vec = malloc(vector);
-    vector_t *null_vec = NULL;
+    cell_t *neighbor_vec = malloc(vector);
+    cell_t *null_vec = NULL;
 
     if ((visited[vector->x - 1][vector->y] == true) &&
         (visited[vector->x][vector->y - 1] == true) &&
@@ -179,11 +185,11 @@ vector_t *vecNeighbor(vector_t *vector)
     return neighbor_vec;
 }
 
-void removeWall(vector_t *cell, vector_t *neighbour)
+void removeWall(cell_t *cell, cell_t *neighbour)
 {
     if (cell->x == neighbour->x)
     {
-        draw_color(22, 22, 22);
+        draw_color((rgb_color_t){22, 22, 22});
         int y = max(cell->y, neighbour->y);
         render_line((cell->x - 1) * grid_cell_size,
                     (y - 1) * grid_cell_size,
@@ -193,7 +199,7 @@ void removeWall(vector_t *cell, vector_t *neighbour)
 
     else if (cell->y == neighbour->y)
     {
-        draw_color(22, 22, 22);
+        draw_color((rgb_color_t){22, 22, 22});
 
         int x = Max(cell->x, neighbour->x);
         render_line((x - 1) * grid_cell_size,
