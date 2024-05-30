@@ -103,7 +103,7 @@ void init_maze()
         }
     }
     first_cell = NULL;
-    // srand(time(NULL));
+    srand(time(NULL));
 }
 
 void push_stack(cell_t *cell)
@@ -197,7 +197,7 @@ void removeWall(cell_t *cell, cell_t *neighbour)
                     (x - 1) * grid_cell_size,
                     (cell->y - 1) * grid_cell_size + grid_cell_size);
     }
-    SDL_Delay(30);
+    SDL_Delay(300);
 }
 
 void generate_maze()
