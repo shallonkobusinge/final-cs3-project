@@ -38,8 +38,7 @@ void init_grid()
     }
 
     SDL_Rect start_cell = {(grid_cell_size / 4), (grid_cell_size / 4), (grid_cell_size / 2), (grid_cell_size / 2)};
-
-    draw_color();
+    draw_color((rgb_color_t){0, 0, 0});
 
     render_rect(&start_cell);
 
@@ -50,9 +49,6 @@ void init_grid()
     terminal_cell.h = grid_cell_size / 2;
 
     render_rect(&terminal_cell);
-
-    // SDL_RenderPresent(renderer);
-    // render_present();
 }
 
 state_t *emscripten_init()
