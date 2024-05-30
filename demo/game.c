@@ -14,6 +14,12 @@ const vector_t MIN = {0, 0};
 const vector_t MAX = {1000, 500};
 const vector_t CENTER = {500, 250};
 
+typedef struct _stack
+{
+    vector_t *vector;
+    struct _stack *next;
+} stack_t;
+
 const int grid_cell_size = 40;
 const int grid_width = 25;
 const int grid_height = 12;
@@ -54,6 +60,150 @@ void init_grid()
     render_rect(&terminal_cell);
 }
 
+static stack_t *first_cell;
+bool visited[grid_width + 2][grid_height + 2];
+bool adjacency_matrx[number_of_cells][number_of_cells];
+
+void init_maze()
+{
+    for (int i = 1; i <= grid_width; i++)
+    {
+        for (int j = 1; j <= grid_height; j++)
+        {
+            visited[i][j] = 0;
+        }
+    }
+    for (int j = 1; j < grid_height + 2; j++)
+    {
+        visited[0][j] = true;
+        visited[grid_width + 1][j] = true;
+    }
+
+    for (int i = 1; i <= grid_width; i++)
+    {
+        visited[i][0] = true;
+        visited[i][grid_height + 1] = true;
+    }
+    for (int i = 0; i < number_of_cells; i++)
+    {
+        for (int j = 0; j < number_of_cells; j++)
+        {
+            adjacency_matrx[i][j] = false;
+        }
+    }
+    first_cell = NULL;
+    srand(time(NULL));
+}
+
+void generate_maze()
+{
+    bool first_look = false;
+    bool generate = false;
+
+    init_maze();
+
+    vector_t *cell = malloc(sizeof(vector_t));
+    cell->x = 1;
+    cell->y = 1;
+    visited[cell->x][cell->y] = true;
+    push_stack(cell);
+    while (first_cell != NULL)
+    {
+        cell = pop_stack();
+        if (vecNeighbor(cell) != NULL)
+        {
+            push_stack(cell);
+            vector_t *neighbor = vecNeighbor(cell);
+            removeWall(cell, neighbor);
+            visited[neighbor->x][neighbor->y] = true;
+            adjacency(cell, neighbor);
+            push_stack(neighbor);
+        }
+    }
+    // solve = SDL_TRUE;
+    // generate = SDL_TRUE;
+}
+
+void push_stack(vector_t *vector)
+{
+    stack_t *s = malloc((sizeof(stack_t)));
+    s->vector = vector;
+    s->next = first_cell;
+    first_cell = s;
+}
+
+vector_t *pop_stack()
+{
+    vector_t *removed = first_cell->vector;
+    stack_t *p = first_cell;
+    first_cell = first_cell->next;
+    free(p);
+    return removed;
+}
+
+vector_t *vecNeighbor(vector_t *vector)
+{
+    vector_t *neighbor_vec = malloc(vector);
+    vector_t *null_vec = NULL;
+
+    if ((visited[vector->x - 1][vector->y] == true) &&
+        (visited[vector->x][vector->y - 1] == true) &&
+        (visited[vector->x][vector->y + 1] == true) &&
+        (visited[vector->x + 1][vector->y] == true))
+        return null_vec;
+
+    do
+    {
+        int randomNeighbour = (rand() % 4) + 1;
+        switch (randomNeighbour)
+        {
+        case 1:
+            neighbor_vec->x = vector->x - 1;
+            neighbor_vec->y = vector->y;
+            break;
+        case 2:
+            neighbor_vec->x = vector->x;
+            neighbor_vec->y = vector->y - 1;
+            break;
+        case 3:
+            neighbor_vec->x = vector->x;
+            neighbor_vec->y = vector->y + 1;
+            break;
+        case 4:
+            neighbor_vec->x = vector->x + 1;
+            neighbor_vec->y = vector->y;
+            break;
+        }
+    } while (visited[neighbor_vec->x][neighbor_vec->y] == true);
+
+    return neighbor_vec;
+}
+
+void removeWall(vector_t *cell, vector_t *neighbour)
+{
+    if (cell->x == neighbour->x)
+    {
+        draw_color(22, 22, 22);
+        int y = max(cell->y, neighbour->y);
+        render_line((cell->x - 1) * grid_cell_size,
+                    (y - 1) * grid_cell_size,
+                    (cell->x - 1) * grid_cell_size + grid_cell_size,
+                    (y - 1) * grid_cell_size);
+    }
+
+    else if (cell->y == neighbour->y)
+    {
+        draw_color(22, 22, 22);
+
+        int x = Max(cell->x, neighbour->x);
+        render_line((x - 1) * grid_cell_size,
+                    (cell->y - 1) * grid_cell_size,
+                    (x - 1) * grid_cell_size,
+                    (cell->y - 1) * grid_cell_size + grid_cell_size);
+    }
+    SDL_Delay(30);
+}
+
 state_t *emscripten_init()
 {
     asset_cache_init();
@@ -68,6 +218,7 @@ bool emscripten_main(state_t *state)
 {
     sdl_clear();
     init_grid();
+    generate_maze();
     sdl_show();
     return false;
 }
