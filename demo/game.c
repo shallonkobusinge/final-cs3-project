@@ -23,7 +23,7 @@ const vector_t START_POS = {0, 45};
 const vector_t INITIAL_VELOCITY = {60, 20};
 const char *SEEKER_PATH = "assets/seeker_bg.png";
 const char *TAGGED_SOUND_PATH = "assets/sound_effects/tagged.wav";
-const char *GAME_SOUND_EFFECT = "assets/sound_effects/hide_and_seek.wav";
+const char *GAME_SOUND_EFFECT = "assets/sound_effects/hide-and-seek.wav";
 
 #define NEW_SEEKERS_INTERVAL 30
 
