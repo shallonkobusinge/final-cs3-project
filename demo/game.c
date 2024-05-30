@@ -15,8 +15,8 @@ const vector_t MAX = {1000, 500};
 const vector_t CENTER = {500, 250};
 
 const int grid_cell_size = 40;
-const int grid_width = 25;
-const int grid_height = 5;
+const int grid_width = 20;
+const int grid_height = 10;
 const int window_width = (grid_width * grid_cell_size) + 1;
 const int window_height = (grid_height * grid_cell_size) + 1;
 const int number_of_cells = grid_width * grid_height;
