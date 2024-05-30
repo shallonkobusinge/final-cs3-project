@@ -189,4 +189,6 @@ void draw_color();
 
 void render_present();
 
+void show();
+
 #endif // #ifndef __SDL_WRAPPER_H__

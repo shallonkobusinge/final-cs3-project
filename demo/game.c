@@ -198,7 +198,8 @@ void removeWall(cell_t *cell, cell_t *neighbour)
                     (cell->y - 1) * grid_cell_size + grid_cell_size);
     }
     SDL_Delay(30);
-    sdl_show();
+    // sdl_show();
+    show();
 }
 
 void generate_maze()

@@ -355,3 +355,8 @@ void render_present()
 {
   SDL_RenderPresent(renderer);
 }
+
+void show()
+{
+  SDL_RenderPresent(renderer);
+}
