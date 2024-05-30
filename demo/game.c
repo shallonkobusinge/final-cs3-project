@@ -175,7 +175,7 @@ void removeWall(cell_t *cell, cell_t *neighbour)
     if (cell->x == neighbour->x)
     {
         draw_color((rgb_color_t){22, 22, 22});
-        int y = max(cell->y, neighbour->y);
+        int y = MAX(cell->y, neighbour->y);
         render_line((cell->x - 1) * grid_cell_size,
                     (y - 1) * grid_cell_size,
                     (cell->x - 1) * grid_cell_size + grid_cell_size,
