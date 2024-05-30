@@ -38,7 +38,6 @@ void init_grid()
     }
 
     SDL_Rect start_cell = {(grid_cell_size / 4), (grid_cell_size / 4), (grid_cell_size / 2), (grid_cell_size / 2)};
-    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
 
     draw_color();
 
