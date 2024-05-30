@@ -121,15 +121,15 @@ void adjacency(cell_t *cell, cell_t *cellNeighbour)
 {
     int cellPos = (cell->x - 1) * grid_height + (cell->y - 1);
     int neighbourPos = (cellNeighbour->x - 1) * grid_height + (cellNeighbour->y - 1);
-    adjacencyMatrix[cellPos][neighbourPos] = true;
-    adjacencyMatrix[neighbourPos][cellPos] = true;
+    adjacency_matrx[cellPos][neighbourPos] = true;
+    adjacency_matrx[neighbourPos][cellPos] = true;
 }
 
 bool isAdjacency(cell_t *cell, cell_t *cellNeighbour)
 {
     int cellPos = (cell->x - 1) * grid_height + (cell->y - 1);
     int neighbourPos = (cellNeighbour->x - 1) * grid_height + (cellNeighbour->y - 1);
-    return adjacencyMatrix[cellPos][neighbourPos];
+    return adjacency_matrx[cellPos][neighbourPos];
 }
 
 cell_t *vecNeighbor(cell_t *cell)
