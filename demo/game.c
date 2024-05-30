@@ -52,7 +52,7 @@ void init_grid()
     render_rect(&terminal_cell);
 
     // SDL_RenderPresent(renderer);
-    render_present();
+    // render_present();
 }
 
 state_t *emscripten_init()
