@@ -73,7 +73,7 @@ state_t *emscripten_init() {
     state->body_assets = list_init(state->max_seekers, (free_func_t)asset_destroy);
     add_new_seeker(state, false);
     state->sound_effect = load_game_sounds();
-    Mix_PlayMusic(state->sound_effect.game_sound, -1);
+    Mix_PlayMusic(state->sound_effect., -1);
     return state;
 }
 
