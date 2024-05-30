@@ -32,7 +32,7 @@ typedef struct state {
     scene_t *scene;
     double last_seeker_time;
     double max_seekers;
-    sound_effect_t sound_effect;
+    sound_effect_t *sound_effect;
 }state_t;
 
 void add_new_seeker(state_t *state, bool is_new){
