@@ -197,7 +197,8 @@ void removeWall(cell_t *cell, cell_t *neighbour)
                     (x - 1) * grid_cell_size,
                     (cell->y - 1) * grid_cell_size + grid_cell_size);
     }
-    SDL_Delay(300);
+    SDL_Delay(30);
+    sdl_show();
 }
 
 void generate_maze()
@@ -244,7 +245,7 @@ bool emscripten_main(state_t *state)
     sdl_clear();
     init_grid();
     generate_maze();
-    sdl_show();
+    // sdl_show();
     return false;
 }
 
