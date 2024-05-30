@@ -28,10 +28,10 @@ struct state
 
 void init_grid()
 {
-    for (int x = 0; x < window_width; x += grid_cell_size)
-    {
-        render_line(x, 0, x, window_height);
-    }
+    // for (int x = 0; x < window_width; x += grid_cell_size)
+    // {
+    //     render_line(x, 0, x, window_height);
+    // }
     // for (int y = 0; y < window_height; y += grid_cell_size)
     // {
     //     render_line(0, y, window_width, y);
