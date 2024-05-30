@@ -28,14 +28,18 @@ struct state
 
 void init_grid()
 {
-    // for (int x = 0; x < window_width; x += grid_cell_size)
-    // {
-    //     render_line(x, 0, x, window_height);
-    // }
-    // for (int y = 0; y < window_height; y += grid_cell_size)
-    // {
-    //     render_line(0, y, window_width, y);
-    // }
+    draw_color((rgb_color_t){22, 22, 22});
+
+    draw_color((rgb_color_t){210, 210, 210});
+
+    for (int x = 0; x < window_width; x += grid_cell_size)
+    {
+        render_line(x, 0, x, window_height);
+    }
+    for (int y = 0; y < window_height; y += grid_cell_size)
+    {
+        render_line(0, y, window_width, y);
+    }
 
     SDL_Rect start_cell = {(grid_cell_size / 4), (grid_cell_size / 4), (grid_cell_size / 2), (grid_cell_size / 2)};
     draw_color((rgb_color_t){0, 0, 0});
