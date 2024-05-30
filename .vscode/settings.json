@@ -6,6 +6,7 @@
         "time.h": "c",
         "body.h": "c",
         "color.h": "c",
-        "state.h": "c"
+        "state.h": "c",
+        "stdbool.h": "c"
     }
 }
