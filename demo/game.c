@@ -101,32 +101,32 @@ void init_maze()
     srand(time(NULL));
 }
 
-void push_stack(cell_t *vector)
+void push_stack(cell_t *cell)
 {
     stack_t *s = malloc((sizeof(stack_t)));
-    s->vector = vector;
+    s->cell = cell;
     s->next = first_cell;
     first_cell = s;
 }
 
 cell_t *pop_stack()
 {
-    cell_t *removed = first_cell->vector;
+    cell_t *removed = first_cell->cell;
     stack_t *p = first_cell;
     first_cell = first_cell->next;
     free(p);
     return removed;
 }
 
-cell_t *vecNeighbor(cell_t *vector)
+cell_t *vecNeighbor(cell_t *cell)
 {
-    cell_t *neighbor_vec = malloc(vector);
+    cell_t *neighbor_vec = malloc(size_of(cell_t));
     cell_t *null_vec = NULL;
 
-    if ((visited[vector->x - 1][vector->y] == true) &&
-        (visited[vector->x][vector->y - 1] == true) &&
-        (visited[vector->x][vector->y + 1] == true) &&
-        (visited[vector->x + 1][vector->y] == true))
+    if ((visited[cell->x - 1][cell->y] == true) &&
+        (visited[cell->x][cell->y - 1] == true) &&
+        (visited[cell->x][cell->y + 1] == true) &&
+        (visited[cell->x + 1][cell->y] == true))
         return null_vec;
 
     do
@@ -135,20 +135,20 @@ cell_t *vecNeighbor(cell_t *vector)
         switch (randomNeighbour)
         {
         case 1:
-            neighbor_vec->x = vector->x - 1;
-            neighbor_vec->y = vector->y;
+            neighbor_vec->x = cell->x - 1;
+            neighbor_vec->y = cell->y;
             break;
         case 2:
-            neighbor_vec->x = vector->x;
-            neighbor_vec->y = vector->y - 1;
+            neighbor_vec->x = cell->x;
+            neighbor_vec->y = cell->y - 1;
             break;
         case 3:
-            neighbor_vec->x = vector->x;
-            neighbor_vec->y = vector->y + 1;
+            neighbor_vec->x = cell->x;
+            neighbor_vec->y = cell->y + 1;
             break;
         case 4:
-            neighbor_vec->x = vector->x + 1;
-            neighbor_vec->y = vector->y;
+            neighbor_vec->x = cell->x + 1;
+            neighbor_vec->y = cell->y;
             break;
         }
     } while (visited[neighbor_vec->x][neighbor_vec->y] == true);
