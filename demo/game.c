@@ -25,7 +25,7 @@ const char *SEEKER_PATH = "assets/seeker_bg.png";
 // const char *TAGGED_SOUND_PATH = "assets/sound_effects/tagged.wav";
 // const char *GAME_SOUND_EFFECT = "assets/sound_effects/hide_and_seek.wav";
 
-#define NEW_SEEKERS_INTERVAL 5
+#define NEW_SEEKERS_INTERVAL 30
 
 typedef struct sound_effect {
   Mix_Music *game_sound;
