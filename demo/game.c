@@ -26,8 +26,6 @@ const char *SEEKER_PATH = "assets/seeker_bg.png";
 
 #define NEW_SEEKERS_INTERVAL 30
 
-
-
 typedef struct state {
     list_t *body_assets;
     scene_t *scene;
@@ -35,10 +33,6 @@ typedef struct state {
     double max_seekers;
     sound_effect_t sound_effect;
 }state_t;
-
-
-
-
 
 void add_new_seeker(state_t *state, bool is_new){
 
