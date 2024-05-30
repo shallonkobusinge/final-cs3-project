@@ -134,7 +134,7 @@ bool isAdjacency(cell_t *cell, cell_t *cellNeighbour)
 
 cell_t *vecNeighbor(cell_t *cell)
 {
-    cell_t *neighbor_vec = malloc(size_of(cell_t));
+    cell_t *neighbor_vec = malloc(sizeof(cell_t));
     cell_t *null_vec = NULL;
 
     if ((visited[cell->x - 1][cell->y] == true) &&
