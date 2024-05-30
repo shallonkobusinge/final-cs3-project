@@ -32,10 +32,10 @@ void init_grid()
     {
         render_line(x, 0, x, window_height);
     }
-    for (int y = 0; y < window_height; y += grid_cell_size)
-    {
-        render_line(0, y, window_width, y);
-    }
+    // for (int y = 0; y < window_height; y += grid_cell_size)
+    // {
+    //     render_line(0, y, window_width, y);
+    // }
 
     SDL_Rect start_cell = {(grid_cell_size / 4), (grid_cell_size / 4), (grid_cell_size / 2), (grid_cell_size / 2)};
     draw_color((rgb_color_t){0, 0, 0});
