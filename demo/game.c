@@ -199,7 +199,7 @@ void removeWall(cell_t *cell, cell_t *neighbour)
     }
     SDL_Delay(30);
     // sdl_show();
-    show();
+    // show();
 }
 
 void generate_maze()
@@ -246,7 +246,7 @@ bool emscripten_main(state_t *state)
     sdl_clear();
     init_grid();
     generate_maze();
-    // sdl_show();
+    sdl_show();
     return false;
 }
 
