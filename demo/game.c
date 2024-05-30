@@ -103,7 +103,7 @@ void init_maze()
         }
     }
     first_cell = NULL;
-    srand(time(NULL));
+    // srand(time(NULL));
 }
 
 void push_stack(cell_t *cell)
