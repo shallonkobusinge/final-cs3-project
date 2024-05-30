@@ -73,7 +73,7 @@ state_t *emscripten_init() {
     state->body_assets = list_init(state->max_seekers, (free_func_t)asset_destroy);
     add_new_seeker(state, false);
     state->sound_effect = load_game_sounds();
-    play_game_sound(state->sound_effect);
+    game_sound(state->sound_effect);
     return state;
 }
 
@@ -85,7 +85,7 @@ bool emscripten_main(state_t *state) {
     state->last_seeker_time += dt;
     if(state->last_seeker_time >= NEW_SEEKERS_INTERVAL){
       add_new_seeker(state, true);
-      play_tagged_sound(state->sound_effect);
+      tagged_sound(state->sound_effect);
     }
     sdl_clear();
     for (size_t i = 0; i < list_size(state->body_assets); i++) {
