@@ -120,8 +120,9 @@ static void remove_wall(cell_t *cell, cell_t *neighbor)
 
 void generate_maze(void *ptr)
 {
-    init_grid();
     init_maze();
+
+    printf("naho se\n");
 
     cell_t *cell = malloc(sizeof(cell_t));
     cell->x = 1;
