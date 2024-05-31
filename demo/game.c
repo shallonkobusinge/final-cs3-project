@@ -63,7 +63,7 @@ bool emscripten_main(state_t *state)
                 case SDL_BUTTON_RIGHT:
                     if (generate)
                     {
-                        initGrid();
+                        init_grid();
                         thread = SDL_CreateThread(generate_maze, "Generating", NULL);
                     }
                     continue;
