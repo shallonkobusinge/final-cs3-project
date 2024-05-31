@@ -47,8 +47,6 @@ void init_grid()
     terminal_cell.w = GRID_CELL_SIZE / 2;
     terminal_cell.h = GRID_CELL_SIZE / 2;
     render_rect(&terminal_cell);
-    printf("/her2e\n");
-
     generate_maze(NULL);
 }
 
@@ -126,6 +124,7 @@ static void remove_wall(cell_t *cell, cell_t *neighbor)
 
 void generate_maze(void *ptr)
 {
+    printf("why?\n");
     init_maze();
 
     cell_t *cell = malloc(sizeof(cell_t));
