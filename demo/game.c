@@ -376,7 +376,7 @@ void queueCellNeighbours(cell_t *cell)
     if ((visited[neighbourCell->x][neighbourCell->y] == false) && (isAdjacency(cell, neighbourCell) == true))
     {
         visited[neighbourCell->x][neighbourCell->y] = true;
-        parent[neighbourCell->x - 1][neighbourCell->poysY - 1] = cell;
+        parent[neighbourCell->x - 1][neighbourCell->y - 1] = cell;
         enqueue(neighbourCell);
 
         rectCell.x = ((neighbourCell->x - 1) * grid_cell_size) - 3 * grid_cell_size / 8;
