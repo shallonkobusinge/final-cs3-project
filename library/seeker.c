@@ -65,7 +65,7 @@ void wrap_seeker_scene(body_t *seeker) {
 }
 
 
-seeker_t *add_new_seeker(scene_t *scene, seeker_t *seeker_ipt, bool is_new){
+void *add_new_seeker(scene_t *scene, seeker_t *seeker_ipt, bool is_new){
    
    vector_t seeker_vel = {.x = 0.0, .y = 0.0};
    body_t *seeker;
@@ -92,7 +92,6 @@ seeker_t *add_new_seeker(scene_t *scene, seeker_t *seeker_ipt, bool is_new){
     // state->last_seeker_time = 0;
     // seeker_ipt.
     // state->max_seekers += 1;
-    return seeker;
 
 }
 
@@ -109,7 +108,7 @@ seeker_t *seeker_init(scene_t *scene){
   seeker->max_seekers = 50;
   seeker->last_seeker_time = 0;
   seeker->body_assets = list_init(seeker->max_seekers, (free_func_t)asset_destroy);
-    add_new_seeker(scene, false);
+    add_new_seeker(scene, seeker, false);
     return seeker;
 }
 
