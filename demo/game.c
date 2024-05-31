@@ -34,7 +34,7 @@ state_t *emscripten_init() {
     state_t *state = malloc(sizeof(state_t));
     state->scene = scene_init();
     state->sound_effect = load_game_sounds();
-    state->seeker = seeker_init();
+    state->seeker = seeker_init(state->scene);
     game_sound(state->sound_effect);
     return state;
 }
@@ -49,7 +49,7 @@ bool emscripten_main(state_t *state) {
     //   add_new_seeker(state, true, dt);
     //   tagged_sound(state->sound_effect);
     // }
-    introduce_seeker(state->seeker, dt, state->sound_effect);
+    introduce_seeker(state->scene, state->seeker, dt, state->sound_effect);
     sdl_clear();
     render_bodies(state->seeker);
     

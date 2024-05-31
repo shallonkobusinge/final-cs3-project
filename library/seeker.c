@@ -65,7 +65,7 @@ void wrap_seeker_scene(body_t *seeker) {
 }
 
 
-void add_new_seeker(seeker_t *seeker_ipt, bool is_new){
+seeker_t *add_new_seeker(scene_t *scene, seeker_t *seeker_ipt, bool is_new){
    
    vector_t seeker_vel = {.x = 0.0, .y = 0.0};
    body_t *seeker;
@@ -83,7 +83,7 @@ void add_new_seeker(seeker_t *seeker_ipt, bool is_new){
     seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, START_POS);
     seeker_vel = INITIAL_VELOCITY;
   
-    // scene_add_body(state->scene, seeker);
+    scene_add_body(scene, seeker);
     body_set_velocity(seeker, seeker_vel);
     asset_t *new_asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
     list_add(seeker_ipt->body_assets, new_asset_seeker);
@@ -92,23 +92,24 @@ void add_new_seeker(seeker_t *seeker_ipt, bool is_new){
     // state->last_seeker_time = 0;
     // seeker_ipt.
     // state->max_seekers += 1;
+    return seeker;
 
 }
 
-void introduce_seeker(seeker_t *seeker, double dt, sound_effect_t *sound_effect){
+void introduce_seeker(scene_t *scene, seeker_t *seeker, double dt, sound_effect_t *sound_effect){
     seeker->last_seeker_time += dt;
     if(seeker->last_seeker_time >= NEW_SEEKERS_INTERVAL){
-      add_new_seeker(seeker, true);
+      add_new_seeker(scene, seeker, true);
        tagged_sound(sound_effect);
     }
 }
 
-seeker_t *seeker_init(){
+seeker_t *seeker_init(scene_t *scene){
   seeker_t *seeker = malloc(sizeof(seeker_t));
   seeker->max_seekers = 50;
   seeker->last_seeker_time = 0;
   seeker->body_assets = list_init(seeker->max_seekers, (free_func_t)asset_destroy);
-    add_new_seeker(seeker, false);
+    add_new_seeker(scene, false);
     return seeker;
 }
 
