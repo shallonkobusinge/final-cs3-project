@@ -29,14 +29,62 @@ state_t *emscripten_init()
     return state;
 }
 
+SDL_bool generate;
+SDL_bool solve;
+SDL_bool firstLook;
+
 bool emscripten_main(state_t *state)
 {
     sdl_clear();
     init_grid();
+
+    SDL_bool quit = SDL_FALSE;
+    generate = SDL_TRUE;
+    solve = SDL_FALSE;
+    firstLook = SDL_TRUE;
+    SDL_Thread *thread;
+
+    while (!quit)
+    {
+        SDL_Event event;
+        while (SDL_WaitEvent(&event) && !quit)
+        {
+            if (firstLook)
+            {
+                initGrid();
+                thread = SDL_CreateThread(generate_maze, "Generating", NULL);
+            }
+            switch (event.type)
+            {
+            case SDL_MOUSEBUTTONDOWN:
+                switch (event.button.button)
+                {
+                case SDL_BUTTON_RIGHT:
+                    if (generate)
+                    {
+                        initGrid();
+                        thread = SDL_CreateThread(generate_maze, "Generating", NULL);
+                    }
+                    continue;
+                case SDL_BUTTON_LEFT:
+                    // if (solve)
+                    //     thread = SDL_CreateThread(mazeSolving, "Solving", NULL);
+                    continue;
+                }
+            case SDL_QUIT:
+                quit = SDL_TRUE;
+                break;
+            }
+        }
+
+        // SDL_RenderPresent(renderer);
+        sdl_show();
+    }
+
     // SDL_Thread *thread = (generate_maze, "Generating", NULL);
 
     // generate_maze(NULL);
-    sdl_show();
+    // sdl_show();
     return false;
 }
 
