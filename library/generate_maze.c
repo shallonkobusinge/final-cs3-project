@@ -56,8 +56,6 @@ void init_grid()
  */
 static void init_maze()
 {
-
-    printf("wh2y?\n");
     for (int i = 1; i <= GRID_WIDTH; i++)
     {
         for (int j = 1; j <= GRID_HEIGHT; j++)
@@ -85,11 +83,9 @@ static void init_maze()
             adj_matrix[i][j] = false;
         }
     }
-    printf("/her2e\n");
-
     head = NULL;
-    printf("/her2e\n");
     srand(time(NULL));
+    printf("time?\n");
 }
 
 /**
@@ -131,6 +127,8 @@ void generate_maze(void *ptr)
     cell->x = 1;
     cell->y = 1;
     visited[cell->x][cell->y] = true;
+
+    printf("nose ?\n");
 
     push_stack(head, cell);
     while (head != NULL)
