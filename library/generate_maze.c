@@ -1,12 +1,11 @@
-#include "cell.h"
-
-#include "generate_maze.h"
-#include "sdl_wrapper.h"
-#include "stack.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+
+#include "cell.h"
+#include "generate_maze.h"
+#include "stack.h"
+#include "sdl_wrapper.h"
 
 const int grid_cell_size = 40;
 const int grid_width = 25;
