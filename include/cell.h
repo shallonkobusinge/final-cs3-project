@@ -2,6 +2,7 @@
 #define __CELL_H__
 
 #include <stdbool.h>
+#include <stdlib.h>
 
 const int grid_width = 25;
 const int grid_height = 12;
