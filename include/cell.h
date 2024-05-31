@@ -3,7 +3,7 @@
 
 #include <stdbool.h>
 
-struct cell cell_t;
+typedef struct cell;
 
 /**
  * Updates the adjacency matrix to show current cell and neighbor are directly connected
