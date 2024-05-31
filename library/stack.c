@@ -12,7 +12,7 @@ typedef struct stack
 
 void push_stack(stack_t *head, cell_t *cell)
 {
-    stack_t *stack = malloc(sizeof(stack));
+    stack_t *stack = malloc(sizeof(stack_t));
     stack->cell = cell;
     stack->next = head;
     head = stack;
