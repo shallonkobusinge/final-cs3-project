@@ -7,8 +7,6 @@
 #include "sound_effect.h"
 const char *SEEKER_PATH = "assets/seeker_bg.png";
 
-const vector_t MIN = {0, 0};
-const vector_t MAX = {1000, 500};
 const double OUTER_RADIUS = 60;
 const double INNER_RADIUS = 60;
 const vector_t START_POS = {0, 45};
@@ -77,7 +75,7 @@ void add_new_seeker(seeker_t *seeker_ipt, bool is_new){
     if(is_new){
       vector_t seeker_pos = (vector_t){
         .x = rand() % (int)INITIAL_VELOCITY.x,
-        .y = rand() % (int)(MAX.y),
+        .y = rand() % (int)(MAX_WINDOW.y),
     };
      seeker_vel = (vector_t){
         .x = rand() % (int)INITIAL_VELOCITY.x + 20,
