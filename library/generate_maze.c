@@ -9,17 +9,25 @@
 
 // const size_t GRID_WIDTH = 25;
 // const size_t GRID_HEIGHT = 12;
+int window_width;
+int window_height;
 // const size_t NUM_CELLS = GRID_WIDTH * GRID_HEIGHT;
 
 const int GRID_CELL_SIZE = 40;
-const int window_width = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
-const int window_height = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
+// const int window_width = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
+// const int window_height = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
 
 bool visited[GRID_WIDTH + 2][GRID_HEIGHT + 2];
 bool adj_matrix[NUM_CELLS][NUM_CELLS];
 cell_t *parent[GRID_WIDTH][GRID_HEIGHT];
 
 static stack_t *head;
+
+void initialize_window_dimensions()
+{
+    window_width = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
+    window_height = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
+}
 
 /**
  * Initialize and draw the Maze Grid.
