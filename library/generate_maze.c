@@ -125,7 +125,7 @@ static void remove_wall(cell_t *cell, cell_t *neighbor)
     // sdl_show();
 }
 
-void generate_maze(void *ptr)
+int generate_maze(void *ptr)
 {
     init_grid();
 
