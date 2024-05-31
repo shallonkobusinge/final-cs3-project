@@ -42,6 +42,10 @@ int findMax(int a, int b)
 {
     return (a > b) ? a : b;
 }
+int findMin(int a, int b)
+{
+    return (a > b) ? b : a;
+}
 
 void init_grid()
 {
@@ -231,6 +235,216 @@ void generate_maze()
     // generate = SDL_TRUE;
 }
 
+typedef struct _queue
+{
+    cell_t *cell;
+    struct _queue *next;
+} queue_t;
+
+static queue_t *firstCell;
+
+void initBFS()
+{
+    firstCell = NULL;
+    for (int i = 0; i < grid_width; i++)
+        for (int j = 0; j < grid_height; j++)
+        {
+            parent[i][j] = NULL;
+            visited[i + 1][j + 1] = false;
+        }
+    visited[1][1] = true;
+}
+
+int mazeSolving(void *ptr)
+{
+    // solve = SDL_TRUE;
+    // generate = SDL_TRUE;
+    initBFS();
+    cell_t *cell = malloc(sizeof(cell_t));
+    cell->x = 1;
+    cell->y = 1;
+    enqueue(cell);
+    while (visited[grid_width][grid_height] == false)
+    {
+        cell_t *cell = dequeue();
+        queueCellNeighbours(cell);
+    }
+    shortPath();
+    // solve = SDL_TRUE;
+    // generate = SDL_TRUE;
+}
+
+void queueCellNeighbours(cell_t *cell)
+{
+    draw_color((rgb_color_t){
+        100,
+        0,
+        0,
+    });
+    SDL_Rect rectCell;
+    if (!((cell->x == 1) && (cell->y == 1)))
+    {
+        rectCell.x = ((cell->x - 1) * grid_cell_size) + 3 * grid_cell_size / 8;
+        rectCell.y = ((cell->y - 1) * grid_cell_size) + 3 * grid_cell_size / 8;
+        rectCell.w = grid_cell_size / 4;
+        rectCell.h = grid_cell_size / 4;
+        render_rect(&rectCell);
+    }
+
+    cell_t *neighbourCell;
+    neighbourCell = malloc(sizeof(cell_t));
+    neighbourCell->x = Cell->x - 1;
+    neighbourCell->y = Cell->y;
+    if ((visited[neighbourCell->x][neighbourCell->y] == false) && (isAdjacency(cell, neighbourCell) == true))
+    {
+        visited[neighbourCell->x][neighbourCell->y] = true;
+        parent[neighbourCell->x - 1][neighbourCell->y - 1] = cell;
+        enqueue(neighbourCell);
+
+        rectCell.x = ((cell->x - 1) * grid_cell_size) - 3 * grid_cell_size / 8;
+        rectCell.y = ((neighbourCell->y - 1) * grid_cell_size) + 3 * grid_cell_size / 8;
+        rectCell.w = grid_cell_size;
+        rectCell.h = grid_cell_size / 4;
+        render_rect(&rectCell);
+    }
+
+    neighbourCell = malloc(sizeof(cell_t));
+    neighbourCell->x = cell->x;
+    neighbourCell->y = cell->y - 1;
+    if ((visited[neighbourCell->x][neighbourCell->y] == false) && (isAdjacency(cell, neighbourCell) == true))
+    {
+        visited[neighbourCell->x][neighbourCell->y] = true;
+        parent[neighbourCell->x - 1][neighbourCell->y - 1] = cell;
+        enqueue(neighbourCell);
+
+        rectCell.x = ((neighbourCell->x - 1) * grid_cell_size) + 3 * grid_cell_size / 8;
+        rectCell.y = ((cell->y - 1) * grid_cell_size) - 3 * grid_cell_size / 8;
+        rectCell.w = grid_cell_size / 4;
+        rectCell.h = grid_cell_size;
+        render_rect(&rectCell);
+    }
+
+    neighbourCell = malloc(sizeof(cell_t));
+    neighbourCell->x = cell->x;
+    neighbourCell->y = cell->y + 1;
+    if ((visited[neighbourCell->x][neighbourCell->y] == false) && (isAdjacency(cell, neighbourCell) == true))
+    {
+        visited[neighbourCell->x][neighbourCell->y] = true;
+        parent[neighbourCell->x - 1][neighbourCell->y - 1] = cell;
+        enqueue(neighbourCell);
+
+        rectCell.x = ((neighbourCell->x - 1) * grid_cell_size) + 3 * grid_cell_size / 8;
+        rectCell.y = ((neighbourCell->y - 1) * grid_cell_size) - 3 * grid_cell_size / 8;
+        rectCell.w = grid_cell_size / 4;
+        rectCell.h = grid_cell_size;
+        render_rect(&rectCell);
+    }
+
+    neighbourCell = malloc(sizeof(cell_t));
+    neighbourCell->x = cell->x + 1;
+    neighbourCell->y = cell->y;
+    if ((visited[neighbourCell->x][neighbourCell->y] == false) && (isAdjacency(cell, neighbourCell) == true))
+    {
+        visited[neighbourCell->x][neighbourCell->y] = true;
+        parent[neighbourCell->x - 1][neighbourCell->poysY - 1] = cell;
+        enqueue(neighbourCell);
+
+        rectCell.x = ((neighbourCell->x - 1) * grid_cell_size) - 3 * grid_cell_size / 8;
+        rectCell.y = ((neighbourCell->y - 1) * grid_cell_size) + 3 * grid_cell_size / 8;
+        rectCell.w = grid_cell_size;
+        rectCell.h = grid_cell_size / 4;
+        render_rect(&rectCell);
+    }
+
+    // SDL_RenderPresent(renderer);
+    SDL_Delay(30);
+}
+
+void shortPath()
+{
+    draw_color((rgb_color_t){0, 0, 255});
+    SDL_Rect rectCell;
+    cell_t *cell = malloc(sizeof(cell_t));
+    cell_t *parentCell;
+    cell->x = grid_width;
+    cell->y = grid_height;
+    while ((cell->x != 1) || (cell->y != 1))
+    {
+        rectCell.x = (cell->x * grid_cell_size) - 5 * grid_cell_size / 8;
+        rectCell.y = ((cell->y - 1) * grid_cell_size) + 3 * grid_cell_size / 8;
+        rectCell.w = grid_cell_size / 4;
+        rectCell.h = grid_cell_size / 4;
+        render_rect(&rectCell);
+
+        parentCell = parent[cell->x - 1][cell->y - 1];
+        if (cell->x == parentCell->x)
+        {
+            int posY = findMin(cell->y, parentCell->y);
+            rectCell.x = (cell->x * grid_cell_size) - 5 * grid_cell_size / 8;
+            rectCell.y = ((posY - 1) * grid_cell_size) + 3 * grid_cell_size / 8;
+            rectCell.w = grid_cell_size / 4;
+            rectCell.h = grid_cell_size;
+            render_rect(&rectCell);
+        }
+        else if (cell->y == parentCell->y)
+        {
+            int posX = findMin(Cell->x, parentCell->x);
+            rectCell.x = (posX * grid_cell_size) - 3 * grid_cell_size / 8;
+            rectCell.y = ((Cell->y - 1) * grid_cell_size) + 3 * grid_cell_size / 8;
+            rectCell.w = grid_cell_size;
+            rectCell.h = grid_cell_size / 4;
+            render_rect(&rectCell);
+        }
+        cell = parentCell;
+        SDL_Delay(10);
+        // SDL_RenderPresent(renderer);
+    }
+}
+
+void enqueue(cell_t *cell)
+{
+    queue_t *newCell = malloc(sizeof(cell_t));
+    newCell->Cell = cell;
+    newCell->next = NULL;
+    if (firstCell == NULL)
+    {
+        firstCell = newCell;
+        return;
+    }
+    queue_t *p = first_cell;
+    queue_t *predCell;
+    while (p != NULL)
+    {
+        predCell = p;
+        p = p->next;
+    }
+    predCell->next = newCell;
+}
+
+cell_t *dequeue()
+{
+    cell_t *removedCell = first_cell->Cell;
+    queue_t *p = first_cell;
+    first_cell = first_cell->next;
+    free(p);
+    return removedCell;
+}
+
+void adjacency(cell_t *cell, cell_t *cellNeighbour)
+{
+    int cellPos = (cell->x - 1) * grid_height + (cell->y - 1);
+    int neighbourPos = (cellNeighbour->x - 1) * grid_height + (cellNeighbour->y - 1);
+    adjacencyMatrix[cellPos][neighbourPos] = true;
+    adjacencyMatrix[neighbourPos][cellPos] = true;
+}
+
+bool isAdjacency(cell_t *cell, cell_t *cellNeighbour)
+{
+    int cellPos = (Cell->x - 1) * grid_height + (Cell->y - 1);
+    int neighbourPos = (cellNeighbour->x - 1) * grid_height + (cellNeighbour->y - 1);
+    return adjacencyMatrix[cellPos][neighbourPos];
+}
+
 state_t *emscripten_init()
 {
     asset_cache_init();
@@ -245,7 +459,7 @@ bool emscripten_main(state_t *state)
 {
     sdl_clear();
     init_grid();
-    generate_maze();
+    // generate_maze();
     sdl_show();
     return false;
 }
