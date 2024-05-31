@@ -111,6 +111,9 @@ seeker_t *seeker_init(){
   seeker->last_seeker_time = 0;
   seeker->body_assets = list_init(seeker->max_seekers, (free_func_t)asset_destroy);
     add_new_seeker(seeker, false);
+for (size_t i = 0; i < list_size(seeker->body_assets); i++) {
+      asset_render(list_get(seeker->body_assets, i));
+    }
 }
 
 void free_seeker(seeker_t *seeker) {

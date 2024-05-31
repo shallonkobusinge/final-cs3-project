@@ -4,6 +4,7 @@
 
 #include "stdbool.h"
 #include "body.h"
+#include "sound_effect.h"
 
 typedef struct seeker seeker_t;
 
