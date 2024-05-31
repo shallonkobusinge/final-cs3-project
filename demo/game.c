@@ -441,7 +441,7 @@ void adjacency(cell_t *cell, cell_t *cellNeighbour)
 
 bool isAdjacency(cell_t *cell, cell_t *cellNeighbour)
 {
-    int cellPos = (Cell->x - 1) * grid_height + (Cell->y - 1);
+    int cellPos = (cell->x - 1) * grid_height + (cell->y - 1);
     int neighbourPos = (cellNeighbour->x - 1) * grid_height + (cellNeighbour->y - 1);
     return adjacency_matrx[cellPos][neighbourPos];
 }
