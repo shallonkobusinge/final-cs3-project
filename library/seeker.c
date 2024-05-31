@@ -112,11 +112,12 @@ void introduce_seeker(seeker_t *seeker, double dt, sound_effect_t *sound_effect)
 }
 
 seeker_t *seeker_init(){
-  seeker_t *seeker = sizeof(sizeof(seeker_t));
+  seeker_t *seeker = malloc(sizeof(seeker_t));
   seeker->max_seekers = 50;
   seeker->last_seeker_time = 0;
   seeker->body_assets = list_init(seeker->max_seekers, (free_func_t)asset_destroy);
     add_new_seeker(seeker, false);
+    return seeker;
 }
 
 void free_seeker(seeker_t *seeker) {
