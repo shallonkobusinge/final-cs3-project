@@ -49,7 +49,7 @@ void init_grid()
     terminal_cell.h = GRID_CELL_SIZE / 2;
     render_rect(&terminal_cell);
 
-    render_show();
+    // render_show();
 }
 
 /**
@@ -122,7 +122,7 @@ static void remove_wall(cell_t *cell, cell_t *neighbor)
     }
     printf("ehg ?\n");
     SDL_Delay(30);
-    sdl_show();
+    // sdl_show();
 }
 
 void generate_maze(void *ptr)
@@ -131,6 +131,7 @@ void generate_maze(void *ptr)
 
     printf("showing generate\n");
     init_maze();
+    render_show();
 
     cell_t *cell = malloc(sizeof(cell_t));
     cell->x = 1;
