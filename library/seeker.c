@@ -7,21 +7,18 @@
 #include "sound_effect.h"
 const char *SEEKER_PATH = "assets/seeker_bg.png";
 
+const vector_t MIN_WINDOW = {0, 0};
+const vector_t MAX_WINDOW = {1000, 500};
 const double OUTER_RADIUS = 60;
 const double INNER_RADIUS = 60;
 const vector_t START_POS = {0, 45};
 const vector_t INITIAL_VELOCITY = {60, 20};
 
-#define NEW_SEEKERS_INTERVAL 30
-
 // SEEKING CONSTANTS
 #define STARTING_SEEKERS 1
 #define S_NUM_POINTS 20
 #define S_RADIUS 0.1
-
-const vector_t MIN_WINDOW = {0, 0};
-const vector_t MAX_WINDOW = {1000, 500};
-
+#define NEW_SEEKERS_INTERVAL 30
 
 const rgb_color_t seeker_color = (rgb_color_t){0.1, 0.9, 0.2};
 
