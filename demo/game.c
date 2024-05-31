@@ -272,38 +272,6 @@ cell_t *dequeue()
     free(p);
     return removedCell;
 }
-
-void initBFS()
-{
-    firstCell = NULL;
-    for (int i = 0; i < grid_width; i++)
-        for (int j = 0; j < grid_height; j++)
-        {
-            parent[i][j] = NULL;
-            visited[i + 1][j + 1] = false;
-        }
-    visited[1][1] = true;
-}
-
-int mazeSolving(void *ptr)
-{
-    // solve = SDL_TRUE;
-    // generate = SDL_TRUE;
-    initBFS();
-    cell_t *cell = malloc(sizeof(cell_t));
-    cell->x = 1;
-    cell->y = 1;
-    enqueue(cell);
-    while (visited[grid_width][grid_height] == false)
-    {
-        cell_t *cell = dequeue();
-        queueCellNeighbours(cell);
-    }
-    shortPath();
-    // solve = SDL_TRUE;
-    // generate = SDL_TRUE;
-}
-
 void queueCellNeighbours(cell_t *cell)
 {
     draw_color((rgb_color_t){
@@ -388,6 +356,37 @@ void queueCellNeighbours(cell_t *cell)
 
     // SDL_RenderPresent(renderer);
     SDL_Delay(30);
+}
+
+void initBFS()
+{
+    firstCell = NULL;
+    for (int i = 0; i < grid_width; i++)
+        for (int j = 0; j < grid_height; j++)
+        {
+            parent[i][j] = NULL;
+            visited[i + 1][j + 1] = false;
+        }
+    visited[1][1] = true;
+}
+
+int mazeSolving(void *ptr)
+{
+    // solve = SDL_TRUE;
+    // generate = SDL_TRUE;
+    initBFS();
+    cell_t *cell = malloc(sizeof(cell_t));
+    cell->x = 1;
+    cell->y = 1;
+    enqueue(cell);
+    while (visited[grid_width][grid_height] == false)
+    {
+        cell_t *cell = dequeue();
+        queueCellNeighbours(cell);
+    }
+    shortPath();
+    // solve = SDL_TRUE;
+    // generate = SDL_TRUE;
 }
 
 void shortPath()
