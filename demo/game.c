@@ -323,8 +323,8 @@ void queueCellNeighbours(cell_t *cell)
 
     cell_t *neighbourCell;
     neighbourCell = malloc(sizeof(cell_t));
-    neighbourCell->x = Cell->x - 1;
-    neighbourCell->y = Cell->y;
+    neighbourCell->x = cell->x - 1;
+    neighbourCell->y = cell->y;
     if ((visited[neighbourCell->x][neighbourCell->y] == false) && (isAdjacency(cell, neighbourCell) == true))
     {
         visited[neighbourCell->x][neighbourCell->y] = true;
