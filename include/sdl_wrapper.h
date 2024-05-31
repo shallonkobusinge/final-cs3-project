@@ -198,4 +198,6 @@ void render_line(int x, int y, int w, int h);
  */
 void render_color(rgb_color_t color);
 
+void render_show();
+
 #endif // #ifndef __SDL_WRAPPER_H__

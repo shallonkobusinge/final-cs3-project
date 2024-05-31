@@ -48,8 +48,8 @@ void init_grid()
     terminal_cell.w = GRID_CELL_SIZE / 2;
     terminal_cell.h = GRID_CELL_SIZE / 2;
     render_rect(&terminal_cell);
-    // sdl_show();
-    // l
+
+    render_show();
 }
 
 /**
