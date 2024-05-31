@@ -89,10 +89,6 @@ void add_new_seeker(scene_t *scene, seeker_t *seeker_ipt, bool is_new){
     list_add(seeker_ipt->body_assets, new_asset_seeker);
     seeker_ipt->last_seeker_time = 0;
     seeker_ipt->max_seekers += 1;
-    // state->last_seeker_time = 0;
-    // seeker_ipt.
-    // state->max_seekers += 1;
-
 }
 
 void introduce_seeker(scene_t *scene, seeker_t *seeker, double dt, sound_effect_t *sound_effect){
@@ -116,11 +112,11 @@ seeker_t *seeker_init(scene_t *scene){
     return seeker;
 }
 
-// void render_bodies(seeker_t *seeker) {
-//    for (size_t i = 0; i < list_size(seeker->body_assets); i++) {
-//       asset_render(list_get(seeker->body_assets, i));
-//     }
-// }
+void render_seeker_bodies(seeker_t *seeker) {
+   for (size_t i = 0; i < list_size(seeker->body_assets); i++) {
+      asset_render(list_get(seeker->body_assets, i));
+    }
+}
 
 void free_seeker(seeker_t *seeker) {
   free(seeker->body_assets);
