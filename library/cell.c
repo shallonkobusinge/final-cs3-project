@@ -3,6 +3,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+const int grid_width = 25;
+const int grid_height = 12;
+const int num_cells = grid_width * grid_height;
+
 void adjacency(cell_t *current, cell_t *neighbor, bool adj_matrix[][num_cells])
 {
     int curr_pos = (current->x - 1) * grid_height + (current->y - 1);

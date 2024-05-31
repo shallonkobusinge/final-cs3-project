@@ -4,9 +4,9 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-const int grid_width = 25;
-const int grid_height = 12;
-const int num_cells = grid_width * grid_height;
+extern const int grid_width;
+extern const int grid_height;
+extern const int num_cells;
 
 typedef struct cell
 {
