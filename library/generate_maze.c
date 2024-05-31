@@ -121,7 +121,7 @@ static void remove_wall(cell_t *cell, cell_t *neighbor)
 void generate_maze()
 {
     init_grid();
-    // init_maze();
+    init_maze();
 
     // cell_t *cell = malloc(sizeof(cell_t));
     // cell->x = 1;
