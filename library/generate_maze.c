@@ -14,7 +14,7 @@ const int num_cells = grid_width * grid_height;
 
 static stack_t *first_cell;
 bool visited[grid_width + 2][grid_height + 2];
-bool adjacency_matrx[num_cells][num_cells];
+bool adj_matrix[num_cells][num_cells];
 cell_t *parent[grid_width][grid_height];
 
 static stack_t head;
