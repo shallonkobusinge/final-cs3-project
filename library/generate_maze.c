@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 const int grid_cell_size = 40;
 const int grid_width = 25;
