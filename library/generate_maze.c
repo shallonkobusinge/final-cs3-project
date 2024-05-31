@@ -5,6 +5,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+const int grid_cell_size = 40;
+const int grid_width = 25;
+const int grid_height = 12;
+const int window_width = (grid_width * grid_cell_size) + 1;
+const int window_height = (grid_height * grid_cell_size) + 1;
+const int number_of_cells = grid_width * grid_height;
+
+static stack_t *first_cell;
+bool visited[grid_width + 2][grid_height + 2];
+bool adjacency_matrx[number_of_cells][number_of_cells];
+cell_t *parent[grid_width][grid_height];
+
 static stack_t head;
 
 /**
@@ -105,6 +117,7 @@ static void remove_wall(cell_t *cell, cell_t *neighbor)
 
 void generate_maze()
 {
+    init_grid();
     init_maze();
 
     cell_t *cell = malloc(sizeof(cell_t));
