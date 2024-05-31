@@ -36,7 +36,6 @@ bool emscripten_main(state_t *state)
 {
     sdl_clear();
     init_grid();
-
     generate_maze(NULL);
     sdl_show();
 
