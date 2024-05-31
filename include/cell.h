@@ -3,8 +3,11 @@
 
 #include <stdbool.h>
 
-typedef struct cell cell_t;
-
+typedef struct cell
+{
+    size_t x;
+    size_t y;
+} cell_t;
 /**
  * Updates the adjacency matrix to show current cell and neighbor are directly connected
  * @param cell current cell

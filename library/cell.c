@@ -3,12 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct cell
-{
-    size_t x;
-    size_t y;
-};
-
 const int grid_width = 25;
 const int grid_height = 12;
 const int num_cells = grid_width * grid_height;

@@ -17,6 +17,7 @@
         "stdio.h": "c",
         "stdbool.h": "c",
         "body.h": "c",
-        "list.h": "c"
+        "list.h": "c",
+        "assert.h": "c"
     }
 }
