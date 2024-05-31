@@ -8,6 +8,7 @@
         "color.h": "c",
         "state.h": "c",
         "stdbool.h": "c",
-        "sound_effect.h": "c"
+        "sound_effect.h": "c",
+        "math.h": "c"
     }
 }

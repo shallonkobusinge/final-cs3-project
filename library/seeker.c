@@ -6,6 +6,9 @@
 #include "asset.h"
 #include "sound_effect.h"
 const char *SEEKER_PATH = "assets/seeker_bg.png";
+
+const vector_t MIN = {0, 0};
+const vector_t MAX = {1000, 500};
 const double OUTER_RADIUS = 60;
 const double INNER_RADIUS = 60;
 const vector_t START_POS = {0, 45};
@@ -103,6 +106,9 @@ void introduce_seeker(seeker_t *seeker, double dt, sound_effect_t *sound_effect)
       add_new_seeker(seeker, true);
        tagged_sound(sound_effect);
     }
+    for (size_t i = 0; i < list_size(seeker->body_assets); i++) {
+      asset_render(list_get(seeker->body_assets, i));
+    }
 }
 
 seeker_t *seeker_init(){
@@ -111,9 +117,6 @@ seeker_t *seeker_init(){
   seeker->last_seeker_time = 0;
   seeker->body_assets = list_init(seeker->max_seekers, (free_func_t)asset_destroy);
     add_new_seeker(seeker, false);
-for (size_t i = 0; i < list_size(seeker->body_assets); i++) {
-      asset_render(list_get(seeker->body_assets, i));
-    }
 }
 
 void free_seeker(seeker_t *seeker) {
