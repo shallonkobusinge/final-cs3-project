@@ -24,7 +24,7 @@ static stack_t *head;
 /**
  * Initialize and draw the Maze Grid.
  */
-static void init_grid()
+void init_grid()
 {
     render_color((rgb_color_t){210, 210, 210});
 
@@ -118,7 +118,7 @@ static void remove_wall(cell_t *cell, cell_t *neighbor)
     SDL_Delay(30);
 }
 
-void generate_maze()
+void generate_maze(void *ptr)
 {
     init_grid();
     init_maze();
