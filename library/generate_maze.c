@@ -49,7 +49,7 @@ void init_grid()
     render_rect(&terminal_cell);
     printf("/her2e\n");
 
-    generate_maze();
+    generate_maze(NULL);
 }
 
 /**
