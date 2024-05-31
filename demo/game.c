@@ -418,9 +418,9 @@ void shortPath()
         }
         else if (cell->y == parentCell->y)
         {
-            int posX = findMin(Cell->x, parentCell->x);
+            int posX = findMin(cell->x, parentCell->x);
             rectCell.x = (posX * grid_cell_size) - 3 * grid_cell_size / 8;
-            rectCell.y = ((Cell->y - 1) * grid_cell_size) + 3 * grid_cell_size / 8;
+            rectCell.y = ((cell->y - 1) * grid_cell_size) + 3 * grid_cell_size / 8;
             rectCell.w = grid_cell_size;
             rectCell.h = grid_cell_size / 4;
             render_rect(&rectCell);
