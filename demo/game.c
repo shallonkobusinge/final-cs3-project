@@ -45,40 +45,36 @@ bool emscripten_main(state_t *state)
 
     init_grid();
 
-    while (!quit)
+    SDL_Event event;
+    while (SDL_WaitEvent(&event) && !quit)
     {
-        SDL_Event event;
-        while (SDL_WaitEvent(&event) && !quit)
+        if (firstLook)
         {
-            if (firstLook)
+            init_grid();
+            thread = SDL_CreateThread(generate_maze, "Generating", NULL);
+        }
+        switch (event.type)
+        {
+        case SDL_MOUSEBUTTONDOWN:
+            switch (event.button.button)
             {
-                init_grid();
-                thread = SDL_CreateThread(generate_maze, "Generating", NULL);
-            }
-            switch (event.type)
-            {
-            case SDL_MOUSEBUTTONDOWN:
-                switch (event.button.button)
+            case SDL_BUTTON_RIGHT:
+                if (generate)
                 {
-                case SDL_BUTTON_RIGHT:
-                    if (generate)
-                    {
-                        init_grid();
-                        thread = SDL_CreateThread(generate_maze, "Generating", NULL);
-                    }
-                    continue;
-                case SDL_BUTTON_LEFT:
-                    // if (solve)
-                    //     thread = SDL_CreateThread(mazeSolving, "Solving", NULL);
-                    continue;
+                    init_grid();
+                    thread = SDL_CreateThread(generate_maze, "Generating", NULL);
                 }
-            case SDL_QUIT:
-                quit = SDL_TRUE;
-                break;
+                continue;
+            case SDL_BUTTON_LEFT:
+                // if (solve)
+                //     thread = SDL_CreateThread(mazeSolving, "Solving", NULL);
+                continue;
             }
+        case SDL_QUIT:
+            quit = SDL_TRUE;
+            break;
         }
 
-        SDL_RenderPresent(renderer);
         // sdl_show();
     }
 
