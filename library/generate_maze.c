@@ -83,7 +83,7 @@ static void init_maze()
         }
     }
     head = NULL;
-    printf("/here\n");
+    printf("/her2e\n");
     srand(time(NULL));
 }
 
