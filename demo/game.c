@@ -78,6 +78,7 @@ void init_grid()
 static stack_t *first_cell;
 bool visited[grid_width + 2][grid_height + 2];
 bool adjacency_matrx[number_of_cells][number_of_cells];
+cell_t *parent[grid_width][grid_height];
 
 void init_maze()
 {
@@ -243,6 +244,35 @@ typedef struct _queue
 
 static queue_t *firstCell;
 
+void enqueue(cell_t *cell)
+{
+    queue_t *newCell = malloc(sizeof(cell_t));
+    newCell->cell = cell;
+    newCell->next = NULL;
+    if (firstCell == NULL)
+    {
+        firstCell = newCell;
+        return;
+    }
+    queue_t *p = firstCell;
+    queue_t *predCell;
+    while (p != NULL)
+    {
+        predCell = p;
+        p = p->next;
+    }
+    predCell->next = newCell;
+}
+
+cell_t *dequeue()
+{
+    cell_t *removedCell = firstCell->Cell;
+    queue_t *p = firstCell;
+    firstCell = firstCell->next;
+    free(p);
+    return removedCell;
+}
+
 void initBFS()
 {
     firstCell = NULL;
@@ -399,35 +429,6 @@ void shortPath()
         SDL_Delay(10);
         // SDL_RenderPresent(renderer);
     }
-}
-
-void enqueue(cell_t *cell)
-{
-    queue_t *newCell = malloc(sizeof(cell_t));
-    newCell->Cell = cell;
-    newCell->next = NULL;
-    if (firstCell == NULL)
-    {
-        firstCell = newCell;
-        return;
-    }
-    queue_t *p = first_cell;
-    queue_t *predCell;
-    while (p != NULL)
-    {
-        predCell = p;
-        p = p->next;
-    }
-    predCell->next = newCell;
-}
-
-cell_t *dequeue()
-{
-    cell_t *removedCell = first_cell->Cell;
-    queue_t *p = first_cell;
-    first_cell = first_cell->next;
-    free(p);
-    return removedCell;
 }
 
 void adjacency(cell_t *cell, cell_t *cellNeighbour)
