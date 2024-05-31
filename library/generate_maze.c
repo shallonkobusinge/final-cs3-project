@@ -121,14 +121,13 @@ static void remove_wall(cell_t *cell, cell_t *neighbor)
                     (cell->y - 1) * GRID_CELL_SIZE + GRID_CELL_SIZE);
     }
     printf("ehg ?\n");
+    sdl_show();
     SDL_Delay(30);
     // sdl_show();
 }
 
 int generate_maze(void *ptr)
 {
-    init_grid();
-
     printf("showing generate\n");
     init_maze();
     render_show();
@@ -152,5 +151,4 @@ int generate_maze(void *ptr)
             push_stack(head, neighbor);
         }
     }
-    printf("showing end gen\n");
 }
