@@ -65,7 +65,7 @@ void wrap_seeker_scene(body_t *seeker) {
 }
 
 
-void *add_new_seeker(scene_t *scene, seeker_t *seeker_ipt, bool is_new){
+void add_new_seeker(scene_t *scene, seeker_t *seeker_ipt, bool is_new){
    
    vector_t seeker_vel = {.x = 0.0, .y = 0.0};
    body_t *seeker;
