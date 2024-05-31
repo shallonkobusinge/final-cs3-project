@@ -78,8 +78,8 @@ bool emscripten_main(state_t *state)
             }
         }
 
-        // SDL_RenderPresent(renderer);
-        sdl_show();
+        SDL_RenderPresent(renderer);
+        // sdl_show();
     }
 
     // SDL_Thread *thread = (generate_maze, "Generating", NULL);
