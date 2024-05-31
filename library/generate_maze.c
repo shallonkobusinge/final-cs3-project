@@ -129,12 +129,12 @@ void generate_maze()
         cell = pop_stack();
         if (get_neighbor(cell) != NULL)
         {
-            push_stack(cell);
+            push_stack(head, cell);
             cell_t *neighbor = get_neighbor(cell);
             remove_wall(cell, neighbor);
             visited[neighbor->x][neighbor->y] = true;
             adjacency(cell, neighbor);
-            push_stack(neighbor);
+            push_stack(head, neighbor);
         }
     }
 }
