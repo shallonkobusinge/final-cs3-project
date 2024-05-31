@@ -4,6 +4,14 @@
 #include "scene.h"
 #include "list.h"
 #include "asset.h"
+#include "sound_effect.h"
+const char *SEEKER_PATH = "assets/seeker_bg.png";
+const double OUTER_RADIUS = 60;
+const double INNER_RADIUS = 60;
+const vector_t START_POS = {0, 45};
+const vector_t INITIAL_VELOCITY = {60, 20};
+
+#define NEW_SEEKERS_INTERVAL 30
 
 // SEEKING CONSTANTS
 #define STARTING_SEEKERS 1
@@ -15,6 +23,12 @@ const vector_t MAX_WINDOW = {1000, 500};
 
 
 const rgb_color_t seeker_color = (rgb_color_t){0.1, 0.9, 0.2};
+
+typedef struct seeker {
+    list_t *body_assets;
+    double last_seeker_time;
+    double max_seekers;
+}seeker_t;
 
 
 body_t *make_seeker(double w, double h, vector_t center) {
@@ -52,3 +66,54 @@ void wrap_seeker_scene(body_t *seeker) {
   body_set_velocity(seeker, velocity);
 }
 
+
+void add_new_seeker(seeker_t *seeker_ipt, bool is_new){
+   
+   vector_t seeker_vel = {.x = 0.0, .y = 0.0};
+   body_t *seeker;
+    if(is_new){
+      vector_t seeker_pos = (vector_t){
+        .x = rand() % (int)INITIAL_VELOCITY.x,
+        .y = rand() % (int)(MAX.y),
+    };
+     seeker_vel = (vector_t){
+        .x = rand() % (int)INITIAL_VELOCITY.x + 20,
+        .y = rand() % (int)INITIAL_VELOCITY.y + 10
+    };
+      seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, seeker_pos);
+    }
+    seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, START_POS);
+    seeker_vel = INITIAL_VELOCITY;
+  
+    // scene_add_body(state->scene, seeker);
+    body_set_velocity(seeker, seeker_vel);
+    asset_t *new_asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
+    list_add(seeker_ipt->body_assets, new_asset_seeker);
+    seeker_ipt->last_seeker_time = 0;
+    seeker_ipt->max_seekers += 1;
+    // state->last_seeker_time = 0;
+    // seeker_ipt.
+    // state->max_seekers += 1;
+
+}
+
+void introduce_seeker(seeker_t *seeker, double dt, sound_effect_t *sound_effect){
+    seeker_ipt->last_seeker_time += dt;
+    if(seeker->last_seeker_time >= NEW_SEEKERS_INTERVAL){
+      add_new_seeker(seeker, true);
+       tagged_sound(sound_effect);
+    }
+}
+
+seeker_t *seeker_init(){
+  seeker_t *seeker = sizeof(sizeof(seeker_t));
+  seeker->max_seekers = 50;
+  seeker->last_seeker_time = 0;
+  seeker->body_assets = list_init(seeker->max_seekers, (free_func_t)asset_destroy);
+    add_new_seeker(seeker, false);
+}
+
+void free_seeker(seeker_t *seeker) {
+  free(seeker->body_assets);
+  free(seeker);
+}
