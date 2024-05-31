@@ -7,17 +7,17 @@
 #include "stack.h"
 #include "sdl_wrapper.h"
 
-const int grid_width = 25;
-const int grid_height = 12;
-const int num_cells = grid_width * grid_height;
+const size_t GRID_WIDTH = 25;
+const size_t GRID_HEIGHT = 12;
+const size_t NUM_CELLS = GRID_WIDTH * GRID_HEIGHT;
 
-const int grid_cell_size = 40;
-const int window_width = (grid_width * grid_cell_size) + 1;
-const int window_height = (grid_height * grid_cell_size) + 1;
+const int GRID_CELL_SIZE = 40;
+const int window_width = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
+const int window_height = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
 
-bool visited[grid_width + 2][grid_height + 2];
-bool adj_matrix[num_cells][num_cells];
-cell_t *parent[grid_width][grid_height];
+bool visited[GRID_WIDTH + 2][GRID_HEIGHT + 2];
+bool adj_matrix[NUM_CELLS][NUM_CELLS];
+cell_t *parent[GRID_WIDTH][GRID_HEIGHT];
 
 static stack_t *head;
 
@@ -28,24 +28,24 @@ static void init_grid()
 {
     render_color((rgb_color_t){210, 210, 210});
 
-    for (int x = 0; x < window_width; x += grid_cell_size)
+    for (int x = 0; x < window_width; x += GRID_CELL_SIZE)
     {
         render_line(x, 0, x, window_height);
     }
-    for (int y = 0; y < window_height; y += grid_cell_size)
+    for (int y = 0; y < window_height; y += GRID_CELL_SIZE)
     {
         render_line(0, y, window_width, y);
     }
 
-    SDL_Rect start_cell = {(grid_cell_size / 4), (grid_cell_size / 4), (grid_cell_size / 2), (grid_cell_size / 2)};
+    SDL_Rect start_cell = {(GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
     render_color((rgb_color_t){0, 0, 0});
     render_rect(&start_cell);
 
     SDL_Rect terminal_cell;
-    terminal_cell.x = ((grid_width - 1) * grid_cell_size) + grid_cell_size / 4;
-    terminal_cell.y = ((grid_height - 1) * grid_cell_size) + grid_cell_size / 4;
-    terminal_cell.w = grid_cell_size / 2;
-    terminal_cell.h = grid_cell_size / 2;
+    terminal_cell.x = ((GRID_WIDTH - 1) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
+    terminal_cell.y = ((GRID_HEIGHT - 1) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
+    terminal_cell.w = GRID_CELL_SIZE / 2;
+    terminal_cell.h = GRID_CELL_SIZE / 2;
     render_rect(&terminal_cell);
 }
 
@@ -55,29 +55,29 @@ static void init_grid()
  */
 static void init_maze()
 {
-    for (int i = 1; i <= grid_width; i++)
+    for (int i = 1; i <= GRID_WIDTH; i++)
     {
-        for (int j = 1; j <= grid_height; j++)
+        for (int j = 1; j <= GRID_HEIGHT; j++)
         {
             visited[i][j] = false;
         }
     }
 
-    for (int i = 1; i <= grid_width; i++)
+    for (int i = 1; i <= GRID_WIDTH; i++)
     {
         visited[i][0] = true;
-        visited[i][grid_height + 1] = true;
+        visited[i][GRID_HEIGHT + 1] = true;
     }
 
-    for (int j = 1; j < grid_height + 2; j++)
+    for (int j = 1; j < GRID_HEIGHT + 2; j++)
     {
         visited[0][j] = true;
-        visited[grid_width + 1][j] = true;
+        visited[GRID_WIDTH + 1][j] = true;
     }
 
-    for (int i = 0; i < num_cells; i++)
+    for (int i = 0; i < NUM_CELLS; i++)
     {
-        for (int j = 0; j < num_cells; j++)
+        for (int j = 0; j < NUM_CELLS; j++)
         {
             adj_matrix[i][j] = false;
         }
@@ -100,19 +100,19 @@ static void remove_wall(cell_t *cell, cell_t *neighbor)
     {
         int pos_y = (cell->y > neighbor->y) ? cell->y : neighbor->y;
 
-        render_line((cell->x - 1) * grid_cell_size,
-                    (pos_y - 1) * grid_cell_size,
-                    (cell->x - 1) * grid_cell_size + grid_cell_size,
-                    (pos_y - 1) * grid_cell_size);
+        render_line((cell->x - 1) * GRID_CELL_SIZE,
+                    (pos_y - 1) * GRID_CELL_SIZE,
+                    (cell->x - 1) * GRID_CELL_SIZE + GRID_CELL_SIZE,
+                    (pos_y - 1) * GRID_CELL_SIZE);
     }
     else if (cell->y == neighbor->y)
     {
         int pos_x = (cell->x > neighbor->x) ? cell->x : neighbor->x;
 
-        render_line((pos_x - 1) * grid_cell_size,
-                    (cell->y - 1) * grid_cell_size,
-                    (pos_x - 1) * grid_cell_size,
-                    (cell->y - 1) * grid_cell_size + grid_cell_size);
+        render_line((pos_x - 1) * GRID_CELL_SIZE,
+                    (cell->y - 1) * GRID_CELL_SIZE,
+                    (pos_x - 1) * GRID_CELL_SIZE,
+                    (cell->y - 1) * GRID_CELL_SIZE + GRID_CELL_SIZE);
     }
     SDL_Delay(30);
 }

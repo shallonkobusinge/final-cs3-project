@@ -4,9 +4,9 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-extern const int grid_width;
-extern const int grid_height;
-extern const int num_cells;
+extern const size_t GRID_WIDTH;
+extern const size_t GRID_HEIGHT;
+extern const size_t NUM_CELLS;
 
 typedef struct cell
 {
@@ -20,7 +20,7 @@ typedef struct cell
  * @param adj_matrix adjancey matrix with direct connections
  *
  */
-void adjacency(cell_t *current, cell_t *neighbor, bool adj_matrix[][num_cells]);
+void adjacency(cell_t *current, cell_t *neighbor, bool adj_matrix[][NUM_CELLS]);
 /**
  *
  * This function checks if there is a direct connection (adjacency) between two cells, Cell and cellNeighbour.
@@ -29,13 +29,13 @@ void adjacency(cell_t *current, cell_t *neighbor, bool adj_matrix[][num_cells]);
  * @param adj_matrix adjancey matrix with direct connections
  * @return true if there is a direct connection between current and neighbor.
  */
-bool isAdjacency(cell_t *current, cell_t *neighbor, bool adj_matrix[][num_cells]);
+bool isAdjacency(cell_t *current, cell_t *neighbor, bool adj_matrix[][NUM_CELLS]);
 
 /**
  * Finds a random unvisited neighbor of the current cell.
  * @param cell current cell.
  * @returns NULL if all neighbors are visited. Otherwise, it returns a random unvisited neighbor.
  */
-cell_t *get_neighbor(cell_t *current, bool visited[][grid_height + 2]);
+cell_t *get_neighbor(cell_t *current, bool visited[][GRID_HEIGHT + 2]);
 
 #endif // #ifndef __CELL_H__
