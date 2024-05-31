@@ -100,10 +100,11 @@ static void init_maze()
 static void remove_wall(cell_t *cell, cell_t *neighbor)
 {
     printf("hase\n");
-    render_color((rgb_color_t){22, 22, 22});
 
     if (cell->x == neighbor->x)
     {
+        render_color((rgb_color_t){22, 22, 22});
+
         int pos_y = (cell->y > neighbor->y) ? cell->y : neighbor->y;
 
         render_line((cell->x - 1) * GRID_CELL_SIZE,
@@ -113,6 +114,8 @@ static void remove_wall(cell_t *cell, cell_t *neighbor)
     }
     else if (cell->y == neighbor->y)
     {
+        render_color((rgb_color_t){22, 22, 22});
+
         int pos_x = (cell->x > neighbor->x) ? cell->x : neighbor->x;
 
         render_line((pos_x - 1) * GRID_CELL_SIZE,
