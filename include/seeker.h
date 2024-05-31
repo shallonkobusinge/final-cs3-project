@@ -24,4 +24,6 @@ void introduce_seeker(seeker_t *seeker, double dt, sound_effect_t *sound_effect)
 
 void free_seeker(seeker_t *seeker);
 
+void render_bodies(seeker_t *seeker);
+
 #endif // #ifndef __SEEKER_H__

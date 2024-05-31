@@ -51,6 +51,7 @@ bool emscripten_main(state_t *state) {
     // }
     introduce_seeker(state->seeker, dt, state->sound_effect);
     sdl_clear();
+    render_bodies(state->seeker);
     
     for(size_t i = 0; i < scene_bodies(state->scene); i++) {
         body_t *seeker = scene_get_body(state->scene, i);
