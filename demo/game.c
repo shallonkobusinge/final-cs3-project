@@ -431,13 +431,13 @@ void shortPath()
     }
 }
 
-void adjacency(cell_t *cell, cell_t *cellNeighbour)
-{
-    int cellPos = (cell->x - 1) * grid_height + (cell->y - 1);
-    int neighbourPos = (cellNeighbour->x - 1) * grid_height + (cellNeighbour->y - 1);
-    adjacency_matrx[cellPos][neighbourPos] = true;
-    adjacency_matrx[neighbourPos][cellPos] = true;
-}
+// void adjacency(cell_t *cell, cell_t *cellNeighbour)
+// {
+//     int cellPos = (cell->x - 1) * grid_height + (cell->y - 1);
+//     int neighbourPos = (cellNeighbour->x - 1) * grid_height + (cellNeighbour->y - 1);
+//     adjacency_matrx[cellPos][neighbourPos] = true;
+//     adjacency_matrx[neighbourPos][cellPos] = true;
+// }
 
 // bool isAdjacency(cell_t *cell, cell_t *cellNeighbour)
 // {
