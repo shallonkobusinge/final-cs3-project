@@ -266,7 +266,7 @@ void enqueue(cell_t *cell)
 
 cell_t *dequeue()
 {
-    cell_t *removedCell = firstCell->Cell;
+    cell_t *removedCell = firstCell->cell;
     queue_t *p = firstCell;
     firstCell = firstCell->next;
     free(p);
