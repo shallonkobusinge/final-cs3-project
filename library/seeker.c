@@ -101,7 +101,7 @@ void add_new_seeker(seeker_t *seeker_ipt, bool is_new){
 }
 
 void introduce_seeker(seeker_t *seeker, double dt, sound_effect_t *sound_effect){
-    seeker_ipt->last_seeker_time += dt;
+    seeker->last_seeker_time += dt;
     if(seeker->last_seeker_time >= NEW_SEEKERS_INTERVAL){
       add_new_seeker(seeker, true);
        tagged_sound(sound_effect);
