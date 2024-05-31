@@ -99,6 +99,7 @@ static void init_maze()
  */
 static void remove_wall(cell_t *cell, cell_t *neighbor)
 {
+    printf("hase\n");
     render_color((rgb_color_t){22, 22, 22});
 
     if (cell->x == neighbor->x)
