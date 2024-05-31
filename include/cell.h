@@ -1,6 +1,8 @@
 #ifndef __CELL_H__
 #define __CELL_H__
 
+#include <stdbool.h>
+
 typedef struct cell cell_t;
 
 /**
