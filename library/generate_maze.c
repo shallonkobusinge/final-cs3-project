@@ -123,10 +123,10 @@ void generate_maze()
     cell->y = 1;
     visited[cell->x][cell->y] = true;
 
-    push_stack(cell);
+    push_stack(head, cell);
     while (head != NULL)
     {
-        cell = pop_stack();
+        cell = pop_stack(head);
         if (get_neighbor(cell) != NULL)
         {
             push_stack(head, cell);
