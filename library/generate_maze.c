@@ -127,7 +127,7 @@ void generate_maze()
     while (head != NULL)
     {
         cell = pop_stack(head);
-        if (get_neighbor(cell) != NULL)
+        if (get_neighbor(cell, visited) != NULL)
         {
             push_stack(head, cell);
             cell_t *neighbor = get_neighbor(cell);
