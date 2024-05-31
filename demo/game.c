@@ -32,7 +32,10 @@ state_t *emscripten_init()
 bool emscripten_main(state_t *state)
 {
     sdl_clear();
-    generate_maze(NULL);
+    // init_grid();
+    SDL_Thread *thread = (generate_maze, "Generating", NULL);
+
+    // generate_maze(NULL);
     sdl_show();
     return false;
 }
