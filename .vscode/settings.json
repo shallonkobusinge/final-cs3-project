@@ -12,6 +12,7 @@
         "generate_maze.h": "c",
         "vector.h": "c",
         "stack.h": "c",
-        "time.h": "c"
+        "time.h": "c",
+        "cell.h": "c"
     }
 }
