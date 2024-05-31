@@ -122,6 +122,8 @@ static void remove_wall(cell_t *cell, cell_t *neighbor)
 
 void generate_maze(void *ptr)
 {
+    init_grid();
+
     printf("showing generate\n");
     init_maze();
 
