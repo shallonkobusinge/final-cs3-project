@@ -26,7 +26,7 @@ state_t *emscripten_init()
     state_t *state = malloc(sizeof(state_t));
     state->page = 0;
 
-    init_grid();
+    // init_grid();
     // sdl_show();
 
     return state;
@@ -35,6 +35,8 @@ state_t *emscripten_init()
 bool emscripten_main(state_t *state)
 {
     sdl_clear();
+    init_grid();
+
     generate_maze(NULL);
     sdl_show();
 
