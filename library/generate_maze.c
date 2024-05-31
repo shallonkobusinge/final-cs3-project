@@ -115,8 +115,6 @@ static void remove_wall(cell_t *cell, cell_t *neighbor)
                     (cell->y - 1) * GRID_CELL_SIZE + GRID_CELL_SIZE);
     }
     printf("ehg ?\n");
-
-    sdl_show();
     SDL_Delay(30);
 }
 
