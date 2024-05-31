@@ -35,7 +35,7 @@ state_t *emscripten_init()
 bool emscripten_main(state_t *state)
 {
     sdl_clear();
-    thread = SDL_CreateThread(generate_maze, "Generating", NULL);
+    SDLThread thread = SDL_CreateThread(generate_maze, "Generating", NULL);
 
     return false;
 }
