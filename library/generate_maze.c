@@ -47,7 +47,6 @@ void init_grid()
     terminal_cell.w = GRID_CELL_SIZE / 2;
     terminal_cell.h = GRID_CELL_SIZE / 2;
     render_rect(&terminal_cell);
-    generate_maze(NULL);
 }
 
 /**
@@ -131,7 +130,6 @@ void generate_maze(void *ptr)
     visited[cell->x][cell->y] = true;
 
     push_stack(head, cell);
-    printf("pushed \n");
     while (head != NULL)
     {
 
