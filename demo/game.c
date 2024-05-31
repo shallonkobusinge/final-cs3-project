@@ -27,7 +27,7 @@ state_t *emscripten_init()
     state->page = 0;
 
     init_grid();
-    sdl_show();
+    // sdl_show();
 
     return state;
 }
