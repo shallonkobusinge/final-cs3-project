@@ -411,7 +411,7 @@ void shortPath()
     }
 }
 
-int mazeSolving(void *ptr)
+int mazeSolving()
 {
     // solve = SDL_TRUE;
     // generate = SDL_TRUE;
