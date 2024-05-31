@@ -1,7 +1,8 @@
+#include "cell.h"
+
 #include "generate_maze.h"
 #include "sdl_wrapper.h"
 #include "stack.h"
-#include "cell.h"
 
 #include <stdio.h>
 #include <stdlib.h>
