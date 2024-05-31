@@ -86,8 +86,6 @@ static void init_maze()
         }
     }
     head = NULL;
-    printf("showing maze\n");
-
     srand(time(NULL));
 }
 
