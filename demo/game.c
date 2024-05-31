@@ -460,6 +460,7 @@ bool emscripten_main(state_t *state)
     sdl_clear();
     init_grid();
     // generate_maze();
+    mazeSolving();
     sdl_show();
     return false;
 }
