@@ -26,6 +26,7 @@ static stack_t *head;
  */
 static void init_grid()
 {
+    printf("here\n");
     render_color((rgb_color_t){210, 210, 210});
 
     for (int x = 0; x < window_width; x += GRID_CELL_SIZE)
