@@ -121,6 +121,7 @@ static void remove_wall(cell_t *cell, cell_t *neighbor)
     }
     printf("ehg ?\n");
     SDL_Delay(30);
+    sdl_show();
 }
 
 void generate_maze(void *ptr)
