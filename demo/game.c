@@ -36,13 +36,14 @@ SDL_bool firstLook;
 bool emscripten_main(state_t *state)
 {
     sdl_clear();
-    init_grid();
 
     SDL_bool quit = SDL_FALSE;
     generate = SDL_TRUE;
     solve = SDL_FALSE;
     firstLook = SDL_TRUE;
     SDL_Thread *thread;
+
+    init_grid();
 
     while (!quit)
     {
@@ -51,7 +52,7 @@ bool emscripten_main(state_t *state)
         {
             if (firstLook)
             {
-                initGrid();
+                init_grid();
                 thread = SDL_CreateThread(generate_maze, "Generating", NULL);
             }
             switch (event.type)
