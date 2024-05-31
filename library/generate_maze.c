@@ -26,6 +26,7 @@ static stack_t *head;
  */
 void init_grid()
 {
+    sdl_clear();
     render_color((rgb_color_t){210, 210, 210});
 
     for (int x = 0; x < window_width; x += GRID_CELL_SIZE)
@@ -47,8 +48,8 @@ void init_grid()
     terminal_cell.w = GRID_CELL_SIZE / 2;
     terminal_cell.h = GRID_CELL_SIZE / 2;
     render_rect(&terminal_cell);
-
-    sdl_show();
+    // sdl_show();
+    l
 }
 
 /**
