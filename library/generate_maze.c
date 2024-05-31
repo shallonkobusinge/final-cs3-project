@@ -57,6 +57,7 @@ void init_grid()
 static void init_maze()
 {
 
+    printf("wh2y?\n");
     for (int i = 1; i <= GRID_WIDTH; i++)
     {
         for (int j = 1; j <= GRID_HEIGHT; j++)
@@ -124,7 +125,6 @@ static void remove_wall(cell_t *cell, cell_t *neighbor)
 
 void generate_maze(void *ptr)
 {
-    printf("why?\n");
     init_maze();
 
     cell_t *cell = malloc(sizeof(cell_t));
