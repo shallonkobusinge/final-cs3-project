@@ -55,6 +55,8 @@ void init_grid()
  */
 static void init_maze()
 {
+    printf("/her2e\n");
+
     for (int i = 1; i <= GRID_WIDTH; i++)
     {
         for (int j = 1; j <= GRID_HEIGHT; j++)
@@ -82,6 +84,8 @@ static void init_maze()
             adj_matrix[i][j] = false;
         }
     }
+    printf("/her2e\n");
+
     head = NULL;
     printf("/her2e\n");
     srand(time(NULL));
