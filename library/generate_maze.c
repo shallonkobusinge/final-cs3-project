@@ -83,6 +83,8 @@ static void init_maze()
         }
     }
     head = NULL;
+    printf("showing maze\n");
+
     srand(time(NULL));
 }
 
@@ -120,6 +122,7 @@ static void remove_wall(cell_t *cell, cell_t *neighbor)
 
 void generate_maze(void *ptr)
 {
+    printf("showing generate\n");
     init_maze();
 
     cell_t *cell = malloc(sizeof(cell_t));
@@ -130,7 +133,6 @@ void generate_maze(void *ptr)
     push_stack(head, cell);
     while (head != NULL)
     {
-
         cell = pop_stack(head);
         if (get_neighbor(cell, visited) != NULL)
         {
@@ -142,4 +144,5 @@ void generate_maze(void *ptr)
             push_stack(head, neighbor);
         }
     }
+    printf("showing end gen\n");
 }
