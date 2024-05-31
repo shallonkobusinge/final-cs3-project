@@ -49,7 +49,7 @@ void init_grid()
     terminal_cell.h = GRID_CELL_SIZE / 2;
     render_rect(&terminal_cell);
 
-    render_show();
+    sdl_show();
 }
 
 /**
