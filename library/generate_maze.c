@@ -85,7 +85,6 @@ static void init_maze()
     }
     head = NULL;
     srand(time(NULL));
-    printf("time?\n");
 }
 
 /**
@@ -132,6 +131,7 @@ void generate_maze(void *ptr)
     visited[cell->x][cell->y] = true;
 
     push_stack(head, cell);
+    printf("pushed \n");
     while (head != NULL)
     {
 
