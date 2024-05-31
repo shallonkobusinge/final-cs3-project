@@ -370,25 +370,6 @@ void initBFS()
     visited[1][1] = true;
 }
 
-int mazeSolving(void *ptr)
-{
-    // solve = SDL_TRUE;
-    // generate = SDL_TRUE;
-    initBFS();
-    cell_t *cell = malloc(sizeof(cell_t));
-    cell->x = 1;
-    cell->y = 1;
-    enqueue(cell);
-    while (visited[grid_width][grid_height] == false)
-    {
-        cell_t *cell = dequeue();
-        queueCellNeighbours(cell);
-    }
-    shortPath();
-    // solve = SDL_TRUE;
-    // generate = SDL_TRUE;
-}
-
 void shortPath()
 {
     draw_color((rgb_color_t){0, 0, 255});
@@ -428,6 +409,25 @@ void shortPath()
         SDL_Delay(10);
         // SDL_RenderPresent(renderer);
     }
+}
+
+int mazeSolving(void *ptr)
+{
+    // solve = SDL_TRUE;
+    // generate = SDL_TRUE;
+    initBFS();
+    cell_t *cell = malloc(sizeof(cell_t));
+    cell->x = 1;
+    cell->y = 1;
+    enqueue(cell);
+    while (visited[grid_width][grid_height] == false)
+    {
+        cell_t *cell = dequeue();
+        queueCellNeighbours(cell);
+    }
+    shortPath();
+    // solve = SDL_TRUE;
+    // generate = SDL_TRUE;
 }
 
 // void adjacency(cell_t *cell, cell_t *cellNeighbour)
