@@ -116,6 +116,8 @@ static void remove_wall(cell_t *cell, cell_t *neighbor)
                     (pos_x - 1) * GRID_CELL_SIZE,
                     (cell->y - 1) * GRID_CELL_SIZE + GRID_CELL_SIZE);
     }
+    printf("ehg ?\n");
+
     sdl_show();
     SDL_Delay(30);
 }
@@ -128,8 +130,6 @@ void generate_maze(void *ptr)
     cell->x = 1;
     cell->y = 1;
     visited[cell->x][cell->y] = true;
-
-    printf("nose ?\n");
 
     push_stack(head, cell);
     while (head != NULL)
