@@ -3,11 +3,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct cell
+struct cell
 {
     size_t x;
     size_t y;
-} cell_t;
+};
 
 const int grid_width = 25;
 const int grid_height = 12;
