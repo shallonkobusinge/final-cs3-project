@@ -42,12 +42,12 @@ state_t *emscripten_init()
 bool emscripten_main(state_t *state)
 {
     sdl_clear();
-    // if (state->page == 0) {
-    //       init_grid();
-    // } else if (state->page == 1){
+    if (state->page == 0) {
+          init_grid();
+    } else if (state->page == 1){
          build_landing_page();
       
-    // }
+    }
     
     // SDL_Thread *thread = (generate_maze, "Generating", NULL);
 
