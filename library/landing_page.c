@@ -14,7 +14,7 @@ typedef struct text_element
     const char *text;
     const char *font_path;
     rgb_color_t color;
-    frame_t frame,
+    SDL_Rect frame,
 } text_element_t;
 
 typedef struct img_element
