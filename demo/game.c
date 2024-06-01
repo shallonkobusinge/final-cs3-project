@@ -32,7 +32,7 @@ state_t *emscripten_init()
     state->scene = scene_init();
     // build_landing_page();
 
-    state->page = 1;
+    state->page = 0;
     // sdl_show();
 
 
