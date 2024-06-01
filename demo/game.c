@@ -73,6 +73,8 @@ bool emscripten_main(state_t *state)
     // draw_maze();
     // init_grid();
 
+    draw_color((rgb_color_t){255, 255, 255});
+
     build_landing_page();
     // }
     sdl_show();
