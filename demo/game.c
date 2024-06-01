@@ -71,9 +71,9 @@ bool emscripten_main(state_t *state)
     // if (state->page == 0)
     // {
     // draw_maze();
-    init_grid();
+    // init_grid();
 
-    // build_landing_p2age();
+    build_landing_page();
     // }
     sdl_show();
     return false;
