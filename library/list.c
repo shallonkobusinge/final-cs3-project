@@ -53,6 +53,7 @@ void *list_get(list_t *list, size_t index) {
 }
 
 void list_add(list_t *list, void *value) {
+   printf("Size of imgs  before list add: \n");
   assert(list != NULL);
   assert(list->data);
   assert(list->size <= list->capacity);

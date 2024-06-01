@@ -205,6 +205,7 @@ static list_t *build_landing_img_assets()
         asset_t *asset =
             asset_make_image(img_elements[i].file_path, img_elements[i].frame);
         list_add(assets, asset);
+            printf("Size of imgs  after list add: \n");
     }
      printf("Size of imgs from landing image: %zu\n", list_size(assets));
     return assets;
