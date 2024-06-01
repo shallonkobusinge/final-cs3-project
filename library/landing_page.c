@@ -34,12 +34,12 @@ typedef struct btn_element
 /**
  * Load game screen
  */
-static void
-load_game_screen()
-{
-    (void);
-    // destroy the screen and build landing_a new one.
-}
+// static void
+// load_game_screen()
+// {
+//     (void);
+//     // destroy the screen and build landing_a new one.
+// }
 
 
 btn_element_t btn_elements[] = {
