@@ -191,7 +191,7 @@ static list_t *build_landing_btn_assets()
     return assets;
 }
 
-void build_landing_page()
+void build_landing_page(state_t *state)
 {
      list_t *imgs = build_landing_img_assets();
     for (size_t i = 0; i < list_size(imgs); i++)
