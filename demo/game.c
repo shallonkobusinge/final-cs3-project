@@ -201,6 +201,7 @@ static list_t *build_landing_img_assets()
             asset_make_image(img_elements[i].file_path, img_elements[i].frame);
         list_add(assets, asset);
     }
+
     return assets;
 }
 
@@ -250,6 +251,7 @@ void build_landing_page()
 {
     printf(" %s \n", "HEYYYY");
     list_t *imgs = build_landing_img_assets();
+    printf("Size of imgs: %zu\n", list_size(imgs));
     for (size_t i = 0; i < list_size(imgs); i++)
     {
     printf(" %s \n", "HEYYYY2");
