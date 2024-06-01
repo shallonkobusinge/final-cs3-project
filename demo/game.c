@@ -32,7 +32,7 @@ state_t *emscripten_init()
     state->scene = scene_init();
     // build_landing_page();
 
-    state->page = 0;
+    state->page = 1;
     // sdl_show();
 
 
@@ -42,9 +42,9 @@ state_t *emscripten_init()
 bool emscripten_main(state_t *state)
 {
     sdl_clear();
-    if (state->page == 0) {
+    if (state->page == 1) {
         build_landing_page();
-    } else if (state->page == 1){
+    } else if (state->page == 0){
         init_grid();
     }
     
