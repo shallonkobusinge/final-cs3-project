@@ -67,7 +67,7 @@ state_t *emscripten_init()
 
 bool emscripten_main(state_t *state)
 {
-    sdl_clear();
+    // sdl_clear();
     // if (state->page == 0)
     // {
     // draw_maze();
@@ -75,7 +75,7 @@ bool emscripten_main(state_t *state)
 
     draw_color((rgb_color_t){255, 255, 255});
 
-    build_landing_page();
+    // build_landing_page();
     // }
     sdl_show();
     return false;
