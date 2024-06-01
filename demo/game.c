@@ -273,7 +273,7 @@ state_t *emscripten_init()
     sdl_init(MIN, MAX);
     state_t *state = malloc(sizeof(state_t));
     state->page = 0;
-build_landing_page();
+// build_landing_page();
     return state;
 }
 
