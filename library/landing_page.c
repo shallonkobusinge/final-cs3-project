@@ -1,5 +1,6 @@
 #include "landing_page.h"
 #include "asset.h"
+#include "asset_cache.h"
 
 const vector_t TEXT_FRAME = {100, 48};
 
