@@ -80,9 +80,13 @@ asset_type_t asset_get_type(asset_t *asset) { return asset->type; }
 
 asset_t *asset_make_image(const char *filepath, SDL_Rect bounding_box)
 {
+   printf("Size of imgs from landing HEEEEEE Assset make image 1: \n");
   image_asset_t *asset = (image_asset_t *)asset_init(ASSET_IMAGE, bounding_box);
+   printf("Size of imgs from landing HEEEEEE Assset make image 2: \n");
   asset->texture = asset_cache_obj_get_or_create(ASSET_IMAGE, filepath);
+   printf("Size of imgs from landing HEEEEEE Assset make image 3: \n");
   asset->body = NULL;
+   printf("Size of imgs from landing HEEEEEE Assset make image 4: \n");
   return (asset_t *)asset;
 }
 
