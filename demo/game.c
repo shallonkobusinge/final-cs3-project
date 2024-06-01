@@ -36,7 +36,7 @@ state_t *emscripten_init()
 
 bool emscripten_main(state_t *state)
 {
-    // sdl_clear();
+    sdl_clear();
     build_landing_page();
     sdl_show();
     
