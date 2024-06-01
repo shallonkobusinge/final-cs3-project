@@ -14,9 +14,6 @@ const vector_t MIN = {0, 0};
 const vector_t MAX = {1000, 500};
 const vector_t CENTER = {500, 250};
 
-const vector_t TEXT_FRAME = {100, 48};
-
-const size_t TEXT_SIZE = 18;
 
 struct state
 {
