@@ -194,22 +194,21 @@ static list_t *build_landing_btn_assets()
 
 void build_landing_page()
 {
-
     list_t *imgs = build_landing_img_assets();
     for (size_t i = 0; i < list_size(imgs); i++)
     {
         asset_render(list_get(imgs, i));
     }
 
-    list_t *texts = build_landing_text_assets();
-    for (size_t i = 0; i < list_size(texts); i++)
-    {
-        asset_render(list_get(texts, i));
-    }
+    // list_t *texts = build_landing_text_assets();
+    // for (size_t i = 0; i < list_size(texts); i++)
+    // {
+    //     asset_render(list_get(texts, i));
+    // }
 
-    list_t *btns = build_landing_btn_assets();
-    for (size_t i = 0; i < list_size(btns); i++)
-    {
-        asset_render(list_get(btns, i));
-    }
+    // list_t *btns = build_landing_btn_assets();
+    // for (size_t i = 0; i < list_size(btns); i++)
+    // {
+    //     asset_render(list_get(btns, i));
+    // }
 }
