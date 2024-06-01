@@ -1,64 +1,86 @@
-#include "stdbool.h"
-#include "asset.h"
-#include "sdl_wrapper.h"
-#include <SDL2/SDL.h>
-#include <SDL2/SDL2_gfxPrimitives.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_mixer.h>
+#include <assert.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include "vector.h"
-#include "assert.h"
+
+#include "landing_page.h"
+#include "asset.h"
 #include "asset_cache.h"
-#include "seeker.h"
-#include "sound_effect.h"
+#include "sdl_wrapper.h"
 
 const vector_t MIN = {0, 0};
 const vector_t MAX = {1000, 500};
+const vector_t CENTER = {500, 250};
 
+const int grid_cell_size = 40;
+const int grid_width = 25;
+const int grid_height = 12;
+const int window_width = (grid_width * grid_cell_size) + 1;
+const int window_height = (grid_height * grid_cell_size) + 1;
+const int number_of_cells = grid_width * grid_height;
 
-typedef struct state {
-    scene_t *scene;
-    seeker_t *seeker;
-    sound_effect_t *sound_effect;
-}state_t;
+struct state
+{
+    size_t page;
+};
 
+void init_grid()
+{
+    draw_color((rgb_color_t){22, 22, 22});
 
-state_t *emscripten_init() {
+    draw_color((rgb_color_t){210, 210, 210});
+
+    for (int x = 0; x < window_width; x += grid_cell_size)
+    {
+        render_line(x, 0, x, window_height);
+    }
+    for (int y = 0; y < window_height; y += grid_cell_size)
+    {
+        render_line(0, y, window_width, y);
+    }
+
+    SDL_Rect start_cell = {(grid_cell_size / 4), (grid_cell_size / 4), (grid_cell_size / 2), (grid_cell_size / 2)};
+    draw_color((rgb_color_t){0, 0, 0});
+
+    render_rect(&start_cell);
+
+    SDL_Rect terminal_cell;
+    terminal_cell.x = ((grid_width - 1) * grid_cell_size) + grid_cell_size / 4;
+    terminal_cell.y = ((grid_height - 1) * grid_cell_size) + grid_cell_size / 4;
+    terminal_cell.w = grid_cell_size / 2;
+    terminal_cell.h = grid_cell_size / 2;
+
+    render_rect(&terminal_cell);
+}
+
+state_t *emscripten_init()
+{
     asset_cache_init();
     sdl_init(MIN, MAX);
-    init_sound();
     state_t *state = malloc(sizeof(state_t));
-    state->scene = scene_init();
-    state->sound_effect = load_game_sounds();
-    state->seeker = seeker_init(state->scene);
-    game_sound(state->sound_effect);
+    state->page = 0;
+
     return state;
 }
 
-bool emscripten_main(state_t *state) {
-
-    double dt = time_since_last_tick();
-    introduce_seeker(state->scene, state->seeker, dt, state->sound_effect);
+bool emscripten_main(state_t *state)
+{
     sdl_clear();
-    render_seeker_bodies(state->seeker);
-    
-    for(size_t i = 0; i < scene_bodies(state->scene); i++) {
-        body_t *seeker = scene_get_body(state->scene, i);
-        wrap_seeker_scene(seeker);
-    }
+    // if (state->page == 0)
+    // {
+    // draw_maze();
+    init_grid();
+
+    // build_landing_p2age();
+    // }
     sdl_show();
-    scene_tick(state->scene, dt);
-  return false;
+    return false;
 }
 
-void emscripten_free(state_t *state) {
-  free_seeker(state->seeker);
-  scene_free(state->scene);
-  free_sound(state->sound_effect);
-  asset_cache_destroy();
-  free(state);
+void emscripten_free(state_t *state)
+{
+    asset_cache_destroy();
+    free(state);
 }

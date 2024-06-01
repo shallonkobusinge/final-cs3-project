@@ -51,7 +51,8 @@ uint32_t key_start_timestamp;
 clock_t last_clock = 0;
 
 /** Computes the center of the window in pixel coordinates */
-vector_t get_window_center(void) {
+vector_t get_window_center(void)
+{
   int *width = malloc(sizeof(*width)), *height = malloc(sizeof(*height));
   assert(width != NULL);
   assert(height != NULL);
@@ -67,7 +68,8 @@ vector_t get_window_center(void) {
  * The scene is scaled by the same factor in the x and y dimensions,
  * chosen to maximize the size of the scene while keeping it in the window.
  */
-double get_scene_scale(vector_t window_center) {
+double get_scene_scale(vector_t window_center)
+{
   // Scale scene so it fits entirely in the window
   double x_scale = window_center.x / max_diff.x,
          y_scale = window_center.y / max_diff.y;
@@ -75,7 +77,8 @@ double get_scene_scale(vector_t window_center) {
 }
 
 /** Maps a scene coordinate to a window coordinate */
-vector_t get_window_position(vector_t scene_pos, vector_t window_center) {
+vector_t get_window_position(vector_t scene_pos, vector_t window_center)
+{
   // Scale scene coordinates by the scaling factor
   // and map the center of the scene to the center of the window
   vector_t scene_center_offset = vec_subtract(scene_pos, center);
@@ -92,8 +95,10 @@ vector_t get_window_position(vector_t scene_pos, vector_t window_center) {
  * 7-bit ASCII characters are just returned
  * and arrow keys are given special character codes.
  */
-char get_keycode(SDL_Keycode key) {
-  switch (key) {
+char get_keycode(SDL_Keycode key)
+{
+  switch (key)
+  {
   case SDLK_LEFT:
     return LEFT_ARROW;
   case SDLK_UP:
@@ -110,7 +115,8 @@ char get_keycode(SDL_Keycode key) {
   }
 }
 
-void sdl_init(vector_t min, vector_t max) {
+void sdl_init(vector_t min, vector_t max)
+{
   // Check parameters
   assert(min.x < max.x);
   assert(min.y < max.y);
@@ -125,11 +131,14 @@ void sdl_init(vector_t min, vector_t max) {
   TTF_Init();
 }
 
-bool sdl_is_done(void *state) {
+bool sdl_is_done(void *state)
+{
   SDL_Event *event = malloc(sizeof(*event));
   assert(event != NULL);
-  while (SDL_PollEvent(event)) {
-    switch (event->type) {
+  while (SDL_PollEvent(event))
+  {
+    switch (event->type)
+    {
     case SDL_QUIT:
       free(event);
       return true;
@@ -144,7 +153,8 @@ bool sdl_is_done(void *state) {
         break;
 
       uint32_t timestamp = event->key.timestamp;
-      if (!event->key.repeat) {
+      if (!event->key.repeat)
+      {
         key_start_timestamp = timestamp;
       }
       key_event_type_t type =
@@ -163,12 +173,14 @@ bool sdl_is_done(void *state) {
   return false;
 }
 
-void sdl_clear(void) {
+void sdl_clear(void)
+{
   SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
   SDL_RenderClear(renderer);
 }
 
-void sdl_draw_polygon(polygon_t *poly, rgb_color_t color) {
+void sdl_draw_polygon(polygon_t *poly, rgb_color_t color)
+{
   list_t *points = polygon_get_points(poly);
   // Check parameters
   size_t n = list_size(points);
@@ -181,7 +193,8 @@ void sdl_draw_polygon(polygon_t *poly, rgb_color_t color) {
           *y_points = malloc(sizeof(*y_points) * n);
   assert(x_points != NULL);
   assert(y_points != NULL);
-  for (size_t i = 0; i < n; i++) {
+  for (size_t i = 0; i < n; i++)
+  {
     vector_t *vertex = list_get(points, i);
     vector_t pixel = get_window_position(*vertex, window_center);
     x_points[i] = pixel.x;
@@ -195,7 +208,8 @@ void sdl_draw_polygon(polygon_t *poly, rgb_color_t color) {
   free(y_points);
 }
 
-void sdl_show(void) {
+void sdl_show(void)
+{
   // Draw boundary lines
   vector_t window_center = get_window_center();
   vector_t max = vec_add(center, max_diff),
@@ -214,17 +228,20 @@ void sdl_show(void) {
   SDL_RenderPresent(renderer);
 }
 
-void sdl_render_scene(scene_t *scene, void *aux) {
+void sdl_render_scene(scene_t *scene, void *aux)
+{
   sdl_clear();
   size_t body_count = scene_bodies(scene);
-  for (size_t i = 0; i < body_count; i++) {
+  for (size_t i = 0; i < body_count; i++)
+  {
     body_t *body = scene_get_body(scene, i);
     list_t *shape = body_get_shape(body);
     polygon_t *poly = polygon_init(shape, (vector_t){0, 0}, 0, 0, 0, 0);
     sdl_draw_polygon(poly, *body_get_color(body));
     list_free(shape);
   }
-  if (aux != NULL) {
+  if (aux != NULL)
+  {
     body_t *body = aux;
     sdl_draw_polygon(body_get_polygon(body), *body_get_color(body));
   }
@@ -233,7 +250,8 @@ void sdl_render_scene(scene_t *scene, void *aux) {
 
 void sdl_on_key(key_handler_t handler) { key_handler = handler; }
 
-double time_since_last_tick(void) {
+double time_since_last_tick(void)
+{
   clock_t now = clock();
   double difference = last_clock
                           ? (double)(now - last_clock) / CLOCKS_PER_SEC
@@ -242,28 +260,33 @@ double time_since_last_tick(void) {
   return difference;
 }
 
-SDL_Texture *get_img(const char IMG_PATH[]) {
+SDL_Texture *get_img(const char IMG_PATH[])
+{
   return IMG_LoadTexture(renderer, IMG_PATH);
 }
 
 SDL_Texture *get_text(const char text[], TTF_Font *font,
-                      rgb_color_t rgb_color) {
+                      rgb_color_t rgb_color)
+{
   SDL_Color sdl_color = {rgb_color.r, rgb_color.g, rgb_color.b};
   SDL_Surface *surface = TTF_RenderText_Solid(font, text, sdl_color);
   return SDL_CreateTextureFromSurface(renderer, surface);
 }
 
-void render_text(SDL_Texture *Text, SDL_Rect *frame) {
+void render_text(SDL_Texture *Text, SDL_Rect *frame)
+{
   SDL_RenderCopy(renderer, Text, NULL, frame);
 }
 
-void render_image(SDL_Texture *Img, SDL_Rect *frame) {
+void render_image(SDL_Texture *Img, SDL_Rect *frame)
+{
   SDL_RenderCopy(renderer, Img, NULL, frame);
 }
 
 void sdl_on_click(mouse_handler_t handler) { mouse_handler = handler; }
 
-SDL_Rect get_bounding_box(body_t *body) {
+SDL_Rect get_bounding_box(body_t *body)
+{
 
   list_t *shape = body_get_shape(body);
 
@@ -273,19 +296,24 @@ SDL_Rect get_bounding_box(body_t *body) {
   SDL_Rect box_rect_fields;
   vector_t window_center = get_window_center();
 
-  for (size_t i = 1; i < list_size(shape); i++) {
+  for (size_t i = 1; i < list_size(shape); i++)
+  {
     vector_t *point = list_get(shape, i);
 
-    if (point->x < min.x) {
+    if (point->x < min.x)
+    {
       min.x = point->x;
     }
-    if (point->x > max.x) {
+    if (point->x > max.x)
+    {
       max.x = point->x;
     }
-    if (point->y < min.y) {
+    if (point->y < min.y)
+    {
       min.y = point->y;
     }
-    if (point->y > max.y) {
+    if (point->y > max.y)
+    {
       max.y = point->y;
     }
   }
@@ -305,4 +333,25 @@ SDL_Rect get_bounding_box(body_t *body) {
   box_rect_fields.y = (int)window_top_left_sdl.y;
 
   return box_rect_fields;
+}
+
+void render_rect(SDL_Rect *frame)
+{
+  SDL_RenderFillRect(renderer, frame);
+  SDL_RenderDrawRect(renderer, frame);
+}
+
+void render_line(int x, int y, int w, int h)
+{
+  SDL_RenderDrawLine(renderer, x, y, w, h);
+}
+
+void draw_color(rgb_color_t color)
+{
+  SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, 255);
+}
+
+void render_present()
+{
+  SDL_RenderPresent(renderer);
 }

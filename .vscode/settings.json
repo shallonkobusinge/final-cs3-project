@@ -1,14 +1,10 @@
 {
     "files.associations": {
-        "stdio.h": "c",
-        "sdl_wrapper.h": "c",
-        "string.h": "c",
-        "time.h": "c",
-        "body.h": "c",
-        "color.h": "c",
         "state.h": "c",
-        "stdbool.h": "c",
-        "sound_effect.h": "c",
-        "math.h": "c"
+        "math.h": "c",
+        "sdl.h": "c",
+        "asset_cache.h": "c",
+        "landing_page.h": "c",
+        "asset.h": "c"
     }
 }

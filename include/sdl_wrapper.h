@@ -12,7 +12,8 @@
 #include <stdbool.h>
 
 // Values passed to a key handler when the given arrow key is pressed
-typedef enum {
+typedef enum
+{
   LEFT_ARROW = 1,
   UP_ARROW = 2,
   RIGHT_ARROW = 3,
@@ -27,7 +28,11 @@ typedef enum {
  * #define KEY_PRESSED 0
  * #define KEY_RELEASED 1
  */
-typedef enum { KEY_PRESSED, KEY_RELEASED } key_event_type_t;
+typedef enum
+{
+  KEY_PRESSED,
+  KEY_RELEASED
+} key_event_type_t;
 
 /**
  * A keypress handler.
@@ -149,14 +154,14 @@ SDL_Texture *get_img(const char IMG_PATH[]);
 SDL_Texture *get_text(const char text[], TTF_Font *font, rgb_color_t rgb_color);
 
 /**
- * Render text
+ * Render text.
  * @param text text to render
  * @param frame frame of the text
  */
 void render_text(SDL_Texture *text, SDL_Rect *frame);
 
 /**
- * Render image
+ * Render image.
  * @param Img image to render
  * @param frame frame of the image
  */
@@ -171,5 +176,17 @@ void sdl_on_click(mouse_handler_t handler);
  * Return the bounding box of a body
  */
 SDL_Rect get_bounding_box(body_t *body);
+
+/**
+ * Render rect.
+ * @param frame frame of the image
+ */
+void render_rect(SDL_Rect *frame);
+
+void render_line(int x, int y, int w, int h);
+
+void draw_color();
+
+void render_present();
 
 #endif // #ifndef __SDL_WRAPPER_H__

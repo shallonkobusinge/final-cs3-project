@@ -4,7 +4,8 @@
 #include "collision.h"
 #include "scene.h"
 
-typedef struct force_creator_data {
+typedef struct force_creator_data
+{
   force_creator_t force_creator;
   void *aux;
   list_t *bodies;
