@@ -165,6 +165,8 @@ void asset_render(asset_t *asset)
   case ASSET_IMAGE:
   {
     image_asset_t *img_asset = (image_asset_t *)asset;
+    printf(" %s \n", "HEYYY22222Y");
+
     if (img_asset->body != NULL)
     {
       SDL_Rect bounding_box = get_bounding_box(img_asset->body);

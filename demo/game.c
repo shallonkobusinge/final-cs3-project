@@ -252,6 +252,8 @@ void build_landing_page()
     list_t *imgs = build_landing_img_assets();
     for (size_t i = 0; i < list_size(imgs); i++)
     {
+    printf(" %s \n", "HEYYYY2");
+
         asset_render(list_get(imgs, i));
     }
 
