@@ -28,6 +28,8 @@ state_t *emscripten_init()
     state->scene = scene_init();
 
     sdl_show();
+    build_landing_page();
+
 
     return state;
 }
@@ -35,8 +37,6 @@ state_t *emscripten_init()
 bool emscripten_main(state_t *state)
 {
     sdl_clear();
-    build_landing_page();
-
     return false;
 }
 
