@@ -43,8 +43,8 @@ void init_grid()
     render_rect(&start_cell);
 
     SDL_Rect terminal_cell;
-    terminal_cell.x = ((GRID_WIDTH - 3) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
-    terminal_cell.y = ((GRID_HEIGHT - 3) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
+    terminal_cell.x = ((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
+    terminal_cell.y = ((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
     terminal_cell.w = GRID_CELL_SIZE / 2;
     terminal_cell.h = GRID_CELL_SIZE / 2;
     render_rect(&terminal_cell);
