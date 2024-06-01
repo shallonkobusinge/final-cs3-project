@@ -3,7 +3,7 @@ DEMOS = breakout
 TEST_DEMOS = breakout pegs
 # List of C files in "libraries" that you will write.
 # This also defines the order in which the tests are run.
-STUDENT_LIBS = vector list polygon body scene color forces collision emscripten sdl_wrapper
+STUDENT_LIBS = vector list polygon body scene color forces collision emscripten sdl_wrapper landing_page
 
 # find <dir> is the command to find files in a directory
 # ! -name .gitignore tells find to ignore the .gitignore
@@ -127,16 +127,16 @@ out/%.wasm.o: tests/%.c # or "tests"
 # Unlike the out/%.wasm.o rule, this uses the LIBS flags and omits the -c flag,
 # since it is building a full executable. Also notice it uses our EMCC_FLAGS
 
-DEMO_REF = color emscripten list polygon sdl_wrapper vector body scene forces collision asset_cache asset
+DEMO_REF = color emscripten list polygon sdl_wrapper vector body scene forces collision asset_cache asset landing_page
 DEMO_REF_OBJS = $(addprefix $(REF_FOLDER)/,$(DEMO_REF:=.wasm.ref.o))
 
 GAME_REF = emscripten vector body scene list color polygon forces collision
 GAME_REF_OBJS = $(addprefix $(REF_FOLDER)/,$(GAME_REF:=.wasm.ref.o))
 
-GAME_STUDENT = game sdl_wrapper asset asset_cache
+GAME_STUDENT = game sdl_wrapper asset asset_cache landing_page
 GAME_STUDENT_OBJS = $(addprefix out/,$(GAME_STUDENT:=.wasm.o))
 
-TEST_REF = asset_cache asset
+TEST_REF = asset_cache asset landing_page
 TEST_REF_OBJS = $(addprefix $(REF_FOLDER)/,$(TEST_REF:=.wasm.ref.o))
 
 bin/%.demo.html: out/%.wasm.o $(DEMO_REF_OBJS)
