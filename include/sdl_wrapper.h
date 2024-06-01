@@ -179,14 +179,25 @@ SDL_Rect get_bounding_box(body_t *body);
 
 /**
  * Render rect.
- * @param frame frame of the image
+ * @param frame frame of the rect
  */
 void render_rect(SDL_Rect *frame);
 
+/**
+ * Render line.
+ * @param x x coordinate of the line
+ * @param y y coordinate of the line
+ * @param w width of the line
+ * @param h height of the line
+ */
 void render_line(int x, int y, int w, int h);
 
-void draw_color();
+/**
+ * Render color.
+ * @param color rgb color
+ */
+void render_color(rgb_color_t color);
 
-void render_present();
+void render_show();
 
 #endif // #ifndef __SDL_WRAPPER_H__

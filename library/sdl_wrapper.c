@@ -337,21 +337,33 @@ SDL_Rect get_bounding_box(body_t *body)
 
 void render_rect(SDL_Rect *frame)
 {
+  // sdl_clear();
   SDL_RenderFillRect(renderer, frame);
   SDL_RenderDrawRect(renderer, frame);
+  // sdl_show();
 }
 
 void render_line(int x, int y, int w, int h)
 {
+  // sdl_clear();
   SDL_RenderDrawLine(renderer, x, y, w, h);
+  // sdl_show();
 }
 
-void draw_color(rgb_color_t color)
+void render_color(rgb_color_t color)
 {
+  // sdl_clear();
+
   SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, 255);
+  // sdl_show();
 }
 
-void render_present()
+// void render_present()
+// {
+//   SDL_RenderPresent(renderer);
+// }
+
+void render_show()
 {
   SDL_RenderPresent(renderer);
 }
