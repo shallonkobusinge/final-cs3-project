@@ -254,43 +254,6 @@ void build_landing_page()
         asset_render(list_get(imgs, i));
     }
 
-    // list_t *texts = build_landing_text_assets();
-    // for (size_t i = 0; i < list_size(texts); i++)
-    // {
-    //     asset_render(list_get(texts, i));
-    // }
-
-    // list_t *btns = build_landing_btn_assets();
-    // for (size_t i = 0; i < list_size(btns); i++)
-    // {
-    //     asset_render(list_get(btns, i));
-    // }
-}
-
-state_t *emscripten_init()
-{
-    asset_cache_init();
-    sdl_init(MIN, MAX);
-    state_t *state = malloc(sizeof(state_t));
-    state->page = 0;
-
-    return state;
-}
-
-bool emscripten_main(state_t *state)
-{
-    sdl_clear();
-    // if (state->page == 0)
-    // {
-    // draw_maze();
-    // init_grid();
-
-    list_t *imgs = build_landing_img_assets();
-    for (size_t i = 0; i < list_size(imgs); i++)
-    {
-        asset_render(list_get(imgs, i));
-    }
-
     list_t *texts = build_landing_text_assets();
     for (size_t i = 0; i < list_size(texts); i++)
     {
@@ -302,7 +265,26 @@ bool emscripten_main(state_t *state)
     {
         asset_render(list_get(btns, i));
     }
-    // }
+}
+
+state_t *emscripten_init()
+{
+    asset_cache_init();
+    sdl_init(MIN, MAX);
+    state_t *state = malloc(sizeof(state_t));
+    state->page = 0;
+build_landing_page();
+    return state;
+}
+
+bool emscripten_main(state_t *state)
+{
+    sdl_clear();
+    // if (state->page == 0)
+    // {
+    // draw_maze();
+    // init_grid();
+
 
     sdl_show();
     return false;
