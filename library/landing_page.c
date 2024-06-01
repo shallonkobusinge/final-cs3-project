@@ -30,6 +30,18 @@ typedef struct btn_element
     button_handler_t handler;
 } btn_element_t;
 
+
+/**
+ * Load game screen
+ */
+static void
+load_game_screen()
+{
+    (void)
+    // destroy the screen and build landing_a new one.
+}
+
+
 btn_element_t btn_elements[] = {
     {
         .text.frame = (SDL_Rect){0, 400, TEXT_FRAME.x, TEXT_FRAME.y},
@@ -90,16 +102,6 @@ img_element_t img_elements[] = {
         .frame = (SDL_Rect){0, 400, 100, 100},
     },
 };
-
-/**
- * Load game screen
- */
-static void
-load_game_screen()
-{
-    (void)
-    // destroy the screen and build landing_a new one.
-}
 
 /**
  * Build text assets from text templates
