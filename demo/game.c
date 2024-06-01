@@ -279,13 +279,29 @@ state_t *emscripten_init()
 
 bool emscripten_main(state_t *state)
 {
-    // sdl_clear();
+    sdl_clear();
     // if (state->page == 0)
     // {
     // draw_maze();
     // init_grid();
 
-    build_landing_page();
+    list_t *imgs = build_landing_img_assets();
+    for (size_t i = 0; i < list_size(imgs); i++)
+    {
+        asset_render(list_get(imgs, i));
+    }
+
+    list_t *texts = build_landing_text_assets();
+    for (size_t i = 0; i < list_size(texts); i++)
+    {
+        asset_render(list_get(texts, i));
+    }
+
+    list_t *btns = build_landing_btn_assets();
+    for (size_t i = 0; i < list_size(btns); i++)
+    {
+        asset_render(list_get(btns, i));
+    }
     // }
 
     sdl_show();
