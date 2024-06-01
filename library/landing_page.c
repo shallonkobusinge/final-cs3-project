@@ -38,7 +38,7 @@ btn_element_t btn_elements[] = {
         .text.text = "Play",
         .img.file_path = "assets/common/play.png",
         .img.frame = (SDL_Rect){0, 400, 100, 100},
-        .handler = (void *)goto_game_screen,
+        .handler = (void *)load_game_screen,
     },
 };
 
