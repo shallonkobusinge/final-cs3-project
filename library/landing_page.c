@@ -6,9 +6,9 @@ const vector_t TEXT_FRAME = {100, 48};
 
 const size_t TEXT_SIZE = 18;
 
-const size_t LANDING_PAGE_IMG_ELEMENTS = 5;
+const size_t LANDING_PAGE_IMG_ELEMENTS = 4;
 const size_t LANDING_PAGE_TEXT_ELEMENTS = 5;
-const size_t LANDING_PAGE_BTN_ELEMENTS = 5;
+const size_t LANDING_PAGE_BTN_ELEMENTS = 1;
 
 typedef struct text_element
 {
