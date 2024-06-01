@@ -42,9 +42,9 @@ state_t *emscripten_init()
 bool emscripten_main(state_t *state)
 {
     sdl_clear();
-    if (state->page == 1) {
+    if (state->page == 0) {
         build_landing_page();
-    } else if (state->page == 0){
+    } else if (state->page == 1){
         init_grid();
     }
     

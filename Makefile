@@ -133,7 +133,7 @@ DEMO_REF_OBJS = $(addprefix $(REF_FOLDER)/,$(DEMO_REF:=.wasm.ref.o))
 GAME_REF = emscripten vector body scene list color polygon forces collision
 GAME_REF_OBJS = $(addprefix $(REF_FOLDER)/,$(GAME_REF:=.wasm.ref.o))
 
-GAME_STUDENT = game sdl_wrapper asset asset_cache landing_page generate_maze stack cell 
+GAME_STUDENT = game sdl_wrapper asset asset_cache landing_page generate_maze stack cell
 GAME_STUDENT_OBJS = $(addprefix out/,$(GAME_STUDENT:=.wasm.o))
 
 TEST_REF = asset_cache asset landing_page generate_maze stack cell 
