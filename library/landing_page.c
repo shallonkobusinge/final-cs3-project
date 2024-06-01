@@ -37,7 +37,7 @@ typedef struct btn_element
 static void
 load_game_screen()
 {
-    (void)
+    (void);
     // destroy the screen and build landing_a new one.
 }
 
