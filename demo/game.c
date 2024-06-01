@@ -248,6 +248,7 @@ static list_t *build_landing_btn_assets()
 
 void build_landing_page()
 {
+    printf(" %s \n", "HEYYYY");
     list_t *imgs = build_landing_img_assets();
     for (size_t i = 0; i < list_size(imgs); i++)
     {
