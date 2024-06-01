@@ -194,9 +194,14 @@ build_landing_text_assets()
  */
 static list_t *build_landing_img_assets()
 {
+     printf("Size of imgs from landing image first : \n");
+     
     list_t *assets = list_init(LANDING_PAGE_IMG_ELEMENTS, free);
+    printf("Size of imgs from landing image second: \n");
+
     for (size_t i = 0; i < LANDING_PAGE_IMG_ELEMENTS; i++)
     {
+        printf("Size of imgs from landing image third: \n");
         asset_t *asset =
             asset_make_image(img_elements[i].file_path, img_elements[i].frame);
         list_add(assets, asset);
