@@ -133,7 +133,7 @@ static list_t *build_landing_img_assets()
             asset_make_image(img_elements[i].file_path, img_elements[i].frame);
         list_add(assets, asset);
     }
-    return text_elements;
+    return assets;
 }
 
 /**
