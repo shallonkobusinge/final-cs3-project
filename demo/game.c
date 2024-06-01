@@ -18,6 +18,7 @@ const vector_t CENTER = {500, 250};
 struct state
 {
     scene_t *scene;
+    size_t page;
 };
 
 state_t *emscripten_init()
@@ -28,6 +29,7 @@ state_t *emscripten_init()
     state->scene = scene_init();
     // build_landing_page();
 
+    state->page = 0;
     // sdl_show();
 
 
@@ -37,7 +39,11 @@ state_t *emscripten_init()
 bool emscripten_main(state_t *state)
 {
     sdl_clear();
-    build_landing_page();
+    if (state->page == 0) {
+        build_landing_page();
+    } else () {
+        
+    }
     sdl_show();
     
 
