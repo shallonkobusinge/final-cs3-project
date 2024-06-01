@@ -14,13 +14,13 @@ typedef struct text_element
     const char *text;
     const char *font_path;
     rgb_color_t color;
-    SDL_Rect frame,
+    SDL_Rect frame;
 } text_element_t;
 
 typedef struct img_element
 {
     const char *file_path;
-    SDL_Rect frame,
+    SDL_Rect frame;
 } img_element_t;
 
 typedef struct btn_element
@@ -89,7 +89,7 @@ img_element_t img_elements[] = {
         .file_path = "assets/common/copyright_icon.png",
         .frame = (SDL_Rect){0, 400, 100, 100},
     },
-}
+};
 
 /**
  * Load game screen
