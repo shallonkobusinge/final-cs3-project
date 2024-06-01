@@ -5,7 +5,7 @@
 const vector_t SCREEN_MAX = {1000, 500};
 const vector_t SCREEN_CENTER = {500, 250};
 
-const size_t LANDING_PAGE_IMG_ELEMENTS = 5;
+const size_t LANDING_PAGE_IMG_ELEMENTS = 4;
 const size_t LANDING_PAGE_TEXT_ELEMENTS = 7;
 const size_t LANDING_PAGE_BTN_ELEMENTS = 1;
 
