@@ -20,7 +20,7 @@ typedef struct text_element
 typedef struct img_element
 {
     const char *file_path;
-    frame_t frame,
+    SDL_Rect frame,
 } img_element_t;
 
 typedef struct btn_element
