@@ -7,6 +7,7 @@
 
 // #include "landing_page.h"
 #include "asset.h"
+#include "list.h"
 #include "asset_cache.h"
 #include "sdl_wrapper.h"
 
