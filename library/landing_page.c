@@ -169,7 +169,7 @@ static list_t *build_landing_btn_assets()
     list_t *assets = list_init(LANDING_PAGE_BTN_ELEMENTS, (free_func_t)asset_destroy);
     for (size_t i = 0; i < LANDING_PAGE_BTN_ELEMENTS; i++)
     {
-        asset_t *asset = create_button(button_elements[i]);
+        asset_t *asset = create_button(btn_elements[i]);
         list_add(assets, asset);
     }
     return assets;
