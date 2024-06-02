@@ -299,6 +299,7 @@ cell_t *vecNeighbor(cell_t *cell)
 
 void removeWall(cell_t *cell, cell_t *neighbour)
 {
+    printf("once: %d\n", once);
     if (once == 0)
     {
         printf("removing 1\n");
