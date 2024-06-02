@@ -22,11 +22,10 @@ const vector_t SDL_CENTER = {500, 250};
 #define HEIGHT 800
 #define CELL_SIZE 20
 
-typedef struct3
+typedef struct
 {
     int x, y;
-}
-Cell;
+} Cell;
 
 typedef struct
 {
