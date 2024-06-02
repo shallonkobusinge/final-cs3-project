@@ -88,6 +88,7 @@ void connect_cells(Cell a, Cell b)
         0, 0, 0});
     render_line(a.x * CELL_SIZE + CELL_SIZE / 2, a.y * CELL_SIZE + CELL_SIZE / 2,
                 b.x * CELL_SIZE + CELL_SIZE / 2, b.y * CELL_SIZE + CELL_SIZE / 2);
+    sdl_show();
 }
 
 Cell get_random_neighbor(Cell cell, bool **visited)
