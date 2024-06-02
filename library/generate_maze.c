@@ -242,7 +242,7 @@ void generate_maze()
     visited[cell->x][cell->y] = true;
 
     printf("here 5\n");
-    push_stack(head, cell);
+    push_stack(&head, cell);
     printf("here 6\n");
 
     while (head != NULL)
