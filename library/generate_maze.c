@@ -4,7 +4,7 @@
 
 #include "cell.h"
 #include "generate_maze.h"
-// #include "stack.h"
+#include "stack.h"
 #include "sdl_wrapper.h"
 
 const size_t GRID_WIDTH = 25;
