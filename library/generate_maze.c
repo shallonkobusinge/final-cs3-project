@@ -34,7 +34,7 @@ int findMin(int a, int b)
 //     struct stack *next;
 // } stack_t;
 
-static stack_t *head;
+stack_t *head;
 
 // void push_stack(cell_t *cell)
 // {
