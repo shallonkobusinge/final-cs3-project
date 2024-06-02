@@ -18,6 +18,12 @@ const vector_t SDL_MIN = {0, 0};
 const vector_t SDL_MAX = {1000, 500};
 const vector_t SDL_CENTER = {500, 250};
 
+struct state
+{
+    scene_t *scene;
+    size_t page;
+};
+
 state_t *emscripten_init()
 {
     asset_cache_init();
