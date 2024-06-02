@@ -298,7 +298,7 @@ cell_t *vecNeighbor(cell_t *cell)
 
 void removeWall(cell_t *cell, cell_t *neighbour)
 {
-    printf("removing\n");
+    printf("removing 1\n");
     if (cell->x == neighbour->x)
     {
         render_color((rgb_color_t){255, 0, 0});
@@ -378,7 +378,7 @@ bool emscripten_main(state_t *state)
         generate_maze();
     }
 
-    // sdl_show();
+    sdl_show();
 
     return false;
 }
