@@ -375,6 +375,8 @@ bool emscripten_main(state_t *state)
     {
         // init_grid();
         // generate_maze();
+        printf("here reached 1\n");
+
         for (int i = 0; i < WIDTH / CELL_SIZE; i++)
         {
             visits[i] = calloc(HEIGHT / CELL_SIZE, sizeof(bool));
@@ -383,6 +385,7 @@ bool emscripten_main(state_t *state)
         render_color((rgb_color_t){255, 255, 255});
 
         randomized_dfs(visits);
+        printf("here reached 2\n");
     }
 
     // sdl_show();
