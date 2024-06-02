@@ -229,14 +229,14 @@ void generate_maze()
 
         printf("here 1\n");
         cell = pop_stack(head);
-        if (vecNeighbor(cell) != NULL)
+        if (get_neighbor(cell) != NULL)
         {
             push_stack(cell);
-            cell_t *neighbor = vecNeighbor(cell);
-            remove_wall(cell, neighbor);
+            cell_t *neighbor = get_neighbor(cell, visited);
+            remove_wall(cell, neighbor, adj_matrix);
             visited[neighbor->x][neighbor->y] = true;
-            adjacency(cell, neighbor);
-            push_stack(neighbor);
+            adjacency(cell, neighbor, adj_matrix);
+            push_stack(head, neighbor);
         }
     }
 }
