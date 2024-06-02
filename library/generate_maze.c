@@ -214,7 +214,7 @@ cell_t *vecNeighbor(cell_t *cell)
 void generate_maze()
 {
     init_grid();
-    // init_maze();
+    init_maze();
 
     // cell_t *cell = malloc(sizeof(cell_t));
     // cell->x = 1;
