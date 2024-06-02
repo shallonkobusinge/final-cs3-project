@@ -375,19 +375,7 @@ bool emscripten_main(state_t *state)
     else if (state->page == 1)
     {
         // init_grid();
-        // generate_maze();
-        printf("here reached 1\n");
-
-        for (int i = 0; i < WIDTH / CELL_SIZE; i++)
-        {
-            visits[i] = calloc(HEIGHT / CELL_SIZE, sizeof(bool));
-        }
-
-        render_color((rgb_color_t){0, , 255});
-
-        randomized_dfs(visits);
-        printf("here reached 2\n");
-        sdl_show();
+        generate_maze();
     }
 
     // sdl_show();
