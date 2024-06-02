@@ -34,13 +34,13 @@ int findMin(int a, int b)
     return (a > b) ? b : a;
 }
 
-static stack_t *head;
-
 typedef struct stack
 {
     cell_t *cell;
     struct stack *next;
 } stack_t;
+
+static stack_t *head;
 
 void push_stack(cell_t *cell)
 {
@@ -121,7 +121,7 @@ static void init_maze()
         }
     }
 
-    printf("Adjacnence %d\n", adjacency_matrx[10][10]);
+    printf("Adjacnence %d\n", adj_matrix[10][10]);
     head = NULL;
     srand(time(NULL));
 }
