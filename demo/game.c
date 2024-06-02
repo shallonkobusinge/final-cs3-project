@@ -38,7 +38,7 @@ state_t *emscripten_init()
 
 bool emscripten_main(state_t *state)
 {
-    // sdl_clear();
+    sdl_clear();
     if (state->page == 0)
     {
         build_landing_page();
@@ -49,7 +49,7 @@ bool emscripten_main(state_t *state)
         generate_maze(NULL);
     }
 
-    // sdl_show();
+    sdl_show();
 
     return false;
 }
