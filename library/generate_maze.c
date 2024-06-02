@@ -7,12 +7,6 @@
 #include "stack.h"
 #include "sdl_wrapper.h"
 
-typedef struct cell
-{
-    size_t x;
-    size_t y;
-} cell_t;
-
 const size_t GRID_WIDTH = 25;
 const size_t GRID_HEIGHT = 12;
 const size_t NUM_CELLS = GRID_WIDTH * GRID_HEIGHT;
