@@ -353,6 +353,7 @@ void generate_maze()
             }
         }
         once = 1;
+        printf("twageze aha");
     }
 }
 
