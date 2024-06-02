@@ -61,6 +61,7 @@ void draw_cell(Cell cell, int r, int g, int b)
         g, b});
     SDL_Rect rect = {cell.x * CELL_SIZE, cell.y * CELL_SIZE, CELL_SIZE, CELL_SIZE};
     render_rect(&rect);
+    sdl_show();
 }
 
 void draw_maze(bool **visited)
