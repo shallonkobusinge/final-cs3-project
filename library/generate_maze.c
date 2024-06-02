@@ -213,24 +213,25 @@ cell_t *vecNeighbor(cell_t *cell)
 
 void generate_maze()
 {
-    init_maze();
+    init_grid();
+    // init_maze();
 
-    cell_t *cell = malloc(sizeof(cell_t));
-    cell->x = 1;
-    cell->y = 1;
-    visited[cell->x][cell->y] = true;
-    push_stack(cell);
-    while (head != NULL)
-    {
-        cell = pop_stack();
-        if (vecNeighbor(cell) != NULL)
-        {
-            push_stack(cell);
-            cell_t *neighbor = vecNeighbor(cell);
-            remove_wall(cell, neighbor);
-            visited[neighbor->x][neighbor->y] = true;
-            adjacency(cell, neighbor);
-            push_stack(neighbor);
-        }
-    }
+    // cell_t *cell = malloc(sizeof(cell_t));
+    // cell->x = 1;
+    // cell->y = 1;
+    // visited[cell->x][cell->y] = true;
+    // push_stack(cell);
+    // while (head != NULL)
+    // {
+    //     cell = pop_stack();
+    //     if (vecNeighbor(cell) != NULL)
+    //     {
+    //         push_stack(cell);
+    //         cell_t *neighbor = vecNeighbor(cell);
+    //         remove_wall(cell, neighbor);
+    //         visited[neighbor->x][neighbor->y] = true;
+    //         adjacency(cell, neighbor);
+    //         push_stack(neighbor);
+    //     }
+    // }
 }
