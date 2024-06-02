@@ -5,7 +5,7 @@
 const vector_t SCREEN_MAX = {1000, 500};
 const vector_t SCREEN_CENTER = {500, 250};
 
-const size_t LANDING_PAGE_IMG_ELEMENTS = 5;
+const size_t LANDING_PAGE_IMG_ELEMENTS = 4;
 const size_t LANDING_PAGE_TEXT_ELEMENTS = 7;
 const size_t LANDING_PAGE_BTN_ELEMENTS = 1;
 
@@ -37,6 +37,7 @@ static void load_game_screen(state_t *state)
 {
     printf("Next screen\n");
 }
+
 
 btn_element_t btn_elements[] = {
     {
@@ -120,8 +121,7 @@ img_element_t img_elements[] = {
  * Build text assets from text templates
  * @return list of text assets
  */
-static list_t *
-build_landing_text_assets()
+static list_t *build_landing_text_assets()
 {
     list_t *assets = list_init(LANDING_PAGE_TEXT_ELEMENTS, free);
     for (size_t i = 0; i < LANDING_PAGE_TEXT_ELEMENTS; i++)
@@ -159,15 +159,14 @@ static asset_t *create_btn(btn_element_t btn_element)
     asset_t *img_asset = NULL;
     asset_t *text_asset = NULL;
 
+    if (btn_element.img.file_path != NULL)
+    {
+        img_asset = asset_make_image(btn_element.img.file_path, btn_element.img.frame);
+    }
     if (btn_element.text.font_path != NULL)
     {
         text_asset = asset_make_text(btn_element.text.font_path, btn_element.text.frame, btn_element.text.text,
                                      btn_element.text.color);
-    }
-
-    if (btn_element.img.file_path != NULL)
-    {
-        img_asset = asset_make_image(btn_element.img.file_path, btn_element.img.frame);
     }
 
     asset_t *asset =
@@ -194,19 +193,20 @@ static list_t *build_landing_btn_assets()
 
 void build_landing_page()
 {
-
-    list_t *imgs = build_landing_img_assets();
+     list_t *imgs = build_landing_img_assets();
     for (size_t i = 0; i < list_size(imgs); i++)
     {
         asset_render(list_get(imgs, i));
     }
 
     list_t *texts = build_landing_text_assets();
+    
     for (size_t i = 0; i < list_size(texts); i++)
     {
+       
         asset_render(list_get(texts, i));
     }
-
+   
     list_t *btns = build_landing_btn_assets();
     for (size_t i = 0; i < list_size(btns); i++)
     {
