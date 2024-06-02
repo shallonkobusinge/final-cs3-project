@@ -19,27 +19,34 @@ bool visited[GRID_WIDTH + 2][GRID_HEIGHT + 2];
 bool adj_matrix[NUM_CELLS][NUM_CELLS];
 cell_t *parent[GRID_WIDTH][GRID_HEIGHT];
 
+static stack_t *head;
+
 /**
  * Finds max between two numbers
  * @param a first number
  * @param b second number
  * @return maximum numbers between the provided arguments
  */
-static size_t findMax(size_t a, size_t b)
+static size_t find_max(size_t a, size_t b)
 {
     return (a > b) ? a : b;
 }
-static size_t findMin(size_t a, size_t b)
+
+/**
+ * Finds min between two numbers
+ * @param a first number
+ * @param b second number
+ * @return minimum numbers between the provided arguments
+ */
+static size_t find_min(size_t a, size_t b)
 {
     return (a > b) ? b : a;
 }
 
-static stack_t *head;
-
 /**
  * Initialize and draw the Maze Grid.
  */
-void init_grid()
+static void init_grid()
 {
     render_color((rgb_color_t){210, 210, 210});
 
@@ -68,7 +75,7 @@ void init_grid()
  * Initializes the maze by marking all cells as unvisited and setting the border cells as visited.
  * and initializes the adjacency matrix and sets the random seed.
  */
-void init_maze()
+static void init_maze()
 {
     for (int i = 1; i <= GRID_WIDTH; i++)
     {
