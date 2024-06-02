@@ -85,7 +85,7 @@ void draw_maze(bool **visited)
 void connect_cells(Cell a, Cell b)
 {
     render_color((rgb_color_t){
-        0, 0, 0});
+        255, 255, 255});
     render_line(a.x * CELL_SIZE + CELL_SIZE / 2, a.y * CELL_SIZE + CELL_SIZE / 2,
                 b.x * CELL_SIZE + CELL_SIZE / 2, b.y * CELL_SIZE + CELL_SIZE / 2);
     sdl_show();
