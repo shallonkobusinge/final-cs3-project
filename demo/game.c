@@ -22,10 +22,11 @@ const vector_t SDL_CENTER = {500, 250};
 #define HEIGHT 800
 #define CELL_SIZE 20
 
-typedef struct
+typedef struct3
 {
     int x, y;
-} Cell;
+}
+Cell;
 
 typedef struct
 {
@@ -76,6 +77,7 @@ void draw_maze(bool **visited)
             {
                 SDL_Rect rect = {x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE};
                 render_rect(&rect);
+                sdl_show();
             }
         }
     }
