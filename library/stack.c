@@ -12,6 +12,7 @@ typedef struct stack
 
 void push_stack(stack_t *head, cell_t *cell)
 {
+    printf("Here: ", head->cell->x);
     stack_t *stack = malloc(sizeof(stack_t));
     stack->cell = cell;
     stack->next = head;
