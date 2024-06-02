@@ -211,14 +211,25 @@ cell_t *vecNeighbor(cell_t *cell)
 
 void generate_maze()
 {
-    // init_grid();
+    printf("here 1\n");
+
+    init_grid();
+    printf("here 2\n");
+
     init_maze();
+    printf("here 3\n");
 
     cell_t *cell = malloc(sizeof(cell_t));
     cell->x = 1;
     cell->y = 1;
+    printf("here 4\n");
+
     visited[cell->x][cell->y] = true;
+
+    printf("here 5\n");
     push_stack(cell);
+    printf("here 6\n");
+
     while (head != NULL)
     {
         printf("fiurst cell aka head\n");
