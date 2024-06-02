@@ -18,7 +18,7 @@ const vector_t SDL_MIN = {0, 0};
 const vector_t SDL_MAX = {1000, 500};
 const vector_t SDL_CENTER = {500, 250};
 
-#define WIDTH 800
+#define WIDTH 1000
 #define HEIGHT 800
 #define CELL_SIZE 20
 
