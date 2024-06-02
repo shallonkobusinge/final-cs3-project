@@ -19,6 +19,15 @@ bool visited[GRID_WIDTH + 2][GRID_HEIGHT + 2];
 bool adj_matrix[NUM_CELLS][NUM_CELLS];
 cell_t *parent[GRID_WIDTH][GRID_HEIGHT];
 
+int findMax(int a, int b)
+{
+    return (a > b) ? a : b;
+}
+int findMin(int a, int b)
+{
+    return (a > b) ? b : a;
+}
+
 static stack_t *head;
 
 typedef struct stack
