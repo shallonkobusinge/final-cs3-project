@@ -359,6 +359,7 @@ state_t *emscripten_init()
 
     return state;
 }
+bool **visited = malloc((WIDTH / CELL_SIZE) * sizeof(bool *));
 
 bool emscripten_main(state_t *state)
 {
@@ -371,7 +372,6 @@ bool emscripten_main(state_t *state)
     {
         // init_grid();
         // generate_maze();
-        bool **visited = malloc((WIDTH / CELL_SIZE) * sizeof(bool *));
         for (int i = 0; i < WIDTH / CELL_SIZE; i++)
         {
             visited[i] = calloc(HEIGHT / CELL_SIZE, sizeof(bool));
@@ -380,14 +380,6 @@ bool emscripten_main(state_t *state)
         render_color((rgb_color_t){255, 255, 255});
 
         randomized_dfs(visited);
-
-        sdl_show();
-
-        for (int i = 0; i < WIDTH / CELL_SIZE; i++)
-        {
-            free(visited[i]);
-        }
-        free(visited);
     }
 
     // sdl_show();
