@@ -233,7 +233,7 @@ void generate_maze()
         {
             push_stack(cell);
             cell_t *neighbor = get_neighbor(cell, visited);
-            remove_wall(cell, neighbor, adj_matrix);
+            remove_wall(cell, neighbor);
             visited[neighbor->x][neighbor->y] = true;
             adjacency(cell, neighbor, adj_matrix);
             push_stack(head, neighbor);
