@@ -19,11 +19,17 @@ bool visited[GRID_WIDTH + 2][GRID_HEIGHT + 2];
 bool adj_matrix[NUM_CELLS][NUM_CELLS];
 cell_t *parent[GRID_WIDTH][GRID_HEIGHT];
 
-int findMax(int a, int b)
+/**
+ * Finds max between two numbers
+ * @param a first number
+ * @param b second number
+ * @return maximum numbers between the provided arguments
+ */
+static size_t findMax(size_t a, size_t b)
 {
     return (a > b) ? a : b;
 }
-int findMin(int a, int b)
+static size_t findMin(size_t a, size_t b)
 {
     return (a > b) ? b : a;
 }
@@ -102,7 +108,6 @@ void init_maze()
  */
 void remove_wall(cell_t *cell, cell_t *neighbor)
 {
-    printf("removing\n");
     if (cell->x == neighbor->x)
     {
         render_color((rgb_color_t){255, 0, 0});
@@ -126,85 +131,20 @@ void remove_wall(cell_t *cell, cell_t *neighbor)
     SDL_Delay(30);
 }
 
-// void adjacency(cell_t *cell, cell_t *cellNeighbour)
-// {
-//     int cellPos = (cell->x - 1) * GRID_HEIGHT + (cell->y - 1);
-//     int neighbourPos = (cellNeighbour->x - 1) * GRID_HEIGHT + (cellNeighbour->y - 1);
-//     adj_matrix[cellPos][neighbourPos] = true;
-//     adj_matrix[neighbourPos][cellPos] = true;
-// }
-
-// bool isAdjacency(cell_t *cell, cell_t *cellNeighbour)
-// {
-//     int cellPos = (cell->x - 1) * GRID_HEIGHT + (cell->y - 1);
-//     int neighbourPos = (cellNeighbour->x - 1) * GRID_HEIGHT + (cellNeighbour->y - 1);
-//     return adj_matrix[cellPos][neighbourPos];
-// }
-
-// cell_t *vecNeighbor(cell_t *cell)
-// {
-//     cell_t *neighbor_vec = malloc(sizeof(cell_t));
-//     cell_t *null_vec = NULL;
-
-//     if ((visited[cell->x - 1][cell->y] == true) &&
-//         (visited[cell->x][cell->y - 1] == true) &&
-//         (visited[cell->x][cell->y + 1] == true) &&
-//         (visited[cell->x + 1][cell->y] == true))
-//         return null_vec;
-
-//     do
-//     {
-//         int randomNeighbour = (rand() % 4) + 1;
-//         switch (randomNeighbour)
-//         {
-//         case 1:
-//             neighbor_vec->x = cell->x - 1;
-//             neighbor_vec->y = cell->y;
-//             break;
-//         case 2:
-//             neighbor_vec->x = cell->x;
-//             neighbor_vec->y = cell->y - 1;
-//             break;
-//         case 3:
-//             neighbor_vec->x = cell->x;
-//             neighbor_vec->y = cell->y + 1;
-//             break;
-//         case 4:
-//             neighbor_vec->x = cell->x + 1;
-//             neighbor_vec->y = cell->y;
-//             break;
-//         }
-//     } while (visited[neighbor_vec->x][neighbor_vec->y] == true);
-
-//     return neighbor_vec;
-// }
-
 void generate_maze()
 {
-    printf("here 1\n");
-
     init_grid();
-    printf("here 2\n");
-
     init_maze();
-    printf("here 3\n");
 
     cell_t *cell = malloc(sizeof(cell_t));
     cell->x = 1;
     cell->y = 1;
-    printf("here 4\n");
-
     visited[cell->x][cell->y] = true;
 
-    printf("here 5\n");
     push_stack(&head, cell);
-    printf("here 6\n");
 
     while (head != NULL)
     {
-        printf("fiurst cell aka head\n");
-
-        printf("here 1\n");
         cell = pop_stack(&head);
         if (get_neighbor(cell, visited) != NULL)
         {
