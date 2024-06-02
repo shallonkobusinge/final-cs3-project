@@ -35,25 +35,25 @@ state_t *emscripten_init()
     state->page = 0;
     // sdl_show();
 
-
     return state;
 }
 
 bool emscripten_main(state_t *state)
 {
     sdl_clear();
-    if (state->page == 0) {
-          init_grid();
-    } else if (state->page == 1){
-         build_landing_page();
-      
+    if (state->page == 0)
+    {
+        init_grid();
     }
-    
+    else if (state->page == 1)
+    {
+        build_landing_page();
+    }
+
     // SDL_Thread *thread = (generate_maze, "Generating", NULL);
 
     // generate_maze(NULL);
     sdl_show();
-    
 
     return false;
 }
