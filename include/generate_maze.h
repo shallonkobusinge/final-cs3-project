@@ -1,7 +1,7 @@
 #ifndef __GENERATE_MAZE_H__
 #define __GENERATE_MAZE_H__
 
-// #include "cell.h"
+#include "cell.h"
 
 /**
  * Initialize and draw the Maze Grid.
