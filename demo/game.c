@@ -299,30 +299,34 @@ cell_t *vecNeighbor(cell_t *cell)
 
 void removeWall(cell_t *cell, cell_t *neighbour)
 {
-    printf("removing 1\n");
-    if (cell->x == neighbour->x)
+    if (once == 0)
     {
-        render_color((rgb_color_t){255, 0, 0});
-        int y = findMax(cell->y, neighbour->y);
-        render_line((cell->x - 1) * grid_cell_size,
-                    (y - 1) * grid_cell_size,
-                    (cell->x - 1) * grid_cell_size + grid_cell_size,
-                    (y - 1) * grid_cell_size);
-    }
+        printf("removing 1\n");
+        if (cell->x == neighbour->x)
+        {
+            render_color((rgb_color_t){255, 0, 0});
+            int y = findMax(cell->y, neighbour->y);
+            render_line((cell->x - 1) * grid_cell_size,
+                        (y - 1) * grid_cell_size,
+                        (cell->x - 1) * grid_cell_size + grid_cell_size,
+                        (y - 1) * grid_cell_size);
+        }
 
-    else if (cell->y == neighbour->y)
-    {
-        render_color((rgb_color_t){255, 0, 0});
+        else if (cell->y == neighbour->y)
+        {
+            render_color((rgb_color_t){255, 0, 0});
 
-        int x = findMax(cell->x, neighbour->x);
-        render_line((x - 1) * grid_cell_size,
-                    (cell->y - 1) * grid_cell_size,
-                    (x - 1) * grid_cell_size,
-                    (cell->y - 1) * grid_cell_size + grid_cell_size);
+            int x = findMax(cell->x, neighbour->x);
+            render_line((x - 1) * grid_cell_size,
+                        (cell->y - 1) * grid_cell_size,
+                        (x - 1) * grid_cell_size,
+                        (cell->y - 1) * grid_cell_size + grid_cell_size);
+        }
+        // SDL_Delay(30);
+        sdl_show();
+        // show();
+        once = 1;
     }
-    // SDL_Delay(30);
-    sdl_show();
-    // show();
 }
 
 void generate_maze()
