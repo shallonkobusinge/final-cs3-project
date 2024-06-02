@@ -44,7 +44,7 @@ static stack_t *head;
 
 void push_stack(cell_t *cell)
 {
-    printf("Here: %zu", head->cell->x);
+    printf("Here: 6.1");
     stack_t *stack = malloc(sizeof(stack_t));
     stack->cell = cell;
     stack->next = head;
