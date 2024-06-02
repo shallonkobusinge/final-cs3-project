@@ -45,7 +45,7 @@ bool emscripten_main(state_t *state)
     }
     else if (state->page == 1)
     {
-        init_grid();
+        // init_grid();
         generate_maze(NULL);
     }
 
