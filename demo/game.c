@@ -359,10 +359,11 @@ state_t *emscripten_init()
 
     return state;
 }
-bool **visits = malloc((WIDTH / CELL_SIZE) * sizeof(bool *));
 
 bool emscripten_main(state_t *state)
 {
+    bool **visits = malloc((WIDTH / CELL_SIZE) * sizeof(bool *));
+
     sdl_clear();
     if (state->page == 0)
     {
