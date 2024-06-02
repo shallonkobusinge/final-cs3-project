@@ -229,7 +229,7 @@ void generate_maze()
 
         printf("here 1\n");
         cell = pop_stack(head);
-        if (get_neighbor(cell) != NULL)
+        if (get_neighbor(cell, visited) != NULL)
         {
             push_stack(cell);
             cell_t *neighbor = get_neighbor(cell, visited);
