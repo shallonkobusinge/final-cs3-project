@@ -43,16 +43,13 @@ bool emscripten_main(state_t *state)
     sdl_clear();
     if (state->page == 0)
     {
-        init_grid();
+        build_landing_page();
     }
     else if (state->page == 1)
     {
-        build_landing_page();
+        init_grid();
     }
 
-    // SDL_Thread *thread = (generate_maze, "Generating", NULL);
-
-    // generate_maze(NULL);
     sdl_show();
 
     return false;
