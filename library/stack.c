@@ -1,5 +1,6 @@
 #include "stack.h"
 #include "cell.h"
+#include <assert.h>
 
 #include <stdio.h>
 #include <stdlib.h>
