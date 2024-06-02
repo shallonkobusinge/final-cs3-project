@@ -28,52 +28,7 @@ int findMin(int a, int b)
     return (a > b) ? b : a;
 }
 
-typedef struct stack
-{
-    cell_t *cell;
-    struct stack *next;
-} stack_t;
-
-void push_stack(stack_t *head, cell_t *cell)
-{
-    stack_t *stack = malloc(sizeof(stack_t));
-    stack->cell = cell;
-    stack->next = head;
-    head = stack;
-}
-
-cell_t *pop_stack(stack_t *head)
-{
-    cell_t *removed = head->cell;
-    stack_t *temp = head;
-    head = head->next;
-    free(temp);
-    return removed;
-}
-// typedef struct stack
-// {
-//     cell_t *cell;
-//     struct stack *next;
-// } stack_t;
-
 static stack_t *head;
-
-// void push_stack(cell_t *cell)
-// {
-//     stack_t *stack = malloc(sizeof(stack_t));
-//     stack->cell = cell;
-//     stack->next = head;
-//     head = stack;
-// }
-
-// cell_t *pop_stack()
-// {
-//     cell_t *removed = head->cell;
-//     stack_t *temp = head;
-//     head = head->next;
-//     free(temp);
-//     return removed;
-// }
 
 /**
  * Initialize and draw the Maze Grid.
@@ -250,15 +205,15 @@ void generate_maze()
         printf("fiurst cell aka head\n");
 
         printf("here 1\n");
-        cell = pop_stack(head);
+        cell = pop_stack(&head);
         if (get_neighbor(cell, visited) != NULL)
         {
-            push_stack(head, cell);
+            push_stack(&head, cell);
             cell_t *neighbor = get_neighbor(cell, visited);
             remove_wall(cell, neighbor);
             visited[neighbor->x][neighbor->y] = true;
             adjacency(cell, neighbor, adj_matrix);
-            push_stack(head, neighbor);
+            push_stack(&head, neighbor);
         }
     }
 }
