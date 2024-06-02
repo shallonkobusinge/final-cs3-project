@@ -92,7 +92,7 @@ void init_grid()
  * Initializes the maze by marking all cells as unvisited and setting the border cells as visited.
  * and initializes the adjacency matrix and sets the random seed.
  */
-static void init_maze()
+void init_maze()
 {
     for (int i = 1; i <= GRID_WIDTH; i++)
     {
@@ -120,8 +120,6 @@ static void init_maze()
             adj_matrix[i][j] = false;
         }
     }
-
-    printf("Adjacnence %d\n", adj_matrix[10][10]);
     head = NULL;
     srand(time(NULL));
 }
@@ -132,7 +130,7 @@ static void init_maze()
  * @param cell current cell
  * @param neighbor cell neighbor
  */
-static void remove_wall(cell_t *cell, cell_t *neighbor)
+void remove_wall(cell_t *cell, cell_t *neighbor)
 {
     printf("removing\n");
     if (cell->x == neighbor->x)
@@ -213,7 +211,7 @@ cell_t *vecNeighbor(cell_t *cell)
 
 void generate_maze()
 {
-    init_grid();
+    // init_grid();
     init_maze();
 
     cell_t *cell = malloc(sizeof(cell_t));
@@ -223,6 +221,8 @@ void generate_maze()
     push_stack(cell);
     while (head != NULL)
     {
+        printf("fiurst cell aka head\n");
+
         printf("here 1\n");
         cell = pop_stack();
         if (vecNeighbor(cell) != NULL)
