@@ -231,7 +231,7 @@ void generate_maze()
         cell = pop_stack(head);
         if (get_neighbor(cell, visited) != NULL)
         {
-            push_stack(cell);
+            push_stack(head, cell);
             cell_t *neighbor = get_neighbor(cell, visited);
             remove_wall(cell, neighbor);
             visited[neighbor->x][neighbor->y] = true;
