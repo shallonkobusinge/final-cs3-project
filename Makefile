@@ -127,16 +127,16 @@ out/%.wasm.o: tests/%.c # or "tests"
 # Unlike the out/%.wasm.o rule, this uses the LIBS flags and omits the -c flag,
 # since it is building a full executable. Also notice it uses our EMCC_FLAGS
 
-DEMO_REF = color emscripten list polygon sdl_wrapper vector body scene forces collision asset_cache asset landing_page  generate_maze
+DEMO_REF = color emscripten list polygon sdl_wrapper vector body scene forces collision asset_cache asset landing_page cell stack generate_maze
 DEMO_REF_OBJS = $(addprefix $(REF_FOLDER)/,$(DEMO_REF:=.wasm.ref.o))
 
 GAME_REF = emscripten vector body scene list color polygon forces collision
 GAME_REF_OBJS = $(addprefix $(REF_FOLDER)/,$(GAME_REF:=.wasm.ref.o))
 
-GAME_STUDENT = game sdl_wrapper asset asset_cache landing_page  generate_maze
+GAME_STUDENT = game sdl_wrapper asset asset_cache landing_page cell stack generate_maze
 GAME_STUDENT_OBJS = $(addprefix out/,$(GAME_STUDENT:=.wasm.o))
 
-TEST_REF = asset_cache asset landing_page generate_maze
+TEST_REF = asset_cache asset landing_page cell stack generate_maze
 TEST_REF_OBJS = $(addprefix $(REF_FOLDER)/,$(TEST_REF:=.wasm.ref.o))
 
 bin/%.demo.html: out/%.wasm.o $(DEMO_REF_OBJS)
