@@ -22,6 +22,7 @@ const vector_t SDL_CENTER = {500, 250};
 #define HEIGHT 800
 #define CELL_SIZE 20
 
+static int once = 0;
 typedef struct
 {
     int x, y;
@@ -326,28 +327,32 @@ void removeWall(cell_t *cell, cell_t *neighbour)
 
 void generate_maze()
 {
-    bool first_look = false;
-    bool generate = false;
-
-    init_maze();
-
-    cell_t *cell = malloc(sizeof(cell_t));
-    cell->x = 1;
-    cell->y = 1;
-    visited[cell->x][cell->y] = true;
-    push_stack(cell);
-    while (first_cell != NULL)
+    if (once == 0)
     {
-        cell = pop_stack();
-        if (vecNeighbor(cell) != NULL)
+        bool first_look = false;
+        bool generate = false;
+
+        init_maze();
+
+        cell_t *cell = malloc(sizeof(cell_t));
+        cell->x = 1;
+        cell->y = 1;
+        visited[cell->x][cell->y] = true;
+        push_stack(cell);
+        while (first_cell != NULL)
         {
-            push_stack(cell);
-            cell_t *neighbor = vecNeighbor(cell);
-            removeWall(cell, neighbor);
-            visited[neighbor->x][neighbor->y] = true;
-            adjacency(cell, neighbor);
-            push_stack(neighbor);
+            cell = pop_stack();
+            if (vecNeighbor(cell) != NULL)
+            {
+                push_stack(cell);
+                cell_t *neighbor = vecNeighbor(cell);
+                removeWall(cell, neighbor);
+                visited[neighbor->x][neighbor->y] = true;
+                adjacency(cell, neighbor);
+                push_stack(neighbor);
+            }
         }
+        once = 1;
     }
 }
 
