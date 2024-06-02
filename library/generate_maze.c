@@ -131,7 +131,7 @@ int generate_maze(void *ptr)
     visited[cell->x][cell->y] = true;
 
     push_stack(head, cell);
-    printf("Stack: %zu", head->x);
+    printf("Stack: %zu", head->cell->x);
     while (head != NULL)
     {
         cell = pop_stack(head);
