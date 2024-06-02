@@ -85,7 +85,7 @@ void draw_maze(bool **visited)
 void connect_cells(Cell a, Cell b)
 {
     render_color((rgb_color_t){
-        255, 255, 255});
+        0, 0, 0});
     render_line(a.x * CELL_SIZE + CELL_SIZE / 2, a.y * CELL_SIZE + CELL_SIZE / 2,
                 b.x * CELL_SIZE + CELL_SIZE / 2, b.y * CELL_SIZE + CELL_SIZE / 2);
     sdl_show();
@@ -365,6 +365,8 @@ state_t *emscripten_init()
 
 bool emscripten_main(state_t *state)
 {
+    bool **visits = malloc((WIDTH / CELL_SIZE) * sizeof(bool *));
+
     sdl_clear();
     if (state->page == 0)
     {
@@ -372,11 +374,23 @@ bool emscripten_main(state_t *state)
     }
     else if (state->page == 1)
     {
-        init_grid();
+        // init_grid();
         // generate_maze();
+        printf("here reached 1\n");
+
+        for (int i = 0; i < WIDTH / CELL_SIZE; i++)
+        {
+            visits[i] = calloc(HEIGHT / CELL_SIZE, sizeof(bool));
+        }
+
+        render_color((rgb_color_t){0, , 255});
+
+        randomized_dfs(visits);
+        printf("here reached 2\n");
+        sdl_show();
     }
 
-    sdl_show();
+    // sdl_show();
 
     return false;
 }
