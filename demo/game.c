@@ -55,6 +55,11 @@ state_t *emscripten_init()
     return state;
 }
 
+static stack_t *first_cell;
+bool visited[grid_width + 2][grid_height + 2];
+bool adjacency_matrx[number_of_cells][number_of_cells];
+cell_t *parent[grid_width][grid_height];
+
 void init_maze()
 {
     for (int i = 1; i <= grid_width; i++)
