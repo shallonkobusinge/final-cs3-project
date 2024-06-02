@@ -32,7 +32,7 @@ state_t *emscripten_init()
     state->scene = scene_init();
     // build_landing_page();
 
-    state->page = 0;
+    state->page = 1;
     // sdl_show();
 
     // init_grid();
@@ -51,6 +51,7 @@ bool emscripten_main(state_t *state)
     else if (state->page == 1)
     {
         init_grid();
+        generate_maze();
     }
 
     sdl_show();
