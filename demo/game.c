@@ -378,7 +378,6 @@ bool emscripten_main(state_t *state)
         }
 
         render_color((rgb_color_t){255, 255, 255});
-        sdl_clear();
 
         randomized_dfs(visited);
 
