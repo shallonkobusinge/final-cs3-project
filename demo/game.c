@@ -52,18 +52,6 @@ int findMin(int a, int b)
     return (a > b) ? b : a;
 }
 
-state_t *emscripten_init()
-{
-    asset_cache_init();
-    sdl_init(SDL_MIN, SDL_MAX);
-    state_t *state = malloc(sizeof(state_t));
-    state->scene = scene_init();
-
-    state->page = 1;
-
-    return state;
-}
-
 static stack_t *first_cell;
 bool visited[grid_width + 2][grid_height + 2];
 bool adjacency_matrx[number_of_cells][number_of_cells];
@@ -226,6 +214,19 @@ void generate_maze()
         }
     }
 }
+
+state_t *emscripten_init()
+{
+    asset_cache_init();
+    sdl_init(SDL_MIN, SDL_MAX);
+    state_t *state = malloc(sizeof(state_t));
+    state->scene = scene_init();
+
+    state->page = 1;
+
+    return state;
+}
+
 bool emscripten_main(state_t *state)
 {
     sdl_clear();
