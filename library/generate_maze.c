@@ -26,7 +26,6 @@ static stack_t *head;
  */
 void init_grid()
 {
-    // sdl_clear();
     render_color((rgb_color_t){210, 210, 210});
 
     for (int x = 0; x < window_width; x += GRID_CELL_SIZE)
@@ -48,8 +47,6 @@ void init_grid()
     terminal_cell.w = GRID_CELL_SIZE / 2;
     terminal_cell.h = GRID_CELL_SIZE / 2;
     render_rect(&terminal_cell);
-
-    // sdl_show();
 }
 
 /**
@@ -62,7 +59,7 @@ static void init_maze()
     {
         for (int j = 1; j <= GRID_HEIGHT; j++)
         {
-            visited[i][j] = false;
+            visited[i][j] = 0;
         }
     }
 
@@ -97,8 +94,6 @@ static void init_maze()
  */
 static void remove_wall(cell_t *cell, cell_t *neighbor)
 {
-    printf("hase\n");
-
     if (cell->x == neighbor->x)
     {
         render_color((rgb_color_t){22, 22, 22});
@@ -136,6 +131,7 @@ int generate_maze(void *ptr)
     visited[cell->x][cell->y] = true;
 
     push_stack(head, cell);
+    printf("Stack: %zu", head->x);
     while (head != NULL)
     {
         cell = pop_stack(head);
