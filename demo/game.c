@@ -386,6 +386,7 @@ bool emscripten_main(state_t *state)
 
         randomized_dfs(visits);
         printf("here reached 2\n");
+        sdl_show();
     }
 
     // sdl_show();
