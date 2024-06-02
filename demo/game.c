@@ -227,7 +227,7 @@ bool emscripten_main(state_t *state)
     else if (state->page == 1)
     {
         // init_grid();
-        generate_maze(NULL);
+        generate_maze();
     }
 
     sdl_show();
