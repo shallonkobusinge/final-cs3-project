@@ -383,7 +383,7 @@ bool emscripten_main(state_t *state)
             visits[i] = calloc(HEIGHT / CELL_SIZE, sizeof(bool));
         }
 
-        render_color((rgb_color_t){255, 255, 255});
+        render_color((rgb_color_t){0, 0, 255});
 
         randomized_dfs(visits);
         printf("here reached 2\n");
