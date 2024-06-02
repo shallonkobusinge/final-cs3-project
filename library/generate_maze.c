@@ -118,7 +118,7 @@ void remove_wall(cell_t *cell, cell_t *neighbor)
     if (cell->x == neighbor->x)
     {
         render_color((rgb_color_t){255, 0, 0});
-        int y = findMax(cell->y, neighbor->y);
+        size_t y = find_max(cell->y, neighbor->y);
         render_line((cell->x - 1) * GRID_CELL_SIZE,
                     (y - 1) * GRID_CELL_SIZE,
                     (cell->x - 1) * GRID_CELL_SIZE + GRID_CELL_SIZE,
@@ -129,7 +129,7 @@ void remove_wall(cell_t *cell, cell_t *neighbor)
     {
         render_color((rgb_color_t){255, 0, 0});
 
-        int x = findMax(cell->x, neighbor->x);
+        int x = find_max(cell->x, neighbor->x);
         render_line((x - 1) * GRID_CELL_SIZE,
                     (cell->y - 1) * GRID_CELL_SIZE,
                     (x - 1) * GRID_CELL_SIZE,
