@@ -146,4 +146,28 @@ int generate_maze(void *ptr)
             push_stack(head, neighbor);
         }
     }
+
+    bool first_look = false;
+    bool generate = false;
+
+    init_maze();
+
+    cell_t *cell = malloc(sizeof(cell_t));
+    cell->x = 1;
+    cell->y = 1;
+    visited[cell->x][cell->y] = true;
+    push_stack(cell);
+    while (first_cell != NULL)
+    {
+        cell = pop_stack();
+        if (vecNeighbor(cell) != NULL)
+        {
+            push_stack(cell);
+            cell_t *neighbor = vecNeighbor(cell);
+            removeWall(cell, neighbor);
+            visited[neighbor->x][neighbor->y] = true;
+            adjacency(cell, neighbor);
+            push_stack(neighbor);
+        }
+    }
 }

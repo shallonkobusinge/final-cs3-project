@@ -6,7 +6,7 @@
 #include <time.h>
 
 #include "landing_page.h"
-// #include "generate_maze.h"
+#include "generate_maze.h"
 #include "asset_cache.h"
 #include "sdl_wrapper.h"
 
@@ -194,7 +194,7 @@ bool visited[grid_width + 2][grid_height + 2];
 bool adjacency_matrx[number_of_cells][number_of_cells];
 cell_t *parent[grid_width][grid_height];
 
-void init_maze()
+static void init_maze()
 {
     for (int i = 1; i <= grid_width; i++)
     {
@@ -373,7 +373,7 @@ bool emscripten_main(state_t *state)
     }
     else if (state->page == 1)
     {
-        init_grid();
+        // init_grid();
         generate_maze();
     }
 
