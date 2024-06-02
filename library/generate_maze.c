@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "cell.h"
+// #include "cell.h"
 #include "generate_maze.h"
-#include "stack.h"
+// #include "stack.h"
 #include "sdl_wrapper.h"
 
 const size_t GRID_WIDTH = 25;
@@ -196,7 +196,7 @@ cell_t *vecNeighbor(cell_t *cell)
     return neighbor_vec;
 }
 
-int generate_maze(void *ptr)
+void generate_maze()
 {
     init_maze();
 
