@@ -22,6 +22,7 @@ struct state
 {
     scene_t *scene;
     size_t page;
+    bool maze_generated;
 };
 
 state_t *emscripten_init()
@@ -30,13 +31,13 @@ state_t *emscripten_init()
     sdl_init(SDL_MIN, SDL_MAX);
     state_t *state = malloc(sizeof(state_t));
     state->scene = scene_init();
+    state->maze_generated = false;
 
     state->page = 1;
 
     return state;
 }
 
-static int count = 0;
 bool emscripten_main(state_t *state)
 {
     sdl_clear();
@@ -46,11 +47,12 @@ bool emscripten_main(state_t *state)
     }
     else if (state->page == 1)
     {
-        count++;
-        // init_grid();
-        generate_maze();
+        if (!state->maze_generated)
+        {
+            generate_maze();
+            state->maze_generated = true;
+        }
     }
-    printf("Count: %d", count);
     sdl_show();
 
     return false;
