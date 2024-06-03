@@ -140,8 +140,9 @@ void remove_wall(cell_t *cell, cell_t *neighbor)
     SDL_Delay(30);
 }
 
-void generate_maze()
+void generate_maze(state_t *state)
 {
+    printf("Page: %d\n", state->page);
     sdl_clear();
     init_grid();
     // init_maze();
