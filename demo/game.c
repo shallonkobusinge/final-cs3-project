@@ -36,6 +36,7 @@ state_t *emscripten_init()
     return state;
 }
 
+static int count = 0;
 bool emscripten_main(state_t *state)
 {
     sdl_clear();
@@ -45,9 +46,11 @@ bool emscripten_main(state_t *state)
     }
     else if (state->page == 1)
     {
+        count++;
         // init_grid();
         generate_maze();
     }
+    printf("Count: %d", count);
     sdl_show();
 
     return false;
