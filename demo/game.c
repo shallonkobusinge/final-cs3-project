@@ -52,7 +52,7 @@ bool emscripten_main(state_t *state)
             generate_maze();
             printf("her bbga e show");
 
-            state->maze_generated = true;
+            // state->maze_generated = true;
             printf("here show");
         }
     }
