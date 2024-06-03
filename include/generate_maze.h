@@ -2,6 +2,7 @@
 #define __GENERATE_MAZE_H__
 
 #include "cell.h"
+#include "state.h"
 
 /**
  * Generates maze using DFS.
