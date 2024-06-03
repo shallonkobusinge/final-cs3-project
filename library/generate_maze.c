@@ -154,7 +154,7 @@ bool generate_maze(state_t *state)
     sdl_clear();
     init_grid();
     // sdl_show();
-    return true;
+    return false;
     // init_maze();
 
     // cell_t *cell = malloc(sizeof(cell_t));
