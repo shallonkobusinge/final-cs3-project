@@ -50,7 +50,6 @@ bool emscripten_main(state_t *state)
         {
             generate_maze(state);
             printf("her bbga e show");
-
             printf("here show");
         }
         sdl_show();

@@ -153,7 +153,7 @@ bool generate_maze(state_t *state)
     printf("Page: %d\n", state->page);
     sdl_clear();
     init_grid();
-
+    sdl_show();
     state->maze_generated = true;
     return false;
     // init_maze();
