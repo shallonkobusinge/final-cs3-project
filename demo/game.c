@@ -30,10 +30,8 @@ state_t *emscripten_init()
     sdl_init(SDL_MIN, SDL_MAX);
     state_t *state = malloc(sizeof(state_t));
     state->scene = scene_init();
-    // build_landing_page();
 
     state->page = 1;
-    // sdl_show();
 
     return state;
 }
@@ -47,7 +45,8 @@ bool emscripten_main(state_t *state)
     }
     else if (state->page == 1)
     {
-        init_grid();
+        // init_grid();
+        generate_maze();
     }
 
     sdl_show();

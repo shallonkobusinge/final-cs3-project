@@ -22,11 +22,32 @@ cell_t *parent[GRID_WIDTH][GRID_HEIGHT];
 static stack_t *head;
 
 /**
+ * Finds max between two numbers
+ * @param a first number
+ * @param b second number
+ * @return maximum numbers between the provided arguments
+ */
+static size_t find_max(size_t a, size_t b)
+{
+    return (a > b) ? a : b;
+}
+
+/**
+ * Finds min between two numbers
+ * @param a first number
+ * @param b second number
+ * @return minimum numbers between the provided arguments
+ */
+static size_t find_min(size_t a, size_t b)
+{
+    return (a > b) ? b : a;
+}
+
+/**
  * Initialize and draw the Maze Grid.
  */
-void init_grid()
+static void init_grid()
 {
-    sdl_clear();
     render_color((rgb_color_t){210, 210, 210});
 
     for (int x = 0; x < window_width; x += GRID_CELL_SIZE)
@@ -48,8 +69,6 @@ void init_grid()
     terminal_cell.w = GRID_CELL_SIZE / 2;
     terminal_cell.h = GRID_CELL_SIZE / 2;
     render_rect(&terminal_cell);
-
-    sdl_show();
 }
 
 /**
@@ -62,20 +81,19 @@ static void init_maze()
     {
         for (int j = 1; j <= GRID_HEIGHT; j++)
         {
-            visited[i][j] = false;
+            visited[i][j] = 0;
         }
+    }
+    for (int j = 1; j < GRID_HEIGHT + 2; j++)
+    {
+        visited[0][j] = true;
+        visited[GRID_WIDTH + 1][j] = true;
     }
 
     for (int i = 1; i <= GRID_WIDTH; i++)
     {
         visited[i][0] = true;
         visited[i][GRID_HEIGHT + 1] = true;
-    }
-
-    for (int j = 1; j < GRID_HEIGHT + 2; j++)
-    {
-        visited[0][j] = true;
-        visited[GRID_WIDTH + 1][j] = true;
     }
 
     for (int i = 0; i < NUM_CELLS; i++)
@@ -86,8 +104,6 @@ static void init_maze()
         }
     }
     head = NULL;
-    printf("showing maze\n");
-
     srand(time(NULL));
 }
 
@@ -97,60 +113,54 @@ static void init_maze()
  * @param cell current cell
  * @param neighbor cell neighbor
  */
-static void remove_wall(cell_t *cell, cell_t *neighbor)
+void remove_wall(cell_t *cell, cell_t *neighbor)
 {
-    printf("hase\n");
-    render_color((rgb_color_t){22, 22, 22});
-
     if (cell->x == neighbor->x)
     {
-        int pos_y = (cell->y > neighbor->y) ? cell->y : neighbor->y;
-
+        render_color((rgb_color_t){255, 0, 0});
+        size_t y = find_max(cell->y, neighbor->y);
         render_line((cell->x - 1) * GRID_CELL_SIZE,
-                    (pos_y - 1) * GRID_CELL_SIZE,
+                    (y - 1) * GRID_CELL_SIZE,
                     (cell->x - 1) * GRID_CELL_SIZE + GRID_CELL_SIZE,
-                    (pos_y - 1) * GRID_CELL_SIZE);
+                    (y - 1) * GRID_CELL_SIZE);
     }
+
     else if (cell->y == neighbor->y)
     {
-        int pos_x = (cell->x > neighbor->x) ? cell->x : neighbor->x;
+        render_color((rgb_color_t){255, 0, 0});
 
-        render_line((pos_x - 1) * GRID_CELL_SIZE,
+        int x = find_max(cell->x, neighbor->x);
+        render_line((x - 1) * GRID_CELL_SIZE,
                     (cell->y - 1) * GRID_CELL_SIZE,
-                    (pos_x - 1) * GRID_CELL_SIZE,
+                    (x - 1) * GRID_CELL_SIZE,
                     (cell->y - 1) * GRID_CELL_SIZE + GRID_CELL_SIZE);
     }
-    printf("ehg ?\n");
     SDL_Delay(30);
-    // sdl_show();
 }
 
-void generate_maze(void *ptr)
+void generate_maze()
 {
     init_grid();
-
-    printf("showing generate\n");
     init_maze();
-    render_show();
 
     cell_t *cell = malloc(sizeof(cell_t));
     cell->x = 1;
     cell->y = 1;
     visited[cell->x][cell->y] = true;
 
-    push_stack(head, cell);
+    push_stack(&head, cell);
+
     while (head != NULL)
     {
-        cell = pop_stack(head);
+        cell = pop_stack(&head);
         if (get_neighbor(cell, visited) != NULL)
         {
-            push_stack(head, cell);
+            push_stack(&head, cell);
             cell_t *neighbor = get_neighbor(cell, visited);
             remove_wall(cell, neighbor);
             visited[neighbor->x][neighbor->y] = true;
             adjacency(cell, neighbor, adj_matrix);
-            push_stack(head, neighbor);
+            push_stack(&head, neighbor);
         }
     }
-    printf("showing end gen\n");
 }

@@ -1,5 +1,6 @@
 #include "stack.h"
 #include "cell.h"
+#include <assert.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,19 +11,21 @@ typedef struct stack
     struct stack *next;
 } stack_t;
 
-void push_stack(stack_t *head, cell_t *cell)
+void push_stack(stack_t **head, cell_t *cell)
 {
-    stack_t *stack = malloc(sizeof(stack));
+    stack_t *stack = malloc(sizeof(stack_t));
+    assert(stack);
     stack->cell = cell;
-    stack->next = head;
-    head = stack;
+    stack->next = *head;
+    *head = stack;
 }
 
-cell_t *pop_stack(stack_t *head)
+cell_t *pop_stack(stack_t **head)
 {
-    cell_t *removed = head->cell;
-    stack_t *temp = head;
-    head = head->next;
+    assert(head);
+    cell_t *removed = (*head)->cell;
+    stack_t *temp = *head;
+    *head = (*head)->next;
     free(temp);
     return removed;
 }
