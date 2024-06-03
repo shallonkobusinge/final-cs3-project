@@ -128,7 +128,7 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
         case LEFT_ARROW:
         {
 
-            start_cell = (SDL_Rect){(GRID_CELL_SIZE / 10) + 5, (GRID_CELL_SIZE / 4) + 1, (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
+            start_cell = (SDL_Rect){(GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 4) + 1, (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
             render_color((rgb_color_t){0, 0, 0});
             render_rect(&start_cell);
 
