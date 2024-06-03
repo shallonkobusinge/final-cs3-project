@@ -20,6 +20,8 @@ bool visited[GRID_WIDTH + 2][GRID_HEIGHT + 2];
 bool adj_matrix[NUM_CELLS][NUM_CELLS];
 cell_t *parent[GRID_WIDTH][GRID_HEIGHT];
 
+SDL_Rect start_cell;
+
 static stack_t *head;
 typedef struct state
 {
@@ -67,7 +69,7 @@ static void init_grid()
         render_line(0, y, window_width, y);
     }
 
-    SDL_Rect start_cell = {(GRID_CELL_SIZE / 10), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
+    start_cell = {(GRID_CELL_SIZE / 10), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
     render_color((rgb_color_t){0, 0, 0});
     render_rect(&start_cell);
 
@@ -125,6 +127,7 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
         {
         case LEFT_ARROW:
         {
+
             printf("going left\n");
             break;
         }
