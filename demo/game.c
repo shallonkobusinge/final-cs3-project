@@ -50,6 +50,8 @@ bool emscripten_main(state_t *state)
         if (!state->maze_generated)
         {
             generate_maze();
+            printf("her bbga e show");
+
             state->maze_generated = true;
             printf("here show");
         }
