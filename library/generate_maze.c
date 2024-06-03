@@ -69,6 +69,8 @@ static void init_grid()
     terminal_cell.w = GRID_CELL_SIZE / 2;
     terminal_cell.h = GRID_CELL_SIZE / 2;
     render_rect(&terminal_cell);
+
+    sdl_show();
 }
 
 /**
@@ -141,7 +143,7 @@ void remove_wall(cell_t *cell, cell_t *neighbor)
 void generate_maze()
 {
     init_grid();
-    sdl_show();
+    printf("ngahose \n");
     // init_maze();
 
     // cell_t *cell = malloc(sizeof(cell_t));
