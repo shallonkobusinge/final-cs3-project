@@ -34,7 +34,6 @@ state_t *emscripten_init()
     state->maze_generated = false;
 
     state->page = 1;
-    sdl_clear();
 
     return state;
 }

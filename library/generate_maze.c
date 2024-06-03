@@ -142,6 +142,8 @@ void remove_wall(cell_t *cell, cell_t *neighbor)
 
 void generate_maze()
 {
+    sdl_clear();
+
     init_grid();
     // init_maze();
 
