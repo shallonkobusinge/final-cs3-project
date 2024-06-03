@@ -151,9 +151,9 @@ void remove_wall(cell_t *cell, cell_t *neighbor)
 bool generate_maze(state_t *state)
 {
     printf("Page: %d\n", state->page);
-    sdl_clear();
+    // sdl_clear();
     init_grid();
-    sdl_show();
+    // sdl_show();
     return false;
     // init_maze();
 
