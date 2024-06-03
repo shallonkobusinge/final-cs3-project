@@ -141,26 +141,26 @@ void remove_wall(cell_t *cell, cell_t *neighbor)
 void generate_maze()
 {
     init_grid();
-    init_maze();
+    // init_maze();
 
-    cell_t *cell = malloc(sizeof(cell_t));
-    cell->x = 1;
-    cell->y = 1;
-    visited[cell->x][cell->y] = true;
+    // cell_t *cell = malloc(sizeof(cell_t));
+    // cell->x = 1;
+    // cell->y = 1;
+    // visited[cell->x][cell->y] = true;
 
-    push_stack(&head, cell);
+    // push_stack(&head, cell);
 
-    while (head != NULL)
-    {
-        cell = pop_stack(&head);
-        if (get_neighbor(cell, visited) != NULL)
-        {
-            push_stack(&head, cell);
-            cell_t *neighbor = get_neighbor(cell, visited);
-            remove_wall(cell, neighbor);
-            visited[neighbor->x][neighbor->y] = true;
-            adjacency(cell, neighbor, adj_matrix);
-            push_stack(&head, neighbor);
-        }
-    }
+    // while (head != NULL)
+    // {
+    //     cell = pop_stack(&head);
+    //     if (get_neighbor(cell, visited) != NULL)
+    //     {
+    //         push_stack(&head, cell);
+    //         cell_t *neighbor = get_neighbor(cell, visited);
+    //         remove_wall(cell, neighbor);
+    //         visited[neighbor->x][neighbor->y] = true;
+    //         adjacency(cell, neighbor, adj_matrix);
+    //         push_stack(&head, neighbor);
+    //     }
+    // }
 }

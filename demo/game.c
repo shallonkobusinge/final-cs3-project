@@ -51,6 +51,7 @@ bool emscripten_main(state_t *state)
         {
             generate_maze();
             state->maze_generated = true;
+            printf("here show");
         }
     }
     sdl_show();
