@@ -144,6 +144,7 @@ void generate_maze()
 {
     sdl_clear();
     init_grid();
+    sdl_show();
     printf("ngahose \n");
     // init_maze();
 
