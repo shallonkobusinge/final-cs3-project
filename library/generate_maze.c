@@ -142,10 +142,7 @@ void remove_wall(cell_t *cell, cell_t *neighbor)
 
 void generate_maze()
 {
-    sdl_clear();
     init_grid();
-    sdl_show();
-    printf("ngahose \n");
     // init_maze();
 
     // cell_t *cell = malloc(sizeof(cell_t));
