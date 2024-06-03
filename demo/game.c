@@ -33,6 +33,11 @@ state_t *emscripten_init()
 
     state->page = 1;
 
+    return state;
+}
+
+bool emscripten_main(state_t *state)
+{
     sdl_clear();
     if (state->page == 0)
     {
@@ -43,13 +48,6 @@ state_t *emscripten_init()
         // init_grid();
         generate_maze();
     }
-
-    return state;
-}
-
-bool emscripten_main(state_t *state)
-{
-
     sdl_show();
 
     return false;
