@@ -21,6 +21,12 @@ bool adj_matrix[NUM_CELLS][NUM_CELLS];
 cell_t *parent[GRID_WIDTH][GRID_HEIGHT];
 
 static stack_t *head;
+typedef struct state state_t
+{
+    scene_t *scene;
+    size_t page;
+    bool maze_generated;
+}
 
 /**
  * Finds max between two numbers
@@ -28,7 +34,8 @@ static stack_t *head;
  * @param b second number
  * @return maximum numbers between the provided arguments
  */
-static size_t find_max(size_t a, size_t b)
+static size_t
+find_max(size_t a, size_t b)
 {
     return (a > b) ? a : b;
 }
