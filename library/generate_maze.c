@@ -69,7 +69,7 @@ static void init_grid()
         render_line(0, y, window_width, y);
     }
 
-    start_cell = {(GRID_CELL_SIZE / 10), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
+    start_cell = (SDL_Rect){(GRID_CELL_SIZE / 10), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
     render_color((rgb_color_t){0, 0, 0});
     render_rect(&start_cell);
 
