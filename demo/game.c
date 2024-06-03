@@ -63,6 +63,7 @@ bool emscripten_main(state_t *state)
 
 void emscripten_free(state_t *state)
 {
+    printf("when do you stop\n");
     scene_free(state->scene);
     asset_cache_destroy();
     free(state);
