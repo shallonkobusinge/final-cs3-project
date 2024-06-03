@@ -153,6 +153,8 @@ void generate_maze(state_t *state)
     printf("Page: %d\n", state->page);
     sdl_clear();
     init_grid();
+
+    state->maze_generated = false;
     // init_maze();
 
     // cell_t *cell = malloc(sizeof(cell_t));
