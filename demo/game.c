@@ -25,6 +25,43 @@ struct state
     bool maze_generated;
 };
 
+void on_key(char key, key_event_type_t type, double held_time, state_t *state)
+{
+    if (type == KEY_PRESSED)
+    {
+        switch (key)
+        {
+        case LEFT_ARROW:
+        {
+            printf("going left\n");
+            break;
+        }
+        case RIGHT_ARROW:
+        {
+            printf("going right\n");
+            break;
+        }
+        case UP_ARROW:
+        {
+            printf("going up\n");
+            break;
+        }
+        case DOWN_ARROW:
+        {
+            printf("going down\n");
+            break;
+        }
+        }
+    }
+    else if (type == KEY_RELEASED)
+    {
+        if (key == LEFT_ARROW || key == RIGHT_ARROW)
+        {
+            printf("NOTHING \n");
+        }
+    }
+}
+
 state_t *emscripten_init()
 {
     asset_cache_init();
@@ -40,6 +77,8 @@ state_t *emscripten_init()
 
 bool emscripten_main(state_t *state)
 {
+    sdl_on_key((key_handler_t)on_key);
+
     if (state->page == 0)
     {
         build_landing_page();

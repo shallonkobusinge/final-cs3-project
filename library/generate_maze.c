@@ -148,43 +148,6 @@ void remove_wall(cell_t *cell, cell_t *neighbor)
     SDL_Delay(30);
 }
 
-void on_key(char key, key_event_type_t type, double held_time, state_t *state)
-{
-    if (type == KEY_PRESSED)
-    {
-        switch (key)
-        {
-        case LEFT_ARROW:
-        {
-            printf("going left\n");
-            break;
-        }
-        case RIGHT_ARROW:
-        {
-            printf("going right\n");
-            break;
-        }
-        case UP_ARROW:
-        {
-            printf("going up\n");
-            break;
-        }
-        case DOWN_ARROW:
-        {
-            printf("going down\n");
-            break;
-        }
-        }
-    }
-    else if (type == KEY_RELEASED)
-    {
-        if (key == LEFT_ARROW || key == RIGHT_ARROW)
-        {
-            printf("NOTHING \n");
-        }
-    }
-}
-
 bool generate_maze(state_t *state)
 {
     printf("Page: %d\n", state->page);
