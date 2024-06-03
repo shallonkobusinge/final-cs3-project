@@ -48,7 +48,7 @@ bool emscripten_main(state_t *state)
     {
         if (!state->maze_generated)
         {
-            generate_maze(state);
+            state->maze_generated = generate_maze(state);
             printf("her bbga e show");
             printf("here show");
         }
