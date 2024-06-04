@@ -89,7 +89,7 @@ void random_move_seeker (seeker_t *seeker) {
     int direction = rand() % 4;
     switch (direction) {
     case 0: { // move left
-     if (seeker. - GRID_CELL_SIZE >= 0) {
+     if (seeker_cell.x - GRID_CELL_SIZE >= 0) {
             seeker_cell.x -= GRID_CELL_SIZE;
         }
         break;
@@ -272,7 +272,7 @@ bool generate_maze(state_t *state)
 
     init_grid(state);
     // init_maze();
-    random_move_seeker();
+    random_move_seeker(state->seeker);
     // render_color((rgb_color_t){0, 0, 0});
     // render_rect(&terminal_cell);
     // // sdl_show();
