@@ -119,10 +119,11 @@ static void init_grid()
     terminal_cell.y = ((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
     terminal_cell.w = GRID_CELL_SIZE / 2;
     terminal_cell.h = GRID_CELL_SIZE / 2;
+    random_move_seeker(terminal_cell);
 
     render_color((rgb_color_t){0, 0, 0});
     render_rect(&terminal_cell);
-    random_move_seeker(terminal_cell);
+    
 
 }
 
