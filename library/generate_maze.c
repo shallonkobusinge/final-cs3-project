@@ -267,9 +267,6 @@ bool generate_maze(state_t *state, double dt)
     printf("Page: %d\n", state->page);
     sdl_clear();
     init_grid();
-    // render_seeker();
-    // render_color((rgb_color_t){0, 0, 0});
-    // render_rect(&seeker_cell);
     
     // sdl_show();
     return false;
