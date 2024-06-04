@@ -79,7 +79,7 @@ static size_t find_min(size_t a, size_t b)
 */
 static void random_move_seeker (SDL_Rect terminal_cell) {
     printf("WE are here ");
-    SDL_Delay(70);
+    SDL_Delay(110);
     int direction = rand() % 4;
     switch (direction) {
     case 0: { // move left
@@ -276,10 +276,10 @@ bool generate_maze(state_t *state)
 
     init_grid(state);
     // init_maze();
-    // for(size_t i = 0; i < list_size(state->seekers); i++) {
-    //     SDL_Rect *rect = list_get(state->seekers, i);
-    //     random_move_seeker(*rect);
-    // }
+    for(size_t i = 0; i < list_size(state->seekers); i++) {
+        SDL_Rect *rect = list_get(state->seekers, i);
+        random_move_seeker(*rect);
+    }
     //     random_move_seeker();
     // render_color((rgb_color_t){0, 0, 0});
     // render_rect(&terminal_cell);
