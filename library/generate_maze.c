@@ -21,7 +21,7 @@ bool adj_matrix[NUM_CELLS][NUM_CELLS];
 cell_t *parent[GRID_WIDTH][GRID_HEIGHT];
 
 SDL_Rect hider_cell = (SDL_Rect){(GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
-SDL_Rect seeker_cell = (SDL_Rect){(((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2) };
+
 
 static stack_t *head;
 typedef struct state
@@ -75,9 +75,10 @@ static void init_grid()
     render_rect(&hider_cell);
 
   
-
+    SDL_Rect seeker_cell = (SDL_Rect){(((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2) };
     render_color((rgb_color_t){0, 0, 0});
     render_rect(&seeker_cell);
+    random_move_seeker(seeker_cell); 
 
     sdl_show();
 }
@@ -252,15 +253,14 @@ bool generate_maze(state_t *state, double dt)
     new_seeker_cell.y = ((rand() % GRID_HEIGHT) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
     new_seeker_cell.w = GRID_CELL_SIZE / 2;
     new_seeker_cell.h = GRID_CELL_SIZE / 2;
+    render_color((rgb_color_t){0, 0, 0});
     render_rect(&new_seeker_cell);
      random_move_seeker(new_seeker_cell); 
         state->last_seeker_mov_time = 0;    
     }
-    random_move_seeker(seeker_cell); 
     printf("Page: %d\n", state->page);
     sdl_clear();
     init_grid();
-    render_rect(&seeker_cell);
     // sdl_show();
     return false;
     // init_maze();
