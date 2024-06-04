@@ -287,9 +287,9 @@ bool generate_maze(state_t *state)
 
     init_grid(state);
     // init_maze();
-    for(size_t i = 0; i < list_size(state->seekers); i++) {
-            random_move_seeker((cell_t *)list_get(state->seekers, i), list_size(state->seekers));
-    }
+    // for(size_t i = 0; i < list_size(state->seekers); i++) {
+    //         random_move_seeker((cell_t *)list_get(state->seekers, i), list_size(state->seekers));
+    // }
         
     // render_color((rgb_color_t){0, 0, 0});
     // render_rect(&terminal_cell);
