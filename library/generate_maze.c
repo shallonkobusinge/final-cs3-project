@@ -29,6 +29,7 @@ typedef struct state
     size_t page;
     bool maze_generated;
     int counter;
+    stack_t *head;
 } state_t;
 
 const size_t NUM_BUILDINGS = 4;
@@ -238,15 +239,15 @@ bool generate_maze(state_t *state)
     cell->y = 1;
     visited[cell->x][cell->y] = true;
 
-    push_stack(&head, cell);
+    push_stack(&state->head, cell);
 
     printf("hano se \n");
     while (head != NULL)
     {
-        cell = pop_stack(&head);
+        cell = pop_stack(&state->head);
         if (get_neighbor(cell, visited) != NULL)
         {
-            push_stack(&head, cell);
+            push_stack(&state->head, cell);
             cell_t *neighbor = get_neighbor(cell, visited);
             remove_wall(cell, neighbor);
             visited[neighbor->x][neighbor->y] = true;

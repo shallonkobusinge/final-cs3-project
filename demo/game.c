@@ -9,6 +9,7 @@
 #include "generate_maze.h"
 #include "asset_cache.h"
 #include "sdl_wrapper.h"
+#include "stack.h"
 
 const vector_t MIN = {0, 0};
 const vector_t MAX = {1000, 500};
@@ -23,7 +24,7 @@ struct state
     scene_t *scene;
     size_t page;
     bool maze_generated;
-    int counter;
+    stack_t *head;
 };
 
 state_t *emscripten_init()
@@ -36,6 +37,7 @@ state_t *emscripten_init()
 
     state->page = 1;
     state->counter = 0;
+    state->head = NULL;
     sdl_clear();
 
     return state;
