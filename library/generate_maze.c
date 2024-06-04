@@ -28,6 +28,7 @@ typedef struct state
     scene_t *scene;
     size_t page;
     bool maze_generated;
+    int counter;
 } state_t;
 
 const size_t NUM_BUILDINGS = 4;
@@ -253,5 +254,7 @@ bool generate_maze(state_t *state)
             push_stack(&head, neighbor);
         }
     }
-    return true;
+    state->counter++;
+
+    return false;
 }

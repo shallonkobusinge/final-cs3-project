@@ -23,6 +23,7 @@ struct state
     scene_t *scene;
     size_t page;
     bool maze_generated;
+    int counter;
 };
 
 state_t *emscripten_init()
@@ -50,7 +51,7 @@ bool emscripten_main(state_t *state)
     {
         if (!state->maze_generated)
         {
-
+            printf("State is: %d\n", state->counter);
             state->maze_generated = generate_maze(state);
         }
     }
