@@ -22,19 +22,14 @@ cell_t *parent[GRID_WIDTH][GRID_HEIGHT];
 
 SDL_Rect hider_cell = (SDL_Rect){(GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
 
-
 static stack_t *head;
 typedef struct state
 {
     scene_t *scene;
     size_t page;
     bool maze_generated;
-    double last_seeker_mov_time;
 } state_t;
 
-// typedef struct seeker {
-//     SDL_Rect rect;
-// }seeker_t;
 /**
  * Finds max between two numbers
  * @param a first number
@@ -45,6 +40,17 @@ static size_t
 find_max(size_t a, size_t b)
 {
     return (a > b) ? a : b;
+}
+
+/**
+ * Finds min between two numbers
+ * @param a first number
+ * @param b second number
+ * @return minimum numbers between the provided arguments
+ */
+static size_t find_min(size_t a, size_t b)
+{
+    return (a > b) ? b : a;
 }
 
 /*
@@ -85,17 +91,6 @@ void random_move_seeker (SDL_Rect terminal_cell) {
 }
 
 /**
- * Finds min between two numbers
- * @param a first number
- * @param b second number
- * @return minimum numbers between the provided arguments
- */
-static size_t find_min(size_t a, size_t b)
-{
-    return (a > b) ? b : a;
-}
-
-/**
  * Initialize and draw the Maze Grid.
  */
 static void init_grid()
@@ -113,6 +108,7 @@ static void init_grid()
 
     render_color((rgb_color_t){0, 255, 0});
     render_rect(&hider_cell);
+
     SDL_Rect terminal_cell;
     terminal_cell.x = ((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
     terminal_cell.y = ((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
@@ -121,10 +117,8 @@ static void init_grid()
 
     render_color((rgb_color_t){0, 0, 0});
     render_rect(&terminal_cell);
-    random_move_seeker(terminal_cell);
-    
-    sdl_show();
 
+    sdl_show();
 }
 
 /**
@@ -249,15 +243,13 @@ void remove_wall(cell_t *cell, cell_t *neighbor)
     SDL_Delay(30);
 }
 
-bool generate_maze(state_t *state, double dt)
+bool generate_maze(state_t *state)
 {
     sdl_on_key((key_handler_t)on_key);
-    state->last_seeker_mov_time += dt;
-    printf("HEEREE");
+
+    printf("Page: %d\n", state->page);
     sdl_clear();
     init_grid();
-    
-    
     // sdl_show();
     return false;
     // init_maze();

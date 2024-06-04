@@ -50,7 +50,6 @@ bool emscripten_main(state_t *state)
     {
         if (!state->maze_generated)
         {
-            printf("HEREE GAME");
             state->maze_generated = generate_maze(state, dt);
         }
         sdl_show();
