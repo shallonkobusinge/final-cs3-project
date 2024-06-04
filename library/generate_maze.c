@@ -120,7 +120,7 @@ static void random_move_seeker (cell_t *seeker, size_t num_seekers) {
         return;
     }
     seeker->x = seeker_x;
-    seeker.y = seeker_y;
+    seeker->y = seeker_y;
 
 }
 
@@ -147,8 +147,8 @@ static void init_grid(state_t *state)
     {
         cell_t *cell = malloc(sizeof(cell_t));
         cell->x = buildings[i].x;
-        cell.y = buildings[i].y;
-        SDL_Rect seeker_cell = {cell.x, cell->y, GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2};
+        cell->y = buildings[i].y;
+        SDL_Rect seeker_cell = {cell->x, cell->y, GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2};
       
         render_color((rgb_color_t){241, 108, 45});
         render_rect(&seeker_cell);
