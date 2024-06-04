@@ -32,6 +32,9 @@ typedef struct state
     double last_seeker_mov_time;
 } state_t;
 
+typedef struct seeker {
+    SDL_Rect *rect;
+}seeker_t;
 /**
  * Finds max between two numbers
  * @param a first number
@@ -92,6 +95,13 @@ static size_t find_min(size_t a, size_t b)
     return (a > b) ? b : a;
 }
 
+static void render_seeker(){
+    seeker_t *seeker = malloc(sizeof(seeker_t));
+    seeker->rect = (SDL_Rect){(((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2) }
+    render_color((rgb_color_t){0, 0, 0});
+    render_rect(&seeker->rect);
+}
+
 /**
  * Initialize and draw the Maze Grid.
  */
@@ -111,10 +121,7 @@ static void init_grid()
     render_color((rgb_color_t){0, 255, 0});
     render_rect(&hider_cell);
 
-  
-    SDL_Rect seeker_cell = (SDL_Rect){(((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2) };
-    render_color((rgb_color_t){0, 0, 0});
-    render_rect(&seeker_cell);
+    render_seeker();
 
     sdl_show();
 }
@@ -245,18 +252,7 @@ bool generate_maze(state_t *state, double dt)
 {
     sdl_on_key((key_handler_t)on_key);
     state->last_seeker_mov_time += dt;
-    // if(state->last_seeker_mov_time >= 5.0) {
-    //     SDL_Rect new_seeker_cell;
-    //     // printf(" LAST TIME %f CURRENT TIME %f \n", state->last_seeker_mov_time, dt);
-    // new_seeker_cell.x = ((rand() % GRID_WIDTH) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
-    // new_seeker_cell.y = ((rand() % GRID_HEIGHT) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
-    // new_seeker_cell.w = GRID_CELL_SIZE / 2;
-    // new_seeker_cell.h = GRID_CELL_SIZE / 2;
-    // render_color((rgb_color_t){0, 0, 0});
-    // render_rect(&new_seeker_cell);
-    //  random_move_seeker(new_seeker_cell); 
-    //     state->last_seeker_mov_time = 0;    
-    // }
+   
     printf("Page: %d\n", state->page);
     sdl_clear();
     init_grid();
