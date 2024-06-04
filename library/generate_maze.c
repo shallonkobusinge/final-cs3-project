@@ -44,6 +44,43 @@ find_max(size_t a, size_t b)
     return (a > b) ? a : b;
 }
 
+/*
+ * Moves the seeker cell to a random
+ * adjacent cell 
+*/
+void random_move_seeker (SDL_Rect seeker_cell) {
+    SDL_Delay(700);
+    int direction = rand() % 4;
+    switch (direction) {
+    case 0: { // move left
+     if (seeker_cell.x - GRID_CELL_SIZE >= 0) {
+            seeker_cell.x -= GRID_CELL_SIZE;
+        }
+        break;
+    }
+    case 1: { // move right
+        if (seeker_cell.x + GRID_CELL_SIZE < window_width) {
+            seeker_cell.x += GRID_CELL_SIZE;
+        }
+        break;
+    }
+    case 2: { // move up
+        if (seeker_cell.y - GRID_CELL_SIZE >= 0) {
+            seeker_cell.y -= GRID_CELL_SIZE;
+            break;
+        }
+    }
+    case 3: { // move down
+        if (seeker_cell.y + GRID_CELL_SIZE < window_height) {
+            seeker_cell.y += GRID_CELL_SIZE;
+            break;
+        }
+    }
+    default:
+        break;
+    }
+}
+
 /**
  * Finds min between two numbers
  * @param a first number
@@ -171,43 +208,6 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
         {
             printf("NOTHING \n");
         }
-    }
-}
-
-/*
- * Moves the seeker cell to a random
- * adjacent cell 
-*/
-void random_move_seeker (SDL_Rect seeker_cell) {
-    SDL_Delay(700);
-    int direction = rand() % 4;
-    switch (direction) {
-    case 0: { // move left
-     if (seeker_cell.x - GRID_CELL_SIZE >= 0) {
-            seeker_cell.x -= GRID_CELL_SIZE;
-        }
-        break;
-    }
-    case 1: { // move right
-        if (seeker_cell.x + GRID_CELL_SIZE < window_width) {
-            seeker_cell.x += GRID_CELL_SIZE;
-        }
-        break;
-    }
-    case 2: { // move up
-        if (seeker_cell.y - GRID_CELL_SIZE >= 0) {
-            seeker_cell.y -= GRID_CELL_SIZE;
-            break;
-        }
-    }
-    case 3: { // move down
-        if (seeker_cell.y + GRID_CELL_SIZE < window_height) {
-            seeker_cell.y += GRID_CELL_SIZE;
-            break;
-        }
-    }
-    default:
-        break;
     }
 }
 
