@@ -46,7 +46,7 @@ cell_t buildings[] = {
         .y = ((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
     },
     {
-        .x = ((GRID_WIDTH - 20) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+        .x = ((GRID_WIDTH - 24) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
         .y = ((GRID_HEIGHT - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
     },
 };
@@ -95,7 +95,7 @@ static void init_grid()
     for (size_t i = 0; i < NUM_BUILDINGS; i++)
     {
         SDL_Rect cell = {buildings[i].x, buildings[i].y, GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2};
-        render_color((rgb_color_t){0, 0, 0});
+        render_color((rgb_color_t){241, 108, 45});
         render_rect(&cell);
     }
 }
