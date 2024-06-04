@@ -280,10 +280,10 @@ bool generate_maze(state_t *state, double dt)
     render_seeker(state);
     sdl_clear();
     init_grid();
-    for(size_t i = 0; i < num_seekers; i++){
-        render_color((rgb_color_t){0, 0, 0});
-        render_rect(&seekers[i].rect);
-    }
+    // for(size_t i = 0; i < num_seekers; i++){
+    //     render_color((rgb_color_t){0, 0, 0});
+    //     render_rect(&seekers[i].rect);
+    // }
     // sdl_show();
     return false;
     // init_maze();
