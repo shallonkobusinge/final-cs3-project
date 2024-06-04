@@ -59,7 +59,8 @@ static size_t find_min(size_t a, size_t b)
  * adjacent cell 
 */
 static void random_move_seeker () {
-    SDL_Delay(70);
+    printf("WE are here ");
+    SDL_Delay(10);
     int direction = rand() % 4;
     switch (direction) {
     case 0: { // move left
