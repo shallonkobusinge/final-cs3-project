@@ -136,6 +136,8 @@ static void init_grid()
 
     render_color((rgb_color_t){0, 255, 0});
     render_rect(&hider_cell);
+
+    render_seeker();
 }
 
 /**
