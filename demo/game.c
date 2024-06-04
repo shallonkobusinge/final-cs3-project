@@ -50,7 +50,7 @@ bool emscripten_main(state_t *state)
     }
     else if (state->page == 1)
     {
-        if (!state->maze_generated)
+        if (state->counter < 3)
         {
             printf("State is: %d\n", state->counter);
             state->maze_generated = generate_maze(state);
