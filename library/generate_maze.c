@@ -115,7 +115,7 @@ static void init_grid()
     SDL_Rect seeker_cell = (SDL_Rect){(((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2) };
     render_color((rgb_color_t){0, 0, 0});
     render_rect(&seeker_cell);
-    random_move_seeker(seeker_cell); 
+    // random_move_seeker(seeker_cell); 
 
     sdl_show();
 }
@@ -255,7 +255,7 @@ bool generate_maze(state_t *state, double dt)
     new_seeker_cell.h = GRID_CELL_SIZE / 2;
     render_color((rgb_color_t){0, 0, 0});
     render_rect(&new_seeker_cell);
-     random_move_seeker(new_seeker_cell); 
+    //  random_move_seeker(new_seeker_cell); 
         state->last_seeker_mov_time = 0;    
     }
     printf("Page: %d\n", state->page);
