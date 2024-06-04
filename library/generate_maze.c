@@ -268,11 +268,11 @@ bool generate_maze(state_t *state)
 {
     sdl_on_key((key_handler_t)on_key);
 
-    printf("Page: %d\n", state->page);
+    // printf("Page: %d\n", state->page);
 
     init_grid(state);
     // init_maze();
-    random_move_seeker(state->seeker);
+    // random_move_seeker(state->seeker);
     // render_color((rgb_color_t){0, 0, 0});
     // render_rect(&terminal_cell);
     // // sdl_show();
