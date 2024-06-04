@@ -14,6 +14,7 @@
 #include "asset_cache.h"
 #include "sdl_wrapper.h"
 #include "sound_effect.h"
+#include "seeker.h"
 
 const vector_t MIN = {0, 0};
 const vector_t MAX = {1000, 500};
@@ -29,6 +30,7 @@ struct state
     size_t page;
     bool maze_generated;
     sound_effect_t *sound_effect;
+    seeker_t *seeker;
     
 };
 
@@ -41,6 +43,7 @@ state_t *emscripten_init()
     state->scene = scene_init();
     state->maze_generated = false;
     state->sound_effect = load_game_sounds();
+    state->seeker = seeker_init(state->scene);
     state->page = 1;
 
     game_sound(state->sound_effect);
@@ -51,7 +54,7 @@ state_t *emscripten_init()
 bool emscripten_main(state_t *state)
 {
     double dt = time_since_last_tick();
-
+    introduce_seeker(state->scene, state->seeker, dt, state->sound_effect);
     sdl_clear();
     if (state->page == 0)
     {
@@ -65,6 +68,7 @@ bool emscripten_main(state_t *state)
         }
         sdl_show();
     }
+    scene_tick(state->scene, dt);
 
     return false;
 }
