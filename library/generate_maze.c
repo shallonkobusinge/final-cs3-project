@@ -53,7 +53,7 @@ find_max(size_t a, size_t b)
  * adjacent cell 
 */
 void random_move_seeker (SDL_Rect seeker_cell) {
-    SDL_Delay(700);
+    SDL_Delay(70);
     int direction = rand() % 4;
     switch (direction) {
     case 0: { // move left
