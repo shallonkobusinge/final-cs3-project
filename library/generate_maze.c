@@ -84,27 +84,27 @@ static void random_move_seeker (SDL_Rect *terminal_cell) {
     int direction = rand() % 4;
     switch (direction) {
     case 0: { // move left
-     if (single_v->x - GRID_CELL_SIZE >= 0) {
-            single_v->x -= GRID_CELL_SIZE;
+     if (single_v.x - GRID_CELL_SIZE >= 0) {
+            single_v.x -= GRID_CELL_SIZE;
         }
         break;
     }
     case 1: { // move right
-        if (single_v->x + GRID_CELL_SIZE < window_width) {
-            single_v->x += GRID_CELL_SIZE;
+        if (single_v.x + GRID_CELL_SIZE < window_width) {
+            single_v.x += GRID_CELL_SIZE;
         }
         break;
     }
     case 2: { // move up
-        if (single_v->y - GRID_CELL_SIZE >= 0) {
-            single_v->y -= GRID_CELL_SIZE;
+        if (single_v.y - GRID_CELL_SIZE >= 0) {
+            single_v.y -= GRID_CELL_SIZE;
             
         }
         break;
     }
     case 3: { // move down
-        if (single_v->y + GRID_CELL_SIZE < window_height) {
-            single_v->y += GRID_CELL_SIZE;
+        if (single_v.y + GRID_CELL_SIZE < window_height) {
+            single_v.y += GRID_CELL_SIZE;
             
         }
         break;
