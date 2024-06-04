@@ -137,6 +137,8 @@ static void init_grid()
         SDL_Rect cell;
         cell.x = ((rand() % GRID_WIDTH) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
         cell.y = ((rand() % GRID_HEIGHT) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+        cell.w = GRID_CELL_SIZE / 2;
+        cell.h = GRID_CELL_SIZE / 2;
         render_color((rgb_color_t){241, 108, 45});
         render_rect(&cell);
     }
