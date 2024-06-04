@@ -77,6 +77,7 @@ void wrap_seeker_scene(body_t *seeker) {
 void add_new_seeker(scene_t *scene, seeker_t *seeker_ipt, bool is_new){
     printf(" WE are heree ");
      SDL_Rect seeker_cell = {((GRID_WIDTH_S - 2) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4, ((GRID_WIDTH_S - 3) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4, GRID_CELL_SIZE_S / 2, GRID_CELL_SIZE_S / 2}; 
+     render_color((rgb_color_t){241, 108, 45});
     render_rect(&seeker_cell);
   //  vector_t seeker_vel = {.x = 0.0, .y = 0.0};
    body_t *seeker;
