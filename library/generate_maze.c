@@ -30,6 +30,22 @@ typedef struct state
     bool maze_generated;
 } state_t;
 
+const size_t NUM_BUILDINGS = 3;
+
+cell_t buildings[] = {
+    {
+        .x = ((GRID_WIDTH - 3) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+        .y = ((GRID_HEIGHT - 3) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+    },
+    {
+        .x = ((GRID_WIDTH - 12) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+        .y = ((GRID_HEIGHT - 12) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+    },
+    {
+        .x = ((GRID_WIDTH - 10) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+        .y = ((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+    },
+};
 /**
  * Finds max between two numbers
  * @param a first number
@@ -72,14 +88,12 @@ static void init_grid()
     render_color((rgb_color_t){0, 255, 0});
     render_rect(&hider_cell);
 
-    SDL_Rect terminal_cell;
-    terminal_cell.x = ((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
-    terminal_cell.y = ((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
-    terminal_cell.w = GRID_CELL_SIZE / 2;
-    terminal_cell.h = GRID_CELL_SIZE / 2;
-
-    render_color((rgb_color_t){0, 0, 0});
-    render_rect(&terminal_cell);
+    for (size_t i = 0; i < NUM_BUILDINGS; i++)
+    {
+        SDL_Rect cell = {buildings[i].x, buildings[i].y, GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2};
+        render_color((rgb_color_t){0, 0, 0});
+        render_rect(&cell);
+    }
 }
 
 /**
@@ -211,27 +225,27 @@ bool generate_maze(state_t *state)
     printf("Page: %d\n", state->page);
 
     init_grid();
-    init_maze();
+    // init_maze();
 
-    cell_t *cell = malloc(sizeof(cell_t));
-    cell->x = 1;
-    cell->y = 1;
-    visited[cell->x][cell->y] = true;
+    // cell_t *cell = malloc(sizeof(cell_t));
+    // cell->x = 1;
+    // cell->y = 1;
+    // visited[cell->x][cell->y] = true;
 
-    push_stack(&head, cell);
+    // push_stack(&head, cell);
 
-    while (head != NULL)
-    {
-        cell = pop_stack(&head);
-        if (get_neighbor(cell, visited) != NULL)
-        {
-            push_stack(&head, cell);
-            cell_t *neighbor = get_neighbor(cell, visited);
-            remove_wall(cell, neighbor);
-            visited[neighbor->x][neighbor->y] = true;
-            adjacency(cell, neighbor, adj_matrix);
-            push_stack(&head, neighbor);
-        }
-    }
+    // while (head != NULL)
+    // {
+    //     cell = pop_stack(&head);
+    //     if (get_neighbor(cell, visited) != NULL)
+    //     {
+    //         push_stack(&head, cell);
+    //         cell_t *neighbor = get_neighbor(cell, visited);
+    //         remove_wall(cell, neighbor);
+    //         visited[neighbor->x][neighbor->y] = true;
+    //         adjacency(cell, neighbor, adj_matrix);
+    //         push_stack(&head, neighbor);
+    //     }
+    // }
     return false;
 }
