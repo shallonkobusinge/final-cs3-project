@@ -30,6 +30,7 @@ typedef struct state
     size_t page;
     bool maze_generated;
     double last_seeker_mov_time;
+    list_t *seekers;
 } state_t;
 
 typedef struct seeker {
@@ -95,18 +96,25 @@ static size_t find_min(size_t a, size_t b)
     return (a > b) ? b : a;
 }
 
-static void render_seeker(){
+static void render_seeker(state_t *state){
+    SDL_Delay(80);
+    seeker_t *seeker = malloc(sizeof(seeker_t));
+    seeker->rect = (SDL_Rect){(((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2) };
+    render_color((rgb_color_t){0, 0, 0});
+    render_rect(&seeker->rect);
+    list_add(state->seekers, seeker);
     SDL_Delay(80);
     seeker_t *seeker = malloc(sizeof(seeker_t));
     seeker->rect = (SDL_Rect){(((rand() % GRID_WIDTH) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (((rand() % GRID_HEIGHT) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2) };
     render_color((rgb_color_t){0, 0, 0});
     render_rect(&seeker->rect);
+    list_add(state->seekers, seeker);
 }
 
 /**
  * Initialize and draw the Maze Grid.
  */
-static void init_grid()
+static void init_grid(state_t *state)
 {
     render_color((rgb_color_t){210, 210, 210});
 
@@ -122,10 +130,7 @@ static void init_grid()
     render_color((rgb_color_t){0, 255, 0});
     render_rect(&hider_cell);
 
-    seeker_t *seeker = malloc(sizeof(seeker_t));
-    seeker->rect = (SDL_Rect){(((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2) };
-    render_color((rgb_color_t){0, 0, 0});
-    render_rect(&seeker->rect);
+    
 
     sdl_show();
 }
@@ -258,13 +263,17 @@ bool generate_maze(state_t *state, double dt)
     state->last_seeker_mov_time += dt;
     
     printf("Page: %d\n", state->page);
-    
-    init_grid();
-    sdl_clear();
     if(state->last_seeker_mov_time > 5.0){
         render_seeker();
         state->last_seeker_mov_time = 0;
     }
+    sdl_clear();
+    for(size_t i = 0; i < list_size(state->seekers); i++) {
+        SDL_Rect rect = list_get(state->seekers, i);
+        render_rect(&rect);
+    }
+
+    init_grid();
     
     
     // sdl_show();
