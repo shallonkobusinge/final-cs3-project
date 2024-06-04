@@ -245,7 +245,7 @@ bool generate_maze(state_t *state, double dt)
 {
     sdl_on_key((key_handler_t)on_key);
     state->last_seeker_mov_time += dt;
-    if(state->last_seeker_mov_time >= 30.0) {
+    if(state->last_seeker_mov_time >= 5.0) {
         // printf(" LAST TIME %f CURRENT TIME %f \n", state->last_seeker_mov_time, dt);
     seeker_cell.x = ((rand() % GRID_WIDTH) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
     seeker_cell.y = ((rand() % GRID_HEIGHT) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
