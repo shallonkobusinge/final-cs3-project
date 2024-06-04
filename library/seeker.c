@@ -118,7 +118,9 @@ seeker_t *seeker_init(scene_t *scene){
   seeker->max_seekers = 50;
   seeker->last_seeker_time = 0;
   seeker->body_assets = list_init(seeker->max_seekers, (free_func_t)asset_destroy);
+   printf("HEREE INSIDE SEEKER INITI \n");
     add_new_seeker(scene, seeker, false);
+     printf("AFTER HEREE INSIDE SEEKER INITI \n");
     
     return seeker;
 }
