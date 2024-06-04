@@ -182,28 +182,24 @@ void random_move_seeker () {
     case 0: { // move left
      if (seeker_cell.x - GRID_CELL_SIZE >= 0) {
             seeker_cell.x -= GRID_CELL_SIZE;
-            render_rect(&seeker_cell);
         }
         break;
     }
     case 1: { // move right
         if (seeker_cell.x + GRID_CELL_SIZE < window_width) {
             seeker_cell.x += GRID_CELL_SIZE;
-            render_rect(&seeker_cell);
         }
         break;
     }
     case 2: { // move up
         if (seeker_cell.y - GRID_CELL_SIZE >= 0) {
             seeker_cell.y -= GRID_CELL_SIZE;
-              render_rect(&seeker_cell);
             break;
         }
     }
     case 3: { // move down
         if (seeker_cell.y + GRID_CELL_SIZE < window_height) {
             seeker_cell.y += GRID_CELL_SIZE;
-            render_rect(&seeker_cell);
             break;
         }
     }
@@ -250,6 +246,7 @@ bool generate_maze(state_t *state)
     printf("Page: %d\n", state->page);
     sdl_clear();
     init_grid();
+    render_rect(&seeker_cell);
     // sdl_show();
     return false;
     // init_maze();
