@@ -54,8 +54,9 @@ bool emscripten_main(state_t *state)
         if (!state->maze_generated)
         {
             state->maze_generated = generate_maze(state, dt);
-            render_seeker();
+            
         }
+        render_seeker();
         sdl_show();
     }
 
