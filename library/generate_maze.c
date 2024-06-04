@@ -19,9 +19,11 @@ const int window_height = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
 bool visited[GRID_WIDTH + 2][GRID_HEIGHT + 2];
 bool adj_matrix[NUM_CELLS][NUM_CELLS];
 cell_t *parent[GRID_WIDTH][GRID_HEIGHT];
+const int max_seekers = 10;
 
 SDL_Rect hider_cell = (SDL_Rect){(GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
 //  SDL_Rect seeker_cell = {((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4, ((GRID_WIDTH - 3) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4, GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2}; 
+SDL_Rect seeker_cells[max_seekers];
 
 static stack_t *head;
 typedef struct state
@@ -121,6 +123,8 @@ static void random_move_seeker (cell_t *seeker, size_t num_seekers) {
     }
     seeker->x = seeker_x;
     seeker->y = seeker_y;
+    seeker_cells[num_seekers - 1].x = seeker->x;
+    seeker_cells[num_seekers - 1].x = seeker->y;
 
 }
 
