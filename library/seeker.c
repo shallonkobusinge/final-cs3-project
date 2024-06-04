@@ -41,7 +41,7 @@ typedef struct seeker {
 body_t *make_seeker(double w, double h, vector_t center) {
     list_t *c = list_init(4, free);
   vector_t *v1 = malloc(sizeof(vector_t));
-  *v1 = (vector_t){center.x, 0};
+  *v1 = (vector_t){0, 0};
   list_add(c, v1);
 
   vector_t *v2 = malloc(sizeof(vector_t));
