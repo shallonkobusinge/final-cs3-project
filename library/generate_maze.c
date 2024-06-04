@@ -21,7 +21,7 @@ bool adj_matrix[NUM_CELLS][NUM_CELLS];
 cell_t *parent[GRID_WIDTH][GRID_HEIGHT];
 
 SDL_Rect hider_cell = (SDL_Rect){(GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
- SDL_Rect seeker_cell = {((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4, ((GRID_WIDTH - 3) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4, GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2}; 
+//  SDL_Rect seeker_cell = {((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4, ((GRID_WIDTH - 3) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4, GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2}; 
 
 static stack_t *head;
 typedef struct state
@@ -79,33 +79,35 @@ static size_t find_min(size_t a, size_t b)
  * Moves the seeker cell to a random
  * adjacent cell 
 */
-static void random_move_seeker () {
+static void random_move_seeker (cell_t *seeker, size_t num_seekers) {
     printf("WE are here ");
     SDL_Delay(85);
     int direction = rand() % 4;
+    size_t seeker_x = seeker->x;
+    size_t seeker_y = seeker->y;
     switch (direction) {
     case 0: { // move left
-     if (seeker_cell.x - GRID_CELL_SIZE >= 0) {
-            seeker_cell.x -= GRID_CELL_SIZE;
+     if (seeker_x - GRID_CELL_SIZE >= 0) {
+            seeker_x -= GRID_CELL_SIZE;
         }
         break;
     }
     case 1: { // move right
-        if (seeker_cell.x + GRID_CELL_SIZE < window_width) {
-            seeker_cell.x += GRID_CELL_SIZE;
+        if (seeker_x + GRID_CELL_SIZE < window_width) {
+            seeker_x += GRID_CELL_SIZE;
         }
         break;
     }
     case 2: { // move up
-        if (seeker_cell.y - GRID_CELL_SIZE >= 0) {
-            seeker_cell.y -= GRID_CELL_SIZE;
+        if (seeker_y - GRID_CELL_SIZE >= 0) {
+            seeker_y -= GRID_CELL_SIZE;
             
         }
         break;
     }
     case 3: { // move down
-        if (seeker_cell.y + GRID_CELL_SIZE < window_height) {
-            seeker_cell.y += GRID_CELL_SIZE;
+        if (seeker_y + GRID_CELL_SIZE < window_height) {
+            seeker_y += GRID_CELL_SIZE;
             
         }
         break;
@@ -113,6 +115,13 @@ static void random_move_seeker () {
     default:
         break;
     }
+    if(hider_cell.x == seeker_x && hidder_cell.y == seeker_y) {
+        printf(" PLACE FOR COLLISION ");
+        return;
+    }
+    seeker->x = seeker_x;
+    seeker.y = seeker_y;
+
 }
 
 /**
@@ -134,14 +143,18 @@ static void init_grid(state_t *state)
     render_color((rgb_color_t){50, 129, 110});
     render_rect(&hider_cell);
 
-    // for (size_t i = 0; i < NUM_BUILDINGS; i++)
-    // {
-        // SDL_Rect cell = {buildings[i].x, buildings[i].y, GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2};
+    for (size_t i = 0; i < list_size(state->seekers); i++)
+    {
+        cell_t *cell = malloc(sizeof(cell_t));
+        cell->x = buildings[i].x;
+        cell.y = buildings[i].y;
+        SDL_Rect seeker_cell = {cell.x, cell->y, GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2};
       
         render_color((rgb_color_t){241, 108, 45});
         render_rect(&seeker_cell);
+        list_add(state->seekers, cell);
 
-    // }
+    }
 }
 
 /**
@@ -274,7 +287,10 @@ bool generate_maze(state_t *state)
 
     init_grid(state);
     // init_maze();
-        random_move_seeker();
+    for(size_t i = 0; i < list_size(state->seekers); i++) {
+            random_move_seeker((cell_t *)list_get(state->seekers, i), list_size(state->seekers));
+    }
+        
     // render_color((rgb_color_t){0, 0, 0});
     // render_rect(&terminal_cell);
     // // sdl_show();
