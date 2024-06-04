@@ -38,7 +38,7 @@ typedef struct seeker
     SDL_Rect rect;
 } seeker_t;
 
-double num_seekers = 0;
+int num_seekers = 0;
 seeker_t *seekers = NULL;
 
 /**
