@@ -275,7 +275,7 @@ bool generate_maze(state_t *state)
     printf("Page: %d\n", state->page);
 
     init_grid(state);
-    init_maze();
+    // init_maze();
     // for(size_t i = 0; i < list_size(state->seekers); i++) {
     //     SDL_Rect *rect = list_get(state->seekers, i);
     //     random_move_seeker(*rect);
