@@ -177,7 +177,7 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
  * Moves the seeker cell to a random
  * adjacent cell 
 */
-void random_move_seeker () {
+void random_move_seeker (SDL_Rect seeker_cell) {
     SDL_Delay(700);
     int direction = rand() % 4;
     switch (direction) {
@@ -246,15 +246,17 @@ bool generate_maze(state_t *state, double dt)
     sdl_on_key((key_handler_t)on_key);
     state->last_seeker_mov_time += dt;
     if(state->last_seeker_mov_time >= 5.0) {
+        SDL_Rect new_seeker_cell;
         // printf(" LAST TIME %f CURRENT TIME %f \n", state->last_seeker_mov_time, dt);
-    seeker_cell.x = ((rand() % GRID_WIDTH) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
-    seeker_cell.y = ((rand() % GRID_HEIGHT) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
-    seeker_cell.w = GRID_CELL_SIZE / 2;
-    seeker_cell.h = GRID_CELL_SIZE / 2;
-
+    new_seeker_cell.x = ((rand() % GRID_WIDTH) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
+    new_seeker_cell.y = ((rand() % GRID_HEIGHT) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
+    new_seeker_cell.w = GRID_CELL_SIZE / 2;
+    new_seeker_cell.h = GRID_CELL_SIZE / 2;
+    render_rect(&new_seeker_cell);
+     random_move_seeker(new_seeker_cell); 
         state->last_seeker_mov_time = 0;    
     }
-    random_move_seeker(); 
+    random_move_seeker(seeker_cell); 
     printf("Page: %d\n", state->page);
     sdl_clear();
     init_grid();
