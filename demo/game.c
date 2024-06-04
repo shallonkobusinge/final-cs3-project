@@ -33,7 +33,7 @@ state_t *emscripten_init()
     state_t *state = malloc(sizeof(state_t));
     state->scene = scene_init();
     state->maze_generated = false;
-    state->last_seeker_mov_time = 0.0;
+    state->last_seeker_mov_time = 0;
 
     state->page = 1;
 
