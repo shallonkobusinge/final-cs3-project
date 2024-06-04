@@ -96,6 +96,7 @@ static size_t find_min(size_t a, size_t b)
 }
 
 static void render_seeker(){
+    SDL_Delay(80);
     seeker_t *seeker = malloc(sizeof(seeker_t));
     seeker->rect = (SDL_Rect){(((rand() % GRID_WIDTH) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (((rand() % GRID_HEIGHT) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2) };
     render_color((rgb_color_t){0, 0, 0});
