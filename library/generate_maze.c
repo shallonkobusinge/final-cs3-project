@@ -243,7 +243,7 @@ void remove_wall(cell_t *cell, cell_t *neighbor)
 bool generate_maze(state_t *state, double dt)
 {
     sdl_on_key((key_handler_t)on_key);
-    if(dt - state->last_seeker_mov_time > 30.0) {
+    if(dt - state->last_seeker_mov_time > 1.5) {
         printf(" LAST TIME %f CURRENT TIME %f \n", state->last_seeker_mov_time, dt);
         random_move_seeker();    
         state->last_seeker_mov_time = dt;    
