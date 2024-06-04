@@ -113,6 +113,7 @@ void introduce_seeker(scene_t *scene, seeker_t *seeker, double dt, sound_effect_
 }
 
 seeker_t *seeker_init(scene_t *scene){
+  printf("HEREE INSIDE SEEKER INITI \n");
   seeker_t *seeker = malloc(sizeof(seeker_t));
   seeker->max_seekers = 50;
   seeker->last_seeker_time = 0;
