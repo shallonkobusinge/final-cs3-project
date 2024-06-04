@@ -255,7 +255,7 @@ bool generate_maze(state_t *state, double dt)
     
     sdl_clear();
     init_grid();
-    andom_move_seeker();
+    random_move_seeker();
     
     // sdl_show();
     return false;
