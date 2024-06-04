@@ -3,6 +3,7 @@
 
 #include "cell.h"
 #include "state.h"
+#include "seeker.h"
 
 /**
  * Generates maze using DFS.
