@@ -1,3 +1,7 @@
+#include <SDL2/SDL.h>
+#include <SDL2/SDL2_gfxPrimitives.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
 #include <assert.h>
 #include <math.h>
 #include <stdio.h>
@@ -9,6 +13,7 @@
 #include "generate_maze.h"
 #include "asset_cache.h"
 #include "sdl_wrapper.h"
+#include "sound_effect.h"
 
 const vector_t MIN = {0, 0};
 const vector_t MAX = {1000, 500};
@@ -23,19 +28,22 @@ struct state
     scene_t *scene;
     size_t page;
     bool maze_generated;
-    list_t *seekers;
+    sound_effect_t *sound_effect;
+    
 };
 
 state_t *emscripten_init()
 {
     asset_cache_init();
     sdl_init(SDL_MIN, SDL_MAX);
+    init_sound();
     state_t *state = malloc(sizeof(state_t));
     state->scene = scene_init();
     state->maze_generated = false;
-    state->seekers = list_init(4, (free_func_t)asset_destroy);
-
+    state->sound_effect = load_game_sounds()
     state->page = 1;
+    
+    game_sound(state->sound_effect);
 
     return state;
 }

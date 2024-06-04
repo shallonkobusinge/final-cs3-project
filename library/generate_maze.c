@@ -30,6 +30,7 @@ typedef struct state
     size_t page;
     bool maze_generated;
     list_t *seekers;
+    sound_effect_t *sound_effect;
 } state_t;
 
 const size_t NUM_BUILDINGS = 4;
@@ -144,7 +145,6 @@ static void init_grid(state_t *state)
         cell.h = GRID_CELL_SIZE / 2;
         render_color((rgb_color_t){241, 108, 45});
         render_rect(&cell);
-        list_add(state->seekers, &cell);
     // }
 }
 
