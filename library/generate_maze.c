@@ -254,6 +254,8 @@ bool generate_maze(state_t *state)
     sdl_clear();
     init_grid();
     random_move_seeker();
+    render_color((rgb_color_t){0, 0, 0});
+    render_rect(&terminal_cell);
     // sdl_show();
     return false;
     // init_maze();
