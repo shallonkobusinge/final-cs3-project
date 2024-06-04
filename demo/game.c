@@ -34,7 +34,6 @@ state_t *emscripten_init()
     state->maze_generated = false;
 
     state->page = 1;
-    sdl_clear();
 
     return state;
 }
@@ -50,6 +49,8 @@ bool emscripten_main(state_t *state)
     {
         if (!state->maze_generated)
         {
+            sdl_clear();
+
             state->maze_generated = generate_maze(state);
         }
         sdl_show();
