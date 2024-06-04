@@ -21,7 +21,7 @@ bool adj_matrix[NUM_CELLS][NUM_CELLS];
 cell_t *parent[GRID_WIDTH][GRID_HEIGHT];
 
 SDL_Rect hider_cell = (SDL_Rect){(GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
-
+SDL_Rect terminal_cell;
 
 
 static stack_t *head;
@@ -96,6 +96,40 @@ static size_t find_min(size_t a, size_t b)
     return (a > b) ? b : a;
 }
 
+void move_seeker_randomly(SDL_Rect rect) {
+    SDL_Delay(80);
+  int direction = rand() % 4;
+  switch (direction)
+  {
+  case 0: { // move-left
+    if(rect.x - GRID_CELL_SIZE >= 0 ) {
+         rect.x -= GRID_CELL_SIZE;
+    }
+    break;
+  }
+  case 1: { // move-right
+  if(rect.x + GRID_CELL_SIZE < window_width) {
+        rect.x += GRID_CELL_SIZE;
+  }
+    break;
+  }
+  case 2: { // move-up
+    if (rect.y - GRID_CELL_SIZE >= 0) {
+        rect.y -= GRID_CELL_SIZE;
+    }
+    break;
+  }
+  case 3: { // move-down
+    if(rect.y + GRID_CELL_SIZE < window_height) {
+        rect.y += GRID_CELL_SIZE;
+    }
+    break;
+  }
+  default:
+    break;
+  }
+
+}
 
 
 /**
@@ -117,7 +151,6 @@ static void init_grid()
     render_color((rgb_color_t){0, 255, 0});
     render_rect(&hider_cell);
 
-    SDL_Rect terminal_cell;
     terminal_cell.x = ((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
     terminal_cell.y = ((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
     terminal_cell.w = GRID_CELL_SIZE / 2;
@@ -254,7 +287,7 @@ bool generate_maze(state_t *state, double dt)
 {
     sdl_on_key((key_handler_t)on_key);
     state->last_seeker_mov_time += dt;
-    printf("Page: %d\n", state->page);
+    move_seeker_randomly(terminal_cell);
     sdl_clear();
     init_grid();
     
