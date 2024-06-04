@@ -272,7 +272,7 @@ bool generate_maze(state_t *state)
 
     init_grid(state);
     // init_maze();
-    // random_move_seeker(state->seeker);
+    random_move_seeker(state->seeker);
     // render_color((rgb_color_t){0, 0, 0});
     // render_rect(&terminal_cell);
     // // sdl_show();
