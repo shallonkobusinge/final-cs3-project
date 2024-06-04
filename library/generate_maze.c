@@ -137,7 +137,12 @@ static void init_grid()
     render_color((rgb_color_t){0, 255, 0});
     render_rect(&hider_cell);
 
-    render_seeker();
+        seeker_cell.x = (((GRID_WIDTH - 4) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
+        seeker_cell.y = (((rand() % GRID_HEIGHT) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
+        seeker_cell.w = (GRID_CELL_SIZE / 2);
+        seeker_cell.h = (GRID_CELL_SIZE / 2);
+        render_color((rgb_color_t){0, 0, 0});
+        render_rect(&seeker_cell);
 }
 
 /**
