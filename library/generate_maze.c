@@ -137,6 +137,9 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
         }
         case RIGHT_ARROW:
         {
+            start_cell.x += GRID_CELL_SIZE;
+            render_color((rgb_color_t){0, 0, 0});
+            render_rect(&start_cell);
             printf("going right\n");
             break;
         }
