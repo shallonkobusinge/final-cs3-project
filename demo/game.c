@@ -40,6 +40,7 @@ state_t *emscripten_init()
 
 bool emscripten_main(state_t *state)
 {
+    sdl_clear();
 
     if (state->page == 0)
     {
@@ -49,7 +50,6 @@ bool emscripten_main(state_t *state)
     {
         if (!state->maze_generated)
         {
-            sdl_clear();
 
             state->maze_generated = generate_maze(state);
         }
