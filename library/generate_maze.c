@@ -129,27 +129,37 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
             if (hider_cell.x - GRID_CELL_SIZE >= 0)
             {
                 hider_cell.x -= GRID_CELL_SIZE;
+                render_rect(&hider_cell);
             }
-            hider_cell.x -= GRID_CELL_SIZE;
-            render_rect(&hider_cell);
             break;
         }
         case RIGHT_ARROW:
         {
-            hider_cell.x += GRID_CELL_SIZE;
-            render_rect(&hider_cell);
+            if (hider_cell.x + GRID_CELL_SIZE < window_width)
+            {
+                hider_cell.x += GRID_CELL_SIZE;
+                render_rect(&hider_cell);
+            }
             break;
         }
         case UP_ARROW:
         {
-            hider_cell.y -= GRID_CELL_SIZE;
-            render_rect(&hider_cell);
+            if (hider_cell.y - GRID_CELL_SIZE >= 0)
+            {
+                hider_cell.y -= GRID_CELL_SIZE;
+                render_rect(&hider_cell);
+            }
+
             break;
         }
         case DOWN_ARROW:
         {
-            hider_cell.y += GRID_CELL_SIZE;
-            render_rect(&hider_cell);
+            if (hider_cell.y + GRID_CELL_SIZE < window_height)
+            {
+                hider_cell.y += GRID_CELL_SIZE;
+                render_rect(&hider_cell);
+            }
+
             break;
         }
         }
