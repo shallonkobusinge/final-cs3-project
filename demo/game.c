@@ -23,7 +23,6 @@ struct state
     scene_t *scene;
     size_t page;
     bool maze_generated;
-    double last_seeker_mov_time;
 };
 
 state_t *emscripten_init()
@@ -33,7 +32,6 @@ state_t *emscripten_init()
     state_t *state = malloc(sizeof(state_t));
     state->scene = scene_init();
     state->maze_generated = false;
-    state->last_seeker_mov_time = 0;
 
     state->page = 1;
 
@@ -43,7 +41,7 @@ state_t *emscripten_init()
 bool emscripten_main(state_t *state)
 {
     double dt = time_since_last_tick();
-     printf("HEEREE1");
+
     if (state->page == 0)
     {
         build_landing_page();
@@ -52,9 +50,8 @@ bool emscripten_main(state_t *state)
     {
         if (!state->maze_generated)
         {
-              printf("HEEREE1");
+            printf("HEREE GAME");
             state->maze_generated = generate_maze(state, dt);
-            
         }
         sdl_show();
     }
