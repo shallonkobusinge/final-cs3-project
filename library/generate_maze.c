@@ -7,6 +7,7 @@
 #include "stack.h"
 #include "state.h"
 #include "sdl_wrapper.h"
+#include "sound_effect.h"
 
 const size_t GRID_WIDTH = 25;
 const size_t GRID_HEIGHT = 12;
