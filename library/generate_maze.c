@@ -141,6 +141,7 @@ static void init_grid()
         cell.h = GRID_CELL_SIZE / 2;
         render_color((rgb_color_t){241, 108, 45});
         render_rect(&cell);
+        random_move_seeker(cell);
     }
 }
 
