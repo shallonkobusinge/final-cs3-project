@@ -30,6 +30,26 @@ typedef struct state
     bool maze_generated;
 } state_t;
 
+const size_t NUM_BUILDINGS = 4;
+
+cell_t buildings[] = {
+    {
+        .x = ((GRID_WIDTH - 3) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+        .y = ((GRID_HEIGHT - 3) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+    },
+    {
+        .x = ((GRID_WIDTH - 12) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+        .y = ((GRID_HEIGHT - 12) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+    },
+    {
+        .x = ((GRID_WIDTH - 10) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+        .y = ((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+    },
+    {
+        .x = ((GRID_WIDTH - 24) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+        .y = ((GRID_HEIGHT - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+    },
+};
 /**
  * Finds max between two numbers
  * @param a first number
@@ -98,7 +118,7 @@ static void random_move_seeker () {
  */
 static void init_grid()
 {
-    render_color((rgb_color_t){210, 210, 210});
+    render_color((rgb_color_t){230, 230, 230});
 
     for (int x = 0; x < window_width; x += GRID_CELL_SIZE)
     {
@@ -109,15 +129,15 @@ static void init_grid()
         render_line(0, y, window_width, y);
     }
 
-    render_color((rgb_color_t){0, 255, 0});
+    render_color((rgb_color_t){50, 129, 110});
     render_rect(&hider_cell);
 
-  
-
-    // render_color((rgb_color_t){0, 0, 0});
-    // render_rect(&terminal_cell);
-
-    sdl_show();
+    for (size_t i = 0; i < NUM_BUILDINGS; i++)
+    {
+        SDL_Rect cell = {buildings[i].x, buildings[i].y, GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2};
+        render_color((rgb_color_t){241, 108, 45});
+        render_rect(&cell);
+    }
 }
 
 /**
@@ -221,7 +241,7 @@ void remove_wall(cell_t *cell, cell_t *neighbor)
 {
     if (cell->x == neighbor->x)
     {
-        render_color((rgb_color_t){255, 0, 0});
+        render_color((rgb_color_t){22, 22, 22});
         size_t y = find_max(cell->y, neighbor->y);
         render_line((cell->x - 1) * GRID_CELL_SIZE,
                     (y - 1) * GRID_CELL_SIZE,
@@ -231,7 +251,7 @@ void remove_wall(cell_t *cell, cell_t *neighbor)
 
     else if (cell->y == neighbor->y)
     {
-        render_color((rgb_color_t){255, 0, 0});
+        render_color((rgb_color_t){22, 22, 22});
 
         int x = find_max(cell->x, neighbor->x);
         render_line((x - 1) * GRID_CELL_SIZE,
@@ -247,33 +267,34 @@ bool generate_maze(state_t *state)
     sdl_on_key((key_handler_t)on_key);
 
     printf("Page: %d\n", state->page);
-    sdl_clear();
+
     init_grid();
-    random_move_seeker();
-    render_color((rgb_color_t){0, 0, 0});
-    render_rect(&terminal_cell);
-    // sdl_show();
+    init_maze();
+    //     random_move_seeker();
+    // render_color((rgb_color_t){0, 0, 0});
+    // render_rect(&terminal_cell);
+    // // sdl_show();
+    // return false;
+
+    cell_t *cell = malloc(sizeof(cell_t));
+    cell->x = 1;
+    cell->y = 1;
+    visited[cell->x][cell->y] = true;
+
+    push_stack(&head, cell);
+
+    while (head != NULL)
+    {
+        cell = pop_stack(&head);
+        if (get_neighbor(cell, visited) != NULL)
+        {
+            push_stack(&head, cell);
+            cell_t *neighbor = get_neighbor(cell, visited);
+            remove_wall(cell, neighbor);
+            visited[neighbor->x][neighbor->y] = true;
+            adjacency(cell, neighbor, adj_matrix);
+            push_stack(&head, neighbor);
+        }
+    }
     return false;
-    // init_maze();
-
-    // cell_t *cell = malloc(sizeof(cell_t));
-    // cell->x = 1;
-    // cell->y = 1;
-    // visited[cell->x][cell->y] = true;
-
-    // push_stack(&head, cell);
-
-    // while (head != NULL)
-    // {
-    //     cell = pop_stack(&head);
-    //     if (get_neighbor(cell, visited) != NULL)
-    //     {
-    //         push_stack(&head, cell);
-    //         cell_t *neighbor = get_neighbor(cell, visited);
-    //         remove_wall(cell, neighbor);
-    //         visited[neighbor->x][neighbor->y] = true;
-    //         adjacency(cell, neighbor, adj_matrix);
-    //         push_stack(&head, neighbor);
-    //     }
-    // }
 }

@@ -42,6 +42,7 @@ bool emscripten_main(state_t *state)
 {
     double dt = time_since_last_tick();
 
+    sdl_clear();
     if (state->page == 0)
     {
         build_landing_page();
