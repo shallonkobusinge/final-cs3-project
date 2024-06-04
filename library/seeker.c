@@ -77,7 +77,7 @@ void wrap_seeker_scene(body_t *seeker) {
 void add_new_seeker(scene_t *scene, seeker_t *seeker_ipt, bool is_new){
     printf(" WE are heree ");
      SDL_Rect seeker_cell = {((GRID_WIDTH_S - 2) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4, ((GRID_WIDTH_S - 3) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4, GRID_CELL_SIZE_S / 2, GRID_CELL_SIZE_S / 2}; 
-    render_rect(&seeker_cell)
+    render_rect(&seeker_cell);
   //  vector_t seeker_vel = {.x = 0.0, .y = 0.0};
    body_t *seeker;
     // if(is_new){
@@ -91,15 +91,15 @@ void add_new_seeker(scene_t *scene, seeker_t *seeker_ipt, bool is_new){
     // };
     //   seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, seeker_pos);
     // }
-    seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, START_POS);
+    // seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, START_POS);
     // seeker_vel = INITIAL_VELOCITY;
   
-    scene_add_body(scene, seeker);
+    // scene_add_body(scene, seeker);
     // body_set_velocity(seeker, seeker_vel);
-    asset_t *new_asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
-    list_add(seeker_ipt->body_assets, new_asset_seeker);
-    seeker_ipt->last_seeker_time = 0;
-    seeker_ipt->max_seekers += 1;
+    // asset_t *new_asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
+    // list_add(seeker_ipt->body_assets, new_asset_seeker);
+    // seeker_ipt->last_seeker_time = 0;
+    // seeker_ipt->max_seekers += 1;
 }
 
 void introduce_seeker(scene_t *scene, seeker_t *seeker, double dt, sound_effect_t *sound_effect){
