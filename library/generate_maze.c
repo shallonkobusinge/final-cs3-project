@@ -21,6 +21,8 @@ bool adj_matrix[NUM_CELLS][NUM_CELLS];
 cell_t *parent[GRID_WIDTH][GRID_HEIGHT];
 
 SDL_Rect hider_cell = (SDL_Rect){(GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
+ SDL_Rect seeker_cell = {((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4, ((GRID_WIDTH - 3) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4, GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2}; 
+
 static stack_t *head;
 typedef struct state
 {
@@ -276,11 +278,7 @@ bool generate_maze(state_t *state)
 
     init_grid(state);
     // init_maze();
-    for(size_t i = 0; i < list_size(state->seekers); i++) {
-        SDL_Rect *rect = list_get(state->seekers, i);
-        random_move_seeker(*rect);
-    }
-    //     random_move_seeker();
+        random_move_seeker(seeker_cell);
     // render_color((rgb_color_t){0, 0, 0});
     // render_rect(&terminal_cell);
     // // sdl_show();
