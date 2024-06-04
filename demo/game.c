@@ -43,6 +43,7 @@ state_t *emscripten_init()
 bool emscripten_main(state_t *state)
 {
     double dt = time_since_last_tick();
+    printf("TIME SLACK %f \n", dt);
 
     if (state->page == 0)
     {
