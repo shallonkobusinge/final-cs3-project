@@ -254,7 +254,10 @@ bool generate_maze(state_t *state)
             push_stack(&head, neighbor);
         }
     }
-    state->counter++;
+    if (state->counter != 3)
+    {
+        state->counter++;
+    }
 
     return false;
 }
