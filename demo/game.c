@@ -54,7 +54,7 @@ state_t *emscripten_init()
 bool emscripten_main(state_t *state)
 {
     double dt = time_since_last_tick();
-    introduce_seeker(state->scene, state->seeker, dt, state->sound_effect);
+    
     sdl_clear();
     if (state->page == 0)
     {
@@ -62,10 +62,11 @@ bool emscripten_main(state_t *state)
     }
     else if (state->page == 1)
     {
-        if (!state->maze_generated)
-        {
-            state->maze_generated = generate_maze(state);
-        }
+        introduce_seeker(state->scene, state->seeker, dt, state->sound_effect);
+        // if (!state->maze_generated)
+        // {
+        //     state->maze_generated = generate_maze(state);
+        // }
         sdl_show();
     }
     scene_tick(state->scene, dt);

@@ -92,6 +92,7 @@ void add_new_seeker(scene_t *scene, seeker_t *seeker_ipt, bool is_new){
 }
 
 void introduce_seeker(scene_t *scene, seeker_t *seeker, double dt, sound_effect_t *sound_effect){
+    printf(" WE are heree ");
     seeker->last_seeker_time += dt;
     if(seeker->last_seeker_time >= NEW_SEEKERS_INTERVAL){
       add_new_seeker(scene, seeker, true);
