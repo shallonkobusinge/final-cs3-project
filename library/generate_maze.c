@@ -89,7 +89,7 @@ static void init_grid()
         render_line(0, y, window_width, y);
     }
 
-    render_color((rgb_color_t){0, 255, 0});
+    render_color((rgb_color_t){7, 80, 62});
     render_rect(&hider_cell);
 
     for (size_t i = 0; i < NUM_BUILDINGS; i++)
