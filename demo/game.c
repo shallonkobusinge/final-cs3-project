@@ -43,6 +43,7 @@ state_t *emscripten_init()
     state->scene = scene_init();
     state->maze_generated = false;
     state->sound_effect = load_game_sounds();
+    state->seeker = seeker_init(state->scene);
     state->page = 1;
 
     game_sound(state->sound_effect);
@@ -65,7 +66,6 @@ bool emscripten_main(state_t *state)
         if (!state->maze_generated)
         {
             state->maze_generated = generate_maze(state);
-            
         }
         sdl_show();
     }
