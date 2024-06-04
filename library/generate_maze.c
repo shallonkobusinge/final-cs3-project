@@ -287,9 +287,10 @@ bool generate_maze(state_t *state, double dt)
 {
     sdl_on_key((key_handler_t)on_key);
     state->last_seeker_mov_time += dt;
-    move_seeker_randomly(terminal_cell);
+    
     sdl_clear();
     init_grid();
+    move_seeker_randomly(terminal_cell);
     
     // sdl_show();
     return false;
