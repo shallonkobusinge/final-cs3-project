@@ -117,6 +117,9 @@ void introduce_seeker(scene_t *scene, seeker_t *seeker, double dt, sound_effect_
 
 seeker_t *seeker_init(scene_t *scene){
   printf("HEREE INSIDE SEEKER INITI \n");
+  SDL_Rect seeker_cell = {((GRID_WIDTH_S - 2) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4, ((GRID_WIDTH_S - 3) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4, GRID_CELL_SIZE_S / 2, GRID_CELL_SIZE_S / 2}; 
+  render_color((rgb_color_t){241, 108, 45});
+  render_rect(&seeker_cell);
   seeker_t *seeker = malloc(sizeof(seeker_t));
   seeker->max_seekers = 50;
   seeker->last_seeker_time = 0;
