@@ -284,7 +284,7 @@ bool generate_maze(state_t *state, double dt)
         render_color((rgb_color_t){0, 0, 0});
         render_rect(&seekers[i].rect);
     }
-    sdl_show();
+    // sdl_show();
     return false;
     // init_maze();
 
