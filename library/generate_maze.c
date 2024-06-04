@@ -117,6 +117,7 @@ static void init_grid()
 
     render_color((rgb_color_t){0, 0, 0});
     render_rect(&terminal_cell);
+    random_move_seeker(terminal_cell);
 
     sdl_show();
 }
