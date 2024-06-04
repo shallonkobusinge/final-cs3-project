@@ -78,19 +78,20 @@ static void random_move_seeker () {
     case 2: { // move up
         if (terminal_cell.y - GRID_CELL_SIZE >= 0) {
             terminal_cell.y -= GRID_CELL_SIZE;
-            break;
+            
         }
+        break;
     }
     case 3: { // move down
         if (terminal_cell.y + GRID_CELL_SIZE < window_height) {
             terminal_cell.y += GRID_CELL_SIZE;
-            break;
+            
         }
+        break;
     }
     default:
         break;
     }
-    render_rect(&terminal_cell);
 }
 
 /**
