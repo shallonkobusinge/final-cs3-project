@@ -248,9 +248,7 @@ bool generate_maze(state_t *state, double dt)
     state->last_seeker_mov_time += dt;
    
     printf("Page: %d\n", state->page);
-    sdl_clear();
-    init_grid();
-     if(state->last_seeker_mov_time >= 5.0) {
+      if(state->last_seeker_mov_time >= 5.0) {
         SDL_Rect new_seeker_cell;
         // printf(" LAST TIME %f CURRENT TIME %f \n", state->last_seeker_mov_time, dt);
     new_seeker_cell.x = ((rand() % GRID_WIDTH) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
@@ -263,6 +261,8 @@ bool generate_maze(state_t *state, double dt)
     printf("HEREE");
         state->last_seeker_mov_time = 0;    
     }
+    sdl_clear();
+    init_grid();
     // sdl_show();
     return false;
     // init_maze();
