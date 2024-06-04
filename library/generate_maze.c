@@ -141,7 +141,7 @@ static void init_grid(state_t *state)
         cell->w = GRID_CELL_SIZE / 2;
         cell->h = GRID_CELL_SIZE / 2;
         render_color((rgb_color_t){241, 108, 45});
-        render_rect(&cell);
+        render_rect(cell);
         list_add(state->seekers, cell);
     }
 }
