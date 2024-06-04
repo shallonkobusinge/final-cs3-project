@@ -28,6 +28,7 @@ typedef struct state
     scene_t *scene;
     size_t page;
     bool maze_generated;
+    double last_seeker_time;
 } state_t;
 
 /**
@@ -243,10 +244,10 @@ void remove_wall(cell_t *cell, cell_t *neighbor)
     SDL_Delay(30);
 }
 
-bool generate_maze(state_t *state)
+bool generate_maze(state_t *state, double dt)
 {
     sdl_on_key((key_handler_t)on_key);
-
+    state->last_seeker_time += dt;
     printf("Page: %d\n", state->page);
     sdl_clear();
     init_grid();
