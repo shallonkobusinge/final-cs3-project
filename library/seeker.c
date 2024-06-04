@@ -91,7 +91,6 @@ void add_new_seeker(scene_t *scene, seeker_t *seeker_ipt, bool is_new){
     // }
     seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, START_POS);
     // seeker_vel = INITIAL_VELOCITY;
-    printf(" BODY CENTROID: X: %zu Y: %zu \n", seeker->centroid.x, seeker->centroid.y);
   
     scene_add_body(scene, seeker);
     // body_set_velocity(seeker, seeker_vel);
