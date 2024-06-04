@@ -66,34 +66,31 @@ static void random_move_seeker () {
     case 0: { // move left
      if (terminal_cell.x - GRID_CELL_SIZE >= 0) {
             terminal_cell.x -= GRID_CELL_SIZE;
-            render_rect(&terminal_cell);
         }
         break;
     }
     case 1: { // move right
         if (terminal_cell.x + GRID_CELL_SIZE < window_width) {
             terminal_cell.x += GRID_CELL_SIZE;
-            render_rect(&terminal_cell);
         }
         break;
     }
     case 2: { // move up
         if (terminal_cell.y - GRID_CELL_SIZE >= 0) {
             terminal_cell.y -= GRID_CELL_SIZE;
-            render_rect(&terminal_cell);
             break;
         }
     }
     case 3: { // move down
         if (terminal_cell.y + GRID_CELL_SIZE < window_height) {
             terminal_cell.y += GRID_CELL_SIZE;
-            render_rect(&terminal_cell);
             break;
         }
     }
     default:
         break;
     }
+    render_rect(&terminal_cell);
 }
 
 /**
