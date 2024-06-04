@@ -43,10 +43,6 @@ state_t *emscripten_init()
     state->scene = scene_init();
     state->maze_generated = false;
     state->sound_effect = load_game_sounds();
-    state->seeker = seeker_init(state->scene);
-      SDL_Rect seeker_cell = {((GRID_WIDTH_S - 2) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4, ((GRID_WIDTH_S - 3) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4, GRID_CELL_SIZE_S / 2, GRID_CELL_SIZE_S / 2}; 
-  render_color((rgb_color_t){241, 108, 45});
-  render_rect(&seeker_cell);
     state->page = 1;
 
     game_sound(state->sound_effect);
@@ -69,6 +65,7 @@ bool emscripten_main(state_t *state)
         if (!state->maze_generated)
         {
             state->maze_generated = generate_maze(state);
+            state->seeker = seeker_init(state->scene);
         }
         sdl_show();
     }
