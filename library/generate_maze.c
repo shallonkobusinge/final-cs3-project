@@ -5,6 +5,7 @@
 #include "cell.h"
 #include "generate_maze.h"
 #include "stack.h"
+#include "state.h"
 #include "sdl_wrapper.h"
 
 const size_t GRID_WIDTH = 25;
@@ -19,7 +20,15 @@ bool visited[GRID_WIDTH + 2][GRID_HEIGHT + 2];
 bool adj_matrix[NUM_CELLS][NUM_CELLS];
 cell_t *parent[GRID_WIDTH][GRID_HEIGHT];
 
+SDL_Rect hider_cell = (SDL_Rect){(GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
+
 static stack_t *head;
+typedef struct state
+{
+    scene_t *scene;
+    size_t page;
+    bool maze_generated;
+} state_t;
 
 /**
  * Finds max between two numbers
@@ -27,7 +36,8 @@ static stack_t *head;
  * @param b second number
  * @return maximum numbers between the provided arguments
  */
-static size_t find_max(size_t a, size_t b)
+static size_t
+find_max(size_t a, size_t b)
 {
     return (a > b) ? a : b;
 }
@@ -59,16 +69,19 @@ static void init_grid()
         render_line(0, y, window_width, y);
     }
 
-    SDL_Rect start_cell = {(GRID_CELL_SIZE / 10), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
-    render_color((rgb_color_t){0, 0, 0});
-    render_rect(&start_cell);
+    render_color((rgb_color_t){0, 255, 0});
+    render_rect(&hider_cell);
 
     SDL_Rect terminal_cell;
     terminal_cell.x = ((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
     terminal_cell.y = ((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
     terminal_cell.w = GRID_CELL_SIZE / 2;
     terminal_cell.h = GRID_CELL_SIZE / 2;
+
+    render_color((rgb_color_t){0, 0, 0});
     render_rect(&terminal_cell);
+
+    sdl_show();
 }
 
 /**
@@ -107,6 +120,61 @@ static void init_maze()
     srand(time(NULL));
 }
 
+void on_key(char key, key_event_type_t type, double held_time, state_t *state)
+{
+    if (type == KEY_PRESSED)
+    {
+        switch (key)
+        {
+        case LEFT_ARROW:
+        {
+            if (hider_cell.x - GRID_CELL_SIZE >= 0)
+            {
+                hider_cell.x -= GRID_CELL_SIZE;
+                render_rect(&hider_cell);
+            }
+            break;
+        }
+        case RIGHT_ARROW:
+        {
+            if (hider_cell.x + GRID_CELL_SIZE < window_width)
+            {
+                hider_cell.x += GRID_CELL_SIZE;
+                render_rect(&hider_cell);
+            }
+            break;
+        }
+        case UP_ARROW:
+        {
+            if (hider_cell.y - GRID_CELL_SIZE >= 0)
+            {
+                hider_cell.y -= GRID_CELL_SIZE;
+                render_rect(&hider_cell);
+            }
+
+            break;
+        }
+        case DOWN_ARROW:
+        {
+            if (hider_cell.y + GRID_CELL_SIZE < window_height)
+            {
+                hider_cell.y += GRID_CELL_SIZE;
+                render_rect(&hider_cell);
+            }
+
+            break;
+        }
+        }
+    }
+    else if (type == KEY_RELEASED)
+    {
+        if (key == LEFT_ARROW || key == RIGHT_ARROW)
+        {
+            printf("NOTHING \n");
+        }
+    }
+}
+
 /**
  * Removes the wall between the current cell and its neighbor.
  * Checks whether the neighbor is in the same row or column and draws a line to remove the wall.
@@ -138,29 +206,35 @@ void remove_wall(cell_t *cell, cell_t *neighbor)
     SDL_Delay(30);
 }
 
-void generate_maze()
+bool generate_maze(state_t *state)
 {
+    sdl_on_key((key_handler_t)on_key);
+
+    printf("Page: %d\n", state->page);
+    sdl_clear();
     init_grid();
-    init_maze();
+    // sdl_show();
+    return false;
+    // init_maze();
 
-    cell_t *cell = malloc(sizeof(cell_t));
-    cell->x = 1;
-    cell->y = 1;
-    visited[cell->x][cell->y] = true;
+    // cell_t *cell = malloc(sizeof(cell_t));
+    // cell->x = 1;
+    // cell->y = 1;
+    // visited[cell->x][cell->y] = true;
 
-    push_stack(&head, cell);
+    // push_stack(&head, cell);
 
-    while (head != NULL)
-    {
-        cell = pop_stack(&head);
-        if (get_neighbor(cell, visited) != NULL)
-        {
-            push_stack(&head, cell);
-            cell_t *neighbor = get_neighbor(cell, visited);
-            remove_wall(cell, neighbor);
-            visited[neighbor->x][neighbor->y] = true;
-            adjacency(cell, neighbor, adj_matrix);
-            push_stack(&head, neighbor);
-        }
-    }
+    // while (head != NULL)
+    // {
+    //     cell = pop_stack(&head);
+    //     if (get_neighbor(cell, visited) != NULL)
+    //     {
+    //         push_stack(&head, cell);
+    //         cell_t *neighbor = get_neighbor(cell, visited);
+    //         remove_wall(cell, neighbor);
+    //         visited[neighbor->x][neighbor->y] = true;
+    //         adjacency(cell, neighbor, adj_matrix);
+    //         push_stack(&head, neighbor);
+    //     }
+    // }
 }
