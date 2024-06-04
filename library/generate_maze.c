@@ -79,7 +79,7 @@ static size_t find_min(size_t a, size_t b)
 */
 static void random_move_seeker (SDL_Rect terminal_cell) {
     printf("WE are here ");
-    SDL_Delay(100);
+    SDL_Delay(70);
     int direction = rand() % 4;
     switch (direction) {
     case 0: { // move left
@@ -132,18 +132,18 @@ static void init_grid(state_t *state)
     render_color((rgb_color_t){50, 129, 110});
     render_rect(&hider_cell);
 
-    for (size_t i = 0; i < NUM_BUILDINGS; i++)
-    {
-        SDL_Rect cell = {buildings[i].x, buildings[i].y, GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2};
-        // SDL_Rect cell;
-        // cell.x = ((rand() % GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-        // cell.y = ((rand() % GRID_HEIGHT - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-        // cell.w = GRID_CELL_SIZE / 2;
-        // cell.h = GRID_CELL_SIZE / 2;
+    // for (size_t i = 0; i < NUM_BUILDINGS; i++)
+    // {
+        // SDL_Rect cell = {buildings[i].x, buildings[i].y, GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2};
+        SDL_Rect cell;
+        cell.x = ((rand() % GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+        cell.y = ((rand() % GRID_HEIGHT - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+        cell.w = GRID_CELL_SIZE / 2;
+        cell.h = GRID_CELL_SIZE / 2;
         render_color((rgb_color_t){241, 108, 45});
         render_rect(&cell);
         list_add(state->seekers, &cell);
-    }
+    // }
 }
 
 /**
