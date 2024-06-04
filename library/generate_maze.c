@@ -238,6 +238,7 @@ bool generate_maze(state_t *state)
 
     push_stack(&head, cell);
 
+    printf("hano se \n");
     while (head != NULL)
     {
         cell = pop_stack(&head);
