@@ -30,7 +30,7 @@ typedef struct state
     bool maze_generated;
 } state_t;
 
-const size_t NUM_BUILDINGS = 3;
+const size_t NUM_BUILDINGS = 4;
 
 cell_t buildings[] = {
     {
@@ -44,6 +44,10 @@ cell_t buildings[] = {
     {
         .x = ((GRID_WIDTH - 10) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
         .y = ((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+    },
+    {
+        .x = ((GRID_WIDTH - 1) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+        .y = ((GRID_HEIGHT - 10) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
     },
 };
 /**
