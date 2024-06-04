@@ -97,14 +97,14 @@ static size_t find_min(size_t a, size_t b)
     return (a > b) ? b : a;
 }
 
-void render_seeker(){
+static void render_seeker(){
 
     // seeker_t *seeker = malloc(sizeof(seeker_t));
     // seeker->rect = (SDL_Rect){(((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2) };
     // SDL_Delay(100);
     for(int i =0; i < num_seekers; i++){
         seeker_cells[i].x = (((GRID_WIDTH - i) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
-        seeker_cells[i].x = ((( GRID_WIDTH - i) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
+        seeker_cells[i].x = (((GRID_WIDTH - i) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
         seeker_cells[i].y = (((rand() % GRID_HEIGHT) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
         seeker_cells[i].w = (GRID_CELL_SIZE / 2);
         seeker_cells[i].h = (GRID_CELL_SIZE / 2);
@@ -142,7 +142,15 @@ static void init_grid()
 
     // render_color((rgb_color_t){0, 0, 0});
     // render_rect(&seeker_cell);
-    
+    for(int i =0; i < 1; i++){
+        seeker_cells[i].x = (((rand() % GRID_WIDTH) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
+        seeker_cells[i].x = (((rand() % GRID_WIDTH) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
+        seeker_cells[i].y = (((rand() % GRID_HEIGHT) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
+        seeker_cells[i].w = (GRID_CELL_SIZE / 2);
+        seeker_cells[i].h = (GRID_CELL_SIZE / 2);
+        render_color((rgb_color_t){0, 0, 0});
+        render_rect(&seeker_cells[i]);
+    }
 
     sdl_show();
 }
