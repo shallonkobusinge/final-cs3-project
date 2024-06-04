@@ -78,17 +78,17 @@ void add_new_seeker(scene_t *scene, seeker_t *seeker_ipt, bool is_new){
    
    vector_t seeker_vel = {.x = 0.0, .y = 0.0};
    body_t *seeker;
-    if(is_new){
-      vector_t seeker_pos = (vector_t){
-        .x = ((GRID_WIDTH_S - 7) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4,
-        .y = ((GRID_HEIGHT_S - 4) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4,
-    };
-     seeker_vel = (vector_t){
-        .x = rand() % (int)INITIAL_VELOCITY.x + 20,
-        .y = rand() % (int)INITIAL_VELOCITY.y + 10
-    };
-      seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, seeker_pos);
-    }
+    // if(is_new){
+    //   vector_t seeker_pos = (vector_t){
+    //     .x = ((GRID_WIDTH_S - 7) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4,
+    //     .y = ((GRID_HEIGHT_S - 4) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4,
+    // };
+    //  seeker_vel = (vector_t){
+    //     .x = rand() % (int)INITIAL_VELOCITY.x + 20,
+    //     .y = rand() % (int)INITIAL_VELOCITY.y + 10
+    // };
+    //   seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, seeker_pos);
+    // }
     seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, START_POS);
     seeker_vel = INITIAL_VELOCITY;
   
