@@ -96,27 +96,6 @@ static size_t find_min(size_t a, size_t b)
     return (a > b) ? b : a;
 }
 
-void render_seeker(){
-
-    // seeker_t *seeker = malloc(sizeof(seeker_t));
-    // seeker->rect = (SDL_Rect){(((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2) };
-    // SDL_Delay(100);
-    // for(int i =0; i < num_seekers; i++){
-        SDL_Rect seeker_cell;
-        seeker_cell.x = (((GRID_WIDTH - 4) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
-        seeker_cell.y = (((rand() % GRID_HEIGHT) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
-        seeker_cell.w = (GRID_CELL_SIZE / 2);
-        seeker_cell.h = (GRID_CELL_SIZE / 2);
-        render_color((rgb_color_t){0, 0, 0});
-        render_rect(&seeker_cell);
-    // }
-    // seeker_cell.x = (((rand() % GRID_WIDTH) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
-    // seeker_cell.y = (((rand() % GRID_HEIGHT) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
-    // seeker_cell.w = (GRID_CELL_SIZE / 2);
-    // seeker_cell.h = (GRID_CELL_SIZE / 2);
-    // render_color((rgb_color_t){0, 0, 0});
-    // render_rect(&seeker->rect);
-}
 
 
 /**
@@ -138,13 +117,15 @@ static void init_grid()
     render_color((rgb_color_t){0, 255, 0});
     render_rect(&hider_cell);
 
-        SDL_Rect seeker_cell;
-        seeker_cell.x = (((GRID_WIDTH - 4) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
-        seeker_cell.y = (((rand() % GRID_HEIGHT) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
-        seeker_cell.w = (GRID_CELL_SIZE / 2);
-        seeker_cell.h = (GRID_CELL_SIZE / 2);
-        render_color((rgb_color_t){0, 0, 0});
-        render_rect(&seeker_cell);
+    SDL_Rect terminal_cell;
+    terminal_cell.x = ((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
+    terminal_cell.y = ((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
+    terminal_cell.w = GRID_CELL_SIZE / 2;
+    terminal_cell.h = GRID_CELL_SIZE / 2;
+
+    render_color((rgb_color_t){0, 0, 0});
+    render_rect(&terminal_cell);
+
 }
 
 /**
