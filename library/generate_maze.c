@@ -136,15 +136,6 @@ static void init_grid()
 
     render_color((rgb_color_t){0, 255, 0});
     render_rect(&hider_cell);
-
-
-    // render_color((rgb_color_t){0, 0, 0});
-    // render_rect(&seeker_cell);
-    // for(int i =0; i < 1; i++){
-      
-    // }
-
-    // sdl_show();
 }
 
 /**
