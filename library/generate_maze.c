@@ -102,8 +102,8 @@ void render_seeker(){
     // seeker->rect = (SDL_Rect){(((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2) };
     // SDL_Delay(100);
     // for(int i =0; i < num_seekers; i++){
-        seeker_cells.x = (((rand() % GRID_WIDTH) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
-        seeker_cells.y = (((rand() % GRID_HEIGHT) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
+        seeker_cells.x = (((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
+        seeker_cells.y = (((GRID_HEIGHT - 4) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
         seeker_cells.w = (GRID_CELL_SIZE / 2);
         seeker_cells.h = (GRID_CELL_SIZE / 2);
         render_color((rgb_color_t){0, 0, 0});
