@@ -260,6 +260,7 @@ bool generate_maze(state_t *state, double dt)
     render_color((rgb_color_t){0, 0, 0});
     render_rect(&new_seeker_cell);
     //  random_move_seeker(new_seeker_cell); 
+    printf("HEREE");
         state->last_seeker_mov_time = 0;    
     }
     // sdl_show();
