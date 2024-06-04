@@ -19,9 +19,10 @@ const int window_height = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
 bool visited[GRID_WIDTH + 2][GRID_HEIGHT + 2];
 bool adj_matrix[NUM_CELLS][NUM_CELLS];
 cell_t *parent[GRID_WIDTH][GRID_HEIGHT];
+const int num_seekers = 3;
 
 SDL_Rect hider_cell = (SDL_Rect){(GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
-SDL_Rect seeker_cells;
+SDL_Rect seeker_cells[num_seekers];
 
 
 static stack_t *head;
@@ -101,14 +102,15 @@ void render_seeker(){
     // seeker_t *seeker = malloc(sizeof(seeker_t));
     // seeker->rect = (SDL_Rect){(((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2) };
     // SDL_Delay(100);
-    // for(int i =0; i < num_seekers; i++){
-        seeker_cells.x = (((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
-        seeker_cells.y = (((GRID_HEIGHT - 4) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
-        seeker_cells.w = (GRID_CELL_SIZE / 2);
-        seeker_cells.h = (GRID_CELL_SIZE / 2);
+    for(int i =0; i < num_seekers; i++){
+        seeker_cells[i].x = (((GRID_WIDTH - i) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
+        seeker_cells[i].x = ((( GRID_WIDTH - i) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
+        seeker_cells[i].y = (((rand() % GRID_HEIGHT) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
+        seeker_cells[i].w = (GRID_CELL_SIZE / 2);
+        seeker_cells[i].h = (GRID_CELL_SIZE / 2);
         render_color((rgb_color_t){0, 0, 0});
-        render_rect(&seeker_cells);
-    // }
+        render_rect(&seeker_cells[i]);
+    }
     // seeker_cell.x = (((rand() % GRID_WIDTH) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
     // seeker_cell.y = (((rand() % GRID_HEIGHT) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
     // seeker_cell.w = (GRID_CELL_SIZE / 2);
