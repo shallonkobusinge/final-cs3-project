@@ -139,7 +139,7 @@ static void init_grid(state_t *state)
         // SDL_Rect cell = {buildings[i].x, buildings[i].y, GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2};
       
         render_color((rgb_color_t){241, 108, 45});
-        render_rect(seeker_cell);
+        render_rect(&seeker_cell);
 
     // }
 }
