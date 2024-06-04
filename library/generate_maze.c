@@ -21,7 +21,7 @@ bool adj_matrix[NUM_CELLS][NUM_CELLS];
 cell_t *parent[GRID_WIDTH][GRID_HEIGHT];
 
 SDL_Rect hider_cell = (SDL_Rect){(GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
-SDL_Rect seeker_cell;
+
 
 
 static stack_t *head;
@@ -102,6 +102,7 @@ void render_seeker(){
     // seeker->rect = (SDL_Rect){(((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2) };
     // SDL_Delay(100);
     // for(int i =0; i < num_seekers; i++){
+        SDL_Rect seeker_cell;
         seeker_cell.x = (((GRID_WIDTH - 4) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
         seeker_cell.y = (((rand() % GRID_HEIGHT) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
         seeker_cell.w = (GRID_CELL_SIZE / 2);
@@ -137,6 +138,7 @@ static void init_grid()
     render_color((rgb_color_t){0, 255, 0});
     render_rect(&hider_cell);
 
+        SDL_Rect seeker_cell;
         seeker_cell.x = (((GRID_WIDTH - 4) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
         seeker_cell.y = (((rand() % GRID_HEIGHT) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
         seeker_cell.w = (GRID_CELL_SIZE / 2);
