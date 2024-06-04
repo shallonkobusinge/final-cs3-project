@@ -21,6 +21,7 @@ bool adj_matrix[NUM_CELLS][NUM_CELLS];
 cell_t *parent[GRID_WIDTH][GRID_HEIGHT];
 
 SDL_Rect hider_cell = (SDL_Rect){(GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
+SDL_Rect seeker_cell;
 
 
 static stack_t *head;
@@ -30,12 +31,11 @@ typedef struct state
     size_t page;
     bool maze_generated;
     double last_seeker_mov_time;
-    list_t *seekers;
 } state_t;
 
-typedef struct seeker {
-    SDL_Rect rect;
-}seeker_t;
+// typedef struct seeker {
+//     SDL_Rect rect;
+// }seeker_t;
 /**
  * Finds max between two numbers
  * @param a first number
@@ -96,25 +96,21 @@ static size_t find_min(size_t a, size_t b)
     return (a > b) ? b : a;
 }
 
-static void render_seeker(state_t *state){
-    SDL_Delay(80);
-    seeker_t *seeker = malloc(sizeof(seeker_t));
-    seeker->rect = (SDL_Rect){(((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2) };
+static void render_seeker(){
+
+    // seeker_t *seeker = malloc(sizeof(seeker_t));
+    // seeker->rect = (SDL_Rect){(((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2) };
+    seeker_cell.x = (((rand() % GRID_WIDTH) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
+    seeker_cell.y = (((rand() % GRID_HEIGHT) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
     // render_color((rgb_color_t){0, 0, 0});
     // render_rect(&seeker->rect);
-    list_add(state->seekers, seeker);
-    SDL_Delay(80);
-    seeker_t *seeker_n = malloc(sizeof(seeker_t));
-    seeker_n->rect = (SDL_Rect){(((rand() % GRID_WIDTH) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (((rand() % GRID_HEIGHT) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2) };
-    // render_color((rgb_color_t){0, 0, 0});
-    // render_rect(&seeker_n->rect);
-    list_add(state->seekers, seeker_n);
 }
+
 
 /**
  * Initialize and draw the Maze Grid.
  */
-static void init_grid(state_t *state)
+static void init_grid()
 {
     render_color((rgb_color_t){210, 210, 210});
 
@@ -130,7 +126,9 @@ static void init_grid(state_t *state)
     render_color((rgb_color_t){0, 255, 0});
     render_rect(&hider_cell);
 
-    
+
+    render_color((rgb_color_t){0, 0, 0});
+    render_rect(&seeker_cell);
 
     sdl_show();
 }
@@ -263,19 +261,11 @@ bool generate_maze(state_t *state, double dt)
     state->last_seeker_mov_time += dt;
     
     printf("Page: %d\n", state->page);
-    if(state->last_seeker_mov_time > 5.0){
-        render_seeker(state);
-        state->last_seeker_mov_time = 0;
-    }
     sdl_clear();
-    for(size_t i = 0; i < list_size(state->seekers); i++) {
-        seeker_t *seeker = list_get(state->seekers, i);
-        render_color((rgb_color_t){0, 0, 0});
-        render_rect(&seeker->rect);
-    }
-
-    init_grid(state);
-    
+    init_grid();
+    render_seeker();
+    render_color((rgb_color_t){0, 0, 0});
+    render_rect(&seeker_cell);
     
     // sdl_show();
     return false;
