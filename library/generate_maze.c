@@ -46,8 +46,8 @@ cell_t buildings[] = {
         .y = ((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
     },
     {
-        .x = ((GRID_WIDTH - 1) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-        .y = ((GRID_HEIGHT - 10) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+        .x = ((GRID_WIDTH - 20) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+        .y = ((GRID_HEIGHT - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
     },
 };
 /**
