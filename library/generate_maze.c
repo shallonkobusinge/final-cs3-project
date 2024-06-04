@@ -96,42 +96,6 @@ static size_t find_min(size_t a, size_t b)
     return (a > b) ? b : a;
 }
 
-void move_seeker_randomly(SDL_Rect rect) {
-    SDL_Delay(80);
-  int direction = rand() % 4;
-  switch (direction)
-  {
-  case 0: { // move-left
-    if(rect.x - GRID_CELL_SIZE >= 0 ) {
-         rect.x -= GRID_CELL_SIZE;
-    }
-    break;
-  }
-  case 1: { // move-right
-  if(rect.x + GRID_CELL_SIZE < window_width) {
-        rect.x += GRID_CELL_SIZE;
-  }
-    break;
-  }
-  case 2: { // move-up
-    if (rect.y - GRID_CELL_SIZE >= 0) {
-        rect.y -= GRID_CELL_SIZE;
-    }
-    break;
-  }
-  case 3: { // move-down
-    if(rect.y + GRID_CELL_SIZE < window_height) {
-        rect.y += GRID_CELL_SIZE;
-    }
-    break;
-  }
-  default:
-    break;
-  }
-
-}
-
-
 /**
  * Initialize and draw the Maze Grid.
  */
@@ -158,6 +122,7 @@ static void init_grid()
 
     render_color((rgb_color_t){0, 0, 0});
     render_rect(&terminal_cell);
+    random_move_seeker(terminal_cell);
 
 }
 
@@ -290,7 +255,6 @@ bool generate_maze(state_t *state, double dt)
     
     sdl_clear();
     init_grid();
-    move_seeker_randomly(terminal_cell);
     
     // sdl_show();
     return false;
