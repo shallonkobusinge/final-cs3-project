@@ -269,9 +269,9 @@ bool generate_maze(state_t *state, double dt)
     }
     sdl_clear();
     for(size_t i = 0; i < list_size(state->seekers); i++) {
-        SDL_Rect *rect = list_get(state->seekers, i);
+        seeker_t *seeker = list_get(state->seekers, i);
         render_color((rgb_color_t){0, 0, 0});
-        render_rect(rect);
+        render_rect(&seeker.rect);
     }
 
     init_grid(state);
