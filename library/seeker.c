@@ -39,11 +39,8 @@ typedef struct seeker {
 
 
 body_t *make_seeker(double w, double h, vector_t center) {
-   SDL_Rect seeker_cell = {((GRID_WIDTH_S - 2) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4, ((GRID_WIDTH_S - 3) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4, GRID_CELL_SIZE_S / 2, GRID_CELL_SIZE_S / 2}; 
 
-    render_color((rgb_color_t){255, 108, 0});
-    render_rect(&seeker_cell);
-    list_t *c = list_init(1, free);
+  list_t *c = list_init(1, free);
   vector_t *v1 = malloc(sizeof(vector_t));
   *v1 = (vector_t){0, 0};
   list_add(c, v1);
@@ -59,7 +56,7 @@ body_t *make_seeker(double w, double h, vector_t center) {
   vector_t *v4 = malloc(sizeof(vector_t));
   *v4 = (vector_t){0, h};
   list_add(c, v4);
-  body_t *seeker = body_init(c, 1, seeker_color);
+  body_t *seeker = body_init(c, 3, seeker_color);
   body_set_centroid(seeker, center);
   return seeker;
 }
