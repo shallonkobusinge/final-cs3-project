@@ -28,7 +28,6 @@ typedef struct state
     scene_t *scene;
     size_t page;
     bool maze_generated;
-    double last_seeker_time;
 } state_t;
 
 /**
@@ -52,43 +51,6 @@ find_max(size_t a, size_t b)
 static size_t find_min(size_t a, size_t b)
 {
     return (a > b) ? b : a;
-}
-
-/*
- * Moves the seeker cell to a random
- * adjacent cell 
-*/
-void random_move_seeker (SDL_Rect terminal_cell) {
-    SDL_Delay(70);
-    int direction = rand() % 4;
-    switch (direction) {
-    case 0: { // move left
-     if (terminal_cell.x - GRID_CELL_SIZE >= 0) {
-            terminal_cell.x -= GRID_CELL_SIZE;
-        }
-        break;
-    }
-    case 1: { // move right
-        if (terminal_cell.x + GRID_CELL_SIZE < window_width) {
-            terminal_cell.x += GRID_CELL_SIZE;
-        }
-        break;
-    }
-    case 2: { // move up
-        if (terminal_cell.y - GRID_CELL_SIZE >= 0) {
-            terminal_cell.y -= GRID_CELL_SIZE;
-            break;
-        }
-    }
-    case 3: { // move down
-        if (terminal_cell.y + GRID_CELL_SIZE < window_height) {
-            terminal_cell.y += GRID_CELL_SIZE;
-            break;
-        }
-    }
-    default:
-        break;
-    }
 }
 
 /**
@@ -244,10 +206,10 @@ void remove_wall(cell_t *cell, cell_t *neighbor)
     SDL_Delay(30);
 }
 
-bool generate_maze(state_t *state, double dt)
+bool generate_maze(state_t *state)
 {
     sdl_on_key((key_handler_t)on_key);
-    state->last_seeker_time += dt;
+
     printf("Page: %d\n", state->page);
     sdl_clear();
     init_grid();
