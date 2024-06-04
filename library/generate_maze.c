@@ -211,30 +211,29 @@ bool generate_maze(state_t *state)
     sdl_on_key((key_handler_t)on_key);
 
     printf("Page: %d\n", state->page);
-    sdl_clear();
+
     init_grid();
-    // sdl_show();
+    init_maze();
+
+    cell_t *cell = malloc(sizeof(cell_t));
+    cell->x = 1;
+    cell->y = 1;
+    visited[cell->x][cell->y] = true;
+
+    push_stack(&head, cell);
+
+    while (head != NULL)
+    {
+        cell = pop_stack(&head);
+        if (get_neighbor(cell, visited) != NULL)
+        {
+            push_stack(&head, cell);
+            cell_t *neighbor = get_neighbor(cell, visited);
+            remove_wall(cell, neighbor);
+            visited[neighbor->x][neighbor->y] = true;
+            adjacency(cell, neighbor, adj_matrix);
+            push_stack(&head, neighbor);
+        }
+    }
     return false;
-    // init_maze();
-
-    // cell_t *cell = malloc(sizeof(cell_t));
-    // cell->x = 1;
-    // cell->y = 1;
-    // visited[cell->x][cell->y] = true;
-
-    // push_stack(&head, cell);
-
-    // while (head != NULL)
-    // {
-    //     cell = pop_stack(&head);
-    //     if (get_neighbor(cell, visited) != NULL)
-    //     {
-    //         push_stack(&head, cell);
-    //         cell_t *neighbor = get_neighbor(cell, visited);
-    //         remove_wall(cell, neighbor);
-    //         visited[neighbor->x][neighbor->y] = true;
-    //         adjacency(cell, neighbor, adj_matrix);
-    //         push_stack(&head, neighbor);
-    //     }
-    // }
 }
