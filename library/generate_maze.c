@@ -122,6 +122,7 @@ static void init_grid()
 
     render_color((rgb_color_t){0, 0, 0});
     render_rect(&terminal_cell);
+    random_move_seeker();
     
     sdl_show();
 
@@ -256,7 +257,7 @@ bool generate_maze(state_t *state, double dt)
     
     sdl_clear();
     init_grid();
-    random_move_seeker();
+    
     
     // sdl_show();
     return false;
