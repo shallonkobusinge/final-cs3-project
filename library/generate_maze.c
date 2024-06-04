@@ -262,14 +262,14 @@ void render_seeker(state_t *state) {
     new_seeker_cell.w = GRID_CELL_SIZE / 2;
     new_seeker_cell.h = GRID_CELL_SIZE / 2;
 
-    seekers[num_seekers].rect = new_seeker_cell;
+    seekers[num_seekers - 1].rect = new_seeker_cell;
     // render_color((rgb_color_t){0, 0, 0});
     // render_rect(&new_seeker_cell);
     // printf("HEREE");
         state->last_seeker_mov_time = 0;    
     }
     num_seekers++;
-    seekers[num_seekers].rect = (SDL_Rect){(((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2) };
+    seekers[num_seekers - 1].rect = (SDL_Rect){(((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2) };
 
 }
 
@@ -277,7 +277,7 @@ bool generate_maze(state_t *state, double dt)
 {
     sdl_on_key((key_handler_t)on_key);
     state->last_seeker_mov_time += dt;
-    render_new_seeker(state);
+    render_seeker(state);
     sdl_clear();
     init_grid();
     for(size_t i = 0; i < num_seekers; i++){
