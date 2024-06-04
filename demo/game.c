@@ -35,6 +35,7 @@ state_t *emscripten_init()
     state->maze_generated = false;
 
     state->page = 1;
+    state->counter = 0;
 
     return state;
 }
