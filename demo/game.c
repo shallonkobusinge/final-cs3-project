@@ -61,12 +61,12 @@ bool emscripten_main(state_t *state)
     }
     else if (state->page == 1)
     {
-        // introduce_seeker(state->scene, state->seeker, dt, state->sound_effect);
+        introduce_seeker(state->scene, state->seeker, dt, state->sound_effect);
         if (!state->maze_generated)
         {
             state->maze_generated = generate_maze(state);
+            
         }
-        state->seeker = seeker_init(state->scene);
         sdl_show();
     }
     scene_tick(state->scene, dt);
