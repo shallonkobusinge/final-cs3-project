@@ -115,7 +115,7 @@ static void random_move_seeker (cell_t *seeker, size_t num_seekers) {
     default:
         break;
     }
-    if(hider_cell.x == seeker_x && hidder_cell.y == seeker_y) {
+    if(hider_cell.x == seeker_x && hider_cell.y == seeker_y) {
         printf(" PLACE FOR COLLISION ");
         return;
     }
