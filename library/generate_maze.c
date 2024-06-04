@@ -220,8 +220,8 @@ void remove_wall(cell_t *cell, cell_t *neighbor)
                     (x - 1) * GRID_CELL_SIZE,
                     (cell->y - 1) * GRID_CELL_SIZE + GRID_CELL_SIZE);
     }
-    printf("reka turebe\n");
-    SDL_Delay(300);
+    // printf("reka turebe\n");
+    // SDL_Delay(300);
 }
 
 bool generate_maze(state_t *state)
