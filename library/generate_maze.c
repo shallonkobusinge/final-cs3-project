@@ -78,7 +78,7 @@ static size_t find_min(size_t a, size_t b)
  */
 static void init_grid()
 {
-    render_color((rgb_color_t){210, 210, 210});
+    render_color((rgb_color_t){220, 220, 220});
 
     for (int x = 0; x < window_width; x += GRID_CELL_SIZE)
     {
