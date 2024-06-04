@@ -79,7 +79,7 @@ static size_t find_min(size_t a, size_t b)
 */
 static void random_move_seeker (SDL_Rect terminal_cell) {
     printf("WE are here ");
-    SDL_Delay(110);
+    SDL_Delay(100);
     int direction = rand() % 4;
     switch (direction) {
     case 0: { // move left
