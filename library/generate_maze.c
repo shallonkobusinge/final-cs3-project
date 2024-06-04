@@ -27,6 +27,7 @@ typedef struct state
     scene_t *scene;
     size_t page;
     bool maze_generated;
+    list_t *seekers;
 } state_t;
 
 const size_t NUM_BUILDINGS = 4;
@@ -76,33 +77,33 @@ static size_t find_min(size_t a, size_t b)
  * Moves the seeker cell to a random
  * adjacent cell 
 */
-static void random_move_seeker (SDL_Rect terminal_cell) {
+static void random_move_seeker (SDL_Rect *terminal_cell) {
     printf("WE are here ");
     SDL_Delay(70);
     int direction = rand() % 4;
     switch (direction) {
     case 0: { // move left
-     if (terminal_cell.x - GRID_CELL_SIZE >= 0) {
-            terminal_cell.x -= GRID_CELL_SIZE;
+     if (terminal_cell->x - GRID_CELL_SIZE >= 0) {
+            terminal_cell->x -= GRID_CELL_SIZE;
         }
         break;
     }
     case 1: { // move right
-        if (terminal_cell.x + GRID_CELL_SIZE < window_width) {
-            terminal_cell.x += GRID_CELL_SIZE;
+        if (terminal_cell->x + GRID_CELL_SIZE < window_width) {
+            terminal_cell->x += GRID_CELL_SIZE;
         }
         break;
     }
     case 2: { // move up
-        if (terminal_cell.y - GRID_CELL_SIZE >= 0) {
-            terminal_cell.y -= GRID_CELL_SIZE;
+        if (terminal_cell->y - GRID_CELL_SIZE >= 0) {
+            terminal_cell->y -= GRID_CELL_SIZE;
             
         }
         break;
     }
     case 3: { // move down
-        if (terminal_cell.y + GRID_CELL_SIZE < window_height) {
-            terminal_cell.y += GRID_CELL_SIZE;
+        if (terminal_cell->y + GRID_CELL_SIZE < window_height) {
+            terminal_cell->y += GRID_CELL_SIZE;
             
         }
         break;
@@ -115,7 +116,7 @@ static void random_move_seeker (SDL_Rect terminal_cell) {
 /**
  * Initialize and draw the Maze Grid.
  */
-static void init_grid()
+static void init_grid(state_t *state)
 {
     render_color((rgb_color_t){230, 230, 230});
 
@@ -141,7 +142,7 @@ static void init_grid()
         cell.h = GRID_CELL_SIZE / 2;
         render_color((rgb_color_t){241, 108, 45});
         render_rect(&cell);
-        random_move_seeker(cell);
+        list_add(state->seekers, cell);
     }
 }
 
@@ -273,8 +274,12 @@ bool generate_maze(state_t *state)
 
     printf("Page: %d\n", state->page);
 
-    init_grid();
+    init_grid(state);
     init_maze();
+    for(size_t i = 0; i < list_size(state->seekers); i++) {
+        SDL_Rect *rect = list_get(state->seekers, i);
+        random_move_seeker(rect);
+    }
     //     random_move_seeker();
     // render_color((rgb_color_t){0, 0, 0});
     // render_rect(&terminal_cell);
