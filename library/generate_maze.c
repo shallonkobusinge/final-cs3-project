@@ -178,7 +178,7 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
  * adjacent cell 
 */
 void random_move_seeker () {
-    SDL_Delay(80);
+    SDL_Delay(700);
     int direction = rand() % 4;
     switch (direction) {
     case 0: { // move left
