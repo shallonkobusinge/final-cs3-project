@@ -23,7 +23,6 @@ cell_t *parent[GRID_WIDTH][GRID_HEIGHT];
 SDL_Rect hider_cell = (SDL_Rect){(GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
 
 
-
 static stack_t *head;
 typedef struct state
 {
@@ -32,14 +31,6 @@ typedef struct state
     bool maze_generated;
     double last_seeker_mov_time;
 } state_t;
-
-typedef struct seeker
-{
-    SDL_Rect rect;
-} seeker_t;
-
-int num_seekers = 0;
-seeker_t *seekers = NULL;
 
 /**
  * Finds max between two numbers
@@ -120,11 +111,10 @@ static void init_grid()
     render_color((rgb_color_t){0, 255, 0});
     render_rect(&hider_cell);
 
-       for(size_t i = 0; i < num_seekers; i++){
-        render_color((rgb_color_t){0, 0, 0});
-        render_rect(&seekers[i].rect);
-    }
   
+    SDL_Rect seeker_cell = (SDL_Rect){(((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2) };
+    render_color((rgb_color_t){0, 0, 0});
+    render_rect(&seeker_cell);
 
     sdl_show();
 }
@@ -251,39 +241,25 @@ void remove_wall(cell_t *cell, cell_t *neighbor)
     SDL_Delay(30);
 }
 
-void render_seeker(state_t *state) {
-
-    if(state->last_seeker_mov_time >= 5.0) {
-        num_seekers++;
-        SDL_Rect new_seeker_cell;
-        // printf(" LAST TIME %f CURRENT TIME %f \n", state->last_seeker_mov_time, dt);
-    new_seeker_cell.x = ((rand() % GRID_WIDTH) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
-    new_seeker_cell.y = ((rand() % GRID_HEIGHT) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
-    new_seeker_cell.w = GRID_CELL_SIZE / 2;
-    new_seeker_cell.h = GRID_CELL_SIZE / 2;
-
-    seekers[num_seekers - 1].rect = new_seeker_cell;
-    // render_color((rgb_color_t){0, 0, 0});
-    // render_rect(&new_seeker_cell);
-    // printf("HEREE");
-        state->last_seeker_mov_time = 0;    
-    }
-    num_seekers++;
-    seekers[num_seekers - 1].rect = (SDL_Rect){(((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2) };
-
-}
-
 bool generate_maze(state_t *state, double dt)
 {
     sdl_on_key((key_handler_t)on_key);
     state->last_seeker_mov_time += dt;
-    render_seeker(state);
+    // if(state->last_seeker_mov_time >= 5.0) {
+    //     SDL_Rect new_seeker_cell;
+    //     // printf(" LAST TIME %f CURRENT TIME %f \n", state->last_seeker_mov_time, dt);
+    // new_seeker_cell.x = ((rand() % GRID_WIDTH) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
+    // new_seeker_cell.y = ((rand() % GRID_HEIGHT) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
+    // new_seeker_cell.w = GRID_CELL_SIZE / 2;
+    // new_seeker_cell.h = GRID_CELL_SIZE / 2;
+    // render_color((rgb_color_t){0, 0, 0});
+    // render_rect(&new_seeker_cell);
+    //  random_move_seeker(new_seeker_cell); 
+    //     state->last_seeker_mov_time = 0;    
+    // }
+    printf("Page: %d\n", state->page);
     sdl_clear();
     init_grid();
-    // for(size_t i = 0; i < num_seekers; i++){
-    //     render_color((rgb_color_t){0, 0, 0});
-    //     render_rect(&seekers[i].rect);
-    // }
     // sdl_show();
     return false;
     // init_maze();
