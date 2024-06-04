@@ -102,6 +102,8 @@ static void render_seeker(){
     // seeker->rect = (SDL_Rect){(((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2) };
     seeker_cell.x = (((rand() % GRID_WIDTH) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
     seeker_cell.y = (((rand() % GRID_HEIGHT) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
+    seeker_cell.w = (GRID_CELL_SIZE / 2);
+    seeker_cell.h = (GRID_CELL_SIZE / 2);
     // render_color((rgb_color_t){0, 0, 0});
     // render_rect(&seeker->rect);
 }
