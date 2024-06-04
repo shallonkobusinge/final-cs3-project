@@ -100,15 +100,15 @@ static void render_seeker(state_t *state){
     SDL_Delay(80);
     seeker_t *seeker = malloc(sizeof(seeker_t));
     seeker->rect = (SDL_Rect){(((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2) };
-    render_color((rgb_color_t){0, 0, 0});
-    render_rect(&seeker->rect);
+    // render_color((rgb_color_t){0, 0, 0});
+    // render_rect(&seeker->rect);
     list_add(state->seekers, seeker);
     SDL_Delay(80);
-    seeker_t *seeker = malloc(sizeof(seeker_t));
-    seeker->rect = (SDL_Rect){(((rand() % GRID_WIDTH) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (((rand() % GRID_HEIGHT) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2) };
-    render_color((rgb_color_t){0, 0, 0});
-    render_rect(&seeker->rect);
-    list_add(state->seekers, seeker);
+    seeker_t *seeker_n = malloc(sizeof(seeker_t));
+    seeker_n->rect = (SDL_Rect){(((rand() % GRID_WIDTH) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (((rand() % GRID_HEIGHT) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2) };
+    // render_color((rgb_color_t){0, 0, 0});
+    // render_rect(&seeker_n->rect);
+    list_add(state->seekers, seeker_n);
 }
 
 /**
@@ -270,6 +270,7 @@ bool generate_maze(state_t *state, double dt)
     sdl_clear();
     for(size_t i = 0; i < list_size(state->seekers); i++) {
         SDL_Rect *rect = list_get(state->seekers, i);
+        render_color((rgb_color_t){0, 0, 0});
         render_rect(rect);
     }
 
