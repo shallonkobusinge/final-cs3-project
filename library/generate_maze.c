@@ -52,31 +52,31 @@ find_max(size_t a, size_t b)
  * Moves the seeker cell to a random
  * adjacent cell 
 */
-void random_move_seeker (SDL_Rect seeker_cell) {
+void random_move_seeker () {
     SDL_Delay(70);
     int direction = rand() % 4;
     switch (direction) {
     case 0: { // move left
-     if (seeker_cell.x - GRID_CELL_SIZE >= 0) {
-            seeker_cell.x -= GRID_CELL_SIZE;
+     if (terminal_cell.x - GRID_CELL_SIZE >= 0) {
+            terminal_cell.x -= GRID_CELL_SIZE;
         }
         break;
     }
     case 1: { // move right
-        if (seeker_cell.x + GRID_CELL_SIZE < window_width) {
-            seeker_cell.x += GRID_CELL_SIZE;
+        if (terminal_cell.x + GRID_CELL_SIZE < window_width) {
+            terminal_cell.x += GRID_CELL_SIZE;
         }
         break;
     }
     case 2: { // move up
-        if (seeker_cell.y - GRID_CELL_SIZE >= 0) {
-            seeker_cell.y -= GRID_CELL_SIZE;
+        if (terminal_cell.y - GRID_CELL_SIZE >= 0) {
+            terminal_cell.y -= GRID_CELL_SIZE;
             break;
         }
     }
     case 3: { // move down
-        if (seeker_cell.y + GRID_CELL_SIZE < window_height) {
-            seeker_cell.y += GRID_CELL_SIZE;
+        if (terminal_cell.y + GRID_CELL_SIZE < window_height) {
+            terminal_cell.y += GRID_CELL_SIZE;
             break;
         }
     }
@@ -119,7 +119,6 @@ static void init_grid()
     terminal_cell.y = ((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
     terminal_cell.w = GRID_CELL_SIZE / 2;
     terminal_cell.h = GRID_CELL_SIZE / 2;
-    random_move_seeker(terminal_cell);
 
     render_color((rgb_color_t){0, 0, 0});
     render_rect(&terminal_cell);
@@ -256,6 +255,7 @@ bool generate_maze(state_t *state, double dt)
     
     sdl_clear();
     init_grid();
+    andom_move_seeker();
     
     // sdl_show();
     return false;
