@@ -40,21 +40,21 @@ typedef struct seeker {
 
 body_t *make_seeker(double w, double h, vector_t center) {
     list_t *c = list_init(1, free);
-  // vector_t *v1 = malloc(sizeof(vector_t));
-  // *v1 = (vector_t){0, 0};
-  // list_add(c, v1);
+  vector_t *v1 = malloc(sizeof(vector_t));
+  *v1 = (vector_t){0, 0};
+  list_add(c, v1);
 
-  // vector_t *v2 = malloc(sizeof(vector_t));
-  // *v2 = (vector_t){w, 0};
-  // list_add(c, v2);
+  vector_t *v2 = malloc(sizeof(vector_t));
+  *v2 = (vector_t){w, 0};
+  list_add(c, v2);
 
   vector_t *v3 = malloc(sizeof(vector_t));
   *v3 = (vector_t){w, h};
   list_add(c, v3);
 
-  // vector_t *v4 = malloc(sizeof(vector_t));
-  // *v4 = (vector_t){0, h};
-  // list_add(c, v4);
+  vector_t *v4 = malloc(sizeof(vector_t));
+  *v4 = (vector_t){0, h};
+  list_add(c, v4);
   body_t *seeker = body_init(c, 1, seeker_color);
   body_set_centroid(seeker, center);
   return seeker;
