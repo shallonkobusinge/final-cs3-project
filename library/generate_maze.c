@@ -21,8 +21,7 @@ bool adj_matrix[NUM_CELLS][NUM_CELLS];
 cell_t *parent[GRID_WIDTH][GRID_HEIGHT];
 
 SDL_Rect hider_cell = (SDL_Rect){(GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
-SDL_Rect terminal_cell;
-
+SDL_Rect terminal_cell = (SDL_Rect){(((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
 static stack_t *head;
 typedef struct state
 {
@@ -113,13 +112,10 @@ static void init_grid()
     render_color((rgb_color_t){0, 255, 0});
     render_rect(&hider_cell);
 
-    terminal_cell.x = ((GRID_WIDTH - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
-    terminal_cell.y = ((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4;
-    terminal_cell.w = GRID_CELL_SIZE / 2;
-    terminal_cell.h = GRID_CELL_SIZE / 2;
+  
 
-    render_color((rgb_color_t){0, 0, 0});
-    render_rect(&terminal_cell);
+    // render_color((rgb_color_t){0, 0, 0});
+    // render_rect(&terminal_cell);
 
     sdl_show();
 }
