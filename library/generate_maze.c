@@ -143,7 +143,7 @@ static void init_grid(state_t *state)
     render_color((rgb_color_t){50, 129, 110});
     render_rect(&hider_cell);
 
-    for (size_t i = 0; i < list_size(state->seekers); i++)
+    for (size_t i = 0; i < NUM_BUILDINGS; i++)
     {
         cell_t *cell = malloc(sizeof(cell_t));
         cell->x = buildings[i].x;
