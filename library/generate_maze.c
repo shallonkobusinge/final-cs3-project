@@ -284,8 +284,9 @@ bool generate_maze(state_t *state, double dt)
     state->last_seeker_mov_time += dt;
     
     printf("Page: %d\n", state->page);
-    sdl_clear();
     init_grid();
+    sdl_clear();
+    
     // render_seeker();
     // render_color((rgb_color_t){0, 0, 0});
     // render_rect(&seeker_cell);
