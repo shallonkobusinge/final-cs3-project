@@ -83,7 +83,7 @@ static size_t find_min(size_t a, size_t b)
  * Moves the seeker cell to a random
  * adjacent cell 
 */
-void random_move_seeker (seeker_t *seeker) {
+static void random_move_seeker () {
     printf("WE are here ");
     SDL_Delay(90);
     int direction = rand() % 4;
@@ -268,11 +268,11 @@ bool generate_maze(state_t *state)
 {
     sdl_on_key((key_handler_t)on_key);
 
-    // printf("Page: %d\n", state->page);
+    printf("Page: %d\n", state->page);
 
     init_grid(state);
     // init_maze();
-    random_move_seeker(state->seeker);
+    random_move_seeker();
     // render_color((rgb_color_t){0, 0, 0});
     // render_rect(&terminal_cell);
     // // sdl_show();

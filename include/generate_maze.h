@@ -12,6 +12,4 @@
  */
 bool generate_maze(state_t *state);
 
-void random_move_seeker (seeker_t *seeker);
-
 #endif // #ifndef __GENERATE_MAZE_H__
