@@ -251,5 +251,5 @@ bool generate_maze(state_t *state)
             push_stack(&head, neighbor);
         }
     }
-    return false;
+    return true;
 }
