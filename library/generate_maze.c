@@ -8,6 +8,7 @@
 #include "state.h"
 #include "sdl_wrapper.h"
 #include "sound_effect.h"
+#include "seeker.h"
 
 const size_t GRID_WIDTH = 25;
 const size_t GRID_HEIGHT = 12;
@@ -32,6 +33,7 @@ typedef struct state
     bool maze_generated;
     list_t *seekers;
     sound_effect_t *sound_effect;
+    seeker_t *seeker;
 } state_t;
 
 const size_t NUM_BUILDINGS = 4;
@@ -81,13 +83,13 @@ static size_t find_min(size_t a, size_t b)
  * Moves the seeker cell to a random
  * adjacent cell 
 */
-static void random_move_seeker () {
+void random_move_seeker (seeker_t *seeker) {
     printf("WE are here ");
     SDL_Delay(90);
     int direction = rand() % 4;
     switch (direction) {
     case 0: { // move left
-     if (seeker_cell.x - GRID_CELL_SIZE >= 0) {
+     if (seeker. - GRID_CELL_SIZE >= 0) {
             seeker_cell.x -= GRID_CELL_SIZE;
         }
         break;

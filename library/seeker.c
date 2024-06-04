@@ -11,8 +11,17 @@ const vector_t MIN_WINDOW = {0, 0};
 const vector_t MAX_WINDOW = {1000, 500};
 const double OUTER_RADIUS = 60;
 const double INNER_RADIUS = 60;
-const vector_t START_POS = {0, 45};
 const vector_t INITIAL_VELOCITY = {60, 20};
+
+const size_t GRID_WIDTH_S = 25;
+const size_t GRID_HEIGHT_S = 12;
+const size_t NUM_CELLS_S = GRID_WIDTH_S * GRID_HEIGHT_S;
+
+const int GRID_CELL_SIZE_S = 40;
+const int window_width_s = (GRID_WIDTH_S * GRID_CELL_SIZE_S) + 1;
+const int window_height_s = (GRID_HEIGHT_S * GRID_CELL_SIZE_S) + 1;
+// ((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4, ((GRID_WIDTH - 3) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4
+const vector_t START_POS = {.x = ((GRID_WIDTH_S - 2) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4, .y = ((GRID_WIDTH_S - 3) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4};
 
 // SEEKING CONSTANTS
 #define STARTING_SEEKERS 1
@@ -46,9 +55,9 @@ body_t *make_seeker(double w, double h, vector_t center) {
   vector_t *v4 = malloc(sizeof(vector_t));
   *v4 = (vector_t){0, h};
   list_add(c, v4);
-  body_t *obstacle = body_init(c, 1, seeker_color);
-  body_set_centroid(obstacle, center);
-  return obstacle;
+  body_t *seeker = body_init(c, 1, seeker_color);
+  body_set_centroid(seeker, center);
+  return seeker;
 }
 
 void wrap_seeker_scene(body_t *seeker) {
@@ -67,24 +76,24 @@ void wrap_seeker_scene(body_t *seeker) {
 
 void add_new_seeker(scene_t *scene, seeker_t *seeker_ipt, bool is_new){
    
-   vector_t seeker_vel = {.x = 0.0, .y = 0.0};
+  //  vector_t seeker_vel = {.x = 0.0, .y = 0.0};
    body_t *seeker;
     if(is_new){
       vector_t seeker_pos = (vector_t){
-        .x = rand() % (int)INITIAL_VELOCITY.x,
-        .y = rand() % (int)(MAX_WINDOW.y),
+        .x = ((GRID_WIDTH_S - 3) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4,
+        .y = ((GRID_HEIGHT_S - 3) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4,
     };
-     seeker_vel = (vector_t){
-        .x = rand() % (int)INITIAL_VELOCITY.x + 20,
-        .y = rand() % (int)INITIAL_VELOCITY.y + 10
-    };
+    //  seeker_vel = (vector_t){
+    //     .x = rand() % (int)INITIAL_VELOCITY.x + 20,
+    //     .y = rand() % (int)INITIAL_VELOCITY.y + 10
+    // };
       seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, seeker_pos);
     }
     seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, START_POS);
     seeker_vel = INITIAL_VELOCITY;
   
     scene_add_body(scene, seeker);
-    body_set_velocity(seeker, seeker_vel);
+    // body_set_velocity(seeker, seeker_vel);
     asset_t *new_asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
     list_add(seeker_ipt->body_assets, new_asset_seeker);
     seeker_ipt->last_seeker_time = 0;
