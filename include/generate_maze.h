@@ -11,4 +11,6 @@
  */
 bool generate_maze(state_t *state, double dt);
 
+void render_seeker();
+
 #endif // #ifndef __GENERATE_MAZE_H__
