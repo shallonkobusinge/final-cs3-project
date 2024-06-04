@@ -291,7 +291,7 @@ bool generate_maze(state_t *state, double dt)
     // render_rect(&seeker_cell);
     
     // sdl_show();
-    return false;
+    return true;
     // init_maze();
 
     // cell_t *cell = malloc(sizeof(cell_t));
