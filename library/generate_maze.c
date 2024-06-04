@@ -142,7 +142,7 @@ static void init_grid()
 
     // render_color((rgb_color_t){0, 0, 0});
     // render_rect(&seeker_cell);
-    for(int i =0; i < num_seekers; i++){
+    for(int i =0; i < 1; i++){
         seeker_cells[i].x = (((rand() % GRID_WIDTH) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
         seeker_cells[i].x = (((rand() % GRID_WIDTH) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
         seeker_cells[i].y = (((rand() % GRID_HEIGHT) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4);
