@@ -260,7 +260,11 @@ bool generate_maze(state_t *state, double dt)
     printf("Page: %d\n", state->page);
     sdl_clear();
     init_grid();
-    render_seeker();
+    if(state->last_seeker_mov_time > 5.0){
+        render_seeker();
+        state->last_seeker_mov_time = 0;
+    }
+    
     // sdl_show();
     return false;
     // init_maze();
