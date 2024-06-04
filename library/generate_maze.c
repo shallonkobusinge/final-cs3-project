@@ -239,6 +239,7 @@ bool generate_maze(state_t *state)
     cell->y = 1;
     visited[cell->x][cell->y] = true;
 
+    printf("ehe");
     push_stack(&state->head, cell);
 
     printf("hano se \n");
@@ -254,10 +255,6 @@ bool generate_maze(state_t *state)
             adjacency(cell, neighbor, adj_matrix);
             push_stack(&head, neighbor);
         }
-    }
-    if (state->counter != 4)
-    {
-        state->counter++;
     }
 
     return false;
