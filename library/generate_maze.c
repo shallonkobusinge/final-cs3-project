@@ -123,7 +123,7 @@ static void init_grid()
     render_color((rgb_color_t){0, 255, 0});
     render_rect(&hider_cell);
 
-    render_seeker();
+    
 
     sdl_show();
 }
@@ -254,7 +254,7 @@ bool generate_maze(state_t *state, double dt)
 {
     sdl_on_key((key_handler_t)on_key);
     state->last_seeker_mov_time += dt;
-   
+    render_seeker();
     printf("Page: %d\n", state->page);
     sdl_clear();
     init_grid();
