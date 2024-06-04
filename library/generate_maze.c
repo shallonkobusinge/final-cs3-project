@@ -100,7 +100,6 @@ static size_t find_min(size_t a, size_t b)
  */
 static void init_grid()
 {
-    printf("AGAIN");
     render_color((rgb_color_t){210, 210, 210});
 
     for (int x = 0; x < window_width; x += GRID_CELL_SIZE)
@@ -254,7 +253,7 @@ bool generate_maze(state_t *state, double dt)
 {
     sdl_on_key((key_handler_t)on_key);
     state->last_seeker_mov_time += dt;
-    
+    printf("HEEREE");
     sdl_clear();
     init_grid();
     
