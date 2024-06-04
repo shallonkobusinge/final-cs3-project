@@ -40,9 +40,9 @@ state_t *emscripten_init()
     state_t *state = malloc(sizeof(state_t));
     state->scene = scene_init();
     state->maze_generated = false;
-    state->sound_effect = load_game_sounds()
+    state->sound_effect = load_game_sounds();
     state->page = 1;
-    
+
     game_sound(state->sound_effect);
 
     return state;
@@ -72,7 +72,6 @@ bool emscripten_main(state_t *state)
 void emscripten_free(state_t *state)
 {
     scene_free(state->scene);
-    list_free(state->seekers);
     asset_cache_destroy();
     free(state);
 }
