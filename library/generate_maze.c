@@ -79,33 +79,33 @@ static size_t find_min(size_t a, size_t b)
  * Moves the seeker cell to a random
  * adjacent cell 
 */
-static void random_move_seeker (SDL_Rect terminal_cell) {
+static void random_move_seeker () {
     printf("WE are here ");
     SDL_Delay(70);
     int direction = rand() % 4;
     switch (direction) {
     case 0: { // move left
-     if (terminal_cell.x - GRID_CELL_SIZE >= 0) {
-            terminal_cell.x -= GRID_CELL_SIZE;
+     if (seeker_cell.x - GRID_CELL_SIZE >= 0) {
+            seeker_cell.x -= GRID_CELL_SIZE;
         }
         break;
     }
     case 1: { // move right
-        if (terminal_cell.x + GRID_CELL_SIZE < window_width) {
-            terminal_cell.x += GRID_CELL_SIZE;
+        if (seeker_cell.x + GRID_CELL_SIZE < window_width) {
+            seeker_cell.x += GRID_CELL_SIZE;
         }
         break;
     }
     case 2: { // move up
-        if (terminal_cell.y - GRID_CELL_SIZE >= 0) {
-            terminal_cell.y -= GRID_CELL_SIZE;
+        if (seeker_cell.y - GRID_CELL_SIZE >= 0) {
+            seeker_cell.y -= GRID_CELL_SIZE;
             
         }
         break;
     }
     case 3: { // move down
-        if (terminal_cell.y + GRID_CELL_SIZE < window_height) {
-            terminal_cell.y += GRID_CELL_SIZE;
+        if (seeker_cell.y + GRID_CELL_SIZE < window_height) {
+            seeker_cell.y += GRID_CELL_SIZE;
             
         }
         break;
