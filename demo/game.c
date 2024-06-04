@@ -37,13 +37,13 @@ state_t *emscripten_init()
 
     state->page = 1;
     state->head = NULL;
-    sdl_clear();
 
     return state;
 }
 
 bool emscripten_main(state_t *state)
 {
+    sdl_clear();
 
     if (state->page == 0)
     {
