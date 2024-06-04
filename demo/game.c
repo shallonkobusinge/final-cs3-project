@@ -43,7 +43,7 @@ state_t *emscripten_init()
 bool emscripten_main(state_t *state)
 {
     double dt = time_since_last_tick();
-     printf("OUTTTT");
+     printf("HEEREE1");
     if (state->page == 0)
     {
         build_landing_page();
