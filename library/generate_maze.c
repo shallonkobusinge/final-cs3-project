@@ -19,7 +19,7 @@ const int window_height = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
 bool visited[GRID_WIDTH + 2][GRID_HEIGHT + 2];
 bool adj_matrix[NUM_CELLS][NUM_CELLS];
 cell_t *parent[GRID_WIDTH][GRID_HEIGHT];
-int num_seekers = 50;
+const int num_seekers = 3;
 
 SDL_Rect hider_cell = (SDL_Rect){(GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
 SDL_Rect seeker_cells[num_seekers];
