@@ -64,56 +64,6 @@ static size_t find_min(size_t a, size_t b)
     return (a > b) ? b : a;
 }
 
-static body_t *make_beaver(double w, double h, vector_t center){
-    // list_t *beaver_v = list_init(6, free);
-
-    // vector_t *v1 = malloc(sizeof(vector_t));
-    // *v1 = (vector_t){0.0, 0.0};
-    // list_add(beaver_v, v1);
-
-    // vector_t *v2 = malloc(sizeof(vector_t));
-    // *v2 = (vector_t){0.5 * BEAVER_WIDTH, 0.0};
-    // list_add(beaver_v, v2);
-
-    // vector_t *v3 = malloc(sizeof(vector_t));
-    // *v3 = (vector_t){0.0, 0.5 * BEAVER_HEIGHT};
-    // list_add(beaver_v, v3);
-
-    // vector_t *v4 = malloc(sizeof(vector_t));
-    // *v4 = (vector_t){0.5 * BEAVER_WIDTH, BEAVER_HEIGHT};
-    // list_add(beaver_v, v4);
-
-    // vector_t *v5 = malloc(sizeof(vector_t));
-    // *v4 = (vector_t){0.0, BEAVER_HEIGHT};
-    // list_add(beaver_v, v5);
-
-    // vector_t *v6 = malloc(sizeof(vector_t));
-    // *v5 = (vector_t){-0.5 * BEAVER_WIDTH, 0.5 * BEAVER_HEIGHT};
-    // list_add(beaver_v, v6);
-
-    // body_t *beaver = body_init(beaver_v, 1.0, beaver_color);
-    // body_set_centroid(beaver, center);
-    // return beaver;
-    list_t *c = list_init(4, free);
-    vector_t *v1 = malloc(sizeof(vector_t));
-    *v1 = (vector_t){0 , 0};
-    list_add(c, v1);
-
-    vector_t *v2 = malloc(sizeof(vector_t));
-    *v2 = (vector_t){w, 0};
-    list_add(c, v2);
-
-    vector_t *v3 = malloc(sizeof(vector_t));
-    *v3 = (vector_t){w, h};
-    list_add(c, v3);
-
-    vector_t *v4 = malloc(sizeof(vector_t));
-    *v4 = (vector_t){0, h};
-    list_add(c, v4);
-    body_t *seeker = body_init(c, 6, beaver_color);
-    // body_set_centroid(seeker, center);
-    return seeker;
-    }
 
 /**
  * Initialize and draw the Maze Grid.
