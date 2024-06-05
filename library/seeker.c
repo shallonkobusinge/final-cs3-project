@@ -62,7 +62,7 @@ body_t *make_seeker(double w, double h, vector_t center) {
 }
 
 static void move_body(body_t *body, vector_t vec){
-  body_set_centroid(body, vec_add(body_get_centroid(body), vec));
+  body_set_velocity(body, vec_add(body_get_centroid(body), vec));
 }
 // void wrap_seeker_scene(body_t *seeker) {
 //   vector_t centroid = body_get_centroid(seeker);
