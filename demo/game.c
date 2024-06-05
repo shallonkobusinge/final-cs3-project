@@ -43,7 +43,7 @@ state_t *emscripten_init()
     state->scene = scene_init();
     state->maze_generated = false;
     // state->sound_effect = load_game_sounds();
-    state->seeker = seeker_init(state->scene);
+    state->seeker = seeker_init(state);
     state->page = 1;
 
     // game_sound(state->sound_effect);
