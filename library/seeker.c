@@ -131,44 +131,64 @@ void render_seeker_bodies(seeker_t *seeker) {
 }
 
 
-void random_move_seeker (body_t *seeker) {
+void random_move_seeker (scene_t *scene) {
     printf("WE are here ");
     SDL_Delay(90);
     int direction = rand() % 4;
-    // vector_t velocity = body_get_velocity(seeker);
-    vector_t centroid = body_get_centroid(seeker);
+    for(size_t i = 0; i < scene_bodies(scene); i++) {
+      body_t *body = scene_get_body(scene, i);
+      double dx = ((rand() % 3) - 1) * 5.0;
+      double dy = ((rand() % 3) - 1 ) * 5.0;
+      vector_t new_pos = vec_add(body_get_centroid(body), (vector_t){dx, dy});
+      if(new_pos.x < 0){
+        new_pos.x = 0;
+      }
+      if(new_pos.y < 0) {
+        new_pos.y = 0;
+      }
+      if(new_pos.x > window_width_s){
+        new_pos.x = window_width_s;
+      }
+      if(new_pos.y > window_height_s){
+        new_pos.y = window_height_s;
+      }
+      body_set_centroid(body, new_pos);
+    }
 
-    switch (direction) {
-    case 0: { // move left
-     if (centroid.x - GRID_CELL_SIZE_S >= 0) {
-            centroid.x -= GRID_CELL_SIZE_S;
-        }
-        break;
-    }
-    case 1: { // move right
-        if (centroid.x + GRID_CELL_SIZE_S < window_width_s) {
-            centroid.x += GRID_CELL_SIZE_S;
-        }
-        break;
-    }
-    case 2: { // move up
-        if (centroid.y - GRID_CELL_SIZE_S >= 0) {
-            centroid.y -= GRID_CELL_SIZE_S;
+    
+    // vector_t centroid = body_get_centroid(seeker);
+
+    // switch (direction) {
+    // case 0: { // move left
+    //  if (centroid.x - GRID_CELL_SIZE_S >= 0) {
+    //         centroid.x -= GRID_CELL_SIZE_S;
+    //     }
+    //     break;
+    // }
+    // case 1: { // move right
+    //     if (centroid.x + GRID_CELL_SIZE_S < window_width_s) {
+    //         centroid.x += GRID_CELL_SIZE_S;
+    //     }
+    //     break;
+    // }
+    // case 2: { // move up
+    //     if (centroid.y - GRID_CELL_SIZE_S >= 0) {
+    //         centroid.y -= GRID_CELL_SIZE_S;
             
-        }
-        break;
-    }
-    case 3: { // move down
-        if (centroid.y + GRID_CELL_SIZE_S < window_height_s) {
-            centroid.y += GRID_CELL_SIZE_S;
+    //     }
+    //     break;
+    // }
+    // case 3: { // move down
+    //     if (centroid.y + GRID_CELL_SIZE_S < window_height_s) {
+    //         centroid.y += GRID_CELL_SIZE_S;
             
-        }
-        break;
-    }
-    default:
-        break;
-    }
-    body_set_centroid(seeker, centroid);
+    //     }
+    //     break;
+    // }
+    // default:
+    //     break;
+    // }
+    // body_set_centroid(seeker, centroid);
 }
 
 
