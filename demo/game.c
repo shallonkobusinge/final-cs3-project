@@ -52,15 +52,14 @@ state_t *emscripten_init()
     state->maze_generated = false;
     state->sound_effect = load_game_sounds();
     state->seeker = seeker_init(state);
-    add_new_seeker(state, false);
     state->page = 1;
      vector_t center = (vector_t){.x = (((GRID_WIDTH_H - 24) * GRID_CELL_SIZE_H) + GRID_CELL_SIZE_H / 4), .y = (((GRID_HEIGHT_H - 11) * GRID_CELL_SIZE_H) + GRID_CELL_SIZE_H / 4)};
 
     body_t *beaver = make_seeker(35, 35, center);
     scene_add_body(state->scene, beaver);
-
     asset_t *asset_beaver = asset_make_image_with_body(BEAVER_PATH, beaver);
     list_add(state->body_assets, asset_beaver);
+    add_new_seeker(state, false);
     game_sound(state->sound_effect);
 
     return state;
@@ -83,7 +82,7 @@ bool emscripten_main(state_t *state)
             state->maze_generated = generate_maze(state, dt);
         }
         render_seeker_bodies(state);
-        for(size_t i = 0; i < scene_bodies(state->scene); i++) {
+        for(size_t i = 1; i < scene_bodies(state->scene); i++) {
             body_t *seeker = scene_get_body(state->scene, i);
             rgb_color_t *color = body_get_color(seeker);
             if(color->r == 0.1 && color->g == 0.9 && color->b == 0.2) {
