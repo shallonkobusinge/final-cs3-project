@@ -102,7 +102,6 @@ void render_seeker(state_t *state, double dt){
 
         rgb_color_t *color = body_get_color(scene_get_body(state->scene, i));
         if(color->r == 0.1 && color->g == 0.9 && color->b == 0.2) {
-            printf("SIZE FROM: %zu \n", list_size(state->body_assets));
               asset_render(list_get(state->body_assets, i));
             }
  
