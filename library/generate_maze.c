@@ -14,7 +14,7 @@
 #define BEAVER_WIDTH 1.5
 #define BEAVER_HEIGHT 1.0
 
-// const char *BEAVER_PATH = "assets/images/seeking/beaver.png";
+const char *BEAVER_PATH = "assets/images/seeking/beaver.png";
 
 const size_t GRID_WIDTH = 25;
 const size_t GRID_HEIGHT = 12;
@@ -65,55 +65,36 @@ static size_t find_min(size_t a, size_t b)
     return (a > b) ? b : a;
 }
 
-static body_t *make_beaver(double w, double h, vector_t center){
-    // list_t *beaver_v = list_init(6, free);
+static body_t *make_beaver(vector_t center){
+    list_t *beaver_v = list_init(6, free);
 
-    // vector_t *v1 = malloc(sizeof(vector_t));
-    // *v1 = (vector_t){0.0, 0.0};
-    // list_add(beaver_v, v1);
+    vector_t *v1 = malloc(sizeof(vector_t));
+    *v1 = (vector_t){0.0, 0.0};
+    list_add(beaver_v, v1);
 
-    // vector_t *v2 = malloc(sizeof(vector_t));
-    // *v2 = (vector_t){0.5 * BEAVER_WIDTH, 0.0};
-    // list_add(beaver_v, v2);
+    vector_t *v2 = malloc(sizeof(vector_t));
+    *v2 = (vector_t){0.5 * BEAVER_WIDTH, 0.0};
+    list_add(beaver_v, v2);
 
-    // vector_t *v3 = malloc(sizeof(vector_t));
-    // *v3 = (vector_t){0.0, 0.5 * BEAVER_HEIGHT};
-    // list_add(beaver_v, v3);
+    vector_t *v3 = malloc(sizeof(vector_t));
+    *v3 = (vector_t){0.0, 0.5 * BEAVER_HEIGHT};
+    list_add(beaver_v, v3);
 
-    // vector_t *v4 = malloc(sizeof(vector_t));
-    // *v4 = (vector_t){0.5 * BEAVER_WIDTH, BEAVER_HEIGHT};
-    // list_add(beaver_v, v4);
+    vector_t *v4 = malloc(sizeof(vector_t));
+    *v4 = (vector_t){0.5 * BEAVER_WIDTH, BEAVER_HEIGHT};
+    list_add(beaver_v, v4);
 
-    // vector_t *v5 = malloc(sizeof(vector_t));
-    // *v4 = (vector_t){0.0, BEAVER_HEIGHT};
-    // list_add(beaver_v, v5);
+    vector_t *v5 = malloc(sizeof(vector_t));
+    *v4 = (vector_t){0.0, BEAVER_HEIGHT};
+    list_add(beaver_v, v5);
 
-    // vector_t *v6 = malloc(sizeof(vector_t));
-    // *v5 = (vector_t){-0.5 * BEAVER_WIDTH, 0.5 * BEAVER_HEIGHT};
-    // list_add(beaver_v, v6);
+    vector_t *v6 = malloc(sizeof(vector_t));
+    *v5 = (vector_t){-0.5 * BEAVER_WIDTH, 0.5 * BEAVER_HEIGHT};
+    list_add(beaver_v, v6);
 
-    // body_t *beaver = body_init(beaver_v, 1.0, beaver_color);
-    // body_set_centroid(beaver, center);
-    list_t *c = list_init(4, free);
-   vector_t *v1 = malloc(sizeof(vector_t));
-  *v1 = (vector_t){0 , 0};
-  list_add(c, v1);
-
-  vector_t *v2 = malloc(sizeof(vector_t));
-  *v2 = (vector_t){w, 0};
-  list_add(c, v2);
-
-  vector_t *v3 = malloc(sizeof(vector_t));
-  *v3 = (vector_t){w, h};
-  list_add(c, v3);
-
-  vector_t *v4 = malloc(sizeof(vector_t));
-  *v4 = (vector_t){0, h};
-  list_add(c, v4);
-  body_t *seeker = body_init(c, 6, beaver_color);
-  body_set_centroid(seeker, center);
-  return seeker;
-    // return beaver;
+    body_t *beaver = body_init(beaver_v, 1.0, beaver_color);
+    body_set_centroid(beaver, center);
+    return beaver;
 }
 
 /**
@@ -131,14 +112,13 @@ static void init_grid(state_t *state)
     {
         render_line(0, y, window_width, y);
     }
-    // vector_t center = (vector_t){.x = GRID_CELL_SIZE / 4, .y = GRID_CELL_SIZE / 4};
+    vector_t center = (vector_t){.x = GRID_CELL_SIZE / 4, .y = GRID_CELL_SIZE / 4};
 
-    // // body_t *beaver = make_beaver(center);
-    // body_t *beaver = make_beaver(50, 50, center);
-    // scene_add_body(state->scene, beaver);
+    body_t *beaver = make_beaver(center);
+    scene_add_body(state->scene, beaver);
 
-    // asset_t *asset_beaver = asset_make_image_with_body(BEAVER_PATH, beaver);
-    // list_add(state->body_assets, beaver);
+    asset_t *asset_beaver = asset_make_image_with_body(BEAVER_PATH, beaver);
+    list_add(state->body_assets, asset_beaver);
 
     // render_color((rgb_color_t){50, 129, 110});x
     // render_rect(&hider_cell);
