@@ -62,7 +62,7 @@ body_t *make_seeker(double w, double h, vector_t center) {
 }
 
 static void move_body(body_t *body, vector_t vec){
-  body_set_velocity(body, vec_add(body_get_centroid(body), vec));
+  body_set_centroid(body, vec_add(body_get_centroid(body), vec));
 }
 // void wrap_seeker_scene(body_t *seeker) {
 //   vector_t centroid = body_get_centroid(seeker);
@@ -138,26 +138,6 @@ void random_move_seeker (body_t *seeker) {
     printf("WE are here ");
     SDL_Delay(90);
     int direction = rand() % 4;
-    // for(size_t i = 0; i < scene_bodies(scene); i++) {
-    //   body_t *body = scene_get_body(scene, i);
-    //   double dx = ((rand() % 3) - 1) * 5.0;
-    //   double dy = ((rand() % 3) - 1 ) * 5.0;
-    //   vector_t new_pos = vec_add(body_get_centroid(body), (vector_t){dx, dy});
-    //   if(new_pos.x < 0){
-    //     new_pos.x = 0;
-    //   }
-    //   if(new_pos.y < 0) {
-    //     new_pos.y = 0;
-    //   }
-    //   if(new_pos.x > window_width_s){
-    //     new_pos.x = window_width_s;
-    //   }
-    //   if(new_pos.y > window_height_s){
-    //     new_pos.y = window_height_s;
-    //   }
-  
-    // }
-
     
     vector_t centroid = VEC_ZERO;
 
