@@ -29,6 +29,7 @@ const size_t GRID_WIDTH_H = 25;
 const size_t GRID_HEIGHT_H = 12;
 const size_t NUM_CELLS_H = GRID_WIDTH_H * GRID_HEIGHT_H;
 const int GRID_CELL_SIZE_H = 40;
+const rgb_color_t beaver_color = (rgb_color_t){150, 75, 0};
 
 struct state
 {

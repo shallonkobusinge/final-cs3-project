@@ -18,7 +18,7 @@
 const size_t GRID_WIDTH = 25;
 const size_t GRID_HEIGHT = 12;
 const size_t NUM_CELLS = GRID_WIDTH * GRID_HEIGHT;
-const rgb_color_t beaver_color = (rgb_color_t){150, 75, 0};
+
 
 const int GRID_CELL_SIZE = 40;
 const int window_width = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
