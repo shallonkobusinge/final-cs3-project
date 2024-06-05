@@ -150,7 +150,7 @@ static void init_maze()
 
 void on_key(char key, key_event_type_t type, double held_time, state_t *state)
 {
-    body_t *beaver = scene_get_body(state->scene, 0);
+    body_t *beaver = scene_get_body(state->scene, 1);
     vector_t translation = (vector_t){0, 0};
     if (type == KEY_PRESSED && key != KEY_RELEASED)
     {
