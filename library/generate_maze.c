@@ -14,11 +14,10 @@
 #define BEAVER_WIDTH 1.5
 #define BEAVER_HEIGHT 1.0
 
-
 const size_t GRID_WIDTH = 25;
 const size_t GRID_HEIGHT = 12;
 const size_t NUM_CELLS = GRID_WIDTH * GRID_HEIGHT;
-
+const rgb_color_t beaver_color = (rgb_color_t){150, 75, 0};
 
 const int GRID_CELL_SIZE = 40;
 const int window_width = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
@@ -64,6 +63,37 @@ static size_t find_min(size_t a, size_t b)
     return (a > b) ? b : a;
 }
 
+// static body_t *make_beaver(vector_t center){
+    // list_t *beaver_v = list_init(6, free);
+
+    // vector_t *v1 = malloc(sizeof(vector_t));
+    // *v1 = (vector_t){0.0, 0.0};
+    // list_add(beaver_v, v1);
+
+    // vector_t *v2 = malloc(sizeof(vector_t));
+    // *v2 = (vector_t){0.5 * BEAVER_WIDTH, 0.0};
+    // list_add(beaver_v, v2);
+
+    // vector_t *v3 = malloc(sizeof(vector_t));
+    // *v3 = (vector_t){0.0, 0.5 * BEAVER_HEIGHT};
+    // list_add(beaver_v, v3);
+
+    // vector_t *v4 = malloc(sizeof(vector_t));
+    // *v4 = (vector_t){0.5 * BEAVER_WIDTH, BEAVER_HEIGHT};
+    // list_add(beaver_v, v4);
+
+    // vector_t *v5 = malloc(sizeof(vector_t));
+    // *v4 = (vector_t){0.0, BEAVER_HEIGHT};
+    // list_add(beaver_v, v5);
+
+    // vector_t *v6 = malloc(sizeof(vector_t));
+    // *v5 = (vector_t){-0.5 * BEAVER_WIDTH, 0.5 * BEAVER_HEIGHT};
+    // list_add(beaver_v, v6);
+
+    // body_t *beaver = body_init(beaver_v, 1.0, beaver_color);
+    // body_set_centroid(beaver, center);
+    // return beaver;
+    // }
 
 /**
  * Initialize and draw the Maze Grid.
@@ -80,16 +110,6 @@ static void init_grid(state_t *state)
     {
         render_line(0, y, window_width, y);
     }
-    // vector_t center = (vector_t){.x = (((GRID_WIDTH - 24) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), .y = (((GRID_HEIGHT - 11) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4)};
-
-    // body_t *beaver = make_beaver(35, 35, center);
-    // scene_add_body(state->scene, beaver);
-
-    // asset_t *asset_beaver = asset_make_image_with_body(BEAVER_PATH, beaver);
-    // list_add(state->body_assets, asset_beaver);
-
-    // render_color((rgb_color_t){50, 129, 110});x
-    // render_rect(&hider_cell);
 }
 
 /**
@@ -131,15 +151,6 @@ static void init_maze()
 void on_key(char key, key_event_type_t type, double held_time, state_t *state)
 {
     body_t *beaver = scene_get_body(state->scene, 1);
-    // for(size_t i = 0; i < list_size(state->body_assets); i++){
-    //     body_t *current = scene_get_body(state->scene, i);
-    //     rgb_color_t *color = body_get_color(current);
-    //     (rgb_color_t){150, 75, 0};
-    //    if(color->r == 150 && color->g == 75 && color->b == 0) {
-    //         beaver = current;
-           
-    //    }
-    // }
     vector_t translation = (vector_t){0, 0};
     if (type == KEY_PRESSED && key != KEY_RELEASED)
     {
