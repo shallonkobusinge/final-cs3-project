@@ -65,7 +65,7 @@ bool emscripten_main(state_t *state)
         introduce_seeker(state->scene, state->seeker, dt, state->sound_effect);
         if (!state->maze_generated)
         {
-            state->maze_generated = generate_maze(state);
+            state->maze_generated = generate_maze(state, dt);
         }
         sdl_show();
     }

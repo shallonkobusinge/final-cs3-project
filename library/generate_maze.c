@@ -83,40 +83,46 @@ static size_t find_min(size_t a, size_t b)
  * Moves the seeker cell to a random
  * adjacent cell 
 */
-static void random_move_seeker () {
+static void random_move_seeker (seeker_t *seeker_body) {
     printf("WE are here ");
     SDL_Delay(90);
     int direction = rand() % 4;
+    vector_t velocity = VEC_ZERO;
     switch (direction) {
     case 0: { // move left
-     if (seeker_cell.x - GRID_CELL_SIZE >= 0) {
-            seeker_cell.x -= GRID_CELL_SIZE;
-        }
+    //  if (seeker_cell.x - GRID_CELL_SIZE >= 0) {
+    //         seeker_cell.x -= GRID_CELL_SIZE;
+    //     }
+    velocity = (vector_t){-GRID_CELL_SIZE, 0};
         break;
     }
     case 1: { // move right
-        if (seeker_cell.x + GRID_CELL_SIZE < window_width) {
-            seeker_cell.x += GRID_CELL_SIZE;
-        }
+        // if (seeker_cell.x + GRID_CELL_SIZE < window_width) {
+        //     seeker_cell.x += GRID_CELL_SIZE;
+        // }
+        velocity = (vector_t){GRID_CELL_SIZE, 0};
         break;
     }
     case 2: { // move up
-        if (seeker_cell.y - GRID_CELL_SIZE >= 0) {
-            seeker_cell.y -= GRID_CELL_SIZE;
+        // if (seeker_cell.y - GRID_CELL_SIZE >= 0) {
+        //     seeker_cell.y -= GRID_CELL_SIZE;
             
-        }
+        // }
+        velocity = (vector_t){0, -GRID_CELL_SIZE};
         break;
     }
     case 3: { // move down
-        if (seeker_cell.y + GRID_CELL_SIZE < window_height) {
-            seeker_cell.y += GRID_CELL_SIZE;
+        // if (seeker_cell.y + GRID_CELL_SIZE < window_height) {
+        //     seeker_cell.y += GRID_CELL_SIZE;
             
-        }
+        // }
+        velocity = (vector_t){0, GRID_CELL_SIZE};
         break;
     }
     default:
         break;
     }
+    body_set_velocity(velocity);
 }
 
 /**
@@ -265,7 +271,7 @@ void remove_wall(cell_t *cell, cell_t *neighbor)
     SDL_Delay(30);
 }
 
-bool generate_maze(state_t *state)
+bool generate_maze(state_t *state, double dt)
 {
     sdl_on_key((key_handler_t)on_key);
 
@@ -273,6 +279,11 @@ bool generate_maze(state_t *state)
 
     init_grid(state);
     // init_maze();
+    for(size_t i = 0; i < list_size(state->seeker); i++) {
+        body_t *seeker = list_get(state->seekers, i);
+        random_move_seeker(seeker);
+        body_tick(seeker, dt);
+    }
     random_move_seeker();
     // render_color((rgb_color_t){0, 0, 0});
     // render_rect(&terminal_cell);

@@ -20,8 +20,8 @@ const int window_width_s = (GRID_WIDTH_S * GRID_CELL_SIZE_S) + 1;
 const int window_height_s = (GRID_HEIGHT_S * GRID_CELL_SIZE_S) + 1;
 // ((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4, ((GRID_WIDTH - 3) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4
 const vector_t START_POS = {.x =  ((GRID_WIDTH_S - 2) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4, .y = ((GRID_WIDTH_S - 3) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4};
-const double OUTER_RADIUS =  60;
-const double INNER_RADIUS = 60;
+const double OUTER_RADIUS =  GRID_CELL_SIZE_S / 2;
+const double INNER_RADIUS = GRID_CELL_SIZE_S / 2;
 
 // SEEKING CONSTANTS
 #define STARTING_SEEKERS 1
@@ -91,7 +91,7 @@ void add_new_seeker(scene_t *scene, seeker_t *seeker_ipt, bool is_new){
     //   seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, seeker_pos);
     // }
     vector_t center = (vector_t){.x = (((GRID_WIDTH_S - 2) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4), .y = (((GRID_HEIGHT_S - 6) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4)};
-    seeker = make_seeker(GRID_CELL_SIZE_S / 2, GRID_CELL_SIZE_S / 2, center);
+    seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, center);
     // seeker_vel = INITIAL_VELOCITY;
   
     scene_add_body(scene, seeker);
