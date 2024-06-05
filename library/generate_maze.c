@@ -232,7 +232,7 @@ bool generate_maze(state_t *state, double dt)
     printf("Page: %d\n", state->page);
 
     init_grid(state);
-    render_seeker_bodies(state->seeker);
+    // render_seeker_bodies(state->seeker);
     // init_maze();
     // for(size_t i = 0; i < list_size(state->seeker); i++) {
     //     body_t *seeker = list_get(state->seekers, i);
