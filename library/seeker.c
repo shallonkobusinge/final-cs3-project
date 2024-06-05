@@ -58,7 +58,7 @@ body_t *make_seeker(double w, double h, vector_t center) {
   // list_add(c, v4);
   // body_t *seeker = body_init(c, 6, seeker_color);
    vector_t *v1 = malloc(sizeof(vector_t));
-  *v1 = (vector_t){center.x  , 0};
+  *v1 = (vector_t){center.x + w , center.y + h};
   list_add(c, v1);
 
   vector_t *v2 = malloc(sizeof(vector_t));
