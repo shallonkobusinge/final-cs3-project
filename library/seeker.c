@@ -101,12 +101,12 @@ void render_seeker(state_t *state, double dt){
     }
 }
 
-seeker_t *seeker_init(state_t *state){
+void *seeker_init(state_t *state){
   seeker_t *seeker = malloc(sizeof(seeker_t));
-  seeker->max_seekers = 50;
-  seeker->last_seeker_time = 0;
+  state->seeker->max_seekers =
+  state->seeker->max_seekers = 50;
+  state->seeker->last_seeker_time = 0;
   state->body_assets = list_init(seeker->max_seekers, (free_func_t)asset_destroy);
-  return seeker;
 }
 
 void render_seeker_bodies(state_t *state) {
