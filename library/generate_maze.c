@@ -118,8 +118,8 @@ static void init_grid(state_t *state)
     body_t *beaver = make_beaver(center);
     scene_add_body(state->scene, beaver);
 
-    asset_t *asset_beaver = asset_make_image_with_body(BEAVER_PATH, beaver);
-    list_add(state->body_assets, beaver);
+    // asset_t *asset_beaver = asset_make_image_with_body(BEAVER_PATH, beaver);
+    // list_add(state->body_assets, beaver);
 
     render_color((rgb_color_t){50, 129, 110});
     render_rect(&hider_cell);
