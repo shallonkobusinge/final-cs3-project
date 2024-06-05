@@ -280,7 +280,7 @@ bool generate_maze(state_t *state, double dt)
     for(size_t i = 0; i < list_size(state->seeker); i++) {
         body_t *seeker = list_get(state->seekers, i);
         random_move_seeker(seeker);
-        body_tick(seeker, dt);
+        // body_tick(seeker, dt);
     }
     // render_color((rgb_color_t){0, 0, 0});
     // render_rect(&terminal_cell);
