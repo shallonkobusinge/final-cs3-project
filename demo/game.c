@@ -71,8 +71,13 @@ bool emscripten_main(state_t *state)
         // random_move_seeker(state->scene);
         for(size_t i = 0; i < scene_bodies(state->scene); i++) {
             body_t *seeker = scene_get_body(state->scene, i);
-            random_move_seeker(seeker);
-            body_tick(seeker, dt);
+            rgb_color_t color = body_get_color(seeker);
+            if(color.r = 0.1 && color.g = 0.9 && color.b = 0.2) {
+                random_move_seeker(seeker);
+                body_tick(seeker, dt);
+
+            }
+            
         }
         sdl_show();
     }
