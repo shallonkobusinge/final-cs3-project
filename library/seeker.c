@@ -56,7 +56,7 @@ body_t *make_seeker(double w, double h, vector_t center) {
   vector_t *v4 = malloc(sizeof(vector_t));
   *v4 = (vector_t){center.x + w / 2, center.y - h / 2};
   list_add(c, v4);
-  body_t *seeker = body_init(c, 1, seeker_color);
+  body_t *seeker = body_init(c, 3, seeker_color);
   // body_set_centroid(seeker, center);
   return seeker;
 }
@@ -96,8 +96,8 @@ void add_new_seeker(scene_t *scene, seeker_t *seeker_ipt, bool is_new){
   
     scene_add_body(scene, seeker);
     // body_set_velocity(seeker, seeker_vel);
-    asset_t *new_asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
-    list_add(seeker_ipt->body_assets, new_asset_seeker);
+    // asset_t *new_asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
+    list_add(seeker_ipt->body_assets, seeker);
     seeker_ipt->last_seeker_time = 0;
     seeker_ipt->max_seekers += 1;
 }
