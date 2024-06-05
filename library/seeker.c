@@ -72,7 +72,7 @@ static void move_body(body_t *body, vector_t vec){
 }
 
 void add_new_seeker(state_t *state, bool is_new){
-   printf("SIZE: %zu \n", list_size(state->body_assets));
+   
    body_t *seeker;
     if(is_new){
       vector_t seeker_pos = (vector_t){
@@ -86,6 +86,7 @@ void add_new_seeker(state_t *state, bool is_new){
     scene_add_body(state->scene, seeker);
     asset_t *new_asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
     list_add(state->body_assets, new_asset_seeker);
+    printf("SIZE: %zu \n", list_size(state->body_assets));
     state->seeker->last_seeker_time = 0;
     state->seeker->max_seekers += 1;
 }
