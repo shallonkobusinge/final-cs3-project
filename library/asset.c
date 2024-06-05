@@ -90,9 +90,9 @@ asset_t *asset_make_image_with_body(const char *filepath, body_t *body)
 {
   SDL_Rect bounding_box = get_bounding_box(body);
   image_asset_t *asset = (image_asset_t *)asset_init(ASSET_IMAGE, bounding_box);
-  printf("TYPE %s \n", asset->base.type);
   asset->texture = asset_cache_obj_get_or_create(ASSET_IMAGE, filepath);
   asset->body = body;
+  printf("TYPE %s \n", asset->base.type);
   return (asset_t *)asset;
 }
 
