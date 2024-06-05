@@ -9,7 +9,7 @@ const char *SEEKER_PATH = "assets/seeker_bg.png";
 
 const vector_t MIN_WINDOW = {0, 0};
 const vector_t MAX_WINDOW = {1000, 500};
-const vector_t INITIAL_VELOCITY = {60, 20};
+const vector_t INITIAL_VELOCITY = {12, 12};
 
 const size_t GRID_WIDTH_S = 25;
 const size_t GRID_HEIGHT_S = 12;

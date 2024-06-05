@@ -83,46 +83,44 @@ static size_t find_min(size_t a, size_t b)
  * Moves the seeker cell to a random
  * adjacent cell 
 */
-static void random_move_seeker (body_t *seeker_body) {
+static void random_move_seeker (body_t *seeker) {
     printf("WE are here ");
     SDL_Delay(90);
     int direction = rand() % 4;
-    vector_t velocity = VEC_ZERO;
+    // vector_t velocity = body_get_velocity(seeker);
+    vector_t centroid = body_get_centroid(seeker);
+
     switch (direction) {
     case 0: { // move left
-    //  if (seeker_cell.x - GRID_CELL_SIZE >= 0) {
-    //         seeker_cell.x -= GRID_CELL_SIZE;
-    //     }
-    velocity = (vector_t){-GRID_CELL_SIZE, 0};
+     if (centroid.x - GRID_CELL_SIZE >= 0) {
+            centroid.x -= GRID_CELL_SIZE;
+        }
         break;
     }
     case 1: { // move right
-        // if (seeker_cell.x + GRID_CELL_SIZE < window_width) {
-        //     seeker_cell.x += GRID_CELL_SIZE;
-        // }
-        velocity = (vector_t){GRID_CELL_SIZE, 0};
+        if (centroid.x + GRID_CELL_SIZE < window_width) {
+            centroid.x += GRID_CELL_SIZE;
+        }
         break;
     }
     case 2: { // move up
-        // if (seeker_cell.y - GRID_CELL_SIZE >= 0) {
-        //     seeker_cell.y -= GRID_CELL_SIZE;
+        if (centroid.y - GRID_CELL_SIZE >= 0) {
+            centroid.y -= GRID_CELL_SIZE;
             
-        // }
-        velocity = (vector_t){0, -GRID_CELL_SIZE};
+        }
         break;
     }
     case 3: { // move down
-        // if (seeker_cell.y + GRID_CELL_SIZE < window_height) {
-        //     seeker_cell.y += GRID_CELL_SIZE;
+        if (centroid.y + GRID_CELL_SIZE < window_height) {
+            centroid.y += GRID_CELL_SIZE;
             
-        // }
-        velocity = (vector_t){0, GRID_CELL_SIZE};
+        }
         break;
     }
     default:
         break;
     }
-    body_set_velocity(seeker_body, velocity);
+    body_set_centroid(seeker, centroid);
 }
 
 /**
