@@ -106,7 +106,7 @@ seeker_t *seeker_init(state_t *state){
   seeker_t *seeker = malloc(sizeof(seeker_t));
   seeker->max_seekers = 50;
   seeker->last_seeker_time = 0;
-  state->seeker->body_assets = list_init(state->seeker->max_seekers, (free_func_t)asset_destroy);
+  seeker->body_assets = list_init(seeker->max_seekers, (free_func_t)asset_destroy);
   return seeker;
 }
 
