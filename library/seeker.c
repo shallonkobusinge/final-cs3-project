@@ -41,22 +41,6 @@ typedef struct seeker {
 body_t *make_seeker(double w, double h, vector_t center) {
 
   list_t *c = list_init(4, free);
-  // vector_t *v1 = malloc(sizeof(vector_t));
-  // *v1 = (vector_t){center.x - w / 2 , center.y + h / 2};
-  // list_add(c, v1);
-
-  // vector_t *v2 = malloc(sizeof(vector_t));
-  // *v2 = (vector_t){center.x + w / 2, center.y + h / 2};
-  // list_add(c, v2);
-
-  // vector_t *v3 = malloc(sizeof(vector_t));
-  // *v3 = (vector_t){center.x - w / 2, center.y - h / 2};
-  // list_add(c, v3);
-
-  // vector_t *v4 = malloc(sizeof(vector_t));
-  // *v4 = (vector_t){center.x + w / 2, center.y - h / 2};
-  // list_add(c, v4);
-  // body_t *seeker = body_init(c, 6, seeker_color);
    vector_t *v1 = malloc(sizeof(vector_t));
   *v1 = (vector_t){0 , 0};
   list_add(c, v1);
@@ -78,12 +62,7 @@ body_t *make_seeker(double w, double h, vector_t center) {
 }
 
 static void move_body(body_t *body, vector_t vec){
-  list_t *shape = body_get_shape(body);
-  for(size_t i = 0; i < list_size(shape); i++){
-    vector_t *vertex = list_get(shape, i);
-    *vertex = vec_add(*vertex, vec);
-  }
-  list_free(shape);
+  body_set_centroid(body, vec_add(body_get_centroid(body), vec));
 }
 // void wrap_seeker_scene(body_t *seeker) {
 //   vector_t centroid = body_get_centroid(seeker);
