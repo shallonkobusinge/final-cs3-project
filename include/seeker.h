@@ -34,6 +34,4 @@ void render_seeker_bodies(state_t *state);
 */
 void random_move_seeker (body_t *seeker);
 
-list_t *body_asset_init(state_t *state);
-
 #endif // #ifndef __SEEKER_H__
