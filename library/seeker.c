@@ -122,7 +122,7 @@ void render_seeker_bodies(seeker_t *seeker) {
 
 
 void random_move_seeker (body_t *seeker) {
-    SDL_Delay(250);
+    SDL_Delay(450);
     int direction = rand() % 4;
     
     vector_t centroid = VEC_ZERO;
