@@ -25,7 +25,6 @@ const vector_t SDL_MIN = {0, 0};
 const vector_t SDL_MAX = {1000, 500};
 const vector_t SDL_CENTER = {500, 250};
 
-
 struct state
 {
     scene_t *scene;
