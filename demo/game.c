@@ -31,6 +31,7 @@ struct state
     bool maze_generated;
     sound_effect_t *sound_effect;
     seeker_t *seeker;
+    list_t *body_assets;
 };
 
 state_t *emscripten_init()
@@ -43,6 +44,7 @@ state_t *emscripten_init()
     state->maze_generated = false;
     state->sound_effect = load_game_sounds();
     state->seeker = seeker_init(state);
+    state->body_assets = list_init(60.0, (free_func_t)asset_destroy);
     add_new_seeker(state, false);
     state->page = 1;
     // game_sound(state->sound_effect);
@@ -66,7 +68,7 @@ bool emscripten_main(state_t *state)
         {
             state->maze_generated = generate_maze(state, dt);
         }
-        render_seeker_bodies(state->seeker);
+        render_seeker_bodies(state);
         for(size_t i = 0; i < scene_bodies(state->scene); i++) {
             body_t *seeker = scene_get_body(state->scene, i);
             rgb_color_t *color = body_get_color(seeker);
@@ -83,7 +85,8 @@ bool emscripten_main(state_t *state)
     return false;
 }
 
-void emscripten_free(state_t *state) {
+void emscripten_free(state_t *state)
+{   list_free(state->body_assets);
     seeker_free(state->seeker);
     scene_free(state->scene);
     sound_free(state->sound_effect);
