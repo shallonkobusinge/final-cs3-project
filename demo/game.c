@@ -16,7 +16,6 @@
 #include "sound_effect.h"
 #include "seeker.h"
 
-const char *BEAVER_PATH = "assets/images/seeking/beaver.png";
 
 const vector_t MIN = {0, 0};
 const vector_t MAX = {1000, 500};
@@ -25,10 +24,6 @@ const vector_t CENTER = {500, 250};
 const vector_t SDL_MIN = {0, 0};
 const vector_t SDL_MAX = {1000, 500};
 const vector_t SDL_CENTER = {500, 250};
-const size_t GRID_WIDTH_H = 25;
-const size_t GRID_HEIGHT_H = 12;
-const size_t NUM_CELLS_H = GRID_WIDTH_H * GRID_HEIGHT_H;
-const int GRID_CELL_SIZE_H = 40;
 
 
 struct state
