@@ -95,7 +95,7 @@ void render_seeker(state_t *state, double dt){
     state->seeker->last_seeker_time += dt;
     if(state->seeker->last_seeker_time >= NEW_SEEKERS_INTERVAL){
       add_new_seeker(state, true);
-       tagged_sound(state->sound_effect);
+      //  tagged_sound(state->sound_effect);
     }
     for (size_t i = 1; i < list_size(state->body_assets); i++) {
 
@@ -124,7 +124,7 @@ seeker_t *seeker_init(state_t *state){
 }
 
 void render_seeker_bodies(state_t *state) {
-   for (size_t i = 1; i < list_size(state->body_assets); i++) {
+   for (size_t i = 0; i < list_size(state->body_assets); i++) {
           asset_render(list_get(state->body_assets, i));
         }
 }
