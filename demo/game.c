@@ -68,7 +68,7 @@ bool emscripten_main(state_t *state)
             state->maze_generated = generate_maze(state, dt);
         }
         render_seeker_bodies(state->seeker);
-        random_move_seeker(state->scene);
+        // random_move_seeker(state->scene);
         // for(size_t i = 0; i < scene_bodies(state->scene); i++) {
         //     body_t *seeker = scene_get_body(state->scene, i);
         //     random_move_seeker(state->scene);
