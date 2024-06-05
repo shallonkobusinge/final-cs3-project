@@ -56,7 +56,7 @@ body_t *make_seeker(double w, double h, vector_t center) {
   vector_t *v4 = malloc(sizeof(vector_t));
   *v4 = (vector_t){center.x + w, center.y - h};
   list_add(c, v4);
-  body_t *seeker = body_init(c, 3, seeker_color);
+  body_t *seeker = body_init(c, 6, seeker_color);
   // body_set_centroid(seeker, center);
   return seeker;
 }
