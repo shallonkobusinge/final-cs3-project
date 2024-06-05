@@ -88,7 +88,7 @@ void add_new_seeker(state_t *state, bool is_new){
     asset_t *new_asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
     list_add(state->body_assets, new_asset_seeker);
 
-    vector_t center = (vector_t){.x = GRID_CELL_SIZE / 4, .y = GRID_CELL_SIZE / 4};
+    vector_t center = (vector_t){.x = GRID_CELL_SIZE_S / 4, .y = GRID_CELL_SIZE_S / 4};
 
     // body_t *beaver = make_beaver(center);
     body_t *beaver = make_seeker(50, 50, center);
