@@ -35,7 +35,6 @@ typedef struct seeker {
     list_t *body_assets;
     double last_seeker_time;
     double max_seekers;
-
 }seeker_t;
 
 typedef struct state {
@@ -110,9 +109,9 @@ void render_seeker(state_t *state, double dt){
 
 seeker_t *seeker_init(state_t *state){
   seeker_t *seeker = malloc(sizeof(seeker_t));
-  state->seeker->max_seekers = 50;
-  state->seeker->last_seeker_time = 0;
-  state->seeker->body_assets = list_init(state->seeker->max_seekers, (free_func_t)asset_destroy);
+  seeker->max_seekers = 50;
+  seeker->last_seeker_time = 0;
+  seeker->body_assets = list_init(seeker->max_seekers, (free_func_t)asset_destroy);
     add_new_seeker(state, false);
     
     return seeker;
