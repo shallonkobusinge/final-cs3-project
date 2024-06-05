@@ -284,7 +284,6 @@ bool generate_maze(state_t *state, double dt)
         random_move_seeker(seeker);
         body_tick(seeker, dt);
     }
-    random_move_seeker();
     // render_color((rgb_color_t){0, 0, 0});
     // render_rect(&terminal_cell);
     // // sdl_show();
