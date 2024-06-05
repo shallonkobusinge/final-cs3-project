@@ -68,15 +68,15 @@ bool emscripten_main(state_t *state)
             state->maze_generated = generate_maze(state, dt);
         }
         render_seeker_bodies(state);
-        for(size_t i = 0; i < scene_bodies(state->scene); i++) {
-            body_t *seeker = scene_get_body(state->scene, i);
-            rgb_color_t *color = body_get_color(seeker);
-            if(color->r == 0.1 && color->g == 0.9 && color->b == 0.2) {
-                random_move_seeker(seeker);
+        // for(size_t i = 0; i < scene_bodies(state->scene); i++) {
+        //     body_t *seeker = scene_get_body(state->scene, i);
+        //     rgb_color_t *color = body_get_color(seeker);
+        //     if(color->r == 0.1 && color->g == 0.9 && color->b == 0.2) {
+        //         random_move_seeker(seeker);
 
-            }
+        //     }
             
-        }
+        // }
         sdl_show();
     }
     scene_tick(state->scene, dt);
