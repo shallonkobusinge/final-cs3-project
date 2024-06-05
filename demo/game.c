@@ -83,8 +83,7 @@ bool emscripten_main(state_t *state)
     return false;
 }
 
-void emscripten_free(state_t *state)
-{   list_free(state->body_assets);
+void emscripten_free(state_t *state) {
     seeker_free(state->seeker);
     scene_free(state->scene);
     sound_free(state->sound_effect);
