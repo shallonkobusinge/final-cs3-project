@@ -7,7 +7,6 @@
 #include "sound_effect.h"
 
 const char *SEEKER_PATH = "assets/images/seeking/seeker_bg.png";
-const char *BEAVER_PATH = "assets/images/seeking/beaver.png";
 
 const vector_t MIN_WINDOW = {0, 0};
 const vector_t MAX_WINDOW = {1000, 500};
@@ -107,15 +106,15 @@ void render_seeker(state_t *state, double dt){
  
     }
 }
-void hider_init(state_t *state){
-    vector_t center = (vector_t){.x = (((GRID_WIDTH_S - 24) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4), .y = (((GRID_HEIGHT_S - 11) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4)};
+// void hider_init(state_t *state){
+//     vector_t center = (vector_t){.x = (((GRID_WIDTH_S - 24) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4), .y = (((GRID_HEIGHT_S - 11) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4)};
 
-    body_t *beaver = make_seeker(35, 35, center);
-    scene_add_body(state->scene, beaver);
+//     body_t *beaver = make_seeker(35, 35, center);
+//     scene_add_body(state->scene, beaver);
 
-    asset_t *asset_beaver = asset_make_image_with_body(BEAVER_PATH, beaver);
-    list_add(state->body_assets, asset_beaver);
-}
+//     asset_t *asset_beaver = asset_make_image_with_body(BEAVER_PATH, beaver);
+//     list_add(state->body_assets, asset_beaver);
+// }
 seeker_t *seeker_init(state_t *state){
   seeker_t *seeker = malloc(sizeof(seeker_t));
   seeker->max_seekers = STARTING_SEEKERS;

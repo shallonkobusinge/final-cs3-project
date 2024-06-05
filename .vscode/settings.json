@@ -18,6 +18,7 @@
         "stdbool.h": "c",
         "body.h": "c",
         "list.h": "c",
-        "assert.h": "c"
+        "assert.h": "c",
+        "sound_effect.h": "c"
     }
 }

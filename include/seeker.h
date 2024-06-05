@@ -36,6 +36,6 @@ void random_move_seeker (body_t *seeker);
 
 void move_body(body_t *body, vector_t vec);
 
-void hider_init(state_t *state);
+// void hider_init(state_t *state);
 
 #endif // #ifndef __SEEKER_H__

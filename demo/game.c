@@ -16,6 +16,7 @@
 #include "sound_effect.h"
 #include "seeker.h"
 
+const char *BEAVER_PATH = "assets/images/seeking/beaver.png";
 
 const vector_t MIN = {0, 0};
 const vector_t MAX = {1000, 500};
@@ -25,6 +26,11 @@ const vector_t SDL_MIN = {0, 0};
 const vector_t SDL_MAX = {1000, 500};
 const vector_t SDL_CENTER = {500, 250};
 
+const size_t GRID_WIDTH_H = 25;
+const size_t GRID_HEIGHT_H = 12;
+const size_t NUM_CELLS_H = GRID_WIDTH_H * GRID_HEIGHT_H;
+
+const int GRID_CELL_SIZE_H = 40;
 
 struct state
 {
@@ -48,7 +54,13 @@ state_t *emscripten_init()
     state->seeker = seeker_init(state);
     add_new_seeker(state, false);
     state->page = 1;
-    hider_init(state);
+     vector_t center = (vector_t){.x = (((GRID_WIDTH_H - 24) * GRID_CELL_SIZE_H) + GRID_CELL_SIZE_H / 4), .y = (((GRID_HEIGHT_H - 11) * GRID_CELL_SIZE_H) + GRID_CELL_SIZE_H / 4)};
+
+    body_t *beaver = make_seeker(35, 35, center);
+    scene_add_body(state->scene, beaver);
+
+    asset_t *asset_beaver = asset_make_image_with_body(BEAVER_PATH, beaver);
+    list_add(state->body_assets, asset_beaver);
     game_sound(state->sound_effect);
 
     return state;
