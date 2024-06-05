@@ -33,6 +33,7 @@ const rgb_color_t seeker_color = (rgb_color_t){0.1, 0.9, 0.2};
 typedef struct seeker {
     double last_seeker_time;
     double max_seekers;
+    list_t *body_assets;
 }seeker_t;
 
 typedef struct state {
@@ -41,7 +42,6 @@ typedef struct state {
     bool maze_generated;
     sound_effect_t *sound_effect;
     seeker_t *seeker;
-    list_t *body_assets;
 }state_t;
 
 body_t *make_seeker(double w, double h, vector_t center) {
@@ -85,7 +85,7 @@ void add_new_seeker(state_t *state, bool is_new){
     seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, START_POS);
     scene_add_body(state->scene, seeker);
     asset_t *new_asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
-    list_add(state->body_assets, new_asset_seeker);
+    list_add(state->seeker->body_assets, new_asset_seeker);
     state->seeker->last_seeker_time = 0;
     state->seeker->max_seekers += 1;
 }
@@ -96,9 +96,9 @@ void render_seeker(state_t *state, double dt){
       add_new_seeker(state, true);
        tagged_sound(state->sound_effect);
     }
-    for (size_t i = 0; i < list_size(state->body_assets); i++) {
-      printf("SIZE FROM RENDER: %zu \n", list_size(state->body_assets));
-      asset_render(list_get(state->body_assets, i));
+    for (size_t i = 0; i < list_size(state->seeker->body_assets); i++) {
+      printf("SIZE FROM RENDER: %zu \n", list_size(state->seeker->body_assets));
+      asset_render(list_get(state->seeker->body_assets, i));
     }
 }
 
@@ -106,15 +106,16 @@ seeker_t *seeker_init(state_t *state){
   seeker_t *seeker = malloc(sizeof(seeker_t));
   seeker->max_seekers = 50;
   seeker->last_seeker_time = 0;
+  state->seeker->body_assets = list_init(state->seeker->max_seekers, (free_func_t)asset_destroy);
   return seeker;
 }
 
 void render_seeker_bodies(state_t *state) {
-  printf("SIZE: %zu \n", list_size(state->body_assets));
-   for (size_t i = 0; i < list_size(state->body_assets); i++) {
+  printf("SIZE: %zu \n", list_size(state->seeker->body_assets));
+   for (size_t i = 0; i < list_size(state->seeker->body_assets); i++) {
       //  rgb_color_t *color = body_get_color(scene_get_body(state->scene, i));
       //  if(color->r == 0.1 && color->g == 0.9 && color->b == 0.2) {
-          asset_render(list_get(state->body_assets, i));
+          asset_render(list_get(state->seeker->body_assets, i));
         }
       
     // }

@@ -40,7 +40,6 @@ typedef struct state
     list_t *seekers;
     sound_effect_t *sound_effect;
     seeker_t *seeker;
-    list_t *body_assets;
 } state_t;
 
 /**

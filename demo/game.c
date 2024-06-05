@@ -31,7 +31,6 @@ struct state
     bool maze_generated;
     sound_effect_t *sound_effect;
     seeker_t *seeker;
-    list_t *body_assets;
 };
 
 state_t *emscripten_init()
@@ -44,7 +43,6 @@ state_t *emscripten_init()
     state->maze_generated = false;
     state->sound_effect = load_game_sounds();
     state->seeker = seeker_init(state);
-    state->body_assets = list_init(60.0, (free_func_t)asset_destroy);
     add_new_seeker(state, false);
     state->page = 1;
     // game_sound(state->sound_effect);
@@ -55,33 +53,31 @@ state_t *emscripten_init()
 bool emscripten_main(state_t *state)
 {
     double dt = time_since_last_tick();
-     render_seeker_bodies(state);
-     sdl_show();
-    // render_seeker(state, dt);
-    // sdl_clear();
-    // if (state->page == 0)
-    // {
-    //     build_landing_page();
-    // }
-    // else if (state->page == 1)
-    // {
+    render_seeker(state, dt);
+    sdl_clear();
+    if (state->page == 0)
+    {
+        build_landing_page();
+    }
+    else if (state->page == 1)
+    {
         
-    //     if (!state->maze_generated)
-    //     {
-    //         state->maze_generated = generate_maze(state, dt);
-    //     }
-    //     render_seeker_bodies(state);
-    //     for(size_t i = 0; i < scene_bodies(state->scene); i++) {
-    //         body_t *seeker = scene_get_body(state->scene, i);
-    //         rgb_color_t *color = body_get_color(seeker);
-    //         if(color->r == 0.1 && color->g == 0.9 && color->b == 0.2) {
-    //             random_move_seeker(seeker);
+        if (!state->maze_generated)
+        {
+            state->maze_generated = generate_maze(state, dt);
+        }
+        render_seeker_bodies(state);
+        for(size_t i = 0; i < scene_bodies(state->scene); i++) {
+            body_t *seeker = scene_get_body(state->scene, i);
+            rgb_color_t *color = body_get_color(seeker);
+            if(color->r == 0.1 && color->g == 0.9 && color->b == 0.2) {
+                random_move_seeker(seeker);
 
-    //         }
+            }
             
-    //     }
-    //     sdl_show();
-    // }
+        }
+        sdl_show();
+    }
     scene_tick(state->scene, dt);
 
     return false;
