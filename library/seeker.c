@@ -26,7 +26,7 @@ const double INNER_RADIUS = GRID_CELL_SIZE_S;
 #define STARTING_SEEKERS 1
 #define S_NUM_POINTS 20
 #define S_RADIUS 0.1
-#define NEW_SEEKERS_INTERVAL 30
+#define NEW_SEEKERS_INTERVAL 4
 
 const rgb_color_t seeker_color = (rgb_color_t){0.1, 0.9, 0.2};
 
