@@ -23,7 +23,7 @@ const double OUTER_RADIUS =  GRID_CELL_SIZE_S;
 const double INNER_RADIUS = GRID_CELL_SIZE_S;
 
 // SEEKING CONSTANTS
-#define STARTING_SEEKERS 1
+#define STARTING_SEEKERS 80
 #define S_NUM_POINTS 20
 #define S_RADIUS 0.1
 #define NEW_SEEKERS_INTERVAL 4
@@ -104,8 +104,9 @@ void render_seeker(state_t *state, double dt){
 
 seeker_t *seeker_init(state_t *state){
   seeker_t *seeker = malloc(sizeof(seeker_t));
-  seeker->max_seekers = 50;
+  seeker->max_seekers = STARTING_SEEKERS;
   seeker->last_seeker_time = 0;
+  state->body_assets = list_init(seeker->max_seekers (free_func_t)asset_destroy);
   return seeker;
 }
 
