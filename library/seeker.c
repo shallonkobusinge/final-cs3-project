@@ -136,7 +136,7 @@ void render_seeker_bodies(seeker_t *seeker) {
 
 void random_move_seeker (body_t *seeker) {
     printf("WE are here ");
-    SDL_Delay(90);
+    SDL_Delay(150);
     int direction = rand() % 4;
     
     vector_t centroid = VEC_ZERO;
