@@ -131,14 +131,14 @@ static void init_grid(state_t *state)
     {
         render_line(0, y, window_width, y);
     }
-    vector_t center = (vector_t){.x = GRID_CELL_SIZE / 4, .y = GRID_CELL_SIZE / 4};
+    // vector_t center = (vector_t){.x = GRID_CELL_SIZE / 4, .y = GRID_CELL_SIZE / 4};
 
-    // body_t *beaver = make_beaver(center);
-    body_t *beaver = make_beaver(50, 50, center);
-    scene_add_body(state->scene, beaver);
+    // // body_t *beaver = make_beaver(center);
+    // body_t *beaver = make_beaver(50, 50, center);
+    // scene_add_body(state->scene, beaver);
 
-    asset_t *asset_beaver = asset_make_image_with_body(BEAVER_PATH, beaver);
-    list_add(state->body_assets, beaver);
+    // asset_t *asset_beaver = asset_make_image_with_body(BEAVER_PATH, beaver);
+    // list_add(state->body_assets, beaver);
 
     // render_color((rgb_color_t){50, 129, 110});x
     // render_rect(&hider_cell);
