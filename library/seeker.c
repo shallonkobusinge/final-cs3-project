@@ -110,6 +110,7 @@ seeker_t *seeker_init(state_t *state){
 }
 
 void render_seeker_bodies(state_t *state) {
+  printf("NUMBER OF BODIES %zu \n", list_size(state->body_assets));
    for (size_t i = 0; i < list_size(state->body_assets); i++) {
       //  rgb_color_t *color = body_get_color(scene_get_body(state->scene, i));
       //  if(color->r == 0.1 && color->g == 0.9 && color->b == 0.2) {
