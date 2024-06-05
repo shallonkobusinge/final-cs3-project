@@ -93,25 +93,23 @@ void add_new_seeker(state_t *state, bool is_new){
     // }
     vector_t center = (vector_t){.x = (((GRID_WIDTH_S - 2) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4), .y = (((GRID_HEIGHT_S - 6) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4)};
     seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, center);
-    // seeker_vel = INITIAL_VELOCITY;
-  
     scene_add_body(state->scene, seeker);
-    // body_set_velocity(seeker, seeker_vel);
     asset_t *new_asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
-    list_add(seeker_ipt->body_assets, new_asset_seeker);
-    seeker_ipt->last_seeker_time = 0;
-    seeker_ipt->max_seekers += 1;
+    list_add(state->seeker->body_assets, new_asset_seeker);
+    state->seeker->last_seeker_time = 0;
+    state->seeker->max_seekers += 1;
 }
 
 void render_seeker(state_t *state, double dt){
     printf(" WE are heree ");
-    seeker->last_seeker_time += dt;
-    if(seeker->last_seeker_time >= NEW_SEEKERS_INTERVAL){
+    // seeker->last_seeker_time += dt;
+    state->seeker->last_seeker_time += dt;
+    if(state->seeker->last_seeker_time >= NEW_SEEKERS_INTERVAL){
       add_new_seeker(state, true);
       //  tagged_sound(sound_effect);
     }
-    for (size_t i = 0; i < list_size(seeker->body_assets); i++) {
-      asset_render(list_get(seeker->body_assets, i));
+    for (size_t i = 0; i < list_size(state->seeker->body_assets); i++) {
+      asset_render(list_get(state->seeker->body_assets, i));
     }
 }
 
