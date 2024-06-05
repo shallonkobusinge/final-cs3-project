@@ -54,7 +54,7 @@ state_t *emscripten_init()
 bool emscripten_main(state_t *state)
 {
     double dt = time_since_last_tick();
-    introduce_seeker(state, dt);
+    render_seeker(state, dt);
     sdl_clear();
     if (state->page == 0)
     {
