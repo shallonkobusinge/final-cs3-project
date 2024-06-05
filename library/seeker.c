@@ -88,7 +88,7 @@ void add_new_seeker(state_t *state, bool is_new){
     asset_t *new_asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
     list_add(state->body_assets, new_asset_seeker);
 
-    vector_t center = (vector_t){.x = GRID_CELL_SIZE_S / 4, .y = GRID_CELL_SIZE_S / 4};
+    vector_t center = (vector_t){.x = (((GRID_HEIGHT_S - 10) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4), .y = (((GRID_HEIGHT_S - 7) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4)};
 
     // body_t *beaver = make_beaver(center);
     body_t *beaver = make_seeker(50, 50, center);
@@ -107,8 +107,12 @@ void render_seeker(state_t *state, double dt){
        tagged_sound(state->sound_effect);
     }
     for (size_t i = 0; i < list_size(state->body_assets); i++) {
-      printf("SIZE FROM: %zu \n", list_size(state->body_assets));
-      asset_render(list_get(state->body_assets, i));
+        rgb_color_t *color = body_get_color(scene_get_body(state->scene, i));
+        if(color->r == 0.1 && color->g == 0.9 && color->b == 0.2) {
+            printf("SIZE FROM: %zu \n", list_size(state->body_assets));
+              asset_render(list_get(state->body_assets, i));
+            }
+ 
     }
 }
 
