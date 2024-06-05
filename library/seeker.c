@@ -42,25 +42,33 @@ body_t *make_seeker(double w, double h, vector_t center) {
 
   list_t *c = list_init(4, free);
   vector_t *v1 = malloc(sizeof(vector_t));
-  *v1 = (vector_t){-w , h};
+  *v1 = (vector_t){center.x - w , center.y + h};
   list_add(c, v1);
 
   vector_t *v2 = malloc(sizeof(vector_t));
-  *v2 = (vector_t){w, h};
+  *v2 = (vector_t){center.x + w, center.y + h};
   list_add(c, v2);
 
   vector_t *v3 = malloc(sizeof(vector_t));
-  *v3 = (vector_t){-w, -h};
+  *v3 = (vector_t){center.x - w, center.y - h};
   list_add(c, v3);
 
   vector_t *v4 = malloc(sizeof(vector_t));
-  *v4 = (vector_t){w, -h};
+  *v4 = (vector_t){center.x + w, center.y - h};
   list_add(c, v4);
   body_t *seeker = body_init(c, 6, seeker_color);
-  body_set_centroid(seeker, center);
+  // body_set_centroid(seeker, center);
   return seeker;
 }
 
+static void move_body(body_t *body, vector_t vec){
+  list_t *shape = body_get_shape(body);
+  for(size_t i = 0; i < list_size(shape); i++){
+    vector_t *vertex = list_get(shape, i);
+    *vertex = vec_add(*vertex, vec);
+  }
+  list_free(shape);
+}
 // void wrap_seeker_scene(body_t *seeker) {
 //   vector_t centroid = body_get_centroid(seeker);
 //   vector_t velocity = body_get_velocity(seeker);
@@ -131,64 +139,78 @@ void render_seeker_bodies(seeker_t *seeker) {
 }
 
 
-void random_move_seeker (scene_t *scene) {
+void random_move_seeker (body_t *seeker) {
     printf("WE are here ");
     SDL_Delay(90);
     int direction = rand() % 4;
-    for(size_t i = 0; i < scene_bodies(scene); i++) {
-      body_t *body = scene_get_body(scene, i);
-      double dx = ((rand() % 3) - 1) * 5.0;
-      double dy = ((rand() % 3) - 1 ) * 5.0;
-      vector_t new_pos = vec_add(body_get_centroid(body), (vector_t){dx, dy});
-      if(new_pos.x < 0){
-        new_pos.x = 0;
-      }
-      if(new_pos.y < 0) {
-        new_pos.y = 0;
-      }
-      if(new_pos.x > window_width_s){
-        new_pos.x = window_width_s;
-      }
-      if(new_pos.y > window_height_s){
-        new_pos.y = window_height_s;
-      }
-      body_set_centroid(body, new_pos);
-    }
+    // for(size_t i = 0; i < scene_bodies(scene); i++) {
+    //   body_t *body = scene_get_body(scene, i);
+    //   double dx = ((rand() % 3) - 1) * 5.0;
+    //   double dy = ((rand() % 3) - 1 ) * 5.0;
+    //   vector_t new_pos = vec_add(body_get_centroid(body), (vector_t){dx, dy});
+    //   if(new_pos.x < 0){
+    //     new_pos.x = 0;
+    //   }
+    //   if(new_pos.y < 0) {
+    //     new_pos.y = 0;
+    //   }
+    //   if(new_pos.x > window_width_s){
+    //     new_pos.x = window_width_s;
+    //   }
+    //   if(new_pos.y > window_height_s){
+    //     new_pos.y = window_height_s;
+    //   }
+  
+    // }
 
     
-    // vector_t centroid = body_get_centroid(seeker);
+    vector_t centroid = VEC_ZERO;
 
-    // switch (direction) {
-    // case 0: { // move left
+    switch (direction) {
+    case 0: { // move left
     //  if (centroid.x - GRID_CELL_SIZE_S >= 0) {
-    //         centroid.x -= GRID_CELL_SIZE_S;
-    //     }
-    //     break;
-    // }
-    // case 1: { // move right
-    //     if (centroid.x + GRID_CELL_SIZE_S < window_width_s) {
-    //         centroid.x += GRID_CELL_SIZE_S;
-    //     }
-    //     break;
-    // }
-    // case 2: { // move up
-    //     if (centroid.y - GRID_CELL_SIZE_S >= 0) {
-    //         centroid.y -= GRID_CELL_SIZE_S;
+            centroid.x -= GRID_CELL_SIZE_S;
+        // }
+        break;
+    }
+    case 1: { // move right
+        // if (centroid.x + GRID_CELL_SIZE_S < window_width_s) {
+            centroid.x += GRID_CELL_SIZE_S;
+        // }
+        break;
+    }
+    case 2: { // move up
+        // if (centroid.y - GRID_CELL_SIZE_S >= 0) {
+            centroid.y -= GRID_CELL_SIZE_S;
             
-    //     }
-    //     break;
-    // }
-    // case 3: { // move down
-    //     if (centroid.y + GRID_CELL_SIZE_S < window_height_s) {
-    //         centroid.y += GRID_CELL_SIZE_S;
+        // }
+        break;
+    }
+    case 3: { // move down
+        // if (centroid.y + GRID_CELL_SIZE_S < window_height_s) {
+            centroid.y += GRID_CELL_SIZE_S;
             
-    //     }
-    //     break;
-    // }
-    // default:
-    //     break;
-    // }
-    // body_set_centroid(seeker, centroid);
+        // }
+        break;
+    }
+    default:
+        break;
+    }
+    list_t *shape = body_get_shape(seeker);
+    bool move_valid = true;
+    for(size_t i = 0; i < list_size(shape); i++) {
+      vector_t vertex = *(vector_t *)list_get(shape, i);
+      vector_t new_vertex = vec_add(vertex, centroid);
+      if(new_vertex.x < 0 || new_vertex.y < 0 || new_vertex.x >= window_width_s || new_vertex.y >= window_height_s){
+        move_valid = false;
+        break;
+      }
+    }
+    list_free(shape);
+    if(move_valid){
+      move_body(seeker, centroid);
+    }
+
 }
 
 
