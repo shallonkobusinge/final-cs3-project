@@ -86,7 +86,6 @@ void add_new_seeker(state_t *state, bool is_new){
     scene_add_body(state->scene, seeker);
     asset_t *new_asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
     list_add(state->body_assets, new_asset_seeker);
-    printf("SIZE: %zu \n", list_size(state->body_assets));
     state->seeker->last_seeker_time = 0;
     state->seeker->max_seekers += 1;
 }
@@ -110,7 +109,7 @@ seeker_t *seeker_init(state_t *state){
 }
 
 void render_seeker_bodies(state_t *state) {
-  
+  printf("SIZE: %zu \n", list_size(state->body_assets));
    for (size_t i = 0; i < list_size(state->body_assets); i++) {
       //  rgb_color_t *color = body_get_color(scene_get_body(state->scene, i));
       //  if(color->r == 0.1 && color->g == 0.9 && color->b == 0.2) {
