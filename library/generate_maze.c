@@ -112,7 +112,7 @@ static body_t *make_beaver(double w, double h, vector_t center){
     *v4 = (vector_t){0, h};
     list_add(c, v4);
     body_t *seeker = body_init(c, 6, beaver_color);
-    body_set_centroid(seeker, center);
+    // body_set_centroid(seeker, center);
     return seeker;
     }
 
