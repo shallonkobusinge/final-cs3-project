@@ -138,6 +138,7 @@ static void init_grid(state_t *state)
     render_color((rgb_color_t){50, 129, 110});
     render_rect(&hider_cell);
 
+    
     render_color((rgb_color_t){241, 108, 45});
     render_rect(&seeker_cell);
 }

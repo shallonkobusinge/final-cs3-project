@@ -42,37 +42,37 @@ body_t *make_seeker(double w, double h, vector_t center) {
 
   list_t *c = list_init(1, free);
   vector_t *v1 = malloc(sizeof(vector_t));
-  *v1 = (vector_t){0, 0};
+  *v1 = (vector_t){center.x - w / 2 , center.y + h / 2};
   list_add(c, v1);
 
   vector_t *v2 = malloc(sizeof(vector_t));
-  *v2 = (vector_t){w, 0};
+  *v2 = (vector_t){center.x + w / 2, center.y + h / 2};
   list_add(c, v2);
 
   vector_t *v3 = malloc(sizeof(vector_t));
-  *v3 = (vector_t){w, h};
+  *v3 = (vector_t){center.x - w / 2, center.y - h / 2};
   list_add(c, v3);
 
   vector_t *v4 = malloc(sizeof(vector_t));
-  *v4 = (vector_t){0, h};
+  *v4 = (vector_t){center.x + w / 2, center.y - h / 2};
   list_add(c, v4);
-  body_t *seeker = body_init(c, 3, seeker_color);
-  body_set_centroid(seeker, center);
+  body_t *seeker = body_init(c, 1, seeker_color);
+  // body_set_centroid(seeker, center);
   return seeker;
 }
 
-void wrap_seeker_scene(body_t *seeker) {
-  vector_t centroid = body_get_centroid(seeker);
-  vector_t velocity = body_get_velocity(seeker);
+// void wrap_seeker_scene(body_t *seeker) {
+//   vector_t centroid = body_get_centroid(seeker);
+//   vector_t velocity = body_get_velocity(seeker);
   
-  if (centroid.x >= MAX_WINDOW.x || centroid.x <= MIN_WINDOW.x) {
-        velocity.x = -velocity.x;
-  }
-  if(centroid.y >= MAX_WINDOW.y || centroid.y <= MIN_WINDOW.y) {
-    velocity.y = -velocity.y;
-  }
-  body_set_velocity(seeker, velocity);
-}
+//   if (centroid.x >= MAX_WINDOW.x || centroid.x <= MIN_WINDOW.x) {
+//         velocity.x = -velocity.x;
+//   }
+//   if(centroid.y >= MAX_WINDOW.y || centroid.y <= MIN_WINDOW.y) {
+//     velocity.y = -velocity.y;
+//   }
+//   body_set_velocity(seeker, velocity);
+// }
 
 
 void add_new_seeker(scene_t *scene, seeker_t *seeker_ipt, bool is_new){
@@ -90,7 +90,8 @@ void add_new_seeker(scene_t *scene, seeker_t *seeker_ipt, bool is_new){
     // };
     //   seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, seeker_pos);
     // }
-    seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, START_POS);
+    vector_t center = (vector_t){.x = GRID_CELL_SIZE_S / 2, .y = GRID_CELL_SIZE_S / 2};
+    seeker = make_seeker(GRID_CELL_SIZE_S / 2, GRID_CELL_SIZE_S / 2, center);
     // seeker_vel = INITIAL_VELOCITY;
   
     scene_add_body(scene, seeker);
