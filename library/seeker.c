@@ -111,12 +111,12 @@ seeker_t *seeker_init(state_t *state){
 
 void render_seeker_bodies(state_t *state) {
    for (size_t i = 0; i < list_size(state->body_assets); i++) {
-       rgb_color_t *color = body_get_color(scene_get_body(state->scene, i));
-       if(color->r == 0.1 && color->g == 0.9 && color->b == 0.2) {
+      //  rgb_color_t *color = body_get_color(scene_get_body(state->scene, i));
+      //  if(color->r == 0.1 && color->g == 0.9 && color->b == 0.2) {
           asset_render(list_get(state->body_assets, i));
         }
       
-    }
+    // }
 }
 
 
