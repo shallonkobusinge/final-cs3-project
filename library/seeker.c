@@ -130,7 +130,50 @@ void render_seeker_bodies(seeker_t *seeker) {
     }
 }
 
+
+void random_move_seeker (body_t *seeker) {
+    printf("WE are here ");
+    SDL_Delay(90);
+    int direction = rand() % 4;
+    // vector_t velocity = body_get_velocity(seeker);
+    vector_t centroid = body_get_centroid(seeker);
+
+    switch (direction) {
+    case 0: { // move left
+     if (centroid.x - GRID_CELL_SIZE_S >= 0) {
+            centroid.x -= GRID_CELL_SIZE_S;
+        }
+        break;
+    }
+    case 1: { // move right
+        if (centroid.x + GRID_CELL_SIZE_S < window_width_s) {
+            centroid.x += GRID_CELL_SIZE_S;
+        }
+        break;
+    }
+    case 2: { // move up
+        if (centroid.y - GRID_CELL_SIZE_S >= 0) {
+            centroid.y -= GRID_CELL_SIZE_S;
+            
+        }
+        break;
+    }
+    case 3: { // move down
+        if (centroid.y + GRID_CELL_SIZE_S < window_height_s) {
+            centroid.y += GRID_CELL_SIZE_S;
+            
+        }
+        break;
+    }
+    default:
+        break;
+    }
+    body_set_centroid(seeker, centroid);
+}
+
+
 void free_seeker(seeker_t *seeker) {
   free(seeker->body_assets);
   free(seeker);
 }
+

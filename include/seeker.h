@@ -27,4 +27,10 @@ void free_seeker(seeker_t *seeker);
 
 void render_seeker_bodies(seeker_t *seeker);
 
+/*
+ * Moves the seeker cell to a random
+ * adjacent cell 
+*/
+void random_move_seeker (body_t *seeker);
+
 #endif // #ifndef __SEEKER_H__
