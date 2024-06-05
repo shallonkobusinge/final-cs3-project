@@ -26,7 +26,7 @@ const double INNER_RADIUS = GRID_CELL_SIZE_S;
 #define STARTING_SEEKERS 1
 #define S_NUM_POINTS 20
 #define S_RADIUS 0.1
-#define NEW_SEEKERS_INTERVAL 4
+#define NEW_SEEKERS_INTERVAL 30
 
 const rgb_color_t seeker_color = (rgb_color_t){0.1, 0.9, 0.2};
 
@@ -44,8 +44,6 @@ typedef struct state {
     sound_effect_t *sound_effect;
     seeker_t *seeker;
 }state_t;
-
-
 
 body_t *make_seeker(double w, double h, vector_t center) {
 
@@ -74,7 +72,6 @@ static void move_body(body_t *body, vector_t vec){
   body_set_centroid(body, vec_add(body_get_centroid(body), vec));
 }
 
-
 void add_new_seeker(state_t *state, bool is_new){
    
    body_t *seeker;
@@ -99,7 +96,7 @@ void render_seeker(state_t *state, double dt){
     state->seeker->last_seeker_time += dt;
     if(state->seeker->last_seeker_time >= NEW_SEEKERS_INTERVAL){
       add_new_seeker(state, true);
-      //  tagged_sound(state->sound_effect);
+       tagged_sound(state->sound_effect);
     }
     for (size_t i = 0; i < list_size(state->seeker->body_assets); i++) {
       asset_render(list_get(state->seeker->body_assets, i));
@@ -163,7 +160,6 @@ void random_move_seeker (body_t *seeker) {
     }
 
 }
-
 
 void free_seeker(seeker_t *seeker) {
   free(seeker->body_assets);
