@@ -6,6 +6,7 @@
 #include "asset.h"
 #include "sound_effect.h"
 const char *SEEKER_PATH = "assets/images/seeking/seeker_bg.png";
+const char *BEAVER_PATH = "assets/images/seeking/beaver.png";
 
 const vector_t MIN_WINDOW = {0, 0};
 const vector_t MAX_WINDOW = {1000, 500};
@@ -89,6 +90,12 @@ void add_new_seeker(state_t *state, bool is_new){
 
     vector_t center = (vector_t){.x = GRID_CELL_SIZE_S / 4, .y = GRID_CELL_SIZE_S / 4};
 
+    // body_t *beaver = make_beaver(center);
+    body_t *beaver = make_seeker(50, 50, center);
+    scene_add_body(state->scene, beaver);
+
+    asset_t *asset_beaver = asset_make_image_with_body(SEEKER_PATH, beaver);
+    list_add(state->body_assets, asset_beaver);
     state->seeker->last_seeker_time = 0;
     state->seeker->max_seekers += 1;
 }
@@ -100,6 +107,7 @@ void render_seeker(state_t *state, double dt){
        tagged_sound(state->sound_effect);
     }
     for (size_t i = 0; i < list_size(state->body_assets); i++) {
+
         rgb_color_t *color = body_get_color(scene_get_body(state->scene, i));
         if(color->r == 0.1 && color->g == 0.9 && color->b == 0.2) {
             printf("SIZE FROM: %zu \n", list_size(state->body_assets));
