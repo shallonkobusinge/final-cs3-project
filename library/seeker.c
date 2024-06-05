@@ -88,13 +88,13 @@ void add_new_seeker(state_t *state, bool is_new){
     asset_t *new_asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
     list_add(state->body_assets, new_asset_seeker);
 
-    vector_t center = (vector_t){.x = GRID_CELL_SIZE_S / 4, .y = GRID_CELL_SIZE_S / 4};
+    vector_t center = (vector_t){.x = (((GRID_WIDTH_S - 6) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4), .y = (((GRID_HEIGHT_S - 5) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4)};
 
     // body_t *beaver = make_beaver(center);
     body_t *beaver = make_seeker(50, 50, center);
     scene_add_body(state->scene, beaver);
 
-    asset_t *asset_beaver = asset_make_image_with_body(SEEKER_PATH, beaver);
+    asset_t *asset_beaver = asset_make_image_with_body(BEAVER_PATH, beaver);
     list_add(state->body_assets, asset_beaver);
     state->seeker->last_seeker_time = 0;
     state->seeker->max_seekers += 1;
