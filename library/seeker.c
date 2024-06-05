@@ -112,10 +112,10 @@ void introduce_seeker(scene_t *scene, seeker_t *seeker, double dt, sound_effect_
     for (size_t i = 0; i < list_size(seeker->body_assets); i++) {
       body_t *body = scene_get_body(seeker->body_assets, i);
       rgb_color_t *color =  body_get_color(body);
-      render_color(color);
+      render_color(*color);
       polygon_t *pol = body_get_polygon(body);
       // asset_render(list_get(seeker->body_assets, i));
-      sdl_draw_polygon(body->poly, color);
+      sdl_draw_polygon(body->poly, *color);
     }
 }
 
