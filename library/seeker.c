@@ -97,6 +97,7 @@ void render_seeker(state_t *state, double dt){
        tagged_sound(state->sound_effect);
     }
     for (size_t i = 0; i < list_size(state->body_assets); i++) {
+      printf("SIZE FROM RENDER: %zu \n", list_size(state->body_assets));
       asset_render(list_get(state->body_assets, i));
     }
 }
