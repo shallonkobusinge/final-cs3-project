@@ -23,7 +23,7 @@ const double OUTER_RADIUS =  GRID_CELL_SIZE_S;
 const double INNER_RADIUS = GRID_CELL_SIZE_S;
 
 // SEEKING CONSTANTS
-#define STARTING_SEEKERS 1
+#define STARTING_SEEKERS 50
 #define S_NUM_POINTS 20
 #define S_RADIUS 0.1
 #define NEW_SEEKERS_INTERVAL 4
@@ -104,18 +104,18 @@ void render_seeker(state_t *state, double dt){
 
 seeker_t *seeker_init(state_t *state){
   seeker_t *seeker = malloc(sizeof(seeker_t));
-  seeker->max_seekers = 50;
+  seeker->max_seekers = STARTING_SEEKERS;
   seeker->last_seeker_time = 0;
   seeker->body_assets = list_init(seeker->max_seekers, (free_func_t)asset_destroy);
   return seeker;
 }
 
-void render_seeker_bodies(state_t *state) {
-  printf("SIZE: %zu \n", list_size(state->seeker->body_assets));
-   for (size_t i = 0; i < list_size(state->seeker->body_assets); i++) {
+void render_seeker_bodies(seeker_t *seeker) {
+  printf("SIZE: %zu \n", list_size(seeker->body_assets));
+   for (size_t i = 0; i < list_size(seeker->body_assets); i++) {
       //  rgb_color_t *color = body_get_color(scene_get_body(state->scene, i));
       //  if(color->r == 0.1 && color->g == 0.9 && color->b == 0.2) {
-          asset_render(list_get(state->seeker->body_assets, i));
+          asset_render(list_get(seeker->body_assets, i));
         }
       
     // }

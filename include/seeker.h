@@ -26,7 +26,7 @@ void render_seeker(state_t *state, double dt);
 
 void seeker_free(seeker_t *seeker);
 
-void render_seeker_bodies(state_t *state);
+void render_seeker_bodies(seeker_t *seeker);
 
 /*
  * Moves the seeker cell to a random
