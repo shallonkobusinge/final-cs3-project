@@ -53,7 +53,7 @@ state_t *emscripten_init()
     state->seeker = seeker_init(state);
     add_new_seeker(state, false);
     state->page = 1;
-    hider_init();
+    hider_init(state);
     // game_sound(state->sound_effect);
 
     return state;
