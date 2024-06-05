@@ -74,7 +74,7 @@ bool emscripten_main(state_t *state)
             rgb_color_t *color = body_get_color(seeker);
             if(color->r == 0.1 && color->g == 0.9 && color->b == 0.2) {
                 random_move_seeker(seeker);
-                body_tick(seeker, dt);
+                // body_tick(seeker, dt);
 
             }
             
