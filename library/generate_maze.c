@@ -85,13 +85,13 @@ static body_t *make_beaver(vector_t center){
     *v4 = (vector_t){0.5 * BEAVER_WIDTH, BEAVER_HEIGHT};
     list_add(beaver_v, v4);
 
-    vector_t *v4 = malloc(sizeof(vector_t));
-    *v4 = (vector_t){0.0, BEAVER_HEIGHT};
-    list_add(beaver_v, v4);
-
     vector_t *v5 = malloc(sizeof(vector_t));
-    *v5 = (vector_t){-0.5 * BEAVER_WIDTH, 0.5 * BEAVER_HEIGHT};
+    *v4 = (vector_t){0.0, BEAVER_HEIGHT};
     list_add(beaver_v, v5);
+
+    vector_t *v6 = malloc(sizeof(vector_t));
+    *v5 = (vector_t){-0.5 * BEAVER_WIDTH, 0.5 * BEAVER_HEIGHT};
+    list_add(beaver_v, v6);
 
     body_t *beaver = body_init(beaver_v, 1.0, beaver_color);
     body_set_centroid(center);
@@ -118,7 +118,7 @@ static void init_grid(state_t *state)
     body_t *beaver = make_beaver(center);
     scene_add_body(state->scene, beaver);
 
-    asset_t *asset_beaver = asset_make_image_with_body(BEAVER_PATH, (SDL_Rect){0, 0, GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2});
+    asset_t *asset_beaver = asset_make_image_with_body(BEAVER_PATH, beaver);
     list_add(state->body_assets, beaver);
 
     render_color((rgb_color_t){50, 129, 110});

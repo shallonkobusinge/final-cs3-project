@@ -67,7 +67,7 @@ bool emscripten_main(state_t *state)
         {
             state->maze_generated = generate_maze(state, dt);
         }
-        render_seeker_bodies(state->seeker);
+        render_seeker_bodies(state);
         for(size_t i = 0; i < scene_bodies(state->scene); i++) {
             body_t *seeker = scene_get_body(state->scene, i);
             rgb_color_t *color = body_get_color(seeker);
