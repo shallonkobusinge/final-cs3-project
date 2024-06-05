@@ -18,8 +18,7 @@ const size_t NUM_CELLS_S = GRID_WIDTH_S * GRID_HEIGHT_S;
 const int GRID_CELL_SIZE_S = 40;
 const int window_width_s = (GRID_WIDTH_S * GRID_CELL_SIZE_S) + 1;
 const int window_height_s = (GRID_HEIGHT_S * GRID_CELL_SIZE_S) + 1;
-// ((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4, ((GRID_WIDTH - 3) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4
-const vector_t START_POS = {.x =  ((GRID_WIDTH_S - 2) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4, .y = ((GRID_WIDTH_S - 3) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4};
+const vector_t START_POS = (vector_t){.x = (((GRID_WIDTH_S - 2) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4), .y = (((GRID_HEIGHT_S - 6) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4)};
 const double OUTER_RADIUS =  GRID_CELL_SIZE_S;
 const double INNER_RADIUS = GRID_CELL_SIZE_S;
 
@@ -87,8 +86,7 @@ void add_new_seeker(state_t *state, bool is_new){
     
     seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, seeker_pos);
     }
-    vector_t center = (vector_t){.x = (((GRID_WIDTH_S - 2) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4), .y = (((GRID_HEIGHT_S - 6) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4)};
-    seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, center);
+    seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, START_POS);
     scene_add_body(state->scene, seeker);
     asset_t *new_asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
     list_add(state->seeker->body_assets, new_asset_seeker);
@@ -101,7 +99,7 @@ void render_seeker(state_t *state, double dt){
     state->seeker->last_seeker_time += dt;
     if(state->seeker->last_seeker_time >= NEW_SEEKERS_INTERVAL){
       add_new_seeker(state, true);
-       tagged_sound(state->sound_effect);
+      //  tagged_sound(state->sound_effect);
     }
     for (size_t i = 0; i < list_size(state->seeker->body_assets); i++) {
       asset_render(list_get(state->seeker->body_assets, i));
@@ -124,8 +122,7 @@ void render_seeker_bodies(seeker_t *seeker) {
 
 
 void random_move_seeker (body_t *seeker) {
-    printf("WE are here ");
-    SDL_Delay(150);
+    SDL_Delay(250);
     int direction = rand() % 4;
     
     vector_t centroid = VEC_ZERO;
