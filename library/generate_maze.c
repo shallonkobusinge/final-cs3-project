@@ -181,45 +181,47 @@ static void init_maze()
 
 void on_key(char key, key_event_type_t type, double held_time, state_t *state)
 {
-    if (type == KEY_PRESSED)
+    body_t *beaver = scene_get_body(state->scene, 0);
+    vector_t translation = (vector_t){0, 0};
+    if (type == KEY_PRESSED && key != KEY_RELEASED)
     {
         switch (key)
         {
         case LEFT_ARROW:
         {
-            if (hider_cell.x - GRID_CELL_SIZE >= 0)
-            {
-                hider_cell.x -= GRID_CELL_SIZE;
-                render_rect(&hider_cell);
-            }
+            // if (hider_cell.x - GRID_CELL_SIZE >= 0)
+            // {
+                translation.x -= GRID_CELL_SIZE;
+                // render_rect(&hider_cell);
+            // }
             break;
         }
         case RIGHT_ARROW:
         {
-            if (hider_cell.x + GRID_CELL_SIZE < window_width)
-            {
-                hider_cell.x += GRID_CELL_SIZE;
-                render_rect(&hider_cell);
-            }
+            // if (hider_cell.x + GRID_CELL_SIZE < window_width)
+            // {
+                translation.x += GRID_CELL_SIZE;
+            //     render_rect(&hider_cell);
+            // }
             break;
         }
         case UP_ARROW:
         {
-            if (hider_cell.y - GRID_CELL_SIZE >= 0)
-            {
-                hider_cell.y -= GRID_CELL_SIZE;
-                render_rect(&hider_cell);
-            }
+            // if (hider_cell.y - GRID_CELL_SIZE >= 0)
+            // {
+                translation.y -= GRID_CELL_SIZE;
+            //     render_rect(&hider_cell);
+            // }
 
             break;
         }
         case DOWN_ARROW:
         {
-            if (hider_cell.y + GRID_CELL_SIZE < window_height)
-            {
-                hider_cell.y += GRID_CELL_SIZE;
-                render_rect(&hider_cell);
-            }
+            // if (hider_cell.y + GRID_CELL_SIZE < window_height)
+            // {
+                translation.y += GRID_CELL_SIZE;
+                // render_rect(&hider_cell);
+            // }
 
             break;
         }
@@ -231,6 +233,22 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
         {
             printf("NOTHING \n");
         }
+    }
+    // vector_t centroid = move_body(beaver, translation);
+    // body_set_centroid(beaver, centroid);
+    list_t *shape = body_get_shape(beaver);
+    bool move_valid = true;
+    for(size_t i = 0; i < list_size(shape); i++) {
+      vector_t vertex = *(vector_t *)list_get(shape, i);
+      vector_t new_vertex = vec_add(vertex, translation);
+      if(new_vertex.x < 0 || new_vertex.y < 0 || new_vertex.x >= window_width || new_vertex.y >= window_height){
+        move_valid = false;
+        break;
+      }
+    }
+    list_free(shape);
+    if(move_valid){
+      move_body(beaver, translation);
     }
 }
 

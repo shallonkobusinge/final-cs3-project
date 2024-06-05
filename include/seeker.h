@@ -34,4 +34,6 @@ void render_seeker_bodies(state_t *state);
 */
 void random_move_seeker (body_t *seeker);
 
+void move_body(body_t *body, vector_t vec);
+
 #endif // #ifndef __SEEKER_H__
