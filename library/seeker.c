@@ -115,7 +115,7 @@ void introduce_seeker(scene_t *scene, seeker_t *seeker, double dt, sound_effect_
       render_color(*color);
       polygon_t *pol = body_get_polygon(body);
       // asset_render(list_get(seeker->body_assets, i));
-      sdl_draw_polygon(body->poly, *color);
+      sdl_draw_polygon(body_get_polygon(body), *color);
     }
 }
 
