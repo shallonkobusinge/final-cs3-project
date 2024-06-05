@@ -90,8 +90,8 @@ void add_new_seeker(scene_t *scene, seeker_t *seeker_ipt, bool is_new){
     // };
     //   seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, seeker_pos);
     // }
-    vector_t center = (vector_t){.x = GRID_CELL_SIZE_S / 2, .y = GRID_CELL_SIZE_S / 2};
-    seeker = make_seeker(GRID_CELL_SIZE_S / 2, GRID_CELL_SIZE_S / 2, center);
+    vector_t center = (vector_t){.x = ((GRID_WIDTH_S - 2) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4, .y = ((GRID_WIDTH_S - 3) * GRID_CELL_SIZE_S)  + GRID_CELL_SIZE_S / 4};
+    seeker = make_seeker(GRID_CELL_SIZE_S / 2, GRID_CELL_SIZE_S / 2, START_POS);
     // seeker_vel = INITIAL_VELOCITY;
   
     scene_add_body(scene, seeker);
