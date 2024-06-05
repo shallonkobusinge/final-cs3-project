@@ -143,29 +143,19 @@ void random_move_seeker (body_t *seeker) {
 
     switch (direction) {
     case 0: { // move left
-    //  if (centroid.x - GRID_CELL_SIZE_S >= 0) {
             centroid.x -= GRID_CELL_SIZE_S;
-        // }
         break;
     }
     case 1: { // move right
-        // if (centroid.x + GRID_CELL_SIZE_S < window_width_s) {
             centroid.x += GRID_CELL_SIZE_S;
-        // }
         break;
     }
     case 2: { // move up
-        // if (centroid.y - GRID_CELL_SIZE_S >= 0) {
             centroid.y -= GRID_CELL_SIZE_S;
-            
-        // }
         break;
     }
     case 3: { // move down
-        // if (centroid.y + GRID_CELL_SIZE_S < window_height_s) {
             centroid.y += GRID_CELL_SIZE_S;
-            
-        // }
         break;
     }
     default:
