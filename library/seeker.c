@@ -98,11 +98,10 @@ void add_new_seeker(state_t *state, bool is_new){
 
 void render_seeker(state_t *state, double dt){
     printf(" WE are heree ");
-    // seeker->last_seeker_time += dt;
     state->seeker->last_seeker_time += dt;
     if(state->seeker->last_seeker_time >= NEW_SEEKERS_INTERVAL){
       add_new_seeker(state, true);
-      //  tagged_sound(sound_effect);
+       tagged_sound(state->sound_effect);
     }
     for (size_t i = 0; i < list_size(state->seeker->body_assets); i++) {
       asset_render(list_get(state->seeker->body_assets, i));
