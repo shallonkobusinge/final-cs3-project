@@ -56,7 +56,7 @@ body_t *make_seeker(double w, double h, vector_t center) {
   vector_t *v4 = malloc(sizeof(vector_t));
   *v4 = (vector_t){center.x + w / 2, center.y - h / 2};
   list_add(c, v4);
-  body_t *seeker = body_init(c, 1, seeker_color);
+  body_t *seeker = body_init(c, 3, seeker_color);
   // body_set_centroid(seeker, center);
   return seeker;
 }
@@ -96,8 +96,8 @@ void add_new_seeker(scene_t *scene, seeker_t *seeker_ipt, bool is_new){
   
     scene_add_body(scene, seeker);
     // body_set_velocity(seeker, seeker_vel);
-    // asset_t *new_asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
-    list_add(seeker_ipt->body_assets, seeker);
+    asset_t *new_asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
+    list_add(seeker_ipt->body_assets, new_asset_seeker);
     seeker_ipt->last_seeker_time = 0;
     seeker_ipt->max_seekers += 1;
 }
@@ -110,12 +110,7 @@ void introduce_seeker(scene_t *scene, seeker_t *seeker, double dt, sound_effect_
       //  tagged_sound(sound_effect);
     // }
     for (size_t i = 0; i < list_size(seeker->body_assets); i++) {
-      body_t *body = scene_get_body(seeker->body_assets, i);
-      rgb_color_t *color =  body_get_color(body);
-      render_color(*color);
-      polygon_t *pol = body_get_polygon(body);
-      // asset_render(list_get(seeker->body_assets, i));
-      sdl_draw_polygon(body_get_polygon(body), *color);
+      asset_render(list_get(seeker->body_assets, i));
     }
 }
 
