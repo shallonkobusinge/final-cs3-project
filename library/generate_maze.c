@@ -122,7 +122,7 @@ static void random_move_seeker (seeker_t *seeker_body) {
     default:
         break;
     }
-    body_set_velocity(velocity);
+    body_set_velocity(seeker_body, velocity);
 }
 
 /**
