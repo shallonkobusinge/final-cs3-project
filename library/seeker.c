@@ -106,7 +106,7 @@ void introduce_seeker(scene_t *scene, seeker_t *seeker, double dt, sound_effect_
     printf(" WE are heree ");
     seeker->last_seeker_time += dt;
     // if(seeker->last_seeker_time >= NEW_SEEKERS_INTERVAL){
-    //   add_new_seeker(scene, seeker, true);
+      add_new_seeker(scene, seeker, true);
     //   //  tagged_sound(sound_effect);
     // }
     for (size_t i = 0; i < list_size(seeker->body_assets); i++) {
