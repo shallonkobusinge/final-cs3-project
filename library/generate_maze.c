@@ -14,7 +14,7 @@
 #define BEAVER_WIDTH 1.5
 #define BEAVER_HEIGHT 1.0
 
-// const char *BEAVER_PATH = "assets/images/seeking/beaver.png";
+const char *BEAVER_PATH = "assets/images/seeking/beaver.png";
 
 const size_t GRID_WIDTH = 25;
 const size_t GRID_HEIGHT = 12;
@@ -112,13 +112,13 @@ static void init_grid(state_t *state)
     {
         render_line(0, y, window_width, y);
     }
-    // vector_t center = (vector_t){.x = GRID_CELL_SIZE / 4, .y = GRID_CELL_SIZE / 4};
+    ector_t center = (vector_t){.x = (((GRID_WIDTH_S - 6) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4), .y = (((GRID_HEIGHT_S - 5) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4)};
 
-    // body_t *beaver = make_beaver(center);
-    // scene_add_body(state->scene, beaver);
+    body_t *beaver = make_beaver(center);
+    scene_add_body(state->scene, beaver);
 
-    // asset_t *asset_beaver = asset_make_image_with_body(BEAVER_PATH, beaver);
-    // list_add(state->body_assets, asset_beaver);
+    asset_t *asset_beaver = asset_make_image_with_body(BEAVER_PATH, beaver);
+    list_add(state->body_assets, asset_beaver);
 
     // render_color((rgb_color_t){50, 129, 110});x
     // render_rect(&hider_cell);
