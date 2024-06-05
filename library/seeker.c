@@ -5,7 +5,7 @@
 #include "list.h"
 #include "asset.h"
 #include "sound_effect.h"
-const char *SEEKER_PATH = "assets/images/seeker_bg.png";
+const char *SEEKER_PATH = "assets/images/seeking/seeker_bg.png";
 
 const vector_t MIN_WINDOW = {0, 0};
 const vector_t MAX_WINDOW = {1000, 500};

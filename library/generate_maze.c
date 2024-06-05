@@ -37,7 +37,6 @@ typedef struct state
     scene_t *scene;
     size_t page;
     bool maze_generated;
-    list_t *seekers;
     sound_effect_t *sound_effect;
     seeker_t *seeker;
 } state_t;
