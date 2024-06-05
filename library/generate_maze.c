@@ -120,8 +120,8 @@ static void init_grid(state_t *state)
     asset_t *asset_beaver = asset_make_image_with_body(BEAVER_PATH, beaver);
     list_add(state->body_assets, beaver);
 
-    render_color((rgb_color_t){50, 129, 110});
-    render_rect(&hider_cell);
+    // render_color((rgb_color_t){50, 129, 110});
+    // render_rect(&hider_cell);
 }
 
 /**
