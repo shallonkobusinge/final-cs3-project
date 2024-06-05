@@ -112,7 +112,7 @@ static void init_grid(state_t *state)
     {
         render_line(0, y, window_width, y);
     }
-    ector_t center = (vector_t){.x = (((GRID_WIDTH_S - 6) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4), .y = (((GRID_HEIGHT_S - 5) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4)};
+    ector_t center = (vector_t){.x = (((GRID_WIDTH - 6) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), .y = (((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4)};
 
     body_t *beaver = make_beaver(center);
     scene_add_body(state->scene, beaver);
