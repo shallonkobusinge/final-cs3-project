@@ -10,7 +10,7 @@
 
 typedef struct seeker seeker_t;
 
-seeker_t *seeker_init(state_t *state);
+void seeker_init(state_t *state);
 
 body_t *make_seeker(double width, double height, vector_t center);
 

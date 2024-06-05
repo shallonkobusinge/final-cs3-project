@@ -101,7 +101,7 @@ void render_seeker(state_t *state, double dt){
     }
 }
 
-void *seeker_init(state_t *state){
+void seeker_init(state_t *state){
   seeker_t *seeker = malloc(sizeof(seeker_t));
   state->seeker->max_seekers =
   state->seeker->max_seekers = 50;
