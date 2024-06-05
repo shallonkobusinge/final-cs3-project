@@ -44,6 +44,7 @@ state_t *emscripten_init()
     state->maze_generated = false;
     state->sound_effect = load_game_sounds();
     state->seeker = seeker_init(state);
+    state->body_assets = list_init(60.0, (free_func_t)asset_destroy);
     add_new_seeker(state, false);
     state->page = 1;
     // game_sound(state->sound_effect);

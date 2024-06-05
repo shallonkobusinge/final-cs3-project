@@ -72,7 +72,7 @@ static void move_body(body_t *body, vector_t vec){
 }
 
 void add_new_seeker(state_t *state, bool is_new){
-   
+   printf("SIZE: %zu \n", list_size(state->body_assets));
    body_t *seeker;
     if(is_new){
       vector_t seeker_pos = (vector_t){
@@ -105,7 +105,6 @@ seeker_t *seeker_init(state_t *state){
   seeker_t *seeker = malloc(sizeof(seeker_t));
   seeker->max_seekers = 50;
   seeker->last_seeker_time = 0;
-  state->body_assets = list_init(seeker->max_seekers, (free_func_t)asset_destroy);
   return seeker;
 }
 
