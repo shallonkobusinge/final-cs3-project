@@ -94,7 +94,7 @@ static body_t *make_beaver(vector_t center){
     list_add(beaver_v, v6);
 
     body_t *beaver = body_init(beaver_v, 1.0, beaver_color);
-    body_set_centroid(center);
+    body_set_centroid(beaver, center);
     return beaver;
 }
 
