@@ -14,7 +14,7 @@
 #define BEAVER_WIDTH 1.5
 #define BEAVER_HEIGHT 1.0
 
-const char *BEAVER_PATH = "assets/images/seeking/beaver.png";
+// const char *BEAVER_PATH = "assets/images/seeking/beaver.png";
 
 const size_t GRID_WIDTH = 25;
 const size_t GRID_HEIGHT = 12;
