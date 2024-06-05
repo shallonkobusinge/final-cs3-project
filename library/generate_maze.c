@@ -9,10 +9,17 @@
 #include "sdl_wrapper.h"
 #include "sound_effect.h"
 #include "seeker.h"
+#include "asset.h"
+
+#define BEAVER_WIDTH 1.5
+#define BEAVER_HEIGHT 1.0
+
+const char *BEAVER_PATH = "assets/images/beaver.png";
 
 const size_t GRID_WIDTH = 25;
 const size_t GRID_HEIGHT = 12;
 const size_t NUM_CELLS = GRID_WIDTH * GRID_HEIGHT;
+const rgb_color_t beaver_color = (rgb_color_t){150, 75, 0};
 
 const int GRID_CELL_SIZE = 40;
 const int window_width = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
@@ -23,7 +30,6 @@ bool adj_matrix[NUM_CELLS][NUM_CELLS];
 cell_t *parent[GRID_WIDTH][GRID_HEIGHT];
 
 SDL_Rect hider_cell = (SDL_Rect){(GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
- SDL_Rect seeker_cell = {((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4, ((GRID_WIDTH - 3) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4, GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2}; 
 
 static stack_t *head;
 typedef struct state
@@ -34,28 +40,9 @@ typedef struct state
     list_t *seekers;
     sound_effect_t *sound_effect;
     seeker_t *seeker;
+    list_t *body_assets;
 } state_t;
 
-const size_t NUM_BUILDINGS = 4;
-
-cell_t buildings[] = {
-    {
-        .x = ((GRID_WIDTH - 3) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-        .y = ((GRID_HEIGHT - 3) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-    },
-    {
-        .x = ((GRID_WIDTH - 12) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-        .y = ((GRID_HEIGHT - 12) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-    },
-    {
-        .x = ((GRID_WIDTH - 10) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-        .y = ((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-    },
-    {
-        .x = ((GRID_WIDTH - 24) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-        .y = ((GRID_HEIGHT - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-    },
-};
 /**
  * Finds max between two numbers
  * @param a first number
@@ -79,6 +66,38 @@ static size_t find_min(size_t a, size_t b)
     return (a > b) ? b : a;
 }
 
+static body_t *make_beaver(vector_t center){
+    list_t *beaver_v = list_init(6, free);
+
+    vector_t *v1 = malloc(sizeof(vector_t));
+    *v1 = (vector_t){0.0, 0.0};
+    list_add(beaver_v, v1);
+
+    vector_t *v2 = malloc(sizeof(vector_t));
+    *v2 = (vector_t){0.5 * BEAVER_WIDTH, 0.0};
+    list_add(beaver_v, v2);
+
+    vector_t *v3 = malloc(sizeof(vector_t));
+    *v3 = (vector_t){0.0, 0.5 * BEAVER_HEIGHT};
+    list_add(beaver_v, v3);
+
+    vector_t *v4 = malloc(sizeof(vector_t));
+    *v4 = (vector_t){0.5 * BEAVER_WIDTH, BEAVER_HEIGHT};
+    list_add(beaver_v, v4);
+
+    vector_t *v4 = malloc(sizeof(vector_t));
+    *v4 = (vector_t){0.0, BEAVER_HEIGHT};
+    list_add(beaver_v, v4);
+
+    vector_t *v5 = malloc(sizeof(vector_t));
+    *v5 = (vector_t){-0.5 * BEAVER_WIDTH, 0.5 * BEAVER_HEIGHT};
+    list_add(beaver_v, v5);
+
+    body_t *beaver = body_init(beaver_v, 1.0, beaver_color);
+    body_set_centroid(center);
+    return beaver;
+}
+
 /**
  * Initialize and draw the Maze Grid.
  */
@@ -94,13 +113,16 @@ static void init_grid(state_t *state)
     {
         render_line(0, y, window_width, y);
     }
+    vector_t center = (vector_t){.x = GRID_CELL_SIZE / 4, .y = GRID_CELL_SIZE / 4};
+
+    body_t *beaver = make_beaver(center);
+    scene_add_body(state->scene, beaver);
+
+    asset_t *asset_beaver = asset_make_image_with_body(BEAVER_PATH, (SDL_Rect){0, 0, GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2});
+    list_add(state->body_assets, beaver);
 
     render_color((rgb_color_t){50, 129, 110});
     render_rect(&hider_cell);
-
-    
-    render_color((rgb_color_t){241, 108, 45});
-    render_rect(&seeker_cell);
 }
 
 /**
@@ -232,13 +254,6 @@ bool generate_maze(state_t *state, double dt)
     printf("Page: %d\n", state->page);
 
     init_grid(state);
-    // render_seeker_bodies(state->seeker);
-    // init_maze();
-    // for(size_t i = 0; i < list_size(state->seeker); i++) {
-    //     body_t *seeker = list_get(state->seekers, i);
-    //     random_move_seeker(seeker);
-    //     // body_tick(seeker, dt);
-    // }
     // render_color((rgb_color_t){0, 0, 0});
     // render_rect(&terminal_cell);
     // // sdl_show();

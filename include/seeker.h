@@ -24,9 +24,9 @@ void add_new_seeker(state_t *state, bool is_new);
 
 void render_seeker(state_t *state, double dt);
 
-void free_seeker(seeker_t *seeker);
+void seeker_free(seeker_t *seeker);
 
-void render_seeker_bodies(seeker_t *seeker);
+void render_seeker_bodies(state_t *state);
 
 /*
  * Moves the seeker cell to a random

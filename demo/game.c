@@ -31,7 +31,7 @@ struct state
     bool maze_generated;
     sound_effect_t *sound_effect;
     seeker_t *seeker;
-    
+    list_t *body_assets;
 };
 
 state_t *emscripten_init()
@@ -85,8 +85,10 @@ bool emscripten_main(state_t *state)
 }
 
 void emscripten_free(state_t *state)
-{
+{   list_free(state->body_assets);
+    seeker_free(state->seeker);
     scene_free(state->scene);
+    sound_free(state->sound_effect);
     asset_cache_destroy();
     free(state);
 }

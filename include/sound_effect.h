@@ -7,7 +7,7 @@ void init_sound();
 
 sound_effect_t *load_game_sounds();
 
-void free_sound(sound_effect_t *sound_effect);
+void sound_free(sound_effect_t *sound_effect);
 
 void game_sound(sound_effect_t *sound_effect);
 

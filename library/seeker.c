@@ -5,7 +5,7 @@
 #include "list.h"
 #include "asset.h"
 #include "sound_effect.h"
-const char *SEEKER_PATH = "assets/seeker_bg.png";
+const char *SEEKER_PATH = "assets/images/seeker_bg.png";
 
 const vector_t MIN_WINDOW = {0, 0};
 const vector_t MAX_WINDOW = {1000, 500};
@@ -31,10 +31,8 @@ const double INNER_RADIUS = GRID_CELL_SIZE_S;
 const rgb_color_t seeker_color = (rgb_color_t){0.1, 0.9, 0.2};
 
 typedef struct seeker {
-    list_t *body_assets;
     double last_seeker_time;
     double max_seekers;
-
 }seeker_t;
 
 typedef struct state {
@@ -43,6 +41,7 @@ typedef struct state {
     bool maze_generated;
     sound_effect_t *sound_effect;
     seeker_t *seeker;
+    list_t *body_assets;
 }state_t;
 
 body_t *make_seeker(double w, double h, vector_t center) {
@@ -86,20 +85,19 @@ void add_new_seeker(state_t *state, bool is_new){
     seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, START_POS);
     scene_add_body(state->scene, seeker);
     asset_t *new_asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
-    list_add(state->seeker->body_assets, new_asset_seeker);
+    list_add(state->body_assets, new_asset_seeker);
     state->seeker->last_seeker_time = 0;
     state->seeker->max_seekers += 1;
 }
 
 void render_seeker(state_t *state, double dt){
-    printf(" WE are heree ");
     state->seeker->last_seeker_time += dt;
     if(state->seeker->last_seeker_time >= NEW_SEEKERS_INTERVAL){
       add_new_seeker(state, true);
        tagged_sound(state->sound_effect);
     }
-    for (size_t i = 0; i < list_size(state->seeker->body_assets); i++) {
-      asset_render(list_get(state->seeker->body_assets, i));
+    for (size_t i = 0; i < list_size(state->body_assets); i++) {
+      asset_render(list_get(state->body_assets, i));
     }
 }
 
@@ -107,13 +105,17 @@ seeker_t *seeker_init(state_t *state){
   seeker_t *seeker = malloc(sizeof(seeker_t));
   seeker->max_seekers = 50;
   seeker->last_seeker_time = 0;
-  seeker->body_assets = list_init(seeker->max_seekers, (free_func_t)asset_destroy);
+  state->body_assets = list_init(seeker->max_seekers, (free_func_t)asset_destroy);
   return seeker;
 }
 
-void render_seeker_bodies(seeker_t *seeker) {
-   for (size_t i = 0; i < list_size(seeker->body_assets); i++) {
-      asset_render(list_get(seeker->body_assets, i));
+void render_seeker_bodies(state_t *state) {
+   for (size_t i = 0; i < list_size(state->body_assets); i++) {
+       rgb_color_t *color = body_get_color(scene_get_body(state->scene, i));
+       if(color->r == 0.1 && color->g == 0.9 && color->b == 0.2) {
+          asset_render(list_get(state->body_assets, i));
+        }
+      
     }
 }
 
@@ -161,8 +163,7 @@ void random_move_seeker (body_t *seeker) {
 
 }
 
-void free_seeker(seeker_t *seeker) {
-  free(seeker->body_assets);
+void seeker_free(seeker_t *seeker) {
   free(seeker);
 }
 
