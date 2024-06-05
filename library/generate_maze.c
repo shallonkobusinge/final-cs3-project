@@ -95,26 +95,26 @@ static body_t *make_beaver(double w, double h, vector_t center){
     // body_t *beaver = body_init(beaver_v, 1.0, beaver_color);
     // body_set_centroid(beaver, center);
     // return beaver;
-    ist_t *c = list_init(4, free);
-   vector_t *v1 = malloc(sizeof(vector_t));
-  *v1 = (vector_t){0 , 0};
-  list_add(c, v1);
+    list_t *c = list_init(4, free);
+    vector_t *v1 = malloc(sizeof(vector_t));
+    *v1 = (vector_t){0 , 0};
+    list_add(c, v1);
 
-  vector_t *v2 = malloc(sizeof(vector_t));
-  *v2 = (vector_t){w, 0};
-  list_add(c, v2);
+    vector_t *v2 = malloc(sizeof(vector_t));
+    *v2 = (vector_t){w, 0};
+    list_add(c, v2);
 
-  vector_t *v3 = malloc(sizeof(vector_t));
-  *v3 = (vector_t){w, h};
-  list_add(c, v3);
+    vector_t *v3 = malloc(sizeof(vector_t));
+    *v3 = (vector_t){w, h};
+    list_add(c, v3);
 
-  vector_t *v4 = malloc(sizeof(vector_t));
-  *v4 = (vector_t){0, h};
-  list_add(c, v4);
-  body_t *seeker = body_init(c, 6, beaver_color);
-  body_set_centroid(seeker, center);
-  return seeker;
-}
+    vector_t *v4 = malloc(sizeof(vector_t));
+    *v4 = (vector_t){0, h};
+    list_add(c, v4);
+    body_t *seeker = body_init(c, 6, beaver_color);
+    body_set_centroid(seeker, center);
+    return seeker;
+    }
 
 /**
  * Initialize and draw the Maze Grid.
