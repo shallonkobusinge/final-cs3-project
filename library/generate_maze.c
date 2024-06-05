@@ -256,8 +256,6 @@ bool generate_maze(state_t *state, double dt)
 {
     sdl_on_key((key_handler_t)on_key);
 
-    printf("Page: %d\n", state->page);
-
     init_grid(state);
 
     // sdl_show();
