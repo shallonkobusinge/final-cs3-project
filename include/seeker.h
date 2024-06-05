@@ -10,7 +10,7 @@
 
 typedef struct seeker seeker_t;
 
-void seeker_init(state_t *state);
+seeker_t *seeker_init(state_t *state);
 
 body_t *make_seeker(double width, double height, vector_t center);
 
@@ -33,5 +33,7 @@ void render_seeker_bodies(state_t *state);
  * adjacent cell 
 */
 void random_move_seeker (body_t *seeker);
+
+list_t *body_asset_init(state_t *state);
 
 #endif // #ifndef __SEEKER_H__

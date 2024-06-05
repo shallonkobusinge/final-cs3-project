@@ -42,12 +42,11 @@ state_t *emscripten_init()
     state_t *state = malloc(sizeof(state_t));
     state->scene = scene_init();
     state->maze_generated = false;
-    state->body_assets = NULL;
     // state->sound_effect = load_game_sounds();
-    // state->seeker = seeker_init(state);
+    state->seeker = seeker_init(state);
+    state->body_assets = body_asset_init(state);
     // add_new_seeker(state, false);
     state->page = 1;
-    seeker_init(state);
     // game_sound(state->sound_effect);
 
     return state;
