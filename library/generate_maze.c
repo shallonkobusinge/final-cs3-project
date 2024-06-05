@@ -181,7 +181,16 @@ static void init_maze()
 
 void on_key(char key, key_event_type_t type, double held_time, state_t *state)
 {
-    body_t *beaver = scene_get_body(state->scene, 0);
+    body_t *beaver;
+    for(size_t i = 0; i < list_size(state->body_assets); i++){
+        body_t *current = scene_get_body(state->scene, i);
+        rgb_color_t *color = body_get_color(current);
+        (rgb_color_t){150, 75, 0};
+       if(color->r == 150 && color->g == 75 && color->b == 0) {
+            beaver = current;
+            break;
+       }
+    }
     vector_t translation = (vector_t){0, 0};
     if (type == KEY_PRESSED && key != KEY_RELEASED)
     {
