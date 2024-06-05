@@ -49,7 +49,7 @@ state_t *emscripten_init()
     add_new_seeker(state, false);
     state->page = 1;
     hider_init(state);
-    // game_sound(state->sound_effect);
+    game_sound(state->sound_effect);
 
     return state;
 }
