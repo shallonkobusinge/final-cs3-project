@@ -153,7 +153,6 @@ static size_t get_neighbors(maze_t *maze, size_t x, size_t y, size_t neighbors[]
 
 void on_key(char key, key_event_type_t type, double held_time, state_t *state)
 {
-    printf("Here: %d", state->maze_state->buildings[0].x);
     if (type == KEY_PRESSED)
     {
         switch (key)
