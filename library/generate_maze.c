@@ -123,7 +123,7 @@ static void init_maze(maze_state_t *maze_state)
     {
         for (int j = 0; j < NUM_CELLS; j++)
         {
-            maze_state->adj_matrix[i][j] = true;
+            maze_state->adj_matrix[i][j] = false;
             printf("Adj at (%zu)", maze_state->adj_matrix[i][j]);
         }
     }
@@ -220,19 +220,16 @@ bool generate_maze(maze_state_t *maze_state)
 {
     sdl_on_key((key_handler_t)on_key);
 
-    state_t *state = malloc(sizeof(state_t));
-    // printf("Page: %d\n", state->page);
-
     init_grid(maze_state);
 
-    // cell_t *cell = malloc(sizeof(cell_t));
-    // cell->x = 1;
-    // cell->y = 1;
-    // visited[cell->x][cell->y] = true;
+    cell_t *cell = malloc(sizeof(cell_t));
+    cell->x = 1;
+    cell->y = 1;
+    visited[cell->x][cell->y] = true;
 
-    // push_stack(&maze_state->head, cell);
+    push_stack(&maze_state->head, cell);
 
-    // printf("hano se \n");
+    printf("hano se \n");
     // while (maze_state->head != NULL)
     // {
     //     printf("hano se 1 \n");
