@@ -41,6 +41,19 @@ typedef struct maze_state
 
 } maze_state_t;
 
+typedef struct
+{
+    SDL_Rect box;
+    bool left, top, right, bottom;
+    bool visited, start, end;
+} TCell;
+
+typedef struct
+{
+    int width, height, cell_size;
+    TCell cells[GRID_HEIGHT][GRID_WIDTH];
+} Maze;
+
 const size_t NUM_BUILDINGS = 1;
 static int counting = 0;
 
@@ -231,24 +244,18 @@ bool generate_maze(maze_state_t *maze_state)
 
     while (maze_state->head != NULL)
     {
-        printf("hano se 1 \n");
         cell = pop_stack(&maze_state->head);
-        printf("hano se 2  cell (%zu, %zu)\n", cell->x, cell->y);
 
         cell_t *neighbor = get_neighbor(cell, maze_state->visited);
 
         if (neighbor != NULL)
         {
-            printf("hano se 3 \n");
 
             // push_stack(&maze_state->head, cell);
-            printf("hano se 4 \n");
 
             cell_t *neighbor = get_neighbor(cell, maze_state->visited);
-            printf("hano se 4 \n");
 
             remove_wall(cell, neighbor);
-            printf("hano se 4 \n");
 
             maze_state->visited[neighbor->x][neighbor->y] = true;
             adjacency(cell, neighbor, maze_state->adj_matrix);
@@ -274,6 +281,113 @@ bool generate_maze(maze_state_t *maze_state)
     return false;
 }
 
+void init_mazeS(Maze *maze, int width, int height, int cell_size)
+{
+    maze->width = width;
+    maze->height = height;
+    maze->cell_size = cell_size;
+    for (int y = 0; y < GRID_HEIGHT; ++y)
+    {
+        for (int x = 0; x < GRID_WIDTH; ++x)
+        {
+            maze->cells[y][x] = (TCell){
+                .box = {x * cell_size, y * cell_size, cell_size, cell_size},
+                .left = true,
+                .top = true,
+                .right = true,
+                .bottom = true,
+                .visited = false,
+                .start = false,
+                .end = false};
+        }
+    }
+}
+
+void apply_aldous_broder(Maze *maze)
+{
+    int total_cells = GRID_WIDTH * GRID_HEIGHT;
+    int visited_cells = 1;
+    int x = rand() % GRID_WIDTH;
+    int y = rand() % GRID_HEIGHT;
+    maze->cells[y][x].visited = true;
+
+    while (visited_cells < total_cells)
+    {
+        int direction = rand() % 4;
+        int nx = x, ny = y;
+
+        switch (direction)
+        {
+        case 0:
+            if (y > 0)
+                ny--;
+            break; // Up
+        case 1:
+            if (x < W - 1)
+                nx++;
+            break; // Right
+        case 2:
+            if (y < H - 1)
+                ny++;
+            break; // Down
+        case 3:
+            if (x > 0)
+                nx--;
+            break; // Left
+        }
+
+        if (maze->cells[ny][nx].visited == false)
+        {
+            maze->cells[ny][nx].visited = true;
+            visited_cells++;
+
+            if (ny == y - 1)
+            {
+                maze->cells[y][x].top = false;
+                maze->cells[ny][nx].bottom = false;
+            }
+            if (nx == x + 1)
+            {
+                maze->cells[y][x].right = false;
+                maze->cells[ny][nx].left = false;
+            }
+            if (ny == y + 1)
+            {
+                maze->cells[y][x].bottom = false;
+                maze->cells[ny][nx].top = false;
+            }
+            if (nx == x - 1)
+            {
+                maze->cells[y][x].left = false;
+                maze->cells[ny][nx].right = false;
+            }
+        }
+
+        x = nx;
+        y = ny;
+    }
+}
+
+void draw_maze(Maze *maze)
+{
+    render_color(255, 255, 255, 255);
+
+    for (int y = 0; y < GRID_HEIGHT; ++y)
+    {
+        for (int x = 0; x < GRID_WIDTH; ++x)
+        {
+            TCell *cell = &maze->cells[y][x];
+            if (cell->top)
+                render_line(cell->box.x, cell->box.y, cell->box.x + cell->box.w, cell->box.y);
+            if (cell->right)
+                render_line(cell->box.x + cell->box.w, cell->box.y, cell->box.x + cell->box.w, cell->box.y + cell->box.h);
+            if (cell->bottom)
+                render_line(cell->box.x, cell->box.y + cell->box.h, cell->box.x + cell->box.w, cell->box.y + cell->box.h);
+            if (cell->left)
+                render_line(cell->box.x, cell->box.y, cell->box.x, cell->box.y + cell->box.h);
+        }
+    }
+}
 maze_state_t *maze_init()
 {
     srand(time(NULL));
