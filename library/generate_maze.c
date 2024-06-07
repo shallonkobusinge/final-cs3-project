@@ -48,10 +48,17 @@ typedef struct
     bool visited, start, end;
 } TCell;
 
+typedef struct Node
+{
+    int x, y;
+    struct Node *next;
+} Node;
+
 typedef struct
 {
     int width, height, cell_size;
-    TCell cells[GRID_HEIGHT][GRID_WIDTH];
+    Cell cells[H][W];
+    Node *stack;
 } Maze;
 
 const size_t NUM_BUILDINGS = 1;
