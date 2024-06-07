@@ -468,7 +468,7 @@ void generation(Maze *maze)
 {
     init_maze_d(&maze, GRID_WIDTH, GRID_HEIGHT, GRID_CELL_SIZE);
 
-    init_grid(maze_state);
+    // init_grid(maze_state);
     int x = 0, y = 0;
     &maze->cells[y][x].visited = true;
     push(&maze->stack, x, y);
