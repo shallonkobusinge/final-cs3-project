@@ -235,50 +235,50 @@ bool generate_maze(maze_state_t *maze_state)
         cell = pop_stack(&maze_state->head);
         printf("hano se 2  cell (%zu, %zu)\n", cell->x, cell->y);
 
-        // if (get_neighbor(cell, maze_state->visited) != NULL)
-        // {
-        //     printf("hano se 3 \n");
+        if (get_neighbor(cell, maze_state->visited) != NULL)
+        {
+            //     printf("hano se 3 \n");
 
-        //     push_stack(&maze_state->head, cell);
-        //     printf("hano se 4 \n");
+            //     push_stack(&maze_state->head, cell);
+            //     printf("hano se 4 \n");
 
-        //     cell_t *neighbor = get_neighbor(cell, maze_state->visited);
-        //     printf("hano se 4 \n");
+            //     cell_t *neighbor = get_neighbor(cell, maze_state->visited);
+            //     printf("hano se 4 \n");
 
-        //     remove_wall(cell, neighbor);
-        //     printf("hano se 4 \n");
+            //     remove_wall(cell, neighbor);
+            //     printf("hano se 4 \n");
 
-        //     maze_state->visited[neighbor->x][neighbor->y] = true;
-        //     adjacency(cell, neighbor, maze_state->adj_matrix);
-        //     push_stack(&maze_state->head, neighbor);
-        // }
+            //     maze_state->visited[neighbor->x][neighbor->y] = true;
+            //     adjacency(cell, neighbor, maze_state->adj_matrix);
+            //     push_stack(&maze_state->head, neighbor);
+            // }
+        }
+
+        return false;
     }
-
-    return false;
-}
-maze_state_t *maze_init()
-{
-    srand(time(NULL));
-
-    maze_state_t *maze_state = malloc(sizeof(maze_state_t) + (sizeof(cell_t) * NUM_BUILDINGS));
-    maze_state->head = NULL;
-
-    for (size_t i = 0; i < NUM_BUILDINGS; i++)
+    maze_state_t *maze_init()
     {
-        size_t rand_x = (rand() % GRID_WIDTH) + 1;
-        size_t rand_y = (rand() % GRID_HEIGHT) + 1;
+        srand(time(NULL));
 
-        maze_state->buildings[i] = (cell_t){
-            .x = ((GRID_WIDTH - rand_x) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-            .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-        };
-        printf("Cell: (%zu, %zu)\n", rand_x, rand_y);
+        maze_state_t *maze_state = malloc(sizeof(maze_state_t) + (sizeof(cell_t) * NUM_BUILDINGS));
+        maze_state->head = NULL;
+
+        for (size_t i = 0; i < NUM_BUILDINGS; i++)
+        {
+            size_t rand_x = (rand() % GRID_WIDTH) + 1;
+            size_t rand_y = (rand() % GRID_HEIGHT) + 1;
+
+            maze_state->buildings[i] = (cell_t){
+                .x = ((GRID_WIDTH - rand_x) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+                .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+            };
+            printf("Cell: (%zu, %zu)\n", rand_x, rand_y);
+        }
+        printf("aha ni sawa\n");
+        init_maze(maze_state);
+
+        printf("Visited sihit: %d\n", maze_state->adj_matrix[2][1]);
+        printf("byapfuye\n");
+
+        return maze_state;
     }
-    printf("aha ni sawa\n");
-    init_maze(maze_state);
-
-    printf("Visited sihit: %d\n", maze_state->adj_matrix[2][1]);
-    printf("byapfuye\n");
-
-    return maze_state;
-}
