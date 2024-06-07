@@ -29,6 +29,7 @@ typedef struct state
     size_t page;
     bool maze_generated;
     int counter;
+    cell_t random_cell;
     stack_t *head;
 } state_t;
 
@@ -61,11 +62,13 @@ static size_t find_min(size_t a, size_t b)
 /**
  * Initialize and draw the Maze Grid.
  */
-static void init_grid()
+static void init_grid(state_t *state)
 {
     size_t random_cell_w = (rand() % 24) + 1;
     size_t rand_cell_h = (rand() % 11) + 1;
     printf("Random cell (%zu, %zu)\n", random_cell_w, rand_cell_h);
+
+    state->random_cell = (cell_t){random_cell_w, rand_cell_h};
 
     cell_t buildings[] = {
         {
@@ -73,8 +76,8 @@ static void init_grid()
             .y = ((GRID_HEIGHT - 3) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
         },
         {
-            .x = ((GRID_WIDTH - (rand() % 24) + 1) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-            .y = ((GRID_HEIGHT - (rand() % 11) + 1) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+            .x = ((GRID_WIDTH - state->random_cell.x) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+            .y = ((GRID_HEIGHT - state->random_cell.y) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
         },
         {
             .x = ((GRID_WIDTH - 10) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
@@ -235,9 +238,10 @@ bool generate_maze(state_t *state)
 {
     sdl_on_key((key_handler_t)on_key);
 
+    state_t *state = malloc(sizeof(state_t));
     // printf("Page: %d\n", state->page);
 
-    init_grid();
+    init_grid(state);
     // init_maze();
 
     // cell_t *cell = malloc(sizeof(cell_t));
