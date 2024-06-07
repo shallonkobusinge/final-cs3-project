@@ -105,6 +105,7 @@ static void init_grid()
         render_color((rgb_color_t){241, 108, 45});
         render_rect(&cell);
     }
+    SDL_Delay(30);
 }
 
 /**
@@ -226,7 +227,7 @@ void remove_wall(cell_t *cell, cell_t *neighbor)
                     (x - 1) * GRID_CELL_SIZE,
                     (cell->y - 1) * GRID_CELL_SIZE + GRID_CELL_SIZE);
     }
-    // printf("reka turebe\n");
+    // printf("reka t≈urebe\n");
     SDL_Delay(30);
 }
 
