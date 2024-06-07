@@ -167,6 +167,7 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
         }
         case RIGHT_ARROW:
         {
+            printf("Printing arrow: %d\n", state->maze_state->hider.x);
             if (state->maze_state->hider.x + GRID_CELL_SIZE < MAZE_WINDOW_WIDTH)
             {
                 state->maze_state->hider.x += GRID_CELL_SIZE;
@@ -263,6 +264,7 @@ bool generate_maze(maze_state_t *maze_state)
 
     init_grid(maze_state);
     // draw_maze(&maze_state->maze);
+    return false;
 }
 
 void buildings_init(maze_state_t *maze_state)
