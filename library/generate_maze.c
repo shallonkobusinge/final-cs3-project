@@ -464,9 +464,8 @@ void draw_maze(Maze *maze)
     }
 }
 
-void generation(maze_state_t *maze_state)
+void generation(Maze *maze)
 {
-    Maze maze;
     init_maze_d(&maze, GRID_WIDTH, GRID_HEIGHT, GRID_CELL_SIZE);
 
     init_grid(maze_state);
