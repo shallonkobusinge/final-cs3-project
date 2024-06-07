@@ -158,9 +158,9 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
         {
         case LEFT_ARROW:
         {
-            if (state->maze_state->hider.x - GRID_CELL_SIZE >= 0)
+            if (state->maze_state->hider->x - GRID_CELL_SIZE >= 0)
             {
-                state->maze_state->hider.x -= GRID_CELL_SIZE;
+                state->maze_state->hider->x -= GRID_CELL_SIZE;
                 render_rect(&state->maze_state->hider);
             }
             break;
@@ -168,18 +168,18 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
         case RIGHT_ARROW:
         {
             printf("Printing arrow: %d\n", state->maze_state->hider->x);
-            if (state->maze_state->hider.x + GRID_CELL_SIZE < MAZE_WINDOW_WIDTH)
+            if (state->maze_state->hider->x + GRID_CELL_SIZE < MAZE_WINDOW_WIDTH)
             {
-                state->maze_state->hider.x += GRID_CELL_SIZE;
+                state->maze_state->hider->x += GRID_CELL_SIZE;
                 render_rect(&state->maze_state->hider);
             }
             break;
         }
         case UP_ARROW:
         {
-            if (state->maze_state->hider.y - GRID_CELL_SIZE >= 0)
+            if (state->maze_state->hider->y - GRID_CELL_SIZE >= 0)
             {
-                state->maze_state->hider.y -= GRID_CELL_SIZE;
+                state->maze_state->hider->y -= GRID_CELL_SIZE;
                 render_rect(&state->maze_state->hider);
             }
 
@@ -187,9 +187,9 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
         }
         case DOWN_ARROW:
         {
-            if (state->maze_state->hider.y + GRID_CELL_SIZE < MAZE_WINDOW_HEIGHT)
+            if (state->maze_state->hider->y + GRID_CELL_SIZE < MAZE_WINDOW_HEIGHT)
             {
-                state->maze_state->hider.y += GRID_CELL_SIZE;
+                state->maze_state->hider->y += GRID_CELL_SIZE;
                 render_rect(&state->maze_state->hider);
             }
 
