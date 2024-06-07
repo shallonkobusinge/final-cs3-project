@@ -124,7 +124,7 @@ static void init_maze(maze_state_t *maze_state)
         for (int j = 0; j < NUM_CELLS; j++)
         {
             maze_state->adj_matrix[i][j] = true;
-            printf("Adj at (%zu)", maze_state->adj_matrix[i][j], );
+            printf("Adj at (%zu)", maze_state->adj_matrix[i][j]);
         }
     }
 }
