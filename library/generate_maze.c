@@ -269,33 +269,34 @@ bool generate_maze(maze_state_t *maze_state)
             //     free(cell); // Free the cell if no unvisited neighbors
             // }
         }
-
-        return false;
     }
 
-    maze_state_t *maze_init()
+    return false;
+}
+
+maze_state_t *maze_init()
+{
+    srand(time(NULL));
+
+    maze_state_t *maze_state = malloc(sizeof(maze_state_t) + (sizeof(cell_t) * NUM_BUILDINGS));
+    maze_state->head = NULL;
+
+    for (size_t i = 0; i < NUM_BUILDINGS; i++)
     {
-        srand(time(NULL));
+        size_t rand_x = (rand() % GRID_WIDTH) + 1;
+        size_t rand_y = (rand() % GRID_HEIGHT) + 1;
 
-        maze_state_t *maze_state = malloc(sizeof(maze_state_t) + (sizeof(cell_t) * NUM_BUILDINGS));
-        maze_state->head = NULL;
-
-        for (size_t i = 0; i < NUM_BUILDINGS; i++)
-        {
-            size_t rand_x = (rand() % GRID_WIDTH) + 1;
-            size_t rand_y = (rand() % GRID_HEIGHT) + 1;
-
-            maze_state->buildings[i] = (cell_t){
-                .x = ((GRID_WIDTH - rand_x) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-                .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-            };
-            printf("Cell: (%zu, %zu)\n", rand_x, rand_y);
-        }
-        printf("aha ni sawa\n");
-        init_maze(maze_state);
-
-        printf("Visited sihit: %d\n", maze_state->adj_matrix[2][1]);
-        printf("byapfuye\n");
-
-        return maze_state;
+        maze_state->buildings[i] = (cell_t){
+            .x = ((GRID_WIDTH - rand_x) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+            .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+        };
+        printf("Cell: (%zu, %zu)\n", rand_x, rand_y);
     }
+    printf("aha ni sawa\n");
+    init_maze(maze_state);
+
+    printf("Visited sihit: %d\n", maze_state->adj_matrix[2][1]);
+    printf("byapfuye\n");
+
+    return maze_state;
+}
