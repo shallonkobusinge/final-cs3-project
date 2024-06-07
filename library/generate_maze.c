@@ -281,7 +281,7 @@ maze_state_t *maze_init()
     // init_maze(maze_state);
     printf("aha ni sawa\n");
 
-    printf("Visited sihit: %d\n", maze_state->visited[2][1]);
+    printf("Visited sihit: %d\n", maze_state->adj_matrix[2][1]);
     printf("byapfuye\n");
 
     return maze_state;
