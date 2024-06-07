@@ -17,11 +17,11 @@ const size_t MAZE_WINDOW_HEIGHT = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
 
 const size_t NUM_BUILDINGS = 2;
 
-typedef struct Node
+typedef struct NODE
 {
     size_t x, y;
-    struct Node *next;
-} Node;
+    struct node_t *next;
+} node_t;
 
 typedef struct state
 {
@@ -32,7 +32,7 @@ typedef struct maze
 {
     size_t width, height, cell_size;
     cell_t cells[GRID_HEIGHT][GRID_WIDTH];
-    Node *stack;
+    node_t *stack;
 } maze_t;
 
 typedef struct building
@@ -293,7 +293,7 @@ maze_state_t *maze_init()
     maze_state->hider = (SDL_Rect){(GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
 
     buildings_init(maze_state);
-    init_maze(&maze_state->maze);
+    // init_maze(&maze_state->maze);
     // build_maze(&maze_state->maze);
 
     return maze_state;
