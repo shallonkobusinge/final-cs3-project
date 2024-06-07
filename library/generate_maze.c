@@ -254,6 +254,8 @@ maze_state_t *build_maze()
 {
     maze_state_t *maze_state = malloc(sizeof(maze_state_t));
 
+    printf("nageze hano 1\n");
+
     for (size_t i = 0; i < NUM_BUILDINGS; i++)
     {
         maze_state->buildings[i] = (cell_t){
