@@ -12,8 +12,8 @@ const size_t GRID_HEIGHT = 12;
 const size_t NUM_CELLS = GRID_WIDTH * GRID_HEIGHT;
 const int GRID_CELL_SIZE = 40;
 
-const size_t WINDOW_WIDTH = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
-const size_t WINDOW_HEIGHT = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
+const size_t MAZE_WINDOW_WIDTH = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
+const size_t MAZE_WINDOW_HEIGHT = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
 
 const size_t NUM_BUILDINGS = 2;
 
@@ -55,13 +55,13 @@ static void init_grid(maze_state_t *maze_state)
 {
     render_color((rgb_color_t){230, 230, 230});
 
-    for (size_t x = 0; x < WINDOW_WIDTH; x += GRID_CELL_SIZE)
+    for (size_t x = 0; x < MAZE_WINDOW_WIDTH; x += GRID_CELL_SIZE)
     {
-        render_line(x, 0, x, WINDOW_HEIGHT);
+        render_line(x, 0, x, MAZE_WINDOW_HEIGHT);
     }
-    for (size_t y = 0; y < WINDOW_HEIGHT; y += GRID_CELL_SIZE)
+    for (size_t y = 0; y < MAZE_WINDOW_HEIGHT; y += GRID_CELL_SIZE)
     {
-        render_line(0, y, WINDOW_WIDTH, y);
+        render_line(0, y, MAZE_WINDOW_WIDTH, y);
     }
 
     render_color((rgb_color_t){50, 129, 110});
@@ -173,7 +173,7 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
         }
         case RIGHT_ARROW:
         {
-            if (state->maze_state->hider.x + GRID_CELL_SIZE < WINDOW_WIDTH)
+            if (state->maze_state->hider.x + GRID_CELL_SIZE < MAZE_WINDOW_WIDTH)
             {
                 state->maze_state->hider.x += GRID_CELL_SIZE;
                 render_rect(&state->maze_state->hider);
@@ -192,7 +192,7 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
         }
         case DOWN_ARROW:
         {
-            if (state->maze_state->hider.y + GRID_CELL_SIZE < WINDOW_HEIGHT)
+            if (state->maze_state->hider.y + GRID_CELL_SIZE < MAZE_WINDOW_HEIGHT)
             {
                 state->maze_state->hider.y += GRID_CELL_SIZE;
                 render_rect(&state->maze_state->hider);
