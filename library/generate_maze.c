@@ -263,7 +263,7 @@ void apply_aldous_broder(Maze *maze)
 
     while (visited_cells < total_cells)
     {
-        int direction = rand() % 4;
+        int direction = 3;
         int nx = x, ny = y;
 
         switch (direction)
