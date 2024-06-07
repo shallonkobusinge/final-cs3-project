@@ -35,24 +35,6 @@ typedef struct state
 const size_t NUM_BUILDINGS = 4;
 static int counting = 0;
 
-cell_t buildings[] = {
-    {
-        .x = ((GRID_WIDTH - 3) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-        .y = ((GRID_HEIGHT - 3) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-    },
-    {
-        .x = ((GRID_WIDTH - (rand() % 24) + 1) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-        .y = ((GRID_HEIGHT - (rand() % 11) + 1) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-    },
-    {
-        .x = ((GRID_WIDTH - 10) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-        .y = ((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-    },
-    {
-        .x = ((GRID_WIDTH - 24) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-        .y = ((GRID_HEIGHT - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-    },
-};
 /**
  * Finds max between two numbers
  * @param a first number
@@ -81,6 +63,25 @@ static size_t find_min(size_t a, size_t b)
  */
 static void init_grid()
 {
+
+    cell_t buildings[] = {
+        {
+            .x = ((GRID_WIDTH - 3) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+            .y = ((GRID_HEIGHT - 3) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+        },
+        {
+            .x = ((GRID_WIDTH - (rand() % 24) + 1) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+            .y = ((GRID_HEIGHT - (rand() % 11) + 1) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+        },
+        {
+            .x = ((GRID_WIDTH - 10) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+            .y = ((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+        },
+        {
+            .x = ((GRID_WIDTH - 24) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+            .y = ((GRID_HEIGHT - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+        },
+    };
     render_color((rgb_color_t){230, 230, 230});
 
     for (int x = 0; x < window_width; x += GRID_CELL_SIZE)
