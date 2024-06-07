@@ -501,6 +501,16 @@ void generation(Maze *maze)
     draw_maze(&maze);
 }
 
+bool generate_maze(maze_state_t *maze_state)
+{
+    sdl_on_key((key_handler_t)on_key);
+
+    init_grid(maze_state);
+
+    Maze maze;
+    init_maze_d(&maze, GRID_WIDTH, GRID_HEIGHT, GRID_CELL_SIZE);
+    generation(&maze);
+}
 // bool generate_maze(maze_state_t *maze_state)
 // {
 //     sdl_on_key((key_handler_t)on_key);
