@@ -5,10 +5,10 @@
 #include <string.h>
 #include <time.h>
 
-#include "landing_page.h"
-#include "generate_maze.h"
 #include "asset_cache.h"
 #include "sdl_wrapper.h"
+#include "landing_page.h"
+#include "maze.h"
 
 const vector_t MIN = {0, 0};
 const vector_t MAX = {1000, 500};
@@ -18,22 +18,27 @@ const vector_t SDL_MIN = {0, 0};
 const vector_t SDL_MAX = {1000, 500};
 const vector_t SDL_CENTER = {500, 250};
 
+typedef struct maze_state maze_state_t;
+typedef struct landing_page_state landing_page_state_t;
+
 struct state
 {
     scene_t *scene;
     size_t page;
+    maze_state_t *maze_state;
+    landing_page_state_t *landing_page_state;
 };
 
 state_t *emscripten_init()
 {
     asset_cache_init();
     sdl_init(SDL_MIN, SDL_MAX);
+
     state_t *state = malloc(sizeof(state_t));
     state->scene = scene_init();
-    // build_landing_page();
-
-    state->page = 0;
-    // sdl_show();
+    state->page = 2;
+    state->maze_state = maze_init();
+    state->landing_page_state = landing_page_init();
 
     return state;
 }
@@ -41,13 +46,14 @@ state_t *emscripten_init()
 bool emscripten_main(state_t *state)
 {
     sdl_clear();
-    if (state->page == 0)
+
+    if (state->page == 1)
     {
-        build_landing_page();
+        show_landing_page(state->landing_page_state);
     }
-    else if (state->page == 1)
+    else if (state->page == 2)
     {
-        init_grid();
+        show_maze(state->maze_state);
     }
 
     sdl_show();
