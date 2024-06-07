@@ -277,7 +277,8 @@ maze_state_t *maze_init()
         };
         printf("Cell: (%zu, %zu)\n", rand_x, rand_y);
     }
-    init_maze(maze_state);
+    // init_maze(maze_state);
+    printf("Visited sihit: %d", maze_state->visited[2][0]);
 
     return maze_state;
 }
