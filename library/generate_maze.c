@@ -224,38 +224,38 @@ bool generate_maze(maze_state_t *maze_state)
 
     init_grid(maze_state);
 
-    cell_t *cell = malloc(sizeof(cell_t));
-    cell->x = 1;
-    cell->y = 1;
-    visited[cell->x][cell->y] = true;
+    // cell_t *cell = malloc(sizeof(cell_t));
+    // cell->x = 1;
+    // cell->y = 1;
+    // visited[cell->x][cell->y] = true;
 
-    push_stack(&maze_state->head, cell);
+    // push_stack(&maze_state->head, cell);
 
-    printf("hano se \n");
-    while (maze_state->head != NULL)
-    {
-        printf("hano se 1 \n");
-        cell = pop_stack(&maze_state->head);
-        printf("hano se 2 \n");
+    // printf("hano se \n");
+    // while (maze_state->head != NULL)
+    // {
+    //     printf("hano se 1 \n");
+    //     cell = pop_stack(&maze_state->head);
+    //     printf("hano se 2 \n");
 
-        if (get_neighbor(cell, maze_state->visited) != NULL)
-        {
-            printf("hano se 3 \n");
+    //     if (get_neighbor(cell, maze_state->visited) != NULL)
+    //     {
+    //         printf("hano se 3 \n");
 
-            push_stack(&maze_state->head, cell);
-            printf("hano se 4 \n");
+    //         push_stack(&maze_state->head, cell);
+    //         printf("hano se 4 \n");
 
-            cell_t *neighbor = get_neighbor(cell, maze_state->visited);
-            printf("hano se 4 \n");
+    //         cell_t *neighbor = get_neighbor(cell, maze_state->visited);
+    //         printf("hano se 4 \n");
 
-            remove_wall(cell, neighbor);
-            printf("hano se 4 \n");
+    //         remove_wall(cell, neighbor);
+    //         printf("hano se 4 \n");
 
-            maze_state->visited[neighbor->x][neighbor->y] = true;
-            adjacency(cell, neighbor, maze_state->adj_matrix);
-            push_stack(&maze_state->head, neighbor);
-        }
-    }
+    //         maze_state->visited[neighbor->x][neighbor->y] = true;
+    //         adjacency(cell, neighbor, maze_state->adj_matrix);
+    //         push_stack(&maze_state->head, neighbor);
+    //     }
+    // }
 
     return false;
 }
