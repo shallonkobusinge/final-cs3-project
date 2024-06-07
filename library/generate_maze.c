@@ -242,15 +242,15 @@ bool generate_maze(maze_state_t *maze_state)
             // push_stack(&maze_state->head, cell);
             printf("hano se 4 \n");
 
-            //     cell_t *neighbor = get_neighbor(cell, maze_state->visited);
-            //     printf("hano se 4 \n");
+            cell_t *neighbor = get_neighbor(cell, maze_state->visited);
+            printf("hano se 4 \n");
 
-            //     remove_wall(cell, neighbor);
-            //     printf("hano se 4 \n");
+            remove_wall(cell, neighbor);
+            printf("hano se 4 \n");
 
-            //     maze_state->visited[neighbor->x][neighbor->y] = true;
-            //     adjacency(cell, neighbor, maze_state->adj_matrix);
-            //     push_stack(&maze_state->head, neighbor);
+            maze_state->visited[neighbor->x][neighbor->y] = true;
+            adjacency(cell, neighbor, maze_state->adj_matrix);
+            push_stack(&maze_state->head, neighbor);
             // }
         }
     }
