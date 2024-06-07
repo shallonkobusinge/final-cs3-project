@@ -235,23 +235,38 @@ bool generate_maze(maze_state_t *maze_state)
         cell = pop_stack(&maze_state->head);
         printf("hano se 2  cell (%zu, %zu)\n", cell->x, cell->y);
 
-        if (get_neighbor(cell, maze_state->visited) != NULL)
+        cell_t *neighbor = get_neighbor(cell, maze_state->visited);
+
+        // if (get_neighbor(cell, maze_state->visited) != NULL)
+        // {
+        //     printf("hano se 3 \n");
+
+        //     // push_stack(&maze_state->head, cell);
+        //     printf("hano se 4 \n");
+
+        //     cell_t *neighbor = get_neighbor(cell, maze_state->visited);
+        //     printf("hano se 4 \n");
+
+        //     remove_wall(cell, neighbor);
+        //     printf("hano se 4 \n");
+
+        //     maze_state->visited[neighbor->x][neighbor->y] = true;
+        //     adjacency(cell, neighbor, maze_state->adj_matrix);
+        //     push_stack(&maze_state->head, neighbor);
+        //     // }
+        // }
+
+        if (neighbor != NULL)
         {
-            printf("hano se 3 \n");
-
-            // push_stack(&maze_state->head, cell);
-            printf("hano se 4 \n");
-
-            cell_t *neighbor = get_neighbor(cell, maze_state->visited);
-            printf("hano se 4 \n");
-
+            push_stack(&maze_state->head, cell); // Push the current cell back
             remove_wall(cell, neighbor);
-            printf("hano se 4 \n");
-
             maze_state->visited[neighbor->x][neighbor->y] = true;
             adjacency(cell, neighbor, maze_state->adj_matrix);
             push_stack(&maze_state->head, neighbor);
-            // }
+        }
+        else
+        {
+            free(cell); // Free the cell if no unvisited neighbors
         }
     }
 
