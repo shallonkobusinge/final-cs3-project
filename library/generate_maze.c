@@ -130,7 +130,7 @@ static void remove_wall(cell_t *current, cell_t *next, size_t direction)
     }
 }
 
-static size_t get_neighbors(Maze *maze, size_t x, size_t y, size_t neighbors[][2])
+static size_t get_neighbors(maze_t *maze, size_t x, size_t y, size_t neighbors[][2])
 {
     size_t count = 0;
 
