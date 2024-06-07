@@ -257,12 +257,14 @@ maze_state_t *build_maze()
 
     for (size_t i = 0; i < NUM_BUILDINGS; i++)
     {
+        int rand_x = (rand() % 24) + 1;
+        int rand_y = (rand() % 11) + 1;
 
         maze_state->buildings[i] = (cell_t){
-            .x = ((GRID_WIDTH - (rand() % 24) + 1) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-            .y = ((GRID_HEIGHT - (rand() % 11) + 1) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+            .x = (GRID_WIDTH - rand_x * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+            .y = (GRID_HEIGHT - rand_y * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
         };
-        printf("Cell: (%zu, %zu)\n", maze_state->buildings[i].x, maze_state->buildings[i].y);
+        printf("Cell: (%zu, %zu)\n", rand_x, rand_y);
     }
 
     return maze_state;
