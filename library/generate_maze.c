@@ -165,27 +165,27 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
         {
         case LEFT_ARROW:
         {
-            if (hider_cell.x - GRID_CELL_SIZE >= 0)
+            if (state->maze_state->hider.x - GRID_CELL_SIZE >= 0)
             {
-                hider_cell.x -= GRID_CELL_SIZE;
+                state->maze_state->hider.x -= GRID_CELL_SIZE;
                 render_rect(&state->maze_state->hider);
             }
             break;
         }
         case RIGHT_ARROW:
         {
-            if (hider_cell.x + GRID_CELL_SIZE < WINDOW_WIDTH)
+            if (state->maze_state->hider.x + GRID_CELL_SIZE < WINDOW_WIDTH)
             {
-                hider_cell.x += GRID_CELL_SIZE;
+                state->maze_state->hider.x += GRID_CELL_SIZE;
                 render_rect(&state->maze_state->hider);
             }
             break;
         }
         case UP_ARROW:
         {
-            if (hider_cell.y - GRID_CELL_SIZE >= 0)
+            if (state->maze_state->hider.y - GRID_CELL_SIZE >= 0)
             {
-                hider_cell.y -= GRID_CELL_SIZE;
+                state->maze_state->hider.y -= GRID_CELL_SIZE;
                 render_rect(&state->maze_state->hider);
             }
 
@@ -193,9 +193,9 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
         }
         case DOWN_ARROW:
         {
-            if (hider_cell.y + GRID_CELL_SIZE < WINDOW_HEIGHT)
+            if (state->maze_state->hider.y + GRID_CELL_SIZE < WINDOW_HEIGHT)
             {
-                hider_cell.y += GRID_CELL_SIZE;
+                state->maze_state->hider.y += GRID_CELL_SIZE;
                 render_rect(&state->maze_state->hider);
             }
 
