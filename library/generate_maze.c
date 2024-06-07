@@ -197,13 +197,6 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
         }
         }
     }
-    else if (type == KEY_RELEASED)
-    {
-        if (key == LEFT_ARROW || key == RIGHT_ARROW)
-        {
-            printf("NOTHING \n");
-        }
-    }
 }
 
 static void draw_maze(maze_t *maze)
