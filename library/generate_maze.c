@@ -34,10 +34,10 @@ typedef struct state
 
 typedef struct maze_state
 {
-    cell_t buildings[];
     stack_t *head;
     bool visited[GRID_WIDTH + 2][GRID_HEIGHT + 2];
     bool adj_matrix[NUM_CELLS][NUM_CELLS];
+    cell_t buildings[];
 
 } maze_state_t;
 
