@@ -33,6 +33,7 @@ typedef struct state
 } state_t;
 
 const size_t NUM_BUILDINGS = 4;
+static int counting = 0;
 
 cell_t buildings[] = {
     {
@@ -80,6 +81,8 @@ static size_t find_min(size_t a, size_t b)
  */
 static void init_grid()
 {
+    counting++;
+    printf("Rendered times: %d", counting);
     render_color((rgb_color_t){230, 230, 230});
 
     for (int x = 0; x < window_width; x += GRID_CELL_SIZE)
