@@ -9,6 +9,11 @@ const size_t LANDING_PAGE_IMG_ELEMENTS = 4;
 const size_t LANDING_PAGE_TEXT_ELEMENTS = 7;
 const size_t LANDING_PAGE_BTN_ELEMENTS = 1;
 
+typedef struct state state_t
+{
+    size_t page;
+}
+
 typedef struct text_element
 {
     const char *text;
@@ -42,6 +47,7 @@ typedef struct landing_page_state
  */
 static void load_game_screen(state_t *state)
 {
+    state->page = 2;
     printf("Next screen\n");
 }
 
