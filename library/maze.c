@@ -24,7 +24,7 @@ typedef struct state state_t;
 typedef struct maze
 {
     size_t width, height, cell_size;
-    cell_t cells[GRID_HEIGHT][GRID_WIDTH];
+    cell_t **cells;
     node_t *stack;
 } maze_t;
 
@@ -234,6 +234,17 @@ static void draw_maze(maze_t *maze)
                 render_line(cell->box.x, cell->box.y, cell->box.x, cell->box.y + cell->box.h);
         }
     }
+}
+
+maze_t *create_maze()
+{
+    maze_t *maze = malloc(sizeof(maze_t));
+    maze->cells = malloc(GRID_HEIGHT * sizeof(cell_t *));
+    for (size_t i = 0; i < GRID_HEIGHT; i++)
+    {
+        maze->cells[i] = malloc(GRID_WIDTH * sizeof(cell_t));
+    }
+    return maze;
 }
 
 /**
