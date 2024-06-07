@@ -22,6 +22,26 @@ cell_t *parent[GRID_WIDTH][GRID_HEIGHT];
 
 SDL_Rect hider_cell = (SDL_Rect){(GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
 
+typedef struct
+{
+    SDL_Rect box;
+    bool left, top, right, bottom;
+    bool visited, start, end;
+} TCell;
+
+typedef struct Node
+{
+    int x, y;
+    struct Node *next;
+} Node;
+
+typedef struct
+{
+    int width, height, cell_size;
+    TCell cells[GRID_HEIGHT][GRID_WIDTH];
+    Node *stack;
+} Maze;
+
 typedef struct state
 {
     scene_t *scene;
@@ -105,6 +125,104 @@ static void init_grid(maze_state_t *state)
         render_color((rgb_color_t){241, 108, 45});
         render_rect(&cell);
     }
+}
+
+void init_maze_d(Maze *maze, int width, int height, int cell_size)
+{
+    maze->width = width;
+    maze->height = height;
+    maze->cell_size = cell_size;
+    maze->stack = NULL;
+
+    for (int y = 0; y < GRID_HEIGHT; ++y)
+    {
+        for (int x = 0; x < GRID_WIDTH; ++x)
+        {
+            maze->cells[y][x] = (TCell){
+                .box = {x * cell_size, y * cell_size, cell_size, cell_size},
+                .left = true,
+                .top = true,
+                .right = true,
+                .bottom = true,
+                .visited = false,
+                .start = false,
+                .end = false};
+        }
+    }
+}
+
+void push(Node **stack, int x, int y)
+{
+    Node *node = (Node *)malloc(sizeof(Node));
+    node->x = x;
+    node->y = y;
+    node->next = *stack;
+    *stack = node;
+}
+
+void pop(Node **stack, int *x, int *y)
+{
+    Node *top = *stack;
+    *x = top->x;
+    *y = top->y;
+    *stack = top->next;
+    free(top);
+}
+
+bool is_empty(Node *stack)
+{
+    return stack == NULL;
+}
+
+void remove_wall(TCell *current, TCell *next, int direction)
+{
+    switch (direction)
+    {
+    case 0:
+        current->top = false;
+        next->bottom = false;
+        break; // Up
+    case 1:
+        current->right = false;
+        next->left = false;
+        break; // Right
+    case 2:
+        current->bottom = false;
+        next->top = false;
+        break; // Down
+    case 3:
+        current->left = false;
+        next->right = false;
+        break; // Left
+    }
+}
+
+int get_neighbors(Maze *maze, int x, int y, int neighbors[][2])
+{
+    int count = 0;
+
+    if (y > 0 && !maze->cells[y - 1][x].visited)
+    {
+        neighbors[count][0] = x;
+        neighbors[count++][1] = y - 1;
+    }
+    if (x < GRID_WIDTH - 1 && !maze->cells[y][x + 1].visited)
+    {
+        neighbors[count][0] = x + 1;
+        neighbors[count++][1] = y;
+    }
+    if (y < GRID_HEIGHT - 1 && !maze->cells[y + 1][x].visited)
+    {
+        neighbors[count][0] = x;
+        neighbors[count++][1] = y + 1;
+    }
+    if (x > 0 && !maze->cells[y][x - 1].visited)
+    {
+        neighbors[count][0] = x - 1;
+        neighbors[count++][1] = y;
+    }
+
+    return count;
 }
 
 /**
@@ -338,63 +456,120 @@ void draw_maze(Maze *maze)
     }
 }
 
-bool generate_maze(maze_state_t *maze_state)
+void generate_maze(maze_state_t *maze_state)
 {
-    sdl_on_key((key_handler_t)on_key);
+    Maze maze;
+    init_maze(&maze, GRID_WIDTH, GRID_HEIGHT, GRID_CELL_SIZE);
 
     init_grid(maze_state);
+    int x = 0, y = 0;
+    maze->cells[y][x].visited = true;
+    push(&maze->stack, x, y);
 
-    cell_t *cell = malloc(sizeof(cell_t));
+    while (!is_empty(maze->stack))
+    {
+        int neighbors[4][2];
+        int count = get_neighbors(maze, x, y, neighbors);
 
-    Maze maze;
-    init_mazeS(&maze, GRID_WIDTH, GRID_HEIGHT, GRID_CELL_SIZE);
-    apply_aldous_broder(&maze);
+        if (count > 0)
+        {
+            int r = rand() % count;
+            int nx = neighbors[r][0];
+            int ny = neighbors[r][1];
+            int direction = (nx == x) ? ((ny > y) ? 2 : 0) : ((nx > x) ? 1 : 3);
 
-    draw_maze(&maze);
-    // cell->x = 1;
-    // cell->y = 1;
-    // maze_state->visited[cell->x][cell->y] = true;
+            remove_wall(&maze->cells[y][x], &maze->cells[ny][nx], direction);
+            maze->cells[ny][nx].visited = true;
+            push(&maze->stack, x, y);
 
-    // push_stack(&maze_state->head, cell);
-
-    // while (maze_state->head != NULL)
-    // {
-    //     cell = pop_stack(&maze_state->head);
-
-    //     cell_t *neighbor = get_neighbor(cell, maze_state->visited);
-
-    //     if (neighbor != NULL)
-    //     {
-
-    //         // push_stack(&maze_state->head, cell);
-
-    //         cell_t *neighbor = get_neighbor(cell, maze_state->visited);
-
-    //         remove_wall(cell, neighbor);
-
-    //         maze_state->visited[neighbor->x][neighbor->y] = true;
-    //         adjacency(cell, neighbor, maze_state->adj_matrix);
-    //         push_stack(&maze_state->head, neighbor);
-    // }
-    // }
-
-    // if (neighbor != NULL)
-    // {
-    //     push_stack(&maze_state->head, cell); // Push the current cell back
-    //     remove_wall(cell, neighbor);
-    //     maze_state->visited[neighbor->x][neighbor->y] = true;
-    //     adjacency(cell, neighbor, maze_state->adj_matrix);
-    //     push_stack(&maze_state->head, neighbor);
-    // }
-    // else
-    // {
-    //     free(cell); // Free the cell if no unvisited neighbors
-    // }
-    // }
-    // }
-
-    return false;
+            x = nx;
+            y = ny;
+        }
+        else
+        {
+            pop(&maze->stack, &x, &y);
+        }
+    }
 }
+
+void draw_maze(Maze *maze)
+{
+    render_color((rgb_color_t){255, 255, 255});
+
+    for (int y = 0; y < GRID_HEIGHT; ++y)
+    {
+        for (int x = 0; x < GRID_WIDTH; ++x)
+        {
+            TCell *cell = &maze->cells[y][x];
+            if (cell->top)
+                render_line(cell->box.x, cell->box.y, cell->box.x + cell->box.w, cell->box.y);
+            if (cell->right)
+                render_line(cell->box.x + cell->box.w, cell->box.y, cell->box.x + cell->box.w, cell->box.y + cell->box.h);
+            if (cell->bottom)
+                render_line(cell->box.x, cell->box.y + cell->box.h, cell->box.x + cell->box.w, cell->box.y + cell->box.h);
+            if (cell->left)
+                render_line(cell->box.x, cell->box.y, cell->box.x, cell->box.y + cell->box.h);
+        }
+    }
+}
+
+// bool generate_maze(maze_state_t *maze_state)
+// {
+//     sdl_on_key((key_handler_t)on_key);
+
+//     init_grid(maze_state);
+
+//     cell_t *cell = malloc(sizeof(cell_t));
+
+//     Maze maze;
+//     init_mazeS(&maze, GRID_WIDTH, GRID_HEIGHT, GRID_CELL_SIZE);
+//     apply_aldous_broder(&maze);
+
+//     draw_maze(&maze);
+// cell->x = 1;
+// cell->y = 1;
+// maze_state->visited[cell->x][cell->y] = true;
+
+// push_stack(&maze_state->head, cell);
+
+// while (maze_state->head != NULL)
+// {
+//     cell = pop_stack(&maze_state->head);
+
+//     cell_t *neighbor = get_neighbor(cell, maze_state->visited);
+
+//     if (neighbor != NULL)
+//     {
+
+//         // push_stack(&maze_state->head, cell);
+
+//         cell_t *neighbor = get_neighbor(cell, maze_state->visited);
+
+//         remove_wall(cell, neighbor);
+
+//         maze_state->visited[neighbor->x][neighbor->y] = true;
+//         adjacency(cell, neighbor, maze_state->adj_matrix);
+//         push_stack(&maze_state->head, neighbor);
+// }
+// }
+
+// if (neighbor != NULL)
+// {
+//     push_stack(&maze_state->head, cell); // Push the current cell back
+//     remove_wall(cell, neighbor);
+//     maze_state->visited[neighbor->x][neighbor->y] = true;
+//     adjacency(cell, neighbor, maze_state->adj_matrix);
+//     push_stack(&maze_state->head, neighbor);
+// }
+// else
+// {
+//     free(cell); // Free the cell if no unvisited neighbors
+// }
+// }
+// }
+
+// return false;
+// }
 
 maze_state_t *maze_init()
 {
