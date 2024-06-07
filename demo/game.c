@@ -46,7 +46,6 @@ state_t *emscripten_init()
     state->page = 1;
 
     state->maze_state = maze_init();
-    generate_maze(state->maze_state);
 
     return state;
 }
@@ -63,6 +62,7 @@ bool emscripten_main(state_t *state)
     {
         if (!state->maze_generated)
         {
+            generate_maze(state->maze_state);
         }
     }
 
