@@ -64,7 +64,7 @@ static void init_grid(maze_state_t *maze_state)
 
     for (size_t i = 0; i < NUM_BUILDINGS; i++)
     {
-        SDL_Rect cell = {state->buildings[i].x, state->buildings[i].y, GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2};
+        SDL_Rect cell = {maze_state->buildings[i].x, maze_state->buildings[i].y, GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2};
         render_color((rgb_color_t){241, 108, 45});
         render_rect(&cell);
     }
