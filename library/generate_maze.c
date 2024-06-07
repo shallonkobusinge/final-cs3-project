@@ -22,26 +22,6 @@ cell_t *parent[GRID_WIDTH][GRID_HEIGHT];
 
 SDL_Rect hider_cell = (SDL_Rect){(GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
 
-typedef struct
-{
-    SDL_Rect box;
-    bool left, top, right, bottom;
-    bool visited, start, end;
-} TCell;
-
-typedef struct Node
-{
-    int x, y;
-    struct Node *next;
-} Node;
-
-typedef struct
-{
-    int width, height, cell_size;
-    TCell cells[GRID_HEIGHT][GRID_WIDTH];
-    Node *stack;
-} Maze;
-
 typedef struct state
 {
     scene_t *scene;
