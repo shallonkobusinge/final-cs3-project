@@ -349,8 +349,6 @@ bool generate_maze(maze_state_t *maze_state)
     init_mazeS(&maze, GRID_WIDTH, GRID_HEIGHT, GRID_CELL_SIZE);
     apply_aldous_broder(&maze);
 
-    sdl_clear();
-
     draw_maze(&maze);
     // cell->x = 1;
     // cell->y = 1;
