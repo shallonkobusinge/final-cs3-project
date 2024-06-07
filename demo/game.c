@@ -45,7 +45,7 @@ state_t *emscripten_init()
     state->maze_generated = false;
     state->page = 1;
 
-    state->maze_state = maze_init();
+    // state->maze_state = maze_init();
 
     return state;
 }
