@@ -41,7 +41,11 @@ state_t *emscripten_init()
     state->maze_generated = false;
 
     state->page = 1;
+    printf("here now\n");
+
     maze_state_t *maze_state = build_maze();
+    printf("here now\n");
+
     state->maze_state = maze_state;
 
     return state;
