@@ -239,6 +239,7 @@ bool generate_maze()
     sdl_on_key((key_handler_t)on_key);
 
     state_t *state = malloc(sizeof(state_t));
+    printf("generating everytime\n");
     // printf("Page: %d\n", state->page);
 
     init_grid(state);
