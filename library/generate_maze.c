@@ -257,8 +257,8 @@ maze_state_t *build_maze()
 
     for (size_t i = 0; i < NUM_BUILDINGS; i++)
     {
-        int rand_x = (rand() % 24) + 1;
-        int rand_y = (rand() % 11) + 1;
+        size_t rand_x = (rand() % 24) + 1;
+        size_t rand_y = (rand() % 11) + 1;
 
         maze_state->buildings[i] = (cell_t){
             .x = (GRID_WIDTH - rand_x * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
