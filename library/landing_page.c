@@ -48,7 +48,7 @@ typedef struct landing_page_state
 static void load_game_screen(state_t *state)
 {
     state->page = 2;
-    printf("Next screen: %d\n", state->page);
+    printf("Next screen: %zu\n", state->page);
 }
 
 btn_element_t btn_elements[] = {
