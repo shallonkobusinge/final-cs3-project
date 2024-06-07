@@ -232,30 +232,30 @@ bool generate_maze(state_t *state)
     printf("Page: %d\n", state->page);
 
     init_grid();
-    init_maze();
+    // init_maze();
 
-    cell_t *cell = malloc(sizeof(cell_t));
-    cell->x = 1;
-    cell->y = 1;
-    visited[cell->x][cell->y] = true;
+    // cell_t *cell = malloc(sizeof(cell_t));
+    // cell->x = 1;
+    // cell->y = 1;
+    // visited[cell->x][cell->y] = true;
 
-    printf("ehe");
-    push_stack(&state->head, cell);
+    // printf("ehe");
+    // push_stack(&state->head, cell);
 
-    printf("hano se \n");
-    while (head != NULL)
-    {
-        cell = pop_stack(&state->head);
-        if (get_neighbor(cell, visited) != NULL)
-        {
-            push_stack(&state->head, cell);
-            cell_t *neighbor = get_neighbor(cell, visited);
-            remove_wall(cell, neighbor);
-            visited[neighbor->x][neighbor->y] = true;
-            adjacency(cell, neighbor, adj_matrix);
-            push_stack(&head, neighbor);
-        }
-    }
+    // printf("hano se \n");
+    // while (head != NULL)
+    // {
+    //     cell = pop_stack(&state->head);
+    //     if (get_neighbor(cell, visited) != NULL)
+    //     {
+    //         push_stack(&state->head, cell);
+    //         cell_t *neighbor = get_neighbor(cell, visited);
+    //         remove_wall(cell, neighbor);
+    //         visited[neighbor->x][neighbor->y] = true;
+    //         adjacency(cell, neighbor, adj_matrix);
+    //         push_stack(&head, neighbor);
+    //     }
+    // }
 
     return false;
 }
