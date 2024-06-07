@@ -1,0 +1,2 @@
+- Randomize buildings and can't be same cell.
+- Remove unncessary files.

@@ -41,6 +41,21 @@ typedef struct maze_state
 } maze_state_t;
 
 /**
+ * Create memory for the maze.
+ * @return empty maze
+ */
+maze_t *create_maze()
+{
+    maze_t *maze = malloc(sizeof(maze_t));
+    maze->cells = malloc(GRID_HEIGHT * sizeof(cell_t *));
+    for (size_t i = 0; i < GRID_HEIGHT; i++)
+    {
+        maze->cells[i] = malloc(GRID_WIDTH * sizeof(cell_t));
+    }
+    return maze;
+}
+
+/**
  * Initializes and draws the grid, draws buildings and hider.
  * @param maze_state state struct of the maze.
  */
@@ -94,35 +109,6 @@ static void init_maze(maze_t *maze)
 }
 
 /**
- * Removes the wall between the current cell and its neighbor.
- * Checks whether the neighbor is in the same row or column and draws a line to remove the wall.
- * @param cell current cell
- * @param neighbor cell neighbor
- */
-static void remove_wall(cell_t *current, cell_t *next, size_t direction)
-{
-    switch (direction)
-    {
-    case 0:
-        current->north = false;
-        next->south = false;
-        break;
-    case 1:
-        current->east = false;
-        next->west = false;
-        break;
-    case 2:
-        current->south = false;
-        next->north = false;
-        break;
-    case 3:
-        current->west = false;
-        next->east = false;
-        break;
-    }
-}
-
-/**
  * Checks the four possible neighbors (north, east, south, west) of the cell located at
  * coordinates (x, y) in the maze. It adds the coordinates of the unvisited neighbors to the
  * neighbors array and returns the count of unvisited neighbors.
@@ -163,88 +149,33 @@ static size_t get_neighbors(maze_t *maze, size_t x, size_t y, size_t neighbors[]
     return count;
 }
 
-void on_key(char key, key_event_type_t type, double held_time, state_t *state)
-{
-    if (type == KEY_PRESSED)
-    {
-        switch (key)
-        {
-        case LEFT_ARROW:
-        {
-            if (hider.x - GRID_CELL_SIZE >= 0)
-            {
-                hider.x -= GRID_CELL_SIZE;
-                render_rect(&hider);
-            }
-            break;
-        }
-        case RIGHT_ARROW:
-        {
-            if (hider.x + GRID_CELL_SIZE < MAZE_WINDOW_WIDTH)
-            {
-                hider.x += GRID_CELL_SIZE;
-                render_rect(&hider);
-            }
-            break;
-        }
-        case UP_ARROW:
-        {
-            if (hider.y - GRID_CELL_SIZE >= 0)
-            {
-                hider.y -= GRID_CELL_SIZE;
-                render_rect(&hider);
-            }
-
-            break;
-        }
-        case DOWN_ARROW:
-        {
-            if (hider.y + GRID_CELL_SIZE < MAZE_WINDOW_HEIGHT)
-            {
-                hider.y += GRID_CELL_SIZE;
-                render_rect(&hider);
-            }
-
-            break;
-        }
-        }
-    }
-}
-
 /**
- *  Draw maze
- * @param maze maze to draw
+ * Removes the wall between the current cell and its neighbor.
+ * Checks whether the neighbor is in the same row or column and draws a line to remove the wall.
+ * @param cell current cell
+ * @param neighbor cell neighbor
  */
-static void draw_maze(maze_t *maze)
+static void remove_wall(cell_t *current, cell_t *next, size_t direction)
 {
-    render_color((rgb_color_t){0, 0, 0});
-
-    for (size_t y = 0; y < GRID_HEIGHT; ++y)
+    switch (direction)
     {
-        for (size_t x = 0; x < GRID_WIDTH; ++x)
-        {
-            cell_t *cell = &maze->cells[y][x];
-            if (cell->north)
-                render_line(cell->box.x, cell->box.y, cell->box.x + cell->box.w, cell->box.y);
-            if (cell->east)
-                render_line(cell->box.x + cell->box.w, cell->box.y, cell->box.x + cell->box.w, cell->box.y + cell->box.h);
-            if (cell->south)
-                render_line(cell->box.x, cell->box.y + cell->box.h, cell->box.x + cell->box.w, cell->box.y + cell->box.h);
-            if (cell->west)
-                render_line(cell->box.x, cell->box.y, cell->box.x, cell->box.y + cell->box.h);
-        }
+    case 0:
+        current->north = false;
+        next->south = false;
+        break;
+    case 1:
+        current->east = false;
+        next->west = false;
+        break;
+    case 2:
+        current->south = false;
+        next->north = false;
+        break;
+    case 3:
+        current->west = false;
+        next->east = false;
+        break;
     }
-}
-
-maze_t *create_maze()
-{
-    maze_t *maze = malloc(sizeof(maze_t));
-    maze->cells = malloc(GRID_HEIGHT * sizeof(cell_t *));
-    for (size_t i = 0; i < GRID_HEIGHT; i++)
-    {
-        maze->cells[i] = malloc(GRID_WIDTH * sizeof(cell_t));
-    }
-    return maze;
 }
 
 /**
@@ -313,6 +244,78 @@ maze_state_t *maze_init()
     generate_maze(maze_state->maze);
 
     return maze_state;
+}
+/**
+ *  Draw maze
+ * @param maze maze to draw
+ */
+static void draw_maze(maze_t *maze)
+{
+    render_color((rgb_color_t){0, 0, 0});
+
+    for (size_t y = 0; y < GRID_HEIGHT; ++y)
+    {
+        for (size_t x = 0; x < GRID_WIDTH; ++x)
+        {
+            cell_t *cell = &maze->cells[y][x];
+            if (cell->north)
+                render_line(cell->box.x, cell->box.y, cell->box.x + cell->box.w, cell->box.y);
+            if (cell->east)
+                render_line(cell->box.x + cell->box.w, cell->box.y, cell->box.x + cell->box.w, cell->box.y + cell->box.h);
+            if (cell->south)
+                render_line(cell->box.x, cell->box.y + cell->box.h, cell->box.x + cell->box.w, cell->box.y + cell->box.h);
+            if (cell->west)
+                render_line(cell->box.x, cell->box.y, cell->box.x, cell->box.y + cell->box.h);
+        }
+    }
+}
+
+void on_key(char key, key_event_type_t type, double held_time, state_t *state)
+{
+    if (type == KEY_PRESSED)
+    {
+        switch (key)
+        {
+        case LEFT_ARROW:
+        {
+            if (hider.x - GRID_CELL_SIZE >= 0)
+            {
+                hider.x -= GRID_CELL_SIZE;
+                render_rect(&hider);
+            }
+            break;
+        }
+        case RIGHT_ARROW:
+        {
+            if (hider.x + GRID_CELL_SIZE < MAZE_WINDOW_WIDTH)
+            {
+                hider.x += GRID_CELL_SIZE;
+                render_rect(&hider);
+            }
+            break;
+        }
+        case UP_ARROW:
+        {
+            if (hider.y - GRID_CELL_SIZE >= 0)
+            {
+                hider.y -= GRID_CELL_SIZE;
+                render_rect(&hider);
+            }
+
+            break;
+        }
+        case DOWN_ARROW:
+        {
+            if (hider.y + GRID_CELL_SIZE < MAZE_WINDOW_HEIGHT)
+            {
+                hider.y += GRID_CELL_SIZE;
+                render_rect(&hider);
+            }
+
+            break;
+        }
+        }
+    }
 }
 
 void show_maze(maze_state_t *maze_state)
