@@ -174,7 +174,7 @@ bool is_empty(Node *stack)
     return stack == NULL;
 }
 
-void remove_wall(TCell *current, TCell *next, int direction)
+void remove_wall_d(TCell *current, TCell *next, int direction)
 {
     switch (direction)
     {
@@ -478,7 +478,7 @@ void generate_maze(maze_state_t *maze_state)
             int ny = neighbors[r][1];
             int direction = (nx == x) ? ((ny > y) ? 2 : 0) : ((nx > x) ? 1 : 3);
 
-            remove_wall(&maze->cells[y][x], &maze->cells[ny][nx], direction);
+            remove_wall_d(&maze->cells[y][x], &maze->cells[ny][nx], direction);
             maze->cells[ny][nx].visited = true;
             push(&maze->stack, x, y);
 
