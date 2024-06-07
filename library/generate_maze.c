@@ -22,25 +22,6 @@ cell_t *parent[GRID_WIDTH][GRID_HEIGHT];
 
 SDL_Rect hider_cell = (SDL_Rect){(GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
 
-typedef struct state
-{
-    scene_t *scene;
-    size_t page;
-    bool maze_generated;
-    int counter;
-    cell_t random_cell;
-    stack_t *head;
-} state_t;
-
-typedef struct maze_state
-{
-    stack_t *head;
-    bool visited[GRID_WIDTH + 2][GRID_HEIGHT + 2];
-    bool adj_matrix[NUM_CELLS][NUM_CELLS];
-    cell_t buildings[];
-
-} maze_state_t;
-
 typedef struct
 {
     SDL_Rect box;
@@ -60,6 +41,21 @@ typedef struct
     TCell cells[GRID_HEIGHT][GRID_WIDTH];
     Node *stack;
 } Maze;
+
+typedef struct maze_state
+{
+    stack_t *head;
+    bool visited[GRID_WIDTH + 2][GRID_HEIGHT + 2];
+    bool adj_matrix[NUM_CELLS][NUM_CELLS];
+    cell_t buildings[];
+    Maze maze;
+
+} maze_state_t;
+
+typedef struct state
+{
+    Maze maze;
+} state_t;
 
 const size_t NUM_BUILDINGS = 1;
 static int counting = 0;
@@ -501,10 +497,7 @@ bool generate_maze(maze_state_t *maze_state)
 
     init_grid(maze_state);
 
-    Maze maze;
-    init_maze_d(&maze, GRID_WIDTH, GRID_HEIGHT, GRID_CELL_SIZE);
-    generation(&maze);
-    draw_maze_d(&maze);
+    draw_maze_d(&maze_state->maze);
 }
 // bool generate_maze(maze_state_t *maze_state)
 // {
@@ -581,7 +574,9 @@ maze_state_t *maze_init()
             .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
         };
     }
-    init_maze(maze_state);
+
+    init_maze_d(&maze_state->maze, GRID_WIDTH, GRID_HEIGHT, GRID_CELL_SIZE);
+    generation(&maze_state->maze);
 
     return maze_state;
 }
