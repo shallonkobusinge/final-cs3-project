@@ -278,8 +278,8 @@ maze_state_t *maze_init()
         };
         printf("Cell: (%zu, %zu)\n", rand_x, rand_y);
     }
-    // init_maze(maze_state);
     printf("aha ni sawa\n");
+    init_maze(maze_state);
 
     printf("Visited sihit: %d\n", maze_state->adj_matrix[2][1]);
     printf("byapfuye\n");
