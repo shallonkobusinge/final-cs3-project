@@ -256,7 +256,7 @@ bool generate_maze(maze_state_t *maze_state)
     sdl_on_key((key_handler_t)on_key);
 
     init_grid(maze_state);
-    // draw_maze(&maze_state->maze);
+    draw_maze(&maze_state->maze);
     return false;
 }
 
@@ -281,8 +281,9 @@ maze_state_t *maze_init()
     maze_state_t *maze_state = malloc(sizeof(maze_state_t) + (sizeof(cell_t) * NUM_BUILDINGS));
 
     buildings_init(maze_state);
-    // init_maze(&maze_state->maze);
-    // build_maze(&maze_state->maze);
+
+    init_maze(&maze_state->maze);
+    build_maze(&maze_state->maze);
 
     return maze_state;
 }
