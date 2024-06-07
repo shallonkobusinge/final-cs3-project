@@ -252,6 +252,8 @@ bool generate_maze(maze_state_t *maze_state)
 }
 maze_state_t *build_maze()
 {
+    srand(time(NULL));
+
     maze_state_t *maze_state = malloc(sizeof(maze_state_t) + (sizeof(cell_t) * NUM_BUILDINGS));
 
     printf("nageze hano 1\n");
