@@ -22,7 +22,6 @@ cell_t *parent[GRID_WIDTH][GRID_HEIGHT];
 
 SDL_Rect hider_cell = (SDL_Rect){(GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
 
-static stack_t *head;
 typedef struct state
 {
     scene_t *scene;
@@ -36,6 +35,10 @@ typedef struct state
 typedef struct maze_state
 {
     cell_t buildings[];
+    stack_t *head;
+    bool visited[GRID_WIDTH + 2][GRID_HEIGHT + 2];
+    bool adj_matrix[NUM_CELLS][NUM_CELLS];
+
 } maze_state_t;
 
 const size_t NUM_BUILDINGS = 4;
@@ -95,36 +98,34 @@ static void init_grid(maze_state_t *state)
  * Initializes the maze by marking all cells as unvisited and setting the border cells as visited.
  * and initializes the adjacency matrix and sets the random seed.
  */
-static void init_maze()
+static void init_maze(maze_state_t *maze_state)
 {
     for (int i = 1; i <= GRID_WIDTH; i++)
     {
         for (int j = 1; j <= GRID_HEIGHT; j++)
         {
-            visited[i][j] = 0;
+            maze_state->visited[i][j] = 0;
         }
     }
     for (int j = 1; j < GRID_HEIGHT + 2; j++)
     {
-        visited[0][j] = true;
-        visited[GRID_WIDTH + 1][j] = true;
+        maze_state->visited[0][j] = true;
+        maze_state->visited[GRID_WIDTH + 1][j] = true;
     }
 
     for (int i = 1; i <= GRID_WIDTH; i++)
     {
-        visited[i][0] = true;
-        visited[i][GRID_HEIGHT + 1] = true;
+        maze_state->visited[i][0] = true;
+        maze_state->visited[i][GRID_HEIGHT + 1] = true;
     }
 
     for (int i = 0; i < NUM_CELLS; i++)
     {
         for (int j = 0; j < NUM_CELLS; j++)
         {
-            adj_matrix[i][j] = false;
+            maze_state->adj_matrix[i][j] = false;
         }
     }
-    head = NULL;
-    srand(time(NULL));
 }
 
 void on_key(char key, key_event_type_t type, double held_time, state_t *state)
@@ -222,30 +223,28 @@ bool generate_maze(maze_state_t *maze_state)
     // printf("Page: %d\n", state->page);
 
     init_grid(maze_state);
-    // init_maze();
 
-    // cell_t *cell = malloc(sizeof(cell_t));
-    // cell->x = 1;
-    // cell->y = 1;
-    // visited[cell->x][cell->y] = true;
+    cell_t *cell = malloc(sizeof(cell_t));
+    cell->x = 1;
+    cell->y = 1;
+    visited[cell->x][cell->y] = true;
 
-    // printf("ehe");
-    // push_stack(&head, cell);
+    push_stack(&maze_state->head, cell);
 
-    // printf("hano se \n");
-    // while (head != NULL)
-    // {
-    //     cell = pop_stack(&head);
-    //     if (get_neighbor(cell, visited) != NULL)
-    //     {
-    //         push_stack(&head, cell);
-    //         cell_t *neighbor = get_neighbor(cell, visited);
-    //         remove_wall(cell, neighbor);
-    //         visited[neighbor->x][neighbor->y] = true;
-    //         adjacency(cell, neighbor, adj_matrix);
-    //         push_stack(&head, neighbor);
-    //     }
-    // }
+    printf("hano se \n");
+    while (maze_state->head != NULL)
+    {
+        cell = pop_stack(&maze_state->head);
+        if (get_neighbor(cell, maze_state->visited) != NULL)
+        {
+            push_stack(&maze_state->head, cell);
+            cell_t *neighbor = get_neighbor(cell, maze_state->visited);
+            remove_wall(cell, neighbor);
+            maze_state->visited[neighbor->x][neighbor->y] = true;
+            adjacency(cell, neighbor, maze_state->adj_matrix);
+            push_stack(&maze_state->head, neighbor);
+        }
+    }
 
     return false;
 }
@@ -254,6 +253,7 @@ maze_state_t *build_maze()
     srand(time(NULL));
 
     maze_state_t *maze_state = malloc(sizeof(maze_state_t) + (sizeof(cell_t) * NUM_BUILDINGS));
+    maze_state->head = NULL;
 
     for (size_t i = 0; i < NUM_BUILDINGS; i++)
     {
@@ -266,6 +266,7 @@ maze_state_t *build_maze()
         };
         printf("Cell: (%zu, %zu)\n", rand_x, rand_y);
     }
+    init_maze(maze_state);
 
     return maze_state;
 }
