@@ -36,11 +36,17 @@ typedef struct maze
     Node *stack;
 } maze_t;
 
+typedef struct building
+{
+    size_t x;
+    size_t y;
+} building_t;
+
 typedef struct maze_state
 {
     maze_t maze;
     SDL_Rect hider;
-    cell_t buildings[];
+    building_t buildings[];
 } maze_state_t;
 
 /**
