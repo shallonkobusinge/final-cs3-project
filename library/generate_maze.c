@@ -234,12 +234,23 @@ bool generate_maze(maze_state_t *maze_state)
     printf("hano se \n");
     while (maze_state->head != NULL)
     {
+        printf("hano se 1 \n");
         cell = pop_stack(&maze_state->head);
+        printf("hano se 2 \n");
+
         if (get_neighbor(cell, maze_state->visited) != NULL)
         {
+            printf("hano se 3 \n");
+
             push_stack(&maze_state->head, cell);
+            printf("hano se 4 \n");
+
             cell_t *neighbor = get_neighbor(cell, maze_state->visited);
+            printf("hano se 4 \n");
+
             remove_wall(cell, neighbor);
+            printf("hano se 4 \n");
+
             maze_state->visited[neighbor->x][neighbor->y] = true;
             adjacency(cell, neighbor, maze_state->adj_matrix);
             push_stack(&maze_state->head, neighbor);
