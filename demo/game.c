@@ -63,11 +63,10 @@ bool emscripten_main(state_t *state)
 
         generate_maze(state->maze_state);
     }
-}
 
-sdl_show();
+    sdl_show();
 
-return false;
+    return false;
 }
 
 void emscripten_free(state_t *state)
