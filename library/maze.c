@@ -36,7 +36,7 @@ typedef struct building
 
 typedef struct maze_state
 {
-    maze_t maze;
+    maze_t *maze;
     building_t buildings[];
 } maze_state_t;
 
@@ -309,8 +309,8 @@ maze_state_t *maze_init()
 
     buildings_init(maze_state);
 
-    init_maze(&maze_state->maze);
-    generate_maze(&maze_state->maze);
+    init_maze(maze_state->maze);
+    generate_maze(maze_state->maze);
 
     return maze_state;
 }
