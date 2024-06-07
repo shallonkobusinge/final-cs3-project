@@ -57,7 +57,7 @@ typedef struct Node
 typedef struct
 {
     int width, height, cell_size;
-    Cell cells[H][W];
+    TCell cells[GRID_HEIGHT][GRID_WIDTH];
     Node *stack;
 } Maze;
 
