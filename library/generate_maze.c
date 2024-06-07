@@ -459,7 +459,7 @@ void draw_maze(Maze *maze)
 void generate_maze(maze_state_t *maze_state)
 {
     Maze maze;
-    init_maze(&maze, GRID_WIDTH, GRID_HEIGHT, GRID_CELL_SIZE);
+    init_maze_d(&maze, GRID_WIDTH, GRID_HEIGHT, GRID_CELL_SIZE);
 
     init_grid(maze_state);
     int x = 0, y = 0;
