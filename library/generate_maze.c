@@ -244,7 +244,7 @@ bool generate_maze(state_t *state)
     visited[cell->x][cell->y] = true;
 
     printf("ehe");
-    push_stack(head, cell);
+    push_stack(&head, cell);
 
     printf("hano se \n");
     while (head != NULL)
