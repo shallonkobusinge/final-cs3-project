@@ -33,6 +33,11 @@ typedef struct state
     stack_t *head;
 } state_t;
 
+typedef struct maze_state
+{
+    cell_t buildings[];
+} maze_state_t;
+
 const size_t NUM_BUILDINGS = 4;
 static int counting = 0;
 
@@ -62,32 +67,8 @@ static size_t find_min(size_t a, size_t b)
 /**
  * Initialize and draw the Maze Grid.
  */
-static void init_grid(state_t *state)
+static void init_grid(maze_state_t *state)
 {
-    size_t random_cell_w = (rand() % 24) + 1;
-    size_t rand_cell_h = (rand() % 11) + 1;
-    printf("Random cell (%zu, %zu)\n", random_cell_w, rand_cell_h);
-
-    state->random_cell = (cell_t){random_cell_w, rand_cell_h};
-
-    cell_t buildings[] = {
-        {
-            .x = ((GRID_WIDTH - 3) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-            .y = ((GRID_HEIGHT - 3) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-        },
-        {
-            .x = ((GRID_WIDTH - state->random_cell.x) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-            .y = ((GRID_HEIGHT - state->random_cell.y) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-        },
-        {
-            .x = ((GRID_WIDTH - 10) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-            .y = ((GRID_HEIGHT - 5) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-        },
-        {
-            .x = ((GRID_WIDTH - 24) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-            .y = ((GRID_HEIGHT - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-        },
-    };
     render_color((rgb_color_t){230, 230, 230});
 
     for (int x = 0; x < window_width; x += GRID_CELL_SIZE)
@@ -104,11 +85,10 @@ static void init_grid(state_t *state)
 
     for (size_t i = 0; i < NUM_BUILDINGS; i++)
     {
-        SDL_Rect cell = {buildings[i].x, buildings[i].y, GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2};
+        SDL_Rect cell = {state->buildings[i].x, state->buildings[i].y, GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2};
         render_color((rgb_color_t){241, 108, 45});
         render_rect(&cell);
     }
-    SDL_Delay(30);
 }
 
 /**
@@ -234,7 +214,7 @@ void remove_wall(cell_t *cell, cell_t *neighbor)
     SDL_Delay(30);
 }
 
-bool generate_maze()
+bool generate_maze(maze_state_t *maze_state)
 {
     sdl_on_key((key_handler_t)on_key);
 
@@ -242,7 +222,7 @@ bool generate_maze()
     printf("generating everytime\n");
     // printf("Page: %d\n", state->page);
 
-    init_grid(state);
+    init_grid(maze_state);
     // init_maze();
 
     // cell_t *cell = malloc(sizeof(cell_t));
@@ -269,4 +249,18 @@ bool generate_maze()
     // }
 
     return false;
+}
+maze_state_t *build_maze()
+{
+    maze_state_t *maze_state = malloc(sizeof(maze_state_t));
+
+    for (size_t i = 0; i < NUM_BUILDINGS; i++)
+    {
+        maze_state->buildings[i] = {
+            .x = ((GRID_WIDTH - (rand() % 24) + 1) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+            .y = ((GRID_HEIGHT - (rand() % 11) + 1) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+        };
+    }
+
+    return maze_state;
 }

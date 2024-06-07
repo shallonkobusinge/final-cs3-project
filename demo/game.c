@@ -19,11 +19,17 @@ const vector_t SDL_MIN = {0, 0};
 const vector_t SDL_MAX = {1000, 500};
 const vector_t SDL_CENTER = {500, 250};
 
+typedef struct maze_state
+{
+    cell_t buildings[];
+} maze_state_t;
+
 struct state
 {
     scene_t *scene;
     size_t page;
     bool maze_generated;
+    maze_state_t *maze_state;
 };
 
 state_t *emscripten_init()
@@ -35,14 +41,15 @@ state_t *emscripten_init()
     state->maze_generated = false;
 
     state->page = 1;
-    generate_maze();
+    maze_state_t *maze_state = build_maze();
+    state->maze_state = maze_state;
 
     return state;
 }
 
 bool emscripten_main(state_t *state)
 {
-    // sdl_clear();
+    sdl_clear();
 
     if (state->page == 0)
     {
@@ -52,7 +59,7 @@ bool emscripten_main(state_t *state)
     {
         if (!state->maze_generated)
         {
-            // generate_maze();
+            generate_maze(state->maze_state);
         }
     }
 
