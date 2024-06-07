@@ -16,11 +16,11 @@ typedef struct cell
     bool visited, start, end;
 } cell_t;
 
-/**
- * Finds a random unvisited neighbor of the current cell.
- * @param cell current cell.
- * @returns NULL if all neighbors are visited. Otherwise, it returns a random unvisited neighbor.
- */
-cell_t *get_neighbor(cell_t *current, bool visited[][HEIGHT + 2]);
+// /**
+//  * Finds a random unvisited neighbor of the current cell.
+//  * @param cell current cell.
+//  * @returns NULL if all neighbors are visited. Otherwise, it returns a random unvisited neighbor.
+//  */
+// cell_t *get_neighbor(cell_t *current, bool visited[][HEIGHT + 2]);
 
 #endif // #ifndef __CELL_H__
