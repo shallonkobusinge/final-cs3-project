@@ -26,7 +26,7 @@ void push(node_t **stack, size_t x, size_t y)
     *stack = node;
 }
 
-void pop(node_t **stack, int *x, int *y)
+void pop(node_t **stack, size_t *x, size_t *y)
 {
     node_t *north = *stack;
     *x = north->x;

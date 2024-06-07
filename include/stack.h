@@ -22,7 +22,7 @@ typedef struct node node_t;
 
 void push(node_t **stack, size_t x, size_t y);
 
-void pop(node_t **stack, int *x, int *y);
+void pop(node_t **stack, size_t *x, size_t *y);
 
 bool is_empty(node_t *stack);
 
