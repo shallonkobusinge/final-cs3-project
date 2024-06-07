@@ -4,7 +4,7 @@
 #include "cell.h"
 
 typedef struct stack stack_t;
-typedef struct node_t Node;
+typedef struct node node_t;
 
 /**
  * Add a new cell to the start of the stack
@@ -20,10 +20,10 @@ typedef struct node_t Node;
  */
 // cell_t *pop_stack(stack_t **head);
 
-void push(Node **stack, size_t x, size_t y);
+void push(node_t **stack, size_t x, size_t y);
 
-void pop(Node **stack, int *x, int *y);
+void pop(node_t **stack, int *x, int *y);
 
-bool is_empty(Node *stack);
+bool is_empty(node_t *stack);
 
 #endif // #ifndef __STACK_H__
