@@ -5,27 +5,37 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef struct Node
+{
+    size_t x, y;
+    struct Node *next;
+} Node;
+
 typedef struct stack
 {
     cell_t *cell;
     struct stack *next;
 } stack_t;
 
-void push_stack(stack_t **head, cell_t *cell)
+void push(Node **stack, int x, int y)
 {
-    stack_t *stack = malloc(sizeof(stack_t));
-    assert(stack);
-    stack->cell = cell;
-    stack->next = *head;
-    *head = stack;
+    Node *node = (Node *)malloc(sizeof(Node));
+    node->x = x;
+    node->y = y;
+    node->next = *stack;
+    *stack = node;
 }
 
-cell_t *pop_stack(stack_t **head)
+void pop(Node **stack, int *x, int *y)
 {
-    assert(head);
-    cell_t *removed = (*head)->cell;
-    stack_t *temp = *head;
-    *head = (*head)->next;
-    free(temp);
-    return removed;
+    Node *north = *stack;
+    *x = north->x;
+    *y = north->y;
+    *stack = north->next;
+    free(north);
+}
+
+bool is_empty(Node *stack)
+{
+    return stack == NULL;
 }

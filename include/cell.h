@@ -3,6 +3,7 @@
 
 #include <stdbool.h>
 #include <stdlib.h>
+#include "sdl_wrapper.h"
 
 extern const size_t WIDTH;
 extern const size_t HEIGHT;
@@ -10,26 +11,10 @@ extern const size_t CELLS;
 
 typedef struct cell
 {
-    size_t x;
-    size_t y;
+    SDL_Rect box;
+    bool west, north, east, south;
+    bool visited, start, end;
 } cell_t;
-/**
- * Updates the adjacency matrix to show current cell and neighbor are directly connected
- * @param cell current cell
- * @param neighbor cell neighbor
- * @param adj_matrix adjancey matrix with direct connections
- *
- */
-void adjacency(cell_t *current, cell_t *neighbor, bool adj_matrix[][CELLS]);
-/**
- *
- * This function checks if there is a direct connection (adjacency) between two cells, Cell and cellNeighbour.
- * @param cell current cell
- * @param neighbor cell neighbor
- * @param adj_matrix adjancey matrix with direct connections
- * @return true if there is a direct connection between current and neighbor.
- */
-bool isAdjacency(cell_t *current, cell_t *neighbor, bool adj_matrix[][CELLS]);
 
 /**
  * Finds a random unvisited neighbor of the current cell.
