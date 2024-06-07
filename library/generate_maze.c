@@ -236,47 +236,55 @@ bool generate_maze(maze_state_t *maze_state)
     init_grid(maze_state);
 
     cell_t *cell = malloc(sizeof(cell_t));
-    cell->x = 1;
-    cell->y = 1;
-    maze_state->visited[cell->x][cell->y] = true;
 
-    push_stack(&maze_state->head, cell);
+    Maze maze;
+    init_maze(&maze, GRID_WIDTH, GRID_HEIGHT, GRID_CELL_SIZE);
+    apply_aldous_broder(&maze);
 
-    while (maze_state->head != NULL)
-    {
-        cell = pop_stack(&maze_state->head);
+    sdl_clear();
 
-        cell_t *neighbor = get_neighbor(cell, maze_state->visited);
+    draw_maze(&maze);
+    // cell->x = 1;
+    // cell->y = 1;
+    // maze_state->visited[cell->x][cell->y] = true;
 
-        if (neighbor != NULL)
-        {
+    // push_stack(&maze_state->head, cell);
 
-            // push_stack(&maze_state->head, cell);
+    // while (maze_state->head != NULL)
+    // {
+    //     cell = pop_stack(&maze_state->head);
 
-            cell_t *neighbor = get_neighbor(cell, maze_state->visited);
+    //     cell_t *neighbor = get_neighbor(cell, maze_state->visited);
 
-            remove_wall(cell, neighbor);
+    //     if (neighbor != NULL)
+    //     {
 
-            maze_state->visited[neighbor->x][neighbor->y] = true;
-            adjacency(cell, neighbor, maze_state->adj_matrix);
-            push_stack(&maze_state->head, neighbor);
-            // }
-            // }
+    //         // push_stack(&maze_state->head, cell);
 
-            // if (neighbor != NULL)
-            // {
-            //     push_stack(&maze_state->head, cell); // Push the current cell back
-            //     remove_wall(cell, neighbor);
-            //     maze_state->visited[neighbor->x][neighbor->y] = true;
-            //     adjacency(cell, neighbor, maze_state->adj_matrix);
-            //     push_stack(&maze_state->head, neighbor);
-            // }
-            // else
-            // {
-            //     free(cell); // Free the cell if no unvisited neighbors
-            // }
-        }
-    }
+    //         cell_t *neighbor = get_neighbor(cell, maze_state->visited);
+
+    //         remove_wall(cell, neighbor);
+
+    //         maze_state->visited[neighbor->x][neighbor->y] = true;
+    //         adjacency(cell, neighbor, maze_state->adj_matrix);
+    //         push_stack(&maze_state->head, neighbor);
+    // }
+    // }
+
+    // if (neighbor != NULL)
+    // {
+    //     push_stack(&maze_state->head, cell); // Push the current cell back
+    //     remove_wall(cell, neighbor);
+    //     maze_state->visited[neighbor->x][neighbor->y] = true;
+    //     adjacency(cell, neighbor, maze_state->adj_matrix);
+    //     push_stack(&maze_state->head, neighbor);
+    // }
+    // else
+    // {
+    //     free(cell); // Free the cell if no unvisited neighbors
+    // }
+    // }
+    // }
 
     return false;
 }
