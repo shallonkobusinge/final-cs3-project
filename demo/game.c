@@ -36,7 +36,7 @@ state_t *emscripten_init()
 
     state_t *state = malloc(sizeof(state_t));
     state->scene = scene_init();
-    state->page = 2;
+    state->page = 1;
     state->maze_state = maze_init();
     state->landing_page_state = landing_page_init();
 
