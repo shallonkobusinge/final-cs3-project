@@ -233,7 +233,7 @@ bool generate_maze(maze_state_t *maze_state)
     {
         printf("hano se 1 \n");
         cell = pop_stack(&maze_state->head);
-        printf("hano se 2 \n");
+        printf("hano se 2  cell (%zu, %zu)\n", cell->x, cell->y);
 
         // if (get_neighbor(cell, maze_state->visited) != NULL)
         // {
