@@ -197,9 +197,13 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
     }
 }
 
+/**
+ *  Draw maze
+ * @param maze maze to draw
+ */
 static void draw_maze(maze_t *maze)
 {
-    render_color((rgb_color_t){255, 0, 0});
+    render_color((rgb_color_t){0, 0, 0});
 
     for (size_t y = 0; y < GRID_HEIGHT; ++y)
     {
@@ -218,6 +222,10 @@ static void draw_maze(maze_t *maze)
     }
 }
 
+/**
+ * Generate maze using DFS algorithm
+ * @param maze maze
+ */
 static void generate_maze(maze_t *maze)
 {
     size_t x = 0, y = 0;
@@ -249,15 +257,11 @@ static void generate_maze(maze_t *maze)
     }
 }
 
-void show_maze(maze_state_t *maze_state)
-{
-    sdl_on_key((key_handler_t)on_key);
-
-    init_grid(maze_state);
-    draw_maze(&maze_state->maze);
-}
-
-void buildings_init(maze_state_t *maze_state)
+/**
+ * Initialize and randomly generate a buildings
+ * @param maze_state state of the maze
+ */
+static void buildings_init(maze_state_t *maze_state)
 {
     for (size_t i = 0; i < NUM_BUILDINGS; i++)
     {
@@ -283,4 +287,12 @@ maze_state_t *maze_init()
     generate_maze(&maze_state->maze);
 
     return maze_state;
+}
+
+void show_maze(maze_state_t *maze_state)
+{
+    sdl_on_key((key_handler_t)on_key);
+
+    init_grid(maze_state);
+    draw_maze(&maze_state->maze);
 }
