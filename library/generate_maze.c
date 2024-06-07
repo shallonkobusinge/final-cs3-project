@@ -435,7 +435,7 @@ void apply_aldous_broder(Maze *maze)
     }
 }
 
-void draw_maze(Maze *maze)
+void draw_maze_d(Maze *maze)
 {
     render_color((rgb_color_t){255, 0, 0});
 
@@ -490,6 +490,8 @@ void generate_maze(maze_state_t *maze_state)
             pop(&maze->stack, &x, &y);
         }
     }
+
+    draw_maze(&maze);
 }
 
 void draw_maze(Maze *maze)
