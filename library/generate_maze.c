@@ -264,5 +264,7 @@ maze_state_t *build_maze()
         };
     }
 
+    printf("nageze hano 2\n");
+
     return maze_state;
 }
