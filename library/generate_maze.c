@@ -139,6 +139,7 @@ static void init_maze(state_t *state)
         }
         head = NULL;
         srand(time(NULL));
+        state->maze_generated = true;
     }
 }
 
