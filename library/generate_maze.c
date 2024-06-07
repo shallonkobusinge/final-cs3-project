@@ -398,7 +398,7 @@ bool generate_maze(maze_state_t *maze_state)
 
 maze_state_t *maze_init()
 {
-    srand(time(NULL));
+    // srand(time(NULL));
 
     maze_state_t *maze_state = malloc(sizeof(maze_state_t) + (sizeof(cell_t) * NUM_BUILDINGS));
     maze_state->head = NULL;
