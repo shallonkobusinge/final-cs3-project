@@ -225,10 +225,11 @@ bool generate_maze(maze_state_t *maze_state)
     cell_t *cell = malloc(sizeof(cell_t));
     cell->x = 1;
     cell->y = 1;
-    visited[cell->x][cell->y] = true;
+    maze_state->visited[cell->x][cell->y] = true;
 
     push_stack(&maze_state->head, cell);
 
+    printf("");
     printf("hano se \n");
     // while (maze_state->head != NULL)
     // {
