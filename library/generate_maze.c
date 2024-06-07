@@ -255,15 +255,14 @@ void apply_aldous_broder(Maze *maze)
 {
     int total_cells = GRID_WIDTH * GRID_HEIGHT;
     int visited_cells = 1;
-    // int x = rand() % GRID_WIDTH;
-    // int y = rand() % GRID_HEIGHT;
-    int x = 3;
-    int y = 2;
+    int x = rand() % GRID_WIDTH;
+    int y = rand() % GRID_HEIGHT;
+
     maze->cells[y][x].visited = true;
 
     while (visited_cells < total_cells)
     {
-        int direction = 3;
+        int direction = rand() % 4;
         int nx = x, ny = y;
 
         switch (direction)
