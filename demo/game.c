@@ -60,15 +60,14 @@ bool emscripten_main(state_t *state)
     }
     else if (state->page == 1)
     {
-        if (!state->maze_generated)
-        {
-            generate_maze(state->maze_state);
-        }
+
+        generate_maze(state->maze_state);
     }
+}
 
-    sdl_show();
+sdl_show();
 
-    return false;
+return false;
 }
 
 void emscripten_free(state_t *state)

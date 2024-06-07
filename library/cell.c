@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-const size_t WIDTH = 25;
-const size_t HEIGHT = 12;
+const size_t WIDTH = 5;
+const size_t HEIGHT = 2;
 const size_t CELLS = WIDTH * HEIGHT;
 
 void adjacency(cell_t *current, cell_t *neighbor, bool adj_matrix[][CELLS])
