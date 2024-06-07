@@ -443,6 +443,27 @@ void draw_maze_d(Maze *maze)
     }
 }
 
+void draw_maze(Maze *maze)
+{
+    render_color((rgb_color_t){255, 255, 255});
+
+    for (int y = 0; y < GRID_HEIGHT; ++y)
+    {
+        for (int x = 0; x < GRID_WIDTH; ++x)
+        {
+            TCell *cell = &maze->cells[y][x];
+            if (cell->top)
+                render_line(cell->box.x, cell->box.y, cell->box.x + cell->box.w, cell->box.y);
+            if (cell->right)
+                render_line(cell->box.x + cell->box.w, cell->box.y, cell->box.x + cell->box.w, cell->box.y + cell->box.h);
+            if (cell->bottom)
+                render_line(cell->box.x, cell->box.y + cell->box.h, cell->box.x + cell->box.w, cell->box.y + cell->box.h);
+            if (cell->left)
+                render_line(cell->box.x, cell->box.y, cell->box.x, cell->box.y + cell->box.h);
+        }
+    }
+}
+
 void generation(maze_state_t *maze_state)
 {
     Maze maze;
@@ -479,27 +500,6 @@ void generation(maze_state_t *maze_state)
     }
 
     draw_maze(&maze);
-}
-
-void draw_maze(Maze *maze)
-{
-    render_color((rgb_color_t){255, 255, 255});
-
-    for (int y = 0; y < GRID_HEIGHT; ++y)
-    {
-        for (int x = 0; x < GRID_WIDTH; ++x)
-        {
-            TCell *cell = &maze->cells[y][x];
-            if (cell->top)
-                render_line(cell->box.x, cell->box.y, cell->box.x + cell->box.w, cell->box.y);
-            if (cell->right)
-                render_line(cell->box.x + cell->box.w, cell->box.y, cell->box.x + cell->box.w, cell->box.y + cell->box.h);
-            if (cell->bottom)
-                render_line(cell->box.x, cell->box.y + cell->box.h, cell->box.x + cell->box.w, cell->box.y + cell->box.h);
-            if (cell->left)
-                render_line(cell->box.x, cell->box.y, cell->box.x, cell->box.y + cell->box.h);
-        }
-    }
 }
 
 // bool generate_maze(maze_state_t *maze_state)
