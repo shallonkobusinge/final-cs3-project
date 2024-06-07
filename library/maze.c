@@ -122,6 +122,20 @@ static void remove_wall(cell_t *current, cell_t *next, size_t direction)
     }
 }
 
+/**
+ * Checks the four possible neighbors (north, east, south, west) of the cell located at
+ * coordinates (x, y) in the maze. It adds the coordinates of the unvisited neighbors to the
+ * neighbors array and returns the count of unvisited neighbors.
+ *
+ * @param maze A pointer to the maze structure, which contains the grid of cells.
+ * @param x The x-coordinate of the current cell.
+ * @param y The y-coordinate of the current cell.
+ * @param neighbors A 2D array to store the coordinates of the unvisited neighboring cells. Each
+ *                  element is an array of size 2, where the first element is the x-coordinate and
+ *                  the second element is the y-coordinate of an unvisited neighbor.
+ *
+ * @return The number of unvisited neighboring cells.
+ */
 static size_t get_neighbors(maze_t *maze, size_t x, size_t y, size_t neighbors[][2])
 {
     size_t count = 0;
