@@ -10,7 +10,7 @@
 const size_t GRID_WIDTH = 25;
 const size_t GRID_HEIGHT = 12;
 const size_t NUM_CELLS = GRID_WIDTH * GRID_HEIGHT;
-const int GRID_CELL_SIZE = 40;
+const size_t GRID_CELL_SIZE = 40;
 
 const size_t MAZE_WINDOW_WIDTH = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
 const size_t MAZE_WINDOW_HEIGHT = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
@@ -259,8 +259,8 @@ static void generate_maze(maze_t *maze)
 
     while (!is_empty(maze->stack))
     {
-        int neighbors[4][2];
-        int count = get_neighbors(maze, x, y, neighbors);
+        size_t neighbors[4][2];
+        size_t count = get_neighbors(maze, x, y, neighbors);
 
         if (count > 0)
         {
