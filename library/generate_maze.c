@@ -586,13 +586,8 @@ maze_state_t *maze_init()
             .x = ((GRID_WIDTH - rand_x) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
             .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
         };
-        printf("Cell: (%zu, %zu)\n", rand_x, rand_y);
     }
-    printf("aha ni sawa\n");
     init_maze(maze_state);
-
-    printf("Visited sihit: %d\n", maze_state->adj_matrix[2][1]);
-    printf("byapfuye\n");
 
     return maze_state;
 }
