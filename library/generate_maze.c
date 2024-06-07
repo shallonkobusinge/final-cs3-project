@@ -219,7 +219,6 @@ bool generate_maze(maze_state_t *maze_state)
     sdl_on_key((key_handler_t)on_key);
 
     state_t *state = malloc(sizeof(state_t));
-    printf("generating everytime\n");
     // printf("Page: %d\n", state->page);
 
     init_grid(maze_state);
@@ -256,19 +255,15 @@ maze_state_t *build_maze()
 
     maze_state_t *maze_state = malloc(sizeof(maze_state_t) + (sizeof(cell_t) * NUM_BUILDINGS));
 
-    printf("nageze hano 1\n");
-
     for (size_t i = 0; i < NUM_BUILDINGS; i++)
     {
-        printf("loop\n");
 
         maze_state->buildings[i] = (cell_t){
             .x = ((GRID_WIDTH - (rand() % 24) + 1) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
             .y = ((GRID_HEIGHT - (rand() % 11) + 1) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
         };
+        printf("Cell: (%zu, %zu)\n", maze_state->buildings[i].x, maze_state->buildings[i].y);
     }
-
-    printf("nageze hano 2\n");
 
     return maze_state;
 }
