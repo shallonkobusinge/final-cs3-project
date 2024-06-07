@@ -44,7 +44,8 @@ typedef struct maze_state
 } maze_state_t;
 
 /**
- * Initialize and draw the grid in which the maze will be displayed.
+ * Initializes and draws the grid, draws buildings and hider.
+ * @param maze_state state struct of the maze.
  */
 static void init_grid(maze_state_t *maze_state)
 {
@@ -220,7 +221,7 @@ static void draw_maze(maze_t *maze)
     }
 }
 
-static void build_maze(maze_t *maze)
+static void generate_maze(maze_t *maze)
 {
     size_t x = 0, y = 0;
     maze->cells[y][x].visited = true;
@@ -283,7 +284,7 @@ maze_state_t *maze_init()
     buildings_init(maze_state);
 
     init_maze(&maze_state->maze);
-    build_maze(&maze_state->maze);
+    generate_maze(&maze_state->maze);
 
     return maze_state;
 }
