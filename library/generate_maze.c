@@ -242,7 +242,6 @@ static void init_maze(maze_state_t *maze_state)
         for (int j = 0; j < NUM_CELLS; j++)
         {
             maze_state->adj_matrix[i][j] = false;
-            printf("Adj at (%zu)", maze_state->adj_matrix[i][j]);
         }
     }
 }
@@ -466,9 +465,6 @@ void draw_maze(Maze *maze)
 
 void generation(Maze *maze)
 {
-    init_maze_d(&maze, GRID_WIDTH, GRID_HEIGHT, GRID_CELL_SIZE);
-
-    // init_grid(maze_state);
     int x = 0, y = 0;
     maze->cells[y][x].visited = true;
     push(&maze->stack, x, y);
@@ -497,8 +493,6 @@ void generation(Maze *maze)
             pop(&maze->stack, &x, &y);
         }
     }
-
-    draw_maze(&maze);
 }
 
 bool generate_maze(maze_state_t *maze_state)
