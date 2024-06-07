@@ -49,7 +49,6 @@ typedef struct maze_state
     bool adj_matrix[NUM_CELLS][NUM_CELLS];
     Maze maze;
     cell_t buildings[];
-
 } maze_state_t;
 
 typedef struct state
@@ -57,7 +56,7 @@ typedef struct state
     Maze maze;
 } state_t;
 
-const size_t NUM_BUILDINGS = 1;
+const size_t NUM_BUILDINGS = 2;
 static int counting = 0;
 
 /**
