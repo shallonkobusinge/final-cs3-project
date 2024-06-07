@@ -49,7 +49,7 @@ bool emscripten_main(state_t *state)
 
     if (state->page == 1)
     {
-        show_landing_page();
+        show_landing_page(state->landing_page_state);
     }
     else if (state->page == 2)
     {
