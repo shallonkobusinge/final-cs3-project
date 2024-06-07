@@ -261,8 +261,8 @@ maze_state_t *build_maze()
         size_t rand_y = (rand() % GRID_HEIGHT) + 1;
 
         maze_state->buildings[i] = (cell_t){
-            .x = (GRID_WIDTH - rand_x * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-            .y = (GRID_HEIGHT - rand_y * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+            .x = ((GRID_WIDTH - rand_x) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+            .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
         };
         printf("Cell: (%zu, %zu)\n", rand_x, rand_y);
     }
