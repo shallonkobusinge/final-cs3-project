@@ -107,40 +107,36 @@ static void init_grid()
  * Initializes the maze by marking all cells as unvisited and setting the border cells as visited.
  * and initializes the adjacency matrix and sets the random seed.
  */
-static void init_maze(state_t *state)
+static void init_maze()
 {
-    if (!state->maze_generated)
+    for (int i = 1; i <= GRID_WIDTH; i++)
     {
-        for (int i = 1; i <= GRID_WIDTH; i++)
+        for (int j = 1; j <= GRID_HEIGHT; j++)
         {
-            for (int j = 1; j <= GRID_HEIGHT; j++)
-            {
-                visited[i][j] = 0;
-            }
+            visited[i][j] = 0;
         }
-        for (int j = 1; j < GRID_HEIGHT + 2; j++)
-        {
-            visited[0][j] = true;
-            visited[GRID_WIDTH + 1][j] = true;
-        }
-
-        for (int i = 1; i <= GRID_WIDTH; i++)
-        {
-            visited[i][0] = true;
-            visited[i][GRID_HEIGHT + 1] = true;
-        }
-
-        for (int i = 0; i < NUM_CELLS; i++)
-        {
-            for (int j = 0; j < NUM_CELLS; j++)
-            {
-                adj_matrix[i][j] = false;
-            }
-        }
-        head = NULL;
-        srand(time(NULL));
-        state->maze_generated = true;
     }
+    for (int j = 1; j < GRID_HEIGHT + 2; j++)
+    {
+        visited[0][j] = true;
+        visited[GRID_WIDTH + 1][j] = true;
+    }
+
+    for (int i = 1; i <= GRID_WIDTH; i++)
+    {
+        visited[i][0] = true;
+        visited[i][GRID_HEIGHT + 1] = true;
+    }
+
+    for (int i = 0; i < NUM_CELLS; i++)
+    {
+        for (int j = 0; j < NUM_CELLS; j++)
+        {
+            adj_matrix[i][j] = false;
+        }
+    }
+    head = NULL;
+    srand(time(NULL));
 }
 
 void on_key(char key, key_event_type_t type, double held_time, state_t *state)
@@ -237,7 +233,7 @@ bool generate_maze(state_t *state)
     // printf("Page: %d\n", state->page);
 
     init_grid();
-    init_maze(state);
+    init_maze();
 
     cell_t *cell = malloc(sizeof(cell_t));
     cell->x = 1;
