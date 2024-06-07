@@ -26,4 +26,4 @@ void pop(Node **stack, int *x, int *y);
 
 bool is_empty(Node *stack);
 
-#ifndef __STACK_H__
+#endif // #ifndef __STACK_H__
