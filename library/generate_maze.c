@@ -80,7 +80,7 @@ static void init_grid(maze_state_t *maze_state)
  * Initializes the maze by marking all cells as unvisited and setting the border cells as visited.
  * and initializes the adjacency matrix and sets the random seed.
  */
-static void init_maze(Maze *maze)
+static void init_maze(maze_t *maze)
 {
     maze->stack = NULL;
 
