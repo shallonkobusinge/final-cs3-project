@@ -236,7 +236,7 @@ bool generate_maze(state_t *state)
     // printf("Page: %d\n", state->page);
 
     init_grid();
-    init_maze();
+    init_maze(state);
 
     cell_t *cell = malloc(sizeof(cell_t));
     cell->x = 1;
