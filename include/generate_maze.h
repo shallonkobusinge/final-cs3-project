@@ -13,6 +13,6 @@ typedef struct maze_state maze_state_t;
  */
 bool generate_maze(maze_state_t *maze_state);
 
-maze_state_t *build_maze();
+maze_state_t *maze_init();
 
 #endif // #ifndef __GENERATE_MAZE_H__

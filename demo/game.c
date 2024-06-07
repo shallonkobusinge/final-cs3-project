@@ -43,14 +43,11 @@ state_t *emscripten_init()
     state_t *state = malloc(sizeof(state_t));
     state->scene = scene_init();
     state->maze_generated = false;
-
     state->page = 1;
 
-    maze_state_t *maze_state = build_maze();
+    state->maze_state = maze_init()
 
-    state->maze_state = maze_state;
-
-    return state;
+        return state;
 }
 
 bool emscripten_main(state_t *state)

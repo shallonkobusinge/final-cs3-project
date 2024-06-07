@@ -259,7 +259,7 @@ bool generate_maze(maze_state_t *maze_state)
 
     return false;
 }
-maze_state_t *build_maze()
+maze_state_t *maze_init()
 {
     srand(time(NULL));
 
