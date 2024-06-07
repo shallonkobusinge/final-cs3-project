@@ -8,8 +8,8 @@
 #include "state.h"
 #include "sdl_wrapper.h"
 
-const size_t GRID_WIDTH = 5;
-const size_t GRID_HEIGHT = 5;
+const size_t GRID_WIDTH = 25;
+const size_t GRID_HEIGHT = 12;
 const size_t NUM_CELLS = GRID_WIDTH * GRID_HEIGHT;
 
 const int GRID_CELL_SIZE = 40;
