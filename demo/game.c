@@ -51,7 +51,7 @@ bool emscripten_main(state_t *state)
     {
         if (!state->maze_generated)
         {
-            generate_maze(state);
+            generate_maze();
         }
     }
 

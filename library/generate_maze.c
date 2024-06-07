@@ -234,7 +234,7 @@ void remove_wall(cell_t *cell, cell_t *neighbor)
     SDL_Delay(30);
 }
 
-bool generate_maze(state_t *state)
+bool generate_maze()
 {
     sdl_on_key((key_handler_t)on_key);
 
