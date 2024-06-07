@@ -17,12 +17,6 @@ const size_t MAZE_WINDOW_HEIGHT = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
 
 const size_t NUM_BUILDINGS = 2;
 
-typedef struct NODE
-{
-    size_t x, y;
-    struct node_t *next;
-} node_t;
-
 typedef struct state
 {
     maze_state_t *maze_state;
