@@ -510,6 +510,7 @@ bool generate_maze(maze_state_t *maze_state)
     Maze maze;
     init_maze_d(&maze, GRID_WIDTH, GRID_HEIGHT, GRID_CELL_SIZE);
     generation(&maze);
+    draw_maze_d(&maze);
 }
 // bool generate_maze(maze_state_t *maze_state)
 // {
