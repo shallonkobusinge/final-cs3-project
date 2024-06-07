@@ -320,5 +320,5 @@ void show_maze(maze_state_t *maze_state)
     sdl_on_key((key_handler_t)on_key);
 
     init_grid(maze_state);
-    draw_maze(&maze_state->maze);
+    draw_maze(maze_state->maze);
 }
