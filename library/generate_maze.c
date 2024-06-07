@@ -471,7 +471,7 @@ void generation(maze_state_t *maze_state)
 
     init_grid(maze_state);
     int x = 0, y = 0;
-    maze->cells[y][x].visited = true;
+    &maze->cells[y][x].visited = true;
     push(&maze->stack, x, y);
 
     while (!is_empty(maze->stack))
