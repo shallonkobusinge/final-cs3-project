@@ -38,7 +38,7 @@ typedef struct building
 typedef struct maze_state
 {
     maze_t maze;
-    SDL_Rect hider;
+    SDL_Rect *hider;
     building_t buildings[];
 } maze_state_t;
 
@@ -167,7 +167,7 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
         }
         case RIGHT_ARROW:
         {
-            printf("Printing arrow: %d\n", state->maze_state->hider.x);
+            printf("Printing arrow: %d\n", state->maze_state->hider->x);
             if (state->maze_state->hider.x + GRID_CELL_SIZE < MAZE_WINDOW_WIDTH)
             {
                 state->maze_state->hider.x += GRID_CELL_SIZE;
@@ -286,7 +286,12 @@ maze_state_t *maze_init()
     srand(time(NULL));
 
     maze_state_t *maze_state = malloc(sizeof(maze_state_t) + (sizeof(cell_t) * NUM_BUILDINGS));
-    maze_state->hider = (SDL_Rect){(GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
+    maze_state->hider = malloc(sizeof(SDL_Rect));
+    maze_state->hider->x = (GRID_CELL_SIZE / 4);
+    maze_state->hider->y = (GRID_CELL_SIZE / 4);
+    maze_state->hider->w = (GRID_CELL_SIZE / 2);
+    maze_state->hider->h = (GRID_CELL_SIZE / 2);
+    // = (SDL_Rect){(GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
 
     buildings_init(maze_state);
     // init_maze(&maze_state->maze);
