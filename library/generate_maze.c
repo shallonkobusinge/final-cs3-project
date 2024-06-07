@@ -63,6 +63,9 @@ static size_t find_min(size_t a, size_t b)
  */
 static void init_grid()
 {
+    size_t random_cell_w = (rand() % 24) + 1;
+    size_t rand_cell_h = (rand() % 11) + 1;
+    printf("Random cell (%zu, %zu)", random_cell_w, rand_cell_h);
 
     cell_t buildings[] = {
         {
@@ -234,30 +237,30 @@ bool generate_maze(state_t *state)
     // printf("Page: %d\n", state->page);
 
     init_grid();
-    init_maze();
+    // init_maze();
 
-    cell_t *cell = malloc(sizeof(cell_t));
-    cell->x = 1;
-    cell->y = 1;
-    visited[cell->x][cell->y] = true;
+    // cell_t *cell = malloc(sizeof(cell_t));
+    // cell->x = 1;
+    // cell->y = 1;
+    // visited[cell->x][cell->y] = true;
 
-    printf("ehe");
-    push_stack(&head, cell);
+    // printf("ehe");
+    // push_stack(&head, cell);
 
-    printf("hano se \n");
-    while (head != NULL)
-    {
-        cell = pop_stack(&head);
-        if (get_neighbor(cell, visited) != NULL)
-        {
-            push_stack(&head, cell);
-            cell_t *neighbor = get_neighbor(cell, visited);
-            remove_wall(cell, neighbor);
-            visited[neighbor->x][neighbor->y] = true;
-            adjacency(cell, neighbor, adj_matrix);
-            push_stack(&head, neighbor);
-        }
-    }
+    // printf("hano se \n");
+    // while (head != NULL)
+    // {
+    //     cell = pop_stack(&head);
+    //     if (get_neighbor(cell, visited) != NULL)
+    //     {
+    //         push_stack(&head, cell);
+    //         cell_t *neighbor = get_neighbor(cell, visited);
+    //         remove_wall(cell, neighbor);
+    //         visited[neighbor->x][neighbor->y] = true;
+    //         adjacency(cell, neighbor, adj_matrix);
+    //         push_stack(&head, neighbor);
+    //     }
+    // }
 
     return false;
 }
