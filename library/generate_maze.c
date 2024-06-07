@@ -65,7 +65,7 @@ static void init_grid()
 {
     size_t random_cell_w = (rand() % 24) + 1;
     size_t rand_cell_h = (rand() % 11) + 1;
-    printf("Random cell (%zu, %zu)", random_cell_w, rand_cell_h);
+    printf("Random cell (%zu, %zu)\n", random_cell_w, rand_cell_h);
 
     cell_t buildings[] = {
         {
