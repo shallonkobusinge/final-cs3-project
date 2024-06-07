@@ -41,7 +41,7 @@ typedef struct maze_state
 
 } maze_state_t;
 
-const size_t NUM_BUILDINGS = 4;
+const size_t NUM_BUILDINGS = 1;
 static int counting = 0;
 
 /**
