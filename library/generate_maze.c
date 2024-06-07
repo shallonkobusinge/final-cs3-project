@@ -233,7 +233,7 @@ static void draw_maze(maze_t *maze)
     }
 }
 
-static void build_maze(Maze *maze)
+static void build_maze(maze_t *maze)
 {
     size_t x = 0, y = 0;
     maze->cells[y][x].visited = true;
