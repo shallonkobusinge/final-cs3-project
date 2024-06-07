@@ -41,8 +41,8 @@ cell_t buildings[] = {
         .y = ((GRID_HEIGHT - 3) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
     },
     {
-        .x = ((GRID_WIDTH - 12) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-        .y = ((GRID_HEIGHT - 12) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+        .x = ((GRID_WIDTH - (rand() % 24) + 1) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+        .y = ((GRID_HEIGHT - (rand() % 11) + 1) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
     },
     {
         .x = ((GRID_WIDTH - 10) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
