@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "generate_maze.h"
+#include "maze.h"
 #include "stack.h"
 #include "state.h"
 #include "sdl_wrapper.h"
