@@ -249,13 +249,12 @@ static void generate_maze(maze_t *maze)
     }
 }
 
-bool generate_maze(maze_state_t *maze_state)
+void show_maze(maze_state_t *maze_state)
 {
     sdl_on_key((key_handler_t)on_key);
 
     init_grid(maze_state);
     draw_maze(&maze_state->maze);
-    return false;
 }
 
 void buildings_init(maze_state_t *maze_state)
