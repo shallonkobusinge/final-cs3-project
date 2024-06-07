@@ -318,7 +318,7 @@ void apply_aldous_broder(Maze *maze)
 
 void draw_maze(Maze *maze)
 {
-    render_color((rgb_color_t){255, 255, 255});
+    render_color((rgb_color_t){255, 0, 0});
 
     for (int y = 0; y < GRID_HEIGHT; ++y)
     {
