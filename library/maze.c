@@ -305,6 +305,7 @@ maze_state_t *maze_init()
     srand(time(NULL));
 
     maze_state_t *maze_state = malloc(sizeof(maze_state_t) + (sizeof(cell_t) * NUM_BUILDINGS));
+    maze_state->maze = create_maze();
 
     buildings_init(maze_state);
 
