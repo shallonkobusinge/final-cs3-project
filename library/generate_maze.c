@@ -323,11 +323,11 @@ void apply_aldous_broder(Maze *maze)
                 ny--;
             break; // Up
         case 1:
-            if (x < W - 1)
+            if (x < GRID_WIDTH - 1)
                 nx++;
             break; // Right
         case 2:
-            if (y < H - 1)
+            if (y < GRID_HEIGHT - 1)
                 ny++;
             break; // Down
         case 3:
