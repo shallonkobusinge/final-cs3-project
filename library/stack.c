@@ -8,7 +8,7 @@
 typedef struct node
 {
     size_t x, y;
-    struct node_t *next;
+    struct node *next;
 } node_t;
 
 typedef struct stack
