@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "cell.h"
 #include "generate_maze.h"
 #include "stack.h"
 #include "state.h"

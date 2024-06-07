@@ -17,7 +17,7 @@ typedef struct stack
     struct stack *next;
 } stack_t;
 
-void push(Node **stack, int x, int y)
+void push(Node **stack, size_t x, size_t y)
 {
     Node *node = (Node *)malloc(sizeof(Node));
     node->x = x;
