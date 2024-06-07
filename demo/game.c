@@ -24,7 +24,6 @@ struct state
     scene_t *scene;
     size_t page;
     bool maze_generated;
-    stack_t *head;
 };
 
 state_t *emscripten_init()
@@ -36,7 +35,6 @@ state_t *emscripten_init()
     state->maze_generated = false;
 
     state->page = 1;
-    state->head = NULL;
 
     return state;
 }
