@@ -60,7 +60,7 @@ static void init_grid(maze_state_t *maze_state)
     }
 
     render_color((rgb_color_t){50, 129, 110});
-    render_rect(&maze_state->hider);
+    render_rect(&hider);
 
     for (size_t i = 0; i < NUM_BUILDINGS; i++)
     {
