@@ -178,7 +178,7 @@ static void end_game(){
   exit(0);
 }
 
-static void seeker_collision(state_t *state) {
+void seeker_collision(state_t *state) {
   for(size_t i = 1; i < scene_bodies(state->scene); i++) {
      create_collision(state->scene, scene_get_body(state->scene, 0), scene_get_body(state->scene, i), end_game, NULL, 0.0);
   }
