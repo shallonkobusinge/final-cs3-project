@@ -16,7 +16,7 @@
 #include "sound_effect.h"
 #include "seeker.h"
 
-#define STARTING_SEEKERS 80
+#define STARTING_SEEKERS 50
 
 const vector_t MIN = {0, 0};
 const vector_t MAX = {1000, 500};
@@ -55,8 +55,6 @@ state_t *emscripten_init()
     state->sound_effect = load_game_sounds();
     state->body_assets = list_init(STARTING_SEEKERS, (free_func_t)asset_destroy);
     state->seeker = seeker_init(state);
-    hider_init(state);
-    add_new_seeker(state, false);
     // game_sound(state->sound_effect);
     return state;
 }

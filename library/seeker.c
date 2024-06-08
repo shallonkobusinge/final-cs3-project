@@ -75,7 +75,7 @@ void move_body(body_t *body, vector_t vec) {
  * @param state struct state of the game.
  * @param is_new determine if is it's the after 30 sec or initial seeker to be added.
 */
-void add_new_seeker(state_t *state, bool is_new) {
+static void add_new_seeker(state_t *state, bool is_new) {
    
    body_t *seeker;
     if(is_new){
@@ -113,7 +113,13 @@ void render_another_seeker(state_t *state, double dt){
     }
 
 }
-void hider_init(state_t *state){
+
+/**
+ * Adds a hider body returned by make_body() to the scene.
+ * Creates and adds a body asset of the hider to the list of body_assets in the state.
+ * @param state state struct of the game.
+*/
+static void hider_init(state_t *state){
     vector_t center = (vector_t){.x = (((GRID_WIDTH - 24) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), 
                                   .y = (((GRID_HEIGHT - 11) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4)};
 
@@ -127,6 +133,8 @@ void hider_init(state_t *state){
 seeker_t *seeker_init(state_t *state){
   seeker_t *seeker = malloc(sizeof(seeker_t));
   seeker->last_seeker_time = 0;
+  hider_init(state);
+  add_new_seeker(state, false);
   return seeker;
 }
 
