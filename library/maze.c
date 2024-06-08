@@ -21,7 +21,10 @@ const size_t MAZE_WINDOW_WIDTH = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
 const size_t MAZE_WINDOW_HEIGHT = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
 
 const size_t NUM_BUILDINGS = 2;
-const char *BUILDING_PATH = "assets/images/scenery/caltech-hall.png";
+const char *building_path[] = {
+    "assets/images/scenery/caltech-hall.png",
+    "assets/images/scenery/beckman-auditorium.png"
+};
 
 typedef struct state {
     scene_t *scene;
@@ -90,10 +93,7 @@ static void init_grid(state_t *state)
     for (size_t i = 0; i < NUM_BUILDINGS; i++)
     {
         vector_t center = (vector_t){ .x = maze_state->buildings[i].x, .y = maze_state->buildings[i].y };
-        // SDL_Rect cell = {maze_state->buildings[i].x, maze_state->buildings[i].y, GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2};
-        // render_color((rgb_color_t){241, 108, 45});
-        // render_rect(&cell);
-        body_t *building = make_body(GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2, center, (rgb_color_t){241, 108, 45});
+        body_t *building = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, center, (rgb_color_t){241, 108, 45});
         scene_add_body(state->scene, building);
         asset_t *asset_building = asset_make_image_with_body(maze_state->buildings[i].path, building);
         list_add(state->body_assets, asset_building);
@@ -246,7 +246,7 @@ static void buildings_init(maze_state_t *maze_state)
             .x = ((GRID_WIDTH - rand_x) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
             .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
         };
-        maze_state->buildings[i].path = BUILDING_PATH;
+        maze_state->buildings[i].path = building_path[i];
     }
 }
 
