@@ -65,7 +65,7 @@ state_t *emscripten_init()
 bool emscripten_main(state_t *state)
 {
     double dt = time_since_last_tick();
-    // render_seeker(state, dt);
+    render_seeker(state, dt);
     sdl_clear();
 
     if (state->page == 1)
@@ -76,14 +76,14 @@ bool emscripten_main(state_t *state)
     {
         show_maze(state->maze_state);
          render_seeker_bodies(state);
-        // for(size_t i = 1; i < scene_bodies(state->scene); i++) {
-        //     body_t *seeker = scene_get_body(state->scene, i);
-        //     rgb_color_t *color = body_get_color(seeker);
-        //     if(color->r == 0.1 && color->g == 0.9 && color->b == 0.2) {
-        //         random_move_seeker(seeker);
-        //     }
+        for(size_t i = 1; i < scene_bodies(state->scene); i++) {
+            body_t *seeker = scene_get_body(state->scene, i);
+            rgb_color_t *color = body_get_color(seeker);
+            if(color->r == 0.1 && color->g == 0.9 && color->b == 0.2) {
+                random_move_seeker(seeker);
+            }
             
-        // }
+        }
     }
     scene_tick(state->scene, dt);
 
