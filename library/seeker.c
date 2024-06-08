@@ -130,8 +130,11 @@ void render_seeker_bodies(state_t *state) {
         }
 }
 
-
-void random_move_seeker (body_t *seeker) {
+/*
+ * Moves the seeker cell to a random
+ * adjacent cell 
+*/
+static void generate_movement (body_t *seeker) {
     SDL_Delay(650);
     int direction = rand() % 4;
     
@@ -173,6 +176,17 @@ void random_move_seeker (body_t *seeker) {
     }
 
 }
+
+void seekers_random_movement() {
+for(size_t i = 1; i < scene_bodies(state->scene); i++) {
+      body_t *seeker = scene_get_body(state->scene, i);
+        rgb_color_t *color = body_get_color(seeker);
+            if(color->r == 0.1 && color->g == 0.9 && color->b == 0.2) {
+                generate_movement(seeker);
+            }
+            
+        }
+}
 void reset_user(body_t *body) {
   printf("GAME OVER");
 }
@@ -184,7 +198,6 @@ void end_game(body_t *body1, body_t *body2, vector_t axis, void *aux,
 
 void seeker_collision(state_t *state) {
   for(size_t i = 1; i < scene_bodies(state->scene); i++) {
-    printf("SIZE: %zu \n", scene_bodies(state->scene));
     body_t *seeker = scene_get_body(state->scene, i);
      create_collision(state->scene, scene_get_body(state->scene, 0), seeker, end_game, NULL, 0.0);
   }

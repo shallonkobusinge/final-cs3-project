@@ -327,10 +327,14 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
 
 }
 
-void show_maze(maze_state_t *maze_state)
+void show_maze(state_t *state, double dt)
 {
     sdl_on_key((key_handler_t)on_key);
 
-    init_grid(maze_state);
+    init_grid(state->maze_state);
     draw_maze(maze_state->maze);
+    seekers_random_movement();
+    render_seeker(state, dt);
+    render_seeker_bodies(state);
+    seeker_collision(state);
 }

@@ -28,16 +28,11 @@ void seeker_free(seeker_t *seeker);
 
 void render_seeker_bodies(state_t *state);
 
-/*
- * Moves the seeker cell to a random
- * adjacent cell 
-*/
-void random_move_seeker (body_t *seeker);
-
 void move_body(body_t *body, vector_t vec);
 
 void hider_init(state_t *state);
 
 void seeker_collision(state_t *state);
+void seekers_random_movement();
 
 #endif // #ifndef __SEEKER_H__
