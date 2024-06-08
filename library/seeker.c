@@ -36,6 +36,8 @@ typedef struct seeker {
 typedef struct state {
     scene_t *scene;
     size_t page;
+    maze_state_t *maze_state;
+    landing_page_state_t *landing_page_state;
     sound_effect_t *sound_effect;
     seeker_t *seeker;
     list_t *body_assets;
