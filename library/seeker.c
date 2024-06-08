@@ -173,10 +173,13 @@ void random_move_seeker (body_t *seeker) {
     }
 
 }
+void reset_user(body_t *body) {
+  printf("GAME OVER");
+}
 
-static void end_game(){
-  printf(" Game Over !!");
-  // exit(0);
+void end_game(body_t *body1, body_t *body2, vector_t axis, void *aux,
+                        double force_const) {
+  reset_user(body1);
 }
 
 void seeker_collision(state_t *state) {
