@@ -120,7 +120,7 @@ void hider_init(state_t *state){
 
 seeker_t *seeker_init(state_t *state){
   seeker_t *seeker = malloc(sizeof(seeker_t));
-  seeker->last_seeker_time = 0;
+  seeker->last_seeker_time = 10;
   return seeker;
 }
 
