@@ -28,6 +28,8 @@ extern const int GRID_CELL_SIZE;
 extern const int MAZE_WINDOW_WIDTH;
 extern const int MAZE_WINDOW_HEIGHT;
 
+const vector_t START_POS = (vector_t){.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4)};
+
 // SEEKING CONSTANTS
 #define S_NUM_POINTS 20
 #define S_RADIUS 0.1
