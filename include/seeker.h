@@ -33,6 +33,7 @@ void move_body(body_t *body, vector_t vec);
 void hider_init(state_t *state);
 
 void seeker_collision(state_t *state);
-void seekers_random_movement();
+
+void seekers_random_movement(state_t *state);
 
 #endif // #ifndef __SEEKER_H__

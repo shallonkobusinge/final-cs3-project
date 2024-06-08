@@ -177,7 +177,7 @@ static void generate_movement (body_t *seeker) {
 
 }
 
-void seekers_random_movement() {
+void seekers_random_movement(state_t *state) {
 for(size_t i = 1; i < scene_bodies(state->scene); i++) {
       body_t *seeker = scene_get_body(state->scene, i);
         rgb_color_t *color = body_get_color(seeker);

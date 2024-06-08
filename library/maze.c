@@ -333,7 +333,7 @@ void show_maze(state_t *state, double dt)
 
     init_grid(state->maze_state);
     draw_maze(state->maze_state->maze);
-    seekers_random_movement();
+    seekers_random_movement(state);
     render_seeker(state, dt);
     render_seeker_bodies(state);
     seeker_collision(state);
