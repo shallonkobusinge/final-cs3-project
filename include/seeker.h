@@ -59,13 +59,6 @@ void render_bodies(list_t *bodies);
 void move_body(body_t *body, vector_t vec);
 
 /**
- * Adds a hider body returned by make_body() to the scene.
- * Creates and adds a body asset of the hider to the list of body_assets in the state.
- * @param state state struct of the game.
-*/
-void hider_init(state_t *state);
-
-/**
  * Creates collision between the the seeeker and hider in the state.
  * @param state state struct of the game.
 */
