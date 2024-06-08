@@ -10,30 +10,71 @@
 
 typedef struct seeker seeker_t;
 
+/**
+ * Allocates memory for an empty seeker.
+ * Adds one seeker and one hider to the scene.
+ * @return the new seeker.
+*/
 seeker_t *seeker_init(state_t *state);
 
+/**
+ * Create a four vector shaped body.
+ * @param width width of the body.
+ * @param height height of the body.
+ * @param center center of the body.
+ * @param color color of the body.
+ * @return the new body.
+*/
 body_t *make_body(double width, double height, vector_t center, rgb_color_t color);
-
-void wrap_seeker_scene(body_t *seeker);
 
 /*
 * Add a new seeker either at the start of the game or
 * after 30 seconds into the game
 */
-void add_new_seeker(state_t *state, bool is_new);
 
-void render_seeker(state_t *state, double dt);
+/**
+ * Add a another seeker into the scene after every 30 seconds of the game.
+ * @param state state struct of the game.
+ * @param dt the number of seconds that have elapsed.
+*/
+void render_another_seeker(state_t *state, double dt);
 
+/**
+ * Release memory allocated for a given seeker.
+ * @param seeker a pointer to a seeker returned from seeker_init();
+*/
 void seeker_free(seeker_t *seeker);
 
-void render_seeker_bodies(state_t *state);
+/**
+ * Renders all bodies (seeker, buildings, hider) in the scene.
+ * @param bodies list of all bodies in the scene.
+*/
+void render_bodies(list_t *bodies);
 
+/**
+ * Translates a body by a vector.
+ * @param body body to be translated.
+ * @param vec vector that translates a body.
+*/
 void move_body(body_t *body, vector_t vec);
 
+/**
+ * Adds a hider body returned by make_body() to the scene.
+ * Creates and adds a body asset of the hider to the list of body_assets in the state.
+ * @param state state struct of the game.
+*/
 void hider_init(state_t *state);
 
+/**
+ * Creates collision between the the seeeker and hider in the state.
+ * @param state state struct of the game.
+*/
 void seeker_collision(state_t *state);
 
+/**
+ * Randomly moves only the seeker bodies in the scene.
+ * @param state state struct of the game.s
+*/
 void seekers_random_movement(state_t *state);
 
 #endif // #ifndef __SEEKER_H__

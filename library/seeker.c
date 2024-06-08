@@ -10,8 +10,6 @@
 #include "forces.h"
 
 const char *SEEKER_PATH = "assets/images/scenery/seeker_bg.png";
-
-
 const char *BEAVER_PATH = "assets/images/scenery/beaver.png";
 
 const vector_t MIN_WINDOW = {0, 0};
@@ -38,8 +36,6 @@ typedef struct seeker {
 typedef struct state {
     scene_t *scene;
     size_t page;
-    maze_state_t *maze_state;
-    landing_page_state_t *landing_page_state;
     sound_effect_t *sound_effect;
     seeker_t *seeker;
     list_t *body_assets;
@@ -72,7 +68,12 @@ void move_body(body_t *body, vector_t vec) {
   body_set_centroid(body, vec_add(body_get_centroid(body), vec));
 }
 
-void add_new_seeker(state_t *state, bool is_new){
+/**
+ * Adding a seeker to the scene.
+ * @param state struct state of the game.
+ * @param is_new determine if is it's the after 30 sec or initial seeker to be added.
+*/
+static void add_new_seeker(state_t *state, bool is_new){
    
    body_t *seeker;
     if(is_new){
@@ -84,7 +85,8 @@ void add_new_seeker(state_t *state, bool is_new){
     seeker = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, seeker_pos, SEEKER_COLOR);
     state->seeker->last_seeker_time = 0;
     }else{
-      vector_t center = (vector_t){.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4)};
+      vector_t center = (vector_t){.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), 
+                                    .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4)};
        seeker = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, center, SEEKER_COLOR);
     }
    
@@ -93,7 +95,7 @@ void add_new_seeker(state_t *state, bool is_new){
     list_add(state->body_assets, new_asset_seeker);
 }
 
-void render_seeker(state_t *state, double dt){
+void render_another_seeker(state_t *state, double dt){
     state->seeker->last_seeker_time += dt;
     if(state->seeker->last_seeker_time >= NEW_SEEKERS_INTERVAL){
       add_new_seeker(state, true);
@@ -101,7 +103,8 @@ void render_seeker(state_t *state, double dt){
     }
 }
 void hider_init(state_t *state){
-    vector_t center = (vector_t){.x = (((GRID_WIDTH - 24) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), .y = (((GRID_HEIGHT - 11) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4)};
+    vector_t center = (vector_t){.x = (((GRID_WIDTH - 24) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), 
+                                  .y = (((GRID_HEIGHT - 11) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4)};
 
     body_t *beaver = make_body(35, 35, center, (rgb_color_t){50, 129, 110});
     scene_add_body(state->scene, beaver);
@@ -118,18 +121,19 @@ seeker_t *seeker_init(state_t *state){
   return seeker;
 }
 
-void render_seeker_bodies(state_t *state) {
-   for (size_t i = 0; i < list_size(state->body_assets); i++) {
-          asset_render(list_get(state->body_assets, i));
+void render_bodies(list_t *bodies) {
+   for (size_t i = 0; i < list_size(bodies); i++) {
+          asset_render(list_get(bodies, i));
         }
 }
 
-/*
+/**
  * Moves the seeker cell to a random
- * adjacent cell 
+ * valid adjacent cell.
+ * @param seeker the body of the seeker to be moved.
 */
 static void generate_movement (body_t *seeker) {
-    SDL_Delay(650);
+    SDL_Delay(750);
     int direction = rand() % 4;
     
     vector_t centroid = VEC_ZERO;
@@ -181,13 +185,19 @@ for(size_t i = 1; i < scene_bodies(state->scene); i++) {
             
         }
 }
-void reset_user(body_t *body) {
-  printf("GAME OVER");
-}
 
-void end_game(body_t *body1, body_t *body2, vector_t axis, void *aux,
+/**
+ * Function handler whenever the bodies collide.
+ * @param body1 the first body.
+ * @param body2 the second body.
+ * @param axis unit vector pointing from body1 toward body2 that
+ *    that defines the direction the two bodies are colliding in
+ * @param aux the auxiliary value passed to create_collision.
+ * @param force_const the force constant passed to create_collision()
+*/
+static void end_game(body_t *body1, body_t *body2, vector_t axis, void *aux,
                         double force_const) {
-  reset_user(body1);
+   printf("GAME OVER");
 }
 
 void seeker_collision(state_t *state) {
