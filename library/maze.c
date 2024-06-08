@@ -44,7 +44,7 @@ typedef struct building
 {
     size_t x;
     size_t y;
-    char* path;
+    const char* path;
 } building_t;
 
 typedef struct maze_state
@@ -89,7 +89,7 @@ static void init_grid(state_t *state)
 
     for (size_t i = 0; i < NUM_BUILDINGS; i++)
     {
-        vector_t *center = (vector_t){ .x = maze_state->buildings[i].x, .y = maze_state->buildings[i].y };
+        vector_t center = (vector_t){ .x = maze_state->buildings[i].x, .y = maze_state->buildings[i].y };
         // SDL_Rect cell = {maze_state->buildings[i].x, maze_state->buildings[i].y, GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2};
         // render_color((rgb_color_t){241, 108, 45});
         // render_rect(&cell);
