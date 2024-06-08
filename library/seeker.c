@@ -73,7 +73,7 @@ void move_body(body_t *body, vector_t vec) {
  * @param state struct state of the game.
  * @param is_new determine if is it's the after 30 sec or initial seeker to be added.
 */
-static void add_new_seeker(state_t *state, bool is_new){
+void add_new_seeker(state_t *state, bool is_new) {
    
    body_t *seeker;
     if(is_new){
@@ -125,8 +125,6 @@ void hider_init(state_t *state){
 seeker_t *seeker_init(state_t *state){
   seeker_t *seeker = malloc(sizeof(seeker_t));
   seeker->last_seeker_time = 0;
-  hider_init(state);
-  add_new_seeker(state, false);
   return seeker;
 }
 

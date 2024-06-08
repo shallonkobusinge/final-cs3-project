@@ -77,4 +77,6 @@ void seeker_collision(state_t *state);
 */
 void seekers_random_movement(state_t *state);
 
+void add_new_seeker(state_t *state, bool is_new);
+
 #endif // #ifndef __SEEKER_H__
