@@ -23,8 +23,6 @@ extern const int GRID_CELL_SIZE;
 extern const int MAZE_WINDOW_WIDTH;
 extern const int MAZE_WINDOW_HEIGHT;
 
-const vector_t START_POS = (vector_t){.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4)};
-
 // SEEKING CONSTANTS
 #define S_NUM_POINTS 20
 #define S_RADIUS 0.1
@@ -85,7 +83,8 @@ void add_new_seeker(state_t *state, bool is_new){
     seeker = make_seeker(GRID_CELL_SIZE, GRID_CELL_SIZE, seeker_pos);
     state->seeker->last_seeker_time = 0;
     }else{
-       seeker = make_seeker(GRID_CELL_SIZE, GRID_CELL_SIZE, START_POS);
+      vector_t center = (vector_t){.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4)};
+       seeker = make_seeker(GRID_CELL_SIZE, GRID_CELL_SIZE, center);
     }
    
     scene_add_body(state->scene, seeker);
