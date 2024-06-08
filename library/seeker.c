@@ -15,11 +15,6 @@ const char *BEAVER_PATH = "assets/images/seeking/beaver.png";
 
 const vector_t MIN_WINDOW = {0, 0};
 const vector_t MAX_WINDOW = {1000, 500};
-const vector_t INITIAL_VELOCITY = {12, 12};
-
-const vector_t MIN_WINDOW = {0, 0};
-const vector_t MAX_WINDOW = {1000, 500};
-const vector_t INITIAL_VELOCITY = {12, 12};
 
 extern const size_t GRID_WIDTH;
 extern const size_t GRID_HEIGHT;
