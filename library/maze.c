@@ -10,6 +10,7 @@
 #include "maze.h"
 #include "sound_effect.h"
 #include "seeker.h"
+#include "asset.h"
 
 const size_t GRID_WIDTH = 25;
 const size_t GRID_HEIGHT = 12;
@@ -20,8 +21,7 @@ const size_t MAZE_WINDOW_WIDTH = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
 const size_t MAZE_WINDOW_HEIGHT = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
 
 const size_t NUM_BUILDINGS = 2;
-
-SDL_Rect hider = (SDL_Rect){(GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
+const char *BUILDING_PATH = "assets/images/scenery/caltech-hall.png";
 
 typedef struct state {
     scene_t *scene;
@@ -44,6 +44,7 @@ typedef struct building
 {
     size_t x;
     size_t y;
+    char* path;
 } building_t;
 
 typedef struct maze_state
@@ -69,10 +70,12 @@ maze_t *create_maze()
 
 /**
  * Initializes and draws the grid, draws buildings and hider.
- * @param maze_state state struct of the maze.
+ * @param state state struct.
  */
-static void init_grid(maze_state_t *maze_state)
+static void init_grid(state_t *state)
 {
+    maze_state_t *maze_state = state->maze_state;
+
     render_color((rgb_color_t){230, 230, 230});
 
     for (size_t x = 0; x < MAZE_WINDOW_WIDTH; x += GRID_CELL_SIZE)
@@ -86,9 +89,15 @@ static void init_grid(maze_state_t *maze_state)
 
     for (size_t i = 0; i < NUM_BUILDINGS; i++)
     {
-        SDL_Rect cell = {maze_state->buildings[i].x, maze_state->buildings[i].y, GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2};
-        render_color((rgb_color_t){241, 108, 45});
-        render_rect(&cell);
+        vector_t *center = (vector_t){ .x = maze_state->buildings[i].x, .y = maze_state->buildings[i].y };
+        // SDL_Rect cell = {maze_state->buildings[i].x, maze_state->buildings[i].y, GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2};
+        // render_color((rgb_color_t){241, 108, 45});
+        // render_rect(&cell);
+        body_t *building = make_body(GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2, center, (rgb_color_t){241, 108, 45});
+        scene_add_body(state->scene, building);
+        asset_t *asset_building = asset_make_image_with_body(maze_state->buildings[i].path, building);
+        list_add(state->body_assets, building);
+        
     }
 }
 
@@ -237,6 +246,7 @@ static void buildings_init(maze_state_t *maze_state)
             .x = ((GRID_WIDTH - rand_x) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
             .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
         };
+        maze_state->buildings[i].path = BUILDING_PATH;
     }
 }
 
@@ -331,7 +341,7 @@ void show_maze(state_t *state, double dt)
 {
     sdl_on_key((key_handler_t)on_key);
 
-    init_grid(state->maze_state);
+    init_grid(state);
     draw_maze(state->maze_state->maze);
     seekers_random_movement(state);
     render_seeker(state, dt);

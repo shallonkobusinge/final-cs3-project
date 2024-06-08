@@ -12,7 +12,7 @@ typedef struct seeker seeker_t;
 
 seeker_t *seeker_init(state_t *state);
 
-body_t *make_seeker(double width, double height, vector_t center);
+body_t *make_body(double width, double height, vector_t center, rgb_color_t color);
 
 void wrap_seeker_scene(body_t *seeker);
 

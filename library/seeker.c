@@ -9,10 +9,10 @@
 #include "maze.h"
 #include "forces.h"
 
-const char *SEEKER_PATH = "assets/images/seeking/seeker_bg.png";
+const char *SEEKER_PATH = "assets/images/scenery/seeker_bg.png";
 
 
-const char *BEAVER_PATH = "assets/images/seeking/beaver.png";
+const char *BEAVER_PATH = "assets/images/scenery/beaver.png";
 
 const vector_t MIN_WINDOW = {0, 0};
 const vector_t MAX_WINDOW = {1000, 500};
@@ -29,7 +29,7 @@ extern const int MAZE_WINDOW_HEIGHT;
 #define S_RADIUS 0.1
 #define NEW_SEEKERS_INTERVAL 60
 
-const rgb_color_t seeker_color = (rgb_color_t){0.1, 0.9, 0.2};
+const rgb_color_t SEEKER_COLOR = (rgb_color_t){0.1, 0.9, 0.2};
 
 typedef struct seeker {
     double last_seeker_time;
@@ -45,7 +45,7 @@ typedef struct state {
     list_t *body_assets;
 }state_t;
 
-body_t *make_seeker(double w, double h, vector_t center) {
+body_t *make_body(double w, double h, vector_t center, rgb_color_t color) {
 
   list_t *c = list_init(4, free);
    vector_t *v1 = malloc(sizeof(vector_t));
@@ -63,7 +63,7 @@ body_t *make_seeker(double w, double h, vector_t center) {
   vector_t *v4 = malloc(sizeof(vector_t));
   *v4 = (vector_t){0, h};
   list_add(c, v4);
-  body_t *seeker = body_init(c, 6, seeker_color);
+  body_t *seeker = body_init(c, 6, color);
   body_set_centroid(seeker, center);
   return seeker;
 }
@@ -81,11 +81,11 @@ void add_new_seeker(state_t *state, bool is_new){
         .y = (rand() % (GRID_HEIGHT - 4) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
     };
     
-    seeker = make_seeker(GRID_CELL_SIZE, GRID_CELL_SIZE, seeker_pos);
+    seeker = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, seeker_pos, SEEKER_COLOR);
     state->seeker->last_seeker_time = 0;
     }else{
       vector_t center = (vector_t){.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4)};
-       seeker = make_seeker(GRID_CELL_SIZE, GRID_CELL_SIZE, center);
+       seeker = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, center, SEEKER_COLOR);
     }
    
     scene_add_body(state->scene, seeker);
@@ -111,7 +111,7 @@ void render_seeker(state_t *state, double dt){
 void hider_init(state_t *state){
     vector_t center = (vector_t){.x = (((GRID_WIDTH - 24) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), .y = (((GRID_HEIGHT - 11) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4)};
 
-    body_t *beaver = make_seeker(35, 35, center);
+    body_t *beaver = make_body(35, 35, center, (rgb_color_t){50, 129, 110});
     scene_add_body(state->scene, beaver);
 
     asset_t *asset_beaver = asset_make_image_with_body(BEAVER_PATH, beaver);
