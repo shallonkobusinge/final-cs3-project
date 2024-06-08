@@ -34,7 +34,7 @@ sound_effect_t *load_game_sounds() {
   return sounds;
 }
 
-void free_sound(sound_effect_t *sound_effect){
+void sound_free(sound_effect_t *sound_effect){
   Mix_FreeMusic(sound_effect->game_sound);
   Mix_FreeChunk(sound_effect->tagged_sound);
   free(sound_effect);

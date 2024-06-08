@@ -5,17 +5,29 @@
 #include "list.h"
 #include "asset.h"
 #include "sound_effect.h"
-const char *SEEKER_PATH = "assets/seeker_bg.png";
+
+const char *SEEKER_PATH = "assets/images/seeking/seeker_bg.png";
+
+
+const char *BEAVER_PATH = "assets/images/seeking/beaver.png";
 
 const vector_t MIN_WINDOW = {0, 0};
 const vector_t MAX_WINDOW = {1000, 500};
-const double OUTER_RADIUS = 60;
-const double INNER_RADIUS = 60;
-const vector_t START_POS = {0, 45};
-const vector_t INITIAL_VELOCITY = {60, 20};
+const vector_t INITIAL_VELOCITY = {12, 12};
+
+const size_t GRID_WIDTH_S = 25;
+const size_t GRID_HEIGHT_S = 12;
+const size_t NUM_CELLS_S = GRID_WIDTH_S * GRID_HEIGHT_S;
+
+const int GRID_CELL_SIZE_S = 40;
+const int window_width_s = (GRID_WIDTH_S * GRID_CELL_SIZE_S) + 1;
+const int window_height_s = (GRID_HEIGHT_S * GRID_CELL_SIZE_S) + 1;
+const vector_t START_POS = (vector_t){.x = (((GRID_WIDTH_S - 2) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4), .y = (((GRID_HEIGHT_S - 6) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4)};
+const double OUTER_RADIUS =  GRID_CELL_SIZE_S;
+const double INNER_RADIUS = GRID_CELL_SIZE_S;
 
 // SEEKING CONSTANTS
-#define STARTING_SEEKERS 1
+#define STARTING_SEEKERS 80
 #define S_NUM_POINTS 20
 #define S_RADIUS 0.1
 #define NEW_SEEKERS_INTERVAL 30
@@ -23,16 +35,24 @@ const vector_t INITIAL_VELOCITY = {60, 20};
 const rgb_color_t seeker_color = (rgb_color_t){0.1, 0.9, 0.2};
 
 typedef struct seeker {
-    list_t *body_assets;
     double last_seeker_time;
     double max_seekers;
 }seeker_t;
 
+typedef struct state {
+    scene_t *scene;
+    size_t page;
+    bool maze_generated;
+    sound_effect_t *sound_effect;
+    seeker_t *seeker;
+    list_t *body_assets;
+}state_t;
 
 body_t *make_seeker(double w, double h, vector_t center) {
-    list_t *c = list_init(4, free);
-  vector_t *v1 = malloc(sizeof(vector_t));
-  *v1 = (vector_t){center.x, 0};
+
+  list_t *c = list_init(4, free);
+   vector_t *v1 = malloc(sizeof(vector_t));
+  *v1 = (vector_t){0 , 0};
   list_add(c, v1);
 
   vector_t *v2 = malloc(sizeof(vector_t));
@@ -46,79 +66,118 @@ body_t *make_seeker(double w, double h, vector_t center) {
   vector_t *v4 = malloc(sizeof(vector_t));
   *v4 = (vector_t){0, h};
   list_add(c, v4);
-  body_t *obstacle = body_init(c, 1, seeker_color);
-  body_set_centroid(obstacle, center);
-  return obstacle;
+  body_t *seeker = body_init(c, 6, seeker_color);
+  body_set_centroid(seeker, center);
+  return seeker;
 }
 
-void wrap_seeker_scene(body_t *seeker) {
-  vector_t centroid = body_get_centroid(seeker);
-  vector_t velocity = body_get_velocity(seeker);
-  
-  if (centroid.x >= MAX_WINDOW.x || centroid.x <= MIN_WINDOW.x) {
-        velocity.x = -velocity.x;
-  }
-  if(centroid.y >= MAX_WINDOW.y || centroid.y <= MIN_WINDOW.y) {
-    velocity.y = -velocity.y;
-  }
-  body_set_velocity(seeker, velocity);
+void move_body(body_t *body, vector_t vec) {
+  body_set_centroid(body, vec_add(body_get_centroid(body), vec));
 }
 
-
-void add_new_seeker(scene_t *scene, seeker_t *seeker_ipt, bool is_new){
+void add_new_seeker(state_t *state, bool is_new){
    
-   vector_t seeker_vel = {.x = 0.0, .y = 0.0};
    body_t *seeker;
     if(is_new){
       vector_t seeker_pos = (vector_t){
-        .x = rand() % (int)INITIAL_VELOCITY.x,
-        .y = rand() % (int)(MAX_WINDOW.y),
+        .x = (rand() % (GRID_WIDTH_S ) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4,
+        .y = (rand() % (GRID_HEIGHT_S - 4) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4,
     };
-     seeker_vel = (vector_t){
-        .x = rand() % (int)INITIAL_VELOCITY.x + 20,
-        .y = rand() % (int)INITIAL_VELOCITY.y + 10
-    };
-      seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, seeker_pos);
+    
+    seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, seeker_pos);
     }
     seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, START_POS);
-    seeker_vel = INITIAL_VELOCITY;
-  
-    scene_add_body(scene, seeker);
-    body_set_velocity(seeker, seeker_vel);
+    scene_add_body(state->scene, seeker);
     asset_t *new_asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
-    list_add(seeker_ipt->body_assets, new_asset_seeker);
-    seeker_ipt->last_seeker_time = 0;
-    seeker_ipt->max_seekers += 1;
+    list_add(state->body_assets, new_asset_seeker);
+    state->seeker->last_seeker_time = 0;
+    state->seeker->max_seekers += 1;
 }
 
-void introduce_seeker(scene_t *scene, seeker_t *seeker, double dt, sound_effect_t *sound_effect){
-    seeker->last_seeker_time += dt;
-    if(seeker->last_seeker_time >= NEW_SEEKERS_INTERVAL){
-      add_new_seeker(scene, seeker, true);
-       tagged_sound(sound_effect);
+void render_seeker(state_t *state, double dt){
+    state->seeker->last_seeker_time += dt;
+    if(state->seeker->last_seeker_time >= NEW_SEEKERS_INTERVAL){
+      add_new_seeker(state, true);
+      //  tagged_sound(state->sound_effect);
     }
-    for (size_t i = 0; i < list_size(seeker->body_assets); i++) {
-      asset_render(list_get(seeker->body_assets, i));
+    for (size_t i = 1; i < list_size(state->body_assets); i++) {
+
+        rgb_color_t *color = body_get_color(scene_get_body(state->scene, i));
+        if(color->r == 0.1 && color->g == 0.9 && color->b == 0.2) {
+              asset_render(list_get(state->body_assets, i));
+            }
+ 
     }
 }
+void hider_init(state_t *state){
+    vector_t center = (vector_t){.x = (((GRID_WIDTH_S - 24) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4), .y = (((GRID_HEIGHT_S - 11) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4)};
 
-seeker_t *seeker_init(scene_t *scene){
+    body_t *beaver = make_seeker(35, 35, center);
+    scene_add_body(state->scene, beaver);
+
+    asset_t *asset_beaver = asset_make_image_with_body(BEAVER_PATH, beaver);
+    list_add(state->body_assets, asset_beaver);
+}
+
+seeker_t *seeker_init(state_t *state){
   seeker_t *seeker = malloc(sizeof(seeker_t));
-  seeker->max_seekers = 50;
+  seeker->max_seekers = STARTING_SEEKERS;
   seeker->last_seeker_time = 0;
-  seeker->body_assets = list_init(seeker->max_seekers, (free_func_t)asset_destroy);
-    add_new_seeker(scene, seeker, false);
+  state->body_assets = list_init(seeker->max_seekers, (free_func_t)asset_destroy);
+  return seeker;
+}
+
+void render_seeker_bodies(state_t *state) {
+   for (size_t i = 0; i < list_size(state->body_assets); i++) {
+          asset_render(list_get(state->body_assets, i));
+        }
+}
+
+
+void random_move_seeker (body_t *seeker) {
+    SDL_Delay(650);
+    int direction = rand() % 4;
     
-    return seeker;
-}
+    vector_t centroid = VEC_ZERO;
 
-void render_seeker_bodies(seeker_t *seeker) {
-   for (size_t i = 0; i < list_size(seeker->body_assets); i++) {
-      asset_render(list_get(seeker->body_assets, i));
+    switch (direction) {
+    case 0: { // move left
+            centroid.x -= GRID_CELL_SIZE_S;
+        break;
     }
+    case 1: { // move right
+            centroid.x += GRID_CELL_SIZE_S;
+        break;
+    }
+    case 2: { // move up
+            centroid.y -= GRID_CELL_SIZE_S;
+        break;
+    }
+    case 3: { // move down
+            centroid.y += GRID_CELL_SIZE_S;
+        break;
+    }
+    default:
+        break;
+    }
+    list_t *shape = body_get_shape(seeker);
+    bool move_valid = true;
+    for(size_t i = 0; i < list_size(shape); i++) {
+      vector_t vertex = *(vector_t *)list_get(shape, i);
+      vector_t new_vertex = vec_add(vertex, centroid);
+      if(new_vertex.x < 0 || new_vertex.y < 0 || new_vertex.x >= window_width_s || new_vertex.y >= window_height_s){
+        move_valid = false;
+        break;
+      }
+    }
+    list_free(shape);
+    if(move_valid){
+      move_body(seeker, centroid);
+    }
+
 }
 
-void free_seeker(seeker_t *seeker) {
-  free(seeker->body_assets);
+void seeker_free(seeker_t *seeker) {
   free(seeker);
 }
+

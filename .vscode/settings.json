@@ -19,6 +19,8 @@
         "body.h": "c",
         "list.h": "c",
         "assert.h": "c",
-        "maze.h": "c"
+        "maze.h": "c",
+        "seeker.h":"c",
+        "sound_effect.h":"c"
     }
 }
