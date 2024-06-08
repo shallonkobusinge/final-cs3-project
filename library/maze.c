@@ -315,7 +315,7 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
     for(size_t i = 0; i < list_size(shape); i++) {
       vector_t vertex = *(vector_t *)list_get(shape, i);
       vector_t new_vertex = vec_add(vertex, translation);
-      if(new_vertex.x < 0 || new_vertex.y =< 0 || new_vertex.x >= MAZE_WINDOW_WIDTH || new_vertex.y >= MAZE_WINDOW_HEIGHT){
+      if(new_vertex.x < 0 || new_vertex.y < 0 || new_vertex.x >= MAZE_WINDOW_WIDTH || new_vertex.y >= MAZE_WINDOW_HEIGHT){
         move_valid = false;
         break;
       }
@@ -327,12 +327,12 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
 
 }
 
-void show_maze(state_t *state, double dt)
+void show_maze(state_t *state)
 {
     sdl_on_key((key_handler_t)on_key);
 
     init_grid(state->maze_state);
-    draw_maze(maze_state->maze);
+    draw_maze(state->maze_state->maze);
     seekers_random_movement();
     render_seeker(state, dt);
     render_seeker_bodies(state);
