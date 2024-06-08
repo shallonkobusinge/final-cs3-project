@@ -176,7 +176,7 @@ void random_move_seeker (body_t *seeker) {
 
 static void end_game(){
   printf(" Game Over !!");
-  exit(0);
+  // exit(0);
 }
 
 void seeker_collision(state_t *state) {
