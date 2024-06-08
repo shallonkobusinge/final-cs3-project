@@ -52,7 +52,7 @@ state_t *emscripten_init()
     state->page = 2;
     state->maze_state = maze_init();
     state->landing_page_state = landing_page_init();
-    state->sound_effect = load_game_sounds();
+    state->sound_effect = sound_effect_init();
     state->body_assets = list_init(STARTING_SEEKERS, (free_func_t)asset_destroy);
     state->seeker = seeker_init(state);
     // game_sound(state->sound_effect);

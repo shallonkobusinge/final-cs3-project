@@ -1,6 +1,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 #include "sound_effect.h"
+
 const char *TAGGED_SOUND_PATH = "assets/sound_effects/tagged.wav";
 const char *GAME_SOUND_EFFECT = "assets/sound_effects/hide-and-seek.wav";
 
@@ -20,7 +21,7 @@ void init_sound() {
   }
 }
 
-sound_effect_t *load_game_sounds() {
+sound_effect_t *sound_effect_init() {
   sound_effect_t *sounds = malloc(sizeof(sound_effect_t));
   sounds->game_sound = Mix_LoadMUS(GAME_SOUND_EFFECT);
   if(sounds->game_sound == NULL) {
