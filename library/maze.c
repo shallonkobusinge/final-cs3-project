@@ -21,7 +21,7 @@ const size_t MAZE_WINDOW_WIDTH = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
 const size_t MAZE_WINDOW_HEIGHT = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
 
 const size_t NUM_BUILDINGS = 2;
-const char *building_path[] = {
+const char *building_paths[] = {
     "assets/images/scenery/caltech-hall.png",
     "assets/images/scenery/beckman-auditorium.png"
 };
@@ -246,7 +246,7 @@ static void buildings_init(maze_state_t *maze_state)
             .x = ((GRID_WIDTH - rand_x) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
             .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
         };
-        maze_state->buildings[i].path = building_path[i];
+        maze_state->buildings[i].path = building_paths[i];
     }
 }
 
