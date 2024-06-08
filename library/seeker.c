@@ -17,16 +17,16 @@ const vector_t MIN_WINDOW = {0, 0};
 const vector_t MAX_WINDOW = {1000, 500};
 const vector_t INITIAL_VELOCITY = {12, 12};
 
-const size_t GRID_WIDTH_S = 25;
-const size_t GRID_HEIGHT_S = 12;
-const size_t NUM_CELLS_S = GRID_WIDTH_S * GRID_HEIGHT_S;
+const vector_t MIN_WINDOW = {0, 0};
+const vector_t MAX_WINDOW = {1000, 500};
+const vector_t INITIAL_VELOCITY = {12, 12};
 
-const int GRID_CELL_SIZE_S = 40;
-const int window_width_s = (GRID_WIDTH_S * GRID_CELL_SIZE_S) + 1;
-const int window_height_s = (GRID_HEIGHT_S * GRID_CELL_SIZE_S) + 1;
-const vector_t START_POS = (vector_t){.x = (((GRID_WIDTH_S - 2) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4), .y = (((GRID_HEIGHT_S - 6) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4)};
-const double OUTER_RADIUS =  GRID_CELL_SIZE_S;
-const double INNER_RADIUS = GRID_CELL_SIZE_S;
+extern const size_t GRID_WIDTH;
+extern const size_t GRID_HEIGHT;
+extern const size_t NUM_CELLS;
+extern const int GRID_CELL_SIZE;
+extern const int MAZE_WINDOW_WIDTH;
+extern const int MAZE_WINDOW_HEIGHT;
 
 // SEEKING CONSTANTS
 #define S_NUM_POINTS 20
@@ -81,14 +81,14 @@ void add_new_seeker(state_t *state, bool is_new){
    body_t *seeker;
     if(is_new){
       vector_t seeker_pos = (vector_t){
-        .x = (rand() % (GRID_WIDTH_S ) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4,
-        .y = (rand() % (GRID_HEIGHT_S - 4) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4,
+        .x = (rand() % (GRID_WIDTH ) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+        .y = (rand() % (GRID_HEIGHT - 4) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
     };
     
-    seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, seeker_pos);
+    seeker = make_seeker(GRID_CELL_SIZE, GRID_CELL_SIZE, seeker_pos);
     state->seeker->last_seeker_time = 0;
     }else{
-       seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, START_POS);
+       seeker = make_seeker(GRID_CELL_SIZE, GRID_CELL_SIZE, START_POS);
     }
    
     scene_add_body(state->scene, seeker);
@@ -112,7 +112,7 @@ void render_seeker(state_t *state, double dt){
     }
 }
 void hider_init(state_t *state){
-    vector_t center = (vector_t){.x = (((GRID_WIDTH_S - 24) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4), .y = (((GRID_HEIGHT_S - 11) * GRID_CELL_SIZE_S) + GRID_CELL_SIZE_S / 4)};
+    vector_t center = (vector_t){.x = (((GRID_WIDTH - 24) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), .y = (((GRID_HEIGHT - 11) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4)};
 
     body_t *beaver = make_seeker(35, 35, center);
     scene_add_body(state->scene, beaver);
@@ -142,19 +142,19 @@ void random_move_seeker (body_t *seeker) {
 
     switch (direction) {
     case 0: { // move left
-            centroid.x -= GRID_CELL_SIZE_S;
+            centroid.x -= GRID_CELL_SIZE;
         break;
     }
     case 1: { // move right
-            centroid.x += GRID_CELL_SIZE_S;
+            centroid.x += GRID_CELL_SIZE;
         break;
     }
     case 2: { // move up
-            centroid.y -= GRID_CELL_SIZE_S;
+            centroid.y -= GRID_CELL_SIZE;
         break;
     }
     case 3: { // move down
-            centroid.y += GRID_CELL_SIZE_S;
+            centroid.y += GRID_CELL_SIZE;
         break;
     }
     default:
@@ -165,7 +165,7 @@ void random_move_seeker (body_t *seeker) {
     for(size_t i = 0; i < list_size(shape); i++) {
       vector_t vertex = *(vector_t *)list_get(shape, i);
       vector_t new_vertex = vec_add(vertex, centroid);
-      if(new_vertex.x < 0 || new_vertex.y < 0 || new_vertex.x >= window_width_s || new_vertex.y >= window_height_s){
+      if(new_vertex.x < 0 || new_vertex.y < 0 || new_vertex.x >= MAZE_WINDOW_WIDTH || new_vertex.y >= MAZE_WINDOW_HEIGHT){
         move_valid = false;
         break;
       }
