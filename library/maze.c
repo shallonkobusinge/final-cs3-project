@@ -300,12 +300,12 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
         }
         case UP_ARROW:
         {
-            translation.y -= GRID_CELL_SIZE;
+            translation.y += GRID_CELL_SIZE;
             break;
         }
         case DOWN_ARROW:
         {
-            translation.y += GRID_CELL_SIZE;
+            translation.y -= GRID_CELL_SIZE;
             break;
         }
         }
