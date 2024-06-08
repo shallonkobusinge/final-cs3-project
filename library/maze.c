@@ -6,6 +6,10 @@
 #include "stack.h"
 #include "state.h"
 #include "sdl_wrapper.h"
+#include "landing_page.h"
+#include "maze.h"
+#include "sound_effect.h"
+#include "seeker.h"
 
 const size_t GRID_WIDTH = 25;
 const size_t GRID_HEIGHT = 12;
@@ -19,7 +23,15 @@ const size_t NUM_BUILDINGS = 2;
 
 SDL_Rect hider = (SDL_Rect){(GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 4), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
 
-typedef struct state state_t;
+typedef struct state {
+    scene_t *scene;
+    size_t page;
+    maze_state_t *maze_state;
+    landing_page_state_t *landing_page_state;
+    sound_effect_t *sound_effect;
+    seeker_t *seeker;
+    list_t *body_assets;
+}state_t;
 
 typedef struct maze
 {
