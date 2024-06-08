@@ -180,8 +180,10 @@ static void end_game(){
 }
 
 void seeker_collision(state_t *state) {
+  body_t *beaver = scene_get_body(state->scene, 0);
   for(size_t i = 1; i < scene_bodies(state->scene); i++) {
-     create_collision(state->scene, scene_get_body(state->scene, 0), scene_get_body(state->scene, i), end_game, NULL, 0.0);
+    body_t *seeker = scene_get_body(state->scene, i);
+     create_collision(state->scene, seeker, beaver, end_game, NULL, 0.0);
   }
  
 }
