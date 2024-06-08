@@ -86,8 +86,10 @@ void add_new_seeker(state_t *state, bool is_new){
     
     seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, seeker_pos);
     state->seeker->last_seeker_time = 0;
+    }else{
+       seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, START_POS);
     }
-    seeker = make_seeker(OUTER_RADIUS, INNER_RADIUS, START_POS);
+   
     scene_add_body(state->scene, seeker);
     asset_t *new_asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
     list_add(state->body_assets, new_asset_seeker);
