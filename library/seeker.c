@@ -27,7 +27,7 @@ extern const int MAZE_WINDOW_HEIGHT;
 // SEEKING CONSTANTS
 #define S_NUM_POINTS 20
 #define S_RADIUS 0.1
-#define NEW_SEEKERS_INTERVAL 3
+#define NEW_SEEKERS_INTERVAL 60
 
 const rgb_color_t SEEKER_COLOR = (rgb_color_t){0.1, 0.9, 0.2};
 
@@ -99,14 +99,6 @@ void render_seeker(state_t *state, double dt){
       add_new_seeker(state, true);
       //  tagged_sound(state->sound_effect);
     }
-    // for (size_t i = 1; i < list_size(state->body_assets); i++) {
-
-    //     rgb_color_t *color = body_get_color(scene_get_body(state->scene, i));
-    //     if(color->r == 0.1 && color->g == 0.9 && color->b == 0.2) {
-    //           asset_render(list_get(state->body_assets, i));
-    //         }
- 
-    // }
 }
 void hider_init(state_t *state){
     vector_t center = (vector_t){.x = (((GRID_WIDTH - 24) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), .y = (((GRID_HEIGHT - 11) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4)};
@@ -121,6 +113,8 @@ void hider_init(state_t *state){
 seeker_t *seeker_init(state_t *state){
   seeker_t *seeker = malloc(sizeof(seeker_t));
   seeker->last_seeker_time = 0;
+  hider_init(state);
+  add_new_seeker(state, false);
   return seeker;
 }
 
