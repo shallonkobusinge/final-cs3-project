@@ -7,6 +7,7 @@
 #include "sound_effect.h"
 #include "landing_page.h"
 #include "maze.h"
+#include "forces.h"
 
 const char *SEEKER_PATH = "assets/images/seeking/seeker_bg.png";
 
