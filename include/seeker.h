@@ -10,10 +10,6 @@
 
 typedef struct seeker seeker_t;
 
-/**
- * Initilize a seeker
- * @param state state struct of the seeker.
-*/
 seeker_t *seeker_init(state_t *state);
 
 body_t *make_body(double width, double height, vector_t center, rgb_color_t color);
