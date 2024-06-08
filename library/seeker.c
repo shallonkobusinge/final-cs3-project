@@ -173,7 +173,18 @@ void random_move_seeker (body_t *seeker) {
 
 }
 
+static void end_game(){
+  printf(" Game Over !!");
+  exit(0);
+}
+
+static void seeker_collision(state_t *state) {
+  for(size_t i = 1; i < scene_bodies(state->scene); i++) {
+     create_collision(state->scene, scene_get_body(state->scene, 0), scene_get_body(state->scene, i), end_game, NULL, 0.0);
+  }
+ 
+}
+
 void seeker_free(seeker_t *seeker) {
   free(seeker);
 }
-
