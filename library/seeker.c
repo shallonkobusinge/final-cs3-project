@@ -27,7 +27,6 @@ const double OUTER_RADIUS =  GRID_CELL_SIZE_S;
 const double INNER_RADIUS = GRID_CELL_SIZE_S;
 
 // SEEKING CONSTANTS
-#define STARTING_SEEKERS 80
 #define S_NUM_POINTS 20
 #define S_RADIUS 0.1
 #define NEW_SEEKERS_INTERVAL 30
@@ -123,7 +122,6 @@ void hider_init(state_t *state){
 seeker_t *seeker_init(state_t *state){
   seeker_t *seeker = malloc(sizeof(seeker_t));
   seeker->last_seeker_time = 0;
-  state->body_assets = list_init(STARTING_SEEKERS, (free_func_t)asset_destroy);
   return seeker;
 }
 
