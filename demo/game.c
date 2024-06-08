@@ -51,7 +51,7 @@ state_t *emscripten_init()
     state->landing_page_state = landing_page_init();
     state->sound_effect = load_game_sounds();
     state->seeker = seeker_init(state);
-    hider_init(state);
+    // hider_init(state);
     add_new_seeker(state, false);
     game_sound(state->sound_effect);
 
