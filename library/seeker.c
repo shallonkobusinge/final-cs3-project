@@ -91,7 +91,6 @@ void add_new_seeker(state_t *state, bool is_new){
     asset_t *new_asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
     list_add(state->body_assets, new_asset_seeker);
     state->seeker->last_seeker_time = 0;
-    state->seeker->max_seekers += 1;
 }
 
 void render_seeker(state_t *state, double dt){
@@ -121,9 +120,8 @@ void hider_init(state_t *state){
 
 seeker_t *seeker_init(state_t *state){
   seeker_t *seeker = malloc(sizeof(seeker_t));
-  seeker->max_seekers = STARTING_SEEKERS;
   seeker->last_seeker_time = 0;
-  state->body_assets = list_init(seeker->max_seekers, (free_func_t)asset_destroy);
+  state->body_assets = list_init(STARTING_SEEKERS, (free_func_t)asset_destroy);
   return seeker;
 }
 
