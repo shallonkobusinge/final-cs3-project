@@ -55,7 +55,7 @@ state_t *emscripten_init()
     state->sound_effect = load_game_sounds();
     state->body_assets = list_init(STARTING_SEEKERS, (free_func_t)asset_destroy);
     state->seeker = seeker_init(state);
-    // hider_init(state);
+    hider_init(state);
     add_new_seeker(state, false);
     game_sound(state->sound_effect);
 
@@ -75,7 +75,7 @@ bool emscripten_main(state_t *state)
     else if (state->page == 2)
     {
         show_maze(state->maze_state);
-        //  render_seeker_bodies(state);
+         render_seeker_bodies(state);
         // for(size_t i = 1; i < scene_bodies(state->scene); i++) {
         //     body_t *seeker = scene_get_body(state->scene, i);
         //     rgb_color_t *color = body_get_color(seeker);
