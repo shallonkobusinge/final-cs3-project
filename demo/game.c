@@ -81,7 +81,7 @@ bool emscripten_main(state_t *state)
     else if (state->page == 2)
     {
         show_maze(state->maze_state);
-        render_seeker(state, dt);
+        // render_seeker(state, dt);
         render_seeker_bodies(state);
         seeker_collision(state);
     }
