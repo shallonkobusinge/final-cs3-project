@@ -58,7 +58,6 @@ state_t *emscripten_init()
     hider_init(state);
     add_new_seeker(state, false);
     game_sound(state->sound_effect);
-    seeker_collision(state);
     return state;
 }
 
@@ -84,6 +83,7 @@ bool emscripten_main(state_t *state)
         show_maze(state->maze_state);
         render_seeker(state, dt);
         render_seeker_bodies(state);
+        seeker_collision(state);
     }
     scene_tick(state->scene, dt);
 
