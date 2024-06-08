@@ -35,7 +35,6 @@ const rgb_color_t seeker_color = (rgb_color_t){0.1, 0.9, 0.2};
 
 typedef struct seeker {
     double last_seeker_time;
-    double max_seekers;
 }seeker_t;
 
 typedef struct state {
