@@ -315,7 +315,7 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
     for(size_t i = 0; i < list_size(shape); i++) {
       vector_t vertex = *(vector_t *)list_get(shape, i);
       vector_t new_vertex = vec_add(vertex, translation);
-      if(new_vertex.x < 0 || new_vertex.y < 0 || new_vertex.x >= MAZE_WINDOW_WIDTH || new_vertex.y >= MAZE_WINDOW_HEIGHT){
+      if(new_vertex.x < 0 || new_vertex.y =< 0 || new_vertex.x >= MAZE_WINDOW_WIDTH || new_vertex.y >= MAZE_WINDOW_HEIGHT){
         move_valid = false;
         break;
       }
