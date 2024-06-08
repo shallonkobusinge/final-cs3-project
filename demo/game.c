@@ -16,7 +16,7 @@
 #include "sound_effect.h"
 #include "seeker.h"
 
-#define STARTING_SEEKERS 10
+#define STARTING_SEEKERS 80
 
 const vector_t MIN = {0, 0};
 const vector_t MAX = {1000, 500};
