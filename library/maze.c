@@ -72,9 +72,6 @@ static void init_grid(maze_state_t *maze_state)
         render_line(0, y, MAZE_WINDOW_WIDTH, y);
     }
 
-    render_color((rgb_color_t){50, 129, 110});
-    render_rect(&hider);
-
     for (size_t i = 0; i < NUM_BUILDINGS; i++)
     {
         SDL_Rect cell = {maze_state->buildings[i].x, maze_state->buildings[i].y, GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2};
@@ -272,50 +269,50 @@ static void draw_maze(maze_t *maze)
 
 void on_key(char key, key_event_type_t type, double held_time, state_t *state)
 {
+    body_t *beaver = scene_get_body(state->scene, 0);
+    vector_t translation = (vector_t){0, 0};
+
     if (type == KEY_PRESSED)
     {
         switch (key)
         {
         case LEFT_ARROW:
         {
-            if (hider.x - GRID_CELL_SIZE >= 0)
-            {
-                hider.x -= GRID_CELL_SIZE;
-                render_rect(&hider);
-            }
+             translation.x -= GRID_CELL_SIZE;
             break;
         }
         case RIGHT_ARROW:
         {
-            if (hider.x + GRID_CELL_SIZE < MAZE_WINDOW_WIDTH)
-            {
-                hider.x += GRID_CELL_SIZE;
-                render_rect(&hider);
-            }
+            translation.x += GRID_CELL_SIZE;
             break;
         }
         case UP_ARROW:
         {
-            if (hider.y - GRID_CELL_SIZE >= 0)
-            {
-                hider.y -= GRID_CELL_SIZE;
-                render_rect(&hider);
-            }
-
+            translation.y -= GRID_CELL_SIZE;
             break;
         }
         case DOWN_ARROW:
         {
-            if (hider.y + GRID_CELL_SIZE < MAZE_WINDOW_HEIGHT)
-            {
-                hider.y += GRID_CELL_SIZE;
-                render_rect(&hider);
-            }
-
+            translation.y += GRID_CELL_SIZE;
             break;
         }
         }
     }
+    list_t *shape = body_get_shape(beaver);
+    bool move_valid = true;
+    for(size_t i = 0; i < list_size(shape); i++) {
+      vector_t vertex = *(vector_t *)list_get(shape, i);
+      vector_t new_vertex = vec_add(vertex, translation);
+      if(new_vertex.x < 0 || new_vertex.y < 0 || new_vertex.x >= MAZE_WINDOW_WIDTH || new_vertex.y >= MAZE_WINDOW_HEIGHT){
+        move_valid = false;
+        break;
+      }
+    }
+    list_free(shape);
+    if(move_valid){
+      move_body(beaver, translation);
+    }
+
 }
 
 void show_maze(maze_state_t *maze_state)
