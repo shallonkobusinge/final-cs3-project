@@ -184,7 +184,7 @@ void end_game(body_t *body1, body_t *body2, vector_t axis, void *aux,
 
 void seeker_collision(state_t *state) {
   for(size_t i = 1; i < scene_bodies(state->scene); i++) {
-    printf("SIZE: %zu \n", list_size(scene_bodies));
+    printf("SIZE: %zu \n", list_size(scene_bodies(state->scene)));
     body_t *seeker = scene_get_body(state->scene, i);
      create_collision(state->scene, scene_get_body(state->scene, 0), seeker, end_game, NULL, 0.0);
   }
