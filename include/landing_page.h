@@ -7,7 +7,7 @@ typedef struct text_element text_element_t;
 
 typedef struct img_element img_element_t;
 
-typedef struct btn_element btn_element_t;
+extern typedef struct btn_element btn_element_t;
 
 typedef struct landing_page_state landing_page_state_t;
 
