@@ -274,6 +274,7 @@ maze_state_t *maze_init()
 
     return maze_state;
 }
+
 /**
  *  Draw maze
  * @param maze maze to draw
