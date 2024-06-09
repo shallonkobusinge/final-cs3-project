@@ -13,10 +13,10 @@
 #include "seeker.h"
 #include "asset.h"
 
-const size_t GRID_WIDTH = 25;
+const size_t GRID_WIDTH = 20;
 const size_t GRID_HEIGHT = 12;
 const size_t NUM_CELLS = GRID_WIDTH * GRID_HEIGHT;
-const size_t GRID_CELL_SIZE = 40;
+const size_t GRID_CELL_SIZE = 50;
 
 const size_t MAZE_WINDOW_WIDTH = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
 const size_t MAZE_WINDOW_HEIGHT = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
@@ -95,10 +95,6 @@ static void init_grid(state_t *state)
     for (size_t i = 0; i < NUM_BUILDINGS; i++)
     {
         vector_t center = (vector_t){.x = maze_state->buildings[i].x, .y = maze_state->buildings[i].y};
-        // body_t *building = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, center, (rgb_color_t){241, 108, 45});
-        // scene_add_body(state->scene, building);
-        // asset_t *asset_building = asset_make_image_with_body(maze_state->buildings[i].path, building);
-        // list_add(state->body_assets, asset_building);
         add_to_scene(state, center, (rgb_color_t){241, 108, 45}, building_paths[i]);
     }
 }
