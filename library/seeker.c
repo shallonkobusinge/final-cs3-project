@@ -200,6 +200,7 @@ for(size_t i = 1; i < scene_bodies(state->scene); i++) {
             if(color->r == 0.1 && color->g == 0.9 && color->b == 0.2) {
                 vector_t body_centroid = body_get_centroid(seeker);
                 vector_t new_centroid = traverse_maze(state, body_centroid);
+                printf("OLD x: %f y: %f NEW x: %f   y: %f \n", body_centroid.x, body_centroid.y, new_centroid.x, new_centroid.y);
                 generate_movement(seeker, new_centroid);
             }
             
