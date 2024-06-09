@@ -79,7 +79,7 @@ vector_t traverse_maze(state_t *state, vector_t vec) {
     maze_t *maze = state->maze_state->maze;
     for(size_t i = 0; i < GRID_HEIGHT; i++) {
         printf("I AM IN ");
-        printf("MAZE x: %f y: %f VECTOR x: %f   y: %f \n", maze->cells[i]->box.x, maze->cells[i]->box.y, vec.x, vec.y);
+        printf("MAZE x: %d y: %d VECTOR x: %f   y: %f \n", maze->cells[i]->box.x, maze->cells[i]->box.y, vec.x, vec.y);
 
         if(maze->cells[i]->box.x == vec.x && maze->cells[i]->box.y == vec.y) {
           if(maze->cells[i]->north == true) {
