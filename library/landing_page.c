@@ -248,11 +248,11 @@ void show_landing_page(state_t *state)
 
 void show_end_page(state_t *state)
 {
-    list_t *imgs = state->end_game_state->imgs;
-    for (size_t i = 0; i < list_size(imgs); i++)
-    {
-        asset_render(list_get(imgs, i));
-    }
+    // list_t *imgs = state->end_game_state->imgs;
+    // for (size_t i = 0; i < list_size(imgs); i++)
+    // {
+    //     asset_render(list_get(imgs, i));
+    // }
 
     list_t *texts = state->end_game_state->texts;
     for (size_t i = 0; i < list_size(texts); i++)
