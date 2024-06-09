@@ -25,6 +25,7 @@ const vector_t SDL_CENTER = {500, 250};
 
 typedef struct maze_state maze_state_t;
 typedef struct landing_page_state landing_page_state_t;
+typedef struct end_page_state end_page_state_t;
 typedef struct seeker seeker_t;
 typedef struct sound_effect sound_effect_t;
 
