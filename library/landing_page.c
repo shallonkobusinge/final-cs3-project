@@ -47,7 +47,7 @@ typedef struct state
 
 } state_t;
 
-state_t *state = NULL;
+state_t *state_d = NULL;
 /**
  * Load game screen
  */
@@ -215,21 +215,21 @@ static list_t *build_btn_assets()
 
 void show_landing_page(state_t *_state)
 {
-    state = _state;
-    list_t *imgs = state->imgs;
+    state_d = _state;
+    list_t *imgs = state_d->imgs;
     for (size_t i = 0; i < list_size(imgs); i++)
     {
         asset_render(list_get(imgs, i));
     }
 
-    list_t *texts = state->texts;
+    list_t *texts = state_d->texts;
     for (size_t i = 0; i < list_size(texts); i++)
     {
 
         asset_render(list_get(texts, i));
     }
 
-    list_t *btns = state->btns;
+    list_t *btns = state_d->btns;
     for (size_t i = 0; i < list_size(btns); i++)
     {
         asset_render(list_get(btns, i));
