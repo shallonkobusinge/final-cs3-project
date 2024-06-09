@@ -113,7 +113,8 @@ vector_t traverse_maze(state_t *state, vector_t new_vec) {
                 }
                 }
                 if(move_counts > 0 ){
-                    valid_move = possible_move[rand % move_counts];
+                    int rand_dir = rand % move_counts;
+                    valid_move = possible_move[rand_dir];
                     goto end; 
                 }
             
