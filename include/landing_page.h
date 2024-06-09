@@ -36,6 +36,6 @@ void show_landing_page(landing_page_state_t *page_state);
  * Initialize landing page images, buttons and texts.
  * @return state of the landing page.
  */
-landing_page_state_t *landing_page_init(btn_element_t *btn_elements);
+landing_page_state_t *landing_page_init();
 
 #endif // #ifndef __LANDING_PAGE_H__

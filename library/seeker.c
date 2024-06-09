@@ -240,7 +240,8 @@ void seekers_random_movement(state_t *state)
 static void end_game(body_t *body1, body_t *body2, vector_t axis, void *aux,
                      double force_const)
 {
-  state->page = 3;
+  // state->page = 3;
+  printf("page\n");
 }
 
 void seeker_collision(state_t *state)

@@ -97,6 +97,22 @@ img_element_t img_elements[] = {
     },
 };
 
+static void load_game_screen(state_t *state)
+{
+    state->page = 2;
+}
+
+btn_element_t btn_elements[] = {
+    {
+        .text.frame = (SDL_Rect){SDL_CENTER.x - 20, SDL_CENTER.y + 45, 90, 48},
+        .text.font_path = "assets/fonts/Inter-Regular.ttf",
+        .text.color = (rgb_color_t){0, 0, 0},
+        .text.text = "PLAY",
+        .img.file_path = "assets/images/landing-page/play_btn.png",
+        .img.frame = (SDL_Rect){SDL_CENTER.x - 50, SDL_CENTER.y + 30, 200, 80},
+        .handler = (void *)load_game_screen,
+    },
+};
 /**
  * Build text assets from text templates
  * @return list of text assets
@@ -160,7 +176,7 @@ static asset_t *create_btn(btn_element_t btn_element)
  * Build buttons assets from buttons templates
  * @return list of button assets
  */
-static list_t *build_btn_assets(btn_element_t *btn_elements)
+static list_t *build_btn_assets()
 {
     list_t *assets = list_init(LANDING_PAGE_BTN_ELEMENTS, (free_func_t)asset_destroy);
     for (size_t i = 0; i < LANDING_PAGE_BTN_ELEMENTS; i++)
@@ -198,13 +214,13 @@ void set_state(state_t *state)
     printf("global_state: %d\n", state->page);
 }
 
-landing_page_state_t *landing_page_init(btn_element_t *btn_elements)
+landing_page_state_t *landing_page_init()
 {
     landing_page_state_t *page_state = malloc(sizeof(landing_page_state_t));
 
     page_state->imgs = build_img_assets();
     page_state->texts = build_text_assets();
-    page_state->btns = build_btn_assets(btn_elements);
+    page_state->btns = build_btn_assets();
 
     return page_state;
 }
