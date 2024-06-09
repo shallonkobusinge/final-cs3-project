@@ -40,6 +40,7 @@ typedef struct state
   size_t page;
   maze_state_t *maze_state;
   landing_page_state_t *landing_page_state;
+  end_page_state_t *end_page_state;
   sound_effect_t *sound_effect;
   seeker_t *seeker;
   list_t *body_assets;
@@ -147,7 +148,7 @@ seeker_t *seeker_init(state_t *state)
 {
   seeker_t *seeker = malloc(sizeof(seeker_t));
   seeker->last_seeker_time = 0;
-  hider_init(state);
+  // hider_init(state);
   printf(" PAGE %zu \n", state->page);
   // add_new_seeker(state, false);
   // printf(" SIZE %zu \n", list_size(state->body_assets));
