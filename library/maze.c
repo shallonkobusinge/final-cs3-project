@@ -302,10 +302,12 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_directi
         {.x = 0.0, .y = valid_move.y - GRID_CELL_SIZE}, // south
         {.x = valid_move.x - GRID_CELL_SIZE, .y = 0},   // west
     };
-    for (size_t y = 0; y < GRID_HEIGHT; y++)
-    {
-        for (size_t x = 0; x < GRID_WIDTH; x++)
-        {
+    size_t y = vec / GRID_CELL_SIZE;
+    size_t x = vec / GRID_CELL_SIZE;
+    // for (size_t y = 0; y < GRID_HEIGHT; y++)
+    // {
+    //     for (size_t x = 0; x < GRID_WIDTH; x++)
+    //     {
             if ((maze->cells[y][x].box.x == (int)vec.x) && (maze->cells[y][x].box.y == (int)vec.y))
             {
                 printf(" ARRIVED ");
@@ -322,7 +324,7 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_directi
                 {
                     for (size_t i = 0; i < 4; i++)
                     {
-                        if (!walls[i] && !maze->cells[y][x].visited)
+                        if (!walls[i])
                         {
                             possible_move[move_counts++] = directions[i];
                         }
@@ -335,7 +337,7 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_directi
                 }
                 else
                 {
-                    if (!walls[movement_direction] && !maze->cells[y][x].visited)
+                    if (!walls[movement_direction])
                     {
                         valid_move = directions[movement_direction];
                     }
@@ -347,8 +349,8 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_directi
                     goto end;
                 }
             }
-        }
-    }
+    //     }
+    // }
 end:
     return valid_move;
 }
