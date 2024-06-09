@@ -291,7 +291,7 @@ static void draw_maze(maze_t *maze)
 /**
  * Traverse the maze
  */
-vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_direction)
+vector_t traverse_maze(state_t *state, vector_t new_vec, int movement_direction)
 {
     vector_t valid_move = VEC_ZERO;
     maze_t *maze = state->maze_state->maze;
@@ -319,7 +319,7 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_directi
                     maze->cells[y][x].west,
                 };
                 vector_t possible_move[4];
-                size_t move_counts = 0;
+                int move_counts = 0;
        
                 if (movement_direction == -1)
                 {
@@ -342,7 +342,7 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_directi
                     {
                         valid_move = directions[movement_direction];
                     } else {
-                        printf("CLOSED DIRECTION %zu walls: %d \n", movement_direction, walls[movement_direction]);
+                        printf("CLOSED DIRECTION %d walls: %d \n", movement_direction, walls[movement_direction]);
                         valid_move = VEC_ZERO;
                     }
                      goto end;
