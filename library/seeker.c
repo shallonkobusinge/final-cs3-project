@@ -96,7 +96,6 @@ void move_body(body_t *body, vector_t vec)
 static void add_new_seeker(state_t *state, bool is_new)
 {
 
-  body_t *seeker;
    vector_t seeker_pos = VEC_ZERO;
   if (is_new)
   {
