@@ -105,7 +105,7 @@ static void init_grid(state_t *state)
     //     asset_t *asset_building = asset_make_image_with_body(maze_state->buildings[i].path, building);
     //     list_add(state->body_assets, asset_building);
     // }
-    add_maze_body_scene();
+        add_maze_body_scene();
 }
 
 /**
@@ -422,7 +422,7 @@ static void hider_init(maze_state_t *maze_state) {
 static void add_maze_body_scene(state_t *state) {
     maze_state_t *maze_state = state->maze_state;
     for(size_t i = 0; i < maze_state->num_bodies; i++){
-        body_t body = maze_state->maze_bodies[i].body;
+        body_t *body = maze_state->maze_bodies[i].body;
         scene_add_body(state->scene, body);
         asset_t *asset_body = asset_make_image_with_body(maze_state->maze_bodies[i].path, body);
         list_add(state->body_assets, asset_body);
