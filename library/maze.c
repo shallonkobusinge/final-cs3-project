@@ -391,23 +391,6 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
         }
     }
      move_body(beaver, translation);
-    // list_t *shape = body_get_shape(beaver);
-    // bool move_valid = true;
-    // for (size_t i = 0; i < list_size(shape); i++)
-    // {
-    //     vector_t vertex = *(vector_t *)list_get(shape, i);
-    //     vector_t new_vertex = vec_add(vertex, translation);
-    //     if (new_vertex.x < 0 || new_vertex.y < 0 || new_vertex.x >= MAZE_WINDOW_WIDTH || new_vertex.y >= MAZE_WINDOW_HEIGHT)
-    //     {
-    //         move_valid = false;
-    //         break;
-    //     }
-    // }
-    // list_free(shape);
-    // if (move_valid)
-    // {
-    //     move_body(beaver, translation);
-    // }
 }
 
 void show_maze(state_t *state, double dt)
@@ -417,7 +400,7 @@ void show_maze(state_t *state, double dt)
     init_grid(state);
     draw_maze(state->maze_state->maze);
     seekers_random_movement(state);
-    // render_another_seeker(state, dt);
+    render_another_seeker(state, dt);
     render_bodies(state->body_assets);
-    // seeker_collision(state);
+    seeker_collision(state);
 }
