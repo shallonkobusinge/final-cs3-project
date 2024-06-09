@@ -334,7 +334,7 @@ static vector_t traverse_maze(maze_t *maze, vector_t vec, int movement_direction
                 }
                 else
                 {
-                    if (!walls[movement_direction])
+                    if (walls[movement_direction] == false)
                     {
                         valid_move = directions[movement_direction];
                     } else {
