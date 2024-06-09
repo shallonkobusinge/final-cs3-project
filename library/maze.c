@@ -276,7 +276,7 @@ static void buildings_init(maze_state_t *maze_state)
             .x = ((GRID_WIDTH - rand_x) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2,
             .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10,
         };
-        maze_state->maze_bodies[i + 1] = (maze_body_t){
+        maze_state->maze_bodies[i] = (maze_body_t){
           .x = center.x,
           .y = center.y,
           .body = make_body(center, (rgb_color_t){241, 108, 45}),
