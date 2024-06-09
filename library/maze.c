@@ -280,7 +280,7 @@ static void buildings_init(maze_state_t *maze_state)
           .x = center.x,
           .y = center.y,
           .body = make_body(center, (rgb_color_t){241, 108, 45}),
-          .path = building_paths[i]  
+          .path = building_paths[i - 1]  
         };
         maze_state->num_bodies++;
     }
