@@ -85,29 +85,49 @@ vector_t traverse_maze(state_t *state, vector_t new_vec) {
     for(size_t y = 0; y < GRID_HEIGHT; y++) {
         for(size_t x = 0; x < GRID_WIDTH; x++) {
          if((maze->cells[y][x].box.x == (int)vec.x) && (maze->cells[y][x].box.y == (int)vec.y)) {
-                             printf(" MAZE x = %d y = %d VECTOR x = %d y = %d \n", maze->cells[y][x].box.x, maze->cells[y][x].box.y, (int)vec.x, (int)vec.y);
-                    printf("NORTH = %d SOUTH = %d EAST = %d WEST = %d  \n", maze->cells[y][x].north, maze->cells[y][x].south, maze->cells[y][x].east, maze->cells[y][x].west);
-                if(!maze->cells[y][x].north) {
-                     valid_move = (vector_t){.x = 0, .y = -GRID_CELL_SIZE};
-                     break;
-                 }
-                 if(!maze->cells[y][x].east) {
-                     valid_move = (vector_t){.x = GRID_CELL_SIZE, .y = 0};
-                     break;
-                 }
+                printf(" MAZE x = %d y = %d VECTOR x = %d y = %d \n", maze->cells[y][x].box.x, maze->cells[y][x].box.y, (int)vec.x, (int)vec.y);
+                printf("NORTH = %d SOUTH = %d EAST = %d WEST = %d  \n", maze->cells[y][x].north, maze->cells[y][x].south, maze->cells[y][x].east, maze->cells[y][x].west);
 
-                 if(!maze->cells[y][x].west) {
-                     valid_move = (vector_t){.x = -GRID_CELL_SIZE, .y = 0};
-                     break;
-                 }
+                vector_t directions[] = {
+                    {.x = 0, .y = -GRID_CELL_SIZE}, // north
+                    {.x = 0, .y = GRID_CELL_SIZE}, // south
+                    {.x = GRID_CELL_SIZE, .y = 0}, // east
+                    {.x = -GRID_CELL_SIZE, .y = 0}, //west
+                };
+                bool walls[] = {
+                    maze->cells[y][x].north,
+                    maze->cells[y][x].south,
+                    maze->cells[y][x].east,
+                    maze->cells[y][x].west,
+                };
+                for(size_t i = 0; i < 4; i++) {
+                    if(!walls[i]){
+                        valid_move = directions[i];
+                        goto end_loops;
+                    }
+                }
+                // if(!maze->cells[y][x].north) {
+                //      valid_move = (vector_t){.x = 0, .y = -GRID_CELL_SIZE};
+                //      break;
+                //  }
+                //  if(!maze->cells[y][x].east) {
+                //      valid_move = (vector_t){.x = GRID_CELL_SIZE, .y = 0};
+                //      break;
+                //  }
 
-                 if(!maze->cells[y][x].south) {
-                     valid_move = (vector_t){.x = GRID_CELL_SIZE, .y = 0};
-                     break;
-                 }
+                //  if(!maze->cells[y][x].west) {
+                //      valid_move = (vector_t){.x = -GRID_CELL_SIZE, .y = 0};
+                //      break;
+                //  }
+
+                //  if(!maze->cells[y][x].south) {
+                //      valid_move = (vector_t){.x = GRID_CELL_SIZE, .y = 0};
+                //      break;
+                //  }
             }
         }
     }
+    end_loops:
     // printf("THE VECTOR x = %f y = %f \n", valid_move.x, valid_move.y);
     return valid_move;
 }
@@ -384,7 +404,7 @@ void show_maze(state_t *state, double dt)
 
     init_grid(state);
     draw_maze(state->maze_state->maze);
-    // seekers_random_movement(state);
+    seekers_random_movement(state);
     // render_another_seeker(state, dt);
     render_bodies(state->body_assets);
     // seeker_collision(state);
