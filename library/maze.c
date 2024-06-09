@@ -290,7 +290,6 @@ static void draw_maze(maze_t *maze)
 
 vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_direction)
 {
-    printf("HERE ");
     vector_t valid_move = VEC_ZERO;
     maze_t *maze = state->maze_state->maze;
     vector_t vec = (vector_t){
@@ -418,12 +417,12 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
 void show_maze(state_t *state, double dt)
 {
     sdl_on_key((key_handler_t)on_key);
-    // game_sound(state->sound_effect);
+    game_sound(state->sound_effect);
 
     init_grid(state);
     draw_maze(state->maze_state->maze);
 
-    seekers_random_movement(state);
+    // seekers_random_movement(state);
     render_another_seeker(state, dt);
     render_bodies(state->body_assets);
     seeker_collision(state);
