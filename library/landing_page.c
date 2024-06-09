@@ -9,6 +9,8 @@ const size_t LANDING_PAGE_IMG_ELEMENTS = 4;
 const size_t LANDING_PAGE_TEXT_ELEMENTS = 7;
 const size_t LANDING_PAGE_BTN_ELEMENTS = 1;
 
+#include "maze.h"
+
 typedef struct state
 {
     size_t page;
