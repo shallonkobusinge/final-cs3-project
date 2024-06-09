@@ -105,7 +105,7 @@ vector_t traverse_maze(state_t *state, vector_t new_vec) {
                     maze->cells[y][x].south,
                     maze->cells[y][x].west,
                 };
-                int possible_move[4];
+                vector_t possible_move[4];
                 int move_counts = 0;
                 for(size_t i = 0; i < 4; i++) {
                     if(walls[i] == false){
