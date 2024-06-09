@@ -123,7 +123,7 @@ static void hider_init(state_t *state){
     vector_t center = (vector_t){.x = (((GRID_WIDTH - 24) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), 
                                   .y = (((GRID_HEIGHT - 11) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4)};
 
-    body_t *beaver = make_body(35, 35, center, (rgb_color_t){50, 129, 110});
+    body_t *beaver = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, center, (rgb_color_t){50, 129, 110});
     scene_add_body(state->scene, beaver);
 
     asset_t *asset_beaver = asset_make_image_with_body(BEAVER_PATH, beaver);
