@@ -50,19 +50,19 @@ body_t *make_body(double w, double h, vector_t center, rgb_color_t color)
 
   list_t *c = list_init(4, free);
   vector_t *v1 = malloc(sizeof(vector_t));
-  *v1 = (vector_t){0, 0};
+  *v1 = (vector_t){-w / 2, -h /2};
   list_add(c, v1);
 
   vector_t *v2 = malloc(sizeof(vector_t));
-  *v2 = (vector_t){w, 0};
+  *v2 = (vector_t){w / 2, -h /2};
   list_add(c, v2);
 
   vector_t *v3 = malloc(sizeof(vector_t));
-  *v3 = (vector_t){w, h};
+  *v3 = (vector_t){w / 2, h /2};
   list_add(c, v3);
 
   vector_t *v4 = malloc(sizeof(vector_t));
-  *v4 = (vector_t){0, h};
+  *v4 = (vector_t){-w / 2, h /2};
   list_add(c, v4);
   body_t *seeker = body_init(c, 1, color);
   body_set_centroid(seeker, center);
@@ -95,8 +95,8 @@ static void add_new_seeker(state_t *state, bool is_new)
   }
   else
   {
-    vector_t center = (vector_t){.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4),
-                                 .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4)};
+    vector_t center = (vector_t){.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2),
+                                 .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2)};
     seeker = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, center, SEEKER_COLOR);
   }
 
