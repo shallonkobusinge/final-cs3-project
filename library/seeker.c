@@ -81,17 +81,6 @@ void move_body(body_t *body, vector_t vec)
   body_set_centroid(body, vec_add(body_get_centroid(body), vec));
 }
 
-static maze_body_t *create_body(state_t *state, vector_t ){
-  maze_body_t *
-   vector_t center = (vector_t){.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2),
-                                 .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10)};
-    seeker = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, center, SEEKER_COLOR);
-  
-
-  scene_add_body(state->scene, seeker);
-  asset_t *new_asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
-  list_add(state->body_assets, new_asset_seeker);
-}
 
 /**
  * Adding a seeker to the scene.
@@ -109,14 +98,14 @@ static void add_new_seeker(state_t *state, bool is_new)
         .y = (rand() % (GRID_HEIGHT - 4) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10,
     };
 
-    seeker = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, seeker_pos, SEEKER_COLOR);
+    seeker = make_body( seeker_pos, SEEKER_COLOR);
     state->seeker->last_seeker_time = 0;
   }
   else
   {
     vector_t center = (vector_t){.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2),
                                  .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10)};
-    seeker = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, center, SEEKER_COLOR);
+    seeker = make_body(center, SEEKER_COLOR);
   }
 
   scene_add_body(state->scene, seeker);
