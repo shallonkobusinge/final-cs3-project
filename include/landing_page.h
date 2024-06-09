@@ -23,6 +23,6 @@ void set_state(state_t *state);
  * Initialize landing page images, buttons and texts.
  * @return state of the landing page.
  */
-landing_page_state_t *landing_page_init(state_t *state);
+landing_page_state_t *landing_page_init(btn_element_t *btn_elements);
 
 #endif // #ifndef __LANDING_PAGE_H__

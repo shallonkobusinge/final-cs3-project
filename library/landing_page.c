@@ -56,7 +56,6 @@ static void
 load_game_screen(state_t *state)
 {
     printf("here\n");
-    printf("State %zu\n", global_state->page);
     // state->page = 2;
     // sdl_clear();
     // show_maze(state, 0);
@@ -204,7 +203,7 @@ static asset_t *create_btn(btn_element_t btn_element)
  * Build buttons assets from buttons templates
  * @return list of button assets
  */
-static list_t *build_btn_assets()
+static list_t *build_btn_assets(btn_element_t *btn_elements)
 {
     list_t *assets = list_init(LANDING_PAGE_BTN_ELEMENTS, (free_func_t)asset_destroy);
     for (size_t i = 0; i < LANDING_PAGE_BTN_ELEMENTS; i++)
@@ -242,7 +241,7 @@ void set_state(state_t *state)
     printf("global_state: %d\n", state->page);
 }
 
-landing_page_state_t *landing_page_init(state_t *state)
+landing_page_state_t *landing_page_init()
 {
     landing_page_state_t *page_state = malloc(sizeof(landing_page_state_t));
 

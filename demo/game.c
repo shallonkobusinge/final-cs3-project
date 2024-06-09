@@ -42,6 +42,25 @@ struct state
     list_t *body_assets;
 };
 
+static void load_game_screen(state_t *state)
+{
+    printf("here\n");
+    state->page = 2;
+}
+
+btn_element_t btn_elements[] = {
+    {
+        .text.frame = (SDL_Rect){SCREEN_CENTER.x - 20, SCREEN_CENTER.y + 45, 90, 48},
+        .text.font_path = "assets/fonts/Inter-Regular.ttf",
+        .text.color = (rgb_color_t){0, 0, 0},
+        .text.text = "PLAY",
+        .img.file_path = "assets/images/landing-page/play_btn.png",
+        .img.frame = (SDL_Rect){SCREEN_CENTER.x - 50, SCREEN_CENTER.y + 30, 200, 80},
+
+        .handler = (void *)load_game_screen,
+    },
+};
+
 state_t *emscripten_init()
 {
     asset_cache_init();
@@ -51,13 +70,11 @@ state_t *emscripten_init()
     state->scene = scene_init();
     state->page = 1;
     state->maze_state = maze_init();
-    state->landing_page_state = landing_page_init(state);
+    state->landing_page_state = landing_page_init(&btn_elements);
     state->sound_effect = sound_effect_init();
     state->body_assets = list_init(STARTING_SEEKERS, (free_func_t)asset_destroy);
     state->seeker = seeker_init(state);
     game_sound(state->sound_effect);
-
-    set_state(state);
 
     return state;
 }
