@@ -259,6 +259,7 @@ void physics_collision_handler(body_t *body1, body_t *body2, vector_t axis,
 void create_physics_collision(scene_t *scene, body_t *body1, body_t *body2,
                               double elasticity)
 {
+  state_t *state;
   create_collision(scene, body1, body2, physics_collision_handler, NULL,
-                   elasticity, NULL);
+                   elasticity, state);
 }
