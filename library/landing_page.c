@@ -1,5 +1,6 @@
 #include "landing_page.h"
 #include "asset.h"
+#include "state.h"
 #include "asset_cache.h"
 
 const vector_t SCREEN_MAX = {1000, 500};
@@ -10,11 +11,6 @@ const size_t LANDING_PAGE_TEXT_ELEMENTS = 7;
 const size_t LANDING_PAGE_BTN_ELEMENTS = 1;
 
 #include "maze.h"
-
-typedef struct state
-{
-    size_t page;
-} state_t;
 
 typedef struct text_element
 {
@@ -50,11 +46,11 @@ typedef struct landing_page_state
 static void
 load_game_screen(state_t *state)
 {
-    // printf("State %zu", state->page);
+    printf("State %zu", state->page);
     // state->page = 2;
-    sdl_clear();
-    show_maze(state, 0);
-    printf("Next screen: %d\n", 0);
+    // sdl_clear();
+    // show_maze(state, 0);
+    // printf("Next screen: %d\n", 0);
 }
 
 btn_element_t btn_elements[] = {
