@@ -149,7 +149,7 @@ static btn_element_t end_btn_elements[] = {
         .text.color = (rgb_color_t){0, 0, 0},
         .text.text = "Go to Main Screen",
         .img.file_path = "assets/images/landing-page/play_btn.png",
-        .img.frame = (SDL_Rect){SCREEN_CENTER.x - 50, SCREEN_CENTER.y + 30, 200, 80},
+        .img.frame = (SDL_Rect){SCREEN_CENTER.x - 50, SCREEN_CENTER.y + 120, 200, 80},
         .handler = (void *)load_game_screen,
     },
 };
