@@ -48,6 +48,10 @@ static void load_game_screen(state_t *state)
     state->page = 2;
 }
 
+typedef struct text_element text_element_t;
+
+typedef struct img_element img_element_t;
+
 typedef struct btn_element
 {
     text_element_t text;
