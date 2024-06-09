@@ -95,10 +95,11 @@ static void init_grid(state_t *state)
     for (size_t i = 0; i < NUM_BUILDINGS; i++)
     {
         vector_t center = (vector_t){.x = maze_state->buildings[i].x, .y = maze_state->buildings[i].y};
-        body_t *building = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, center, (rgb_color_t){241, 108, 45});
-        scene_add_body(state->scene, building);
-        asset_t *asset_building = asset_make_image_with_body(maze_state->buildings[i].path, building);
-        list_add(state->body_assets, asset_building);
+        // body_t *building = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, center, (rgb_color_t){241, 108, 45});
+        // scene_add_body(state->scene, building);
+        // asset_t *asset_building = asset_make_image_with_body(maze_state->buildings[i].path, building);
+        // list_add(state->body_assets, asset_building);
+        add_to_scene(state, center, (rgb_color_t){241, 108, 45}, building_paths[i])
     }
 }
 
