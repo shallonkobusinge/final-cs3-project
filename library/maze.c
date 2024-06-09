@@ -102,7 +102,7 @@ vector_t traverse_maze(state_t *state, vector_t new_vec) {
                     maze->cells[y][x].west,
                 };
                 for(size_t i = 0; i < 4; i++) {
-                    if(walls[i]){
+                    if(!walls[i]){
                         valid_move = directions[i];
                         goto end;
                         
