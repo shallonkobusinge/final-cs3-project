@@ -104,7 +104,7 @@ vector_t traverse_maze(state_t *state, vector_t new_vec) {
                 vector_t possible_moves[4];
                 size_t move_count = 0;
                 for(size_t i = 0; i < 4; i++) {
-                    if(!walls[i]){
+                    if(walls[i] != true){
                         // valid_move = directions[i];
                         possible_moves[move_count++] = directions[i];
                     }
