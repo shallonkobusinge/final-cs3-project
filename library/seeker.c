@@ -141,7 +141,7 @@ static void hider_init(state_t *state)
 
   asset_t *asset_beaver = asset_make_image_with_body(BEAVER_PATH, beaver);
   printf(" SIZE %zu \n", list_size(state->body_assets));
-  // list_add(state->body_assets, asset_beaver);
+  list_add(state->body_assets, asset_beaver);
 }
 
 seeker_t *seeker_init(state_t *state)
@@ -151,7 +151,7 @@ seeker_t *seeker_init(state_t *state)
   hider_init(state);
   printf(" PAGE %zu \n", state->page);
   add_new_seeker(state, false);
-  // printf(" SIZE %zu \n", list_size(state->body_assets));
+  printf(" SIZE %zu \n", list_size(state->body_assets));
   return seeker;
 }
 
