@@ -194,13 +194,13 @@ void set_state(state_t *state)
     printf("global_state: %d\n", state->page);
 }
 
-landing_page_state_t *landing_page_init()
+landing_page_state_t *landing_page_init(btn_element_t *btn_elements)
 {
     landing_page_state_t *page_state = malloc(sizeof(landing_page_state_t));
 
     page_state->imgs = build_img_assets();
     page_state->texts = build_text_assets();
-    page_state->btns = build_btn_assets();
+    page_state->btns = build_btn_assets(btn_elements);
 
     return page_state;
 }
