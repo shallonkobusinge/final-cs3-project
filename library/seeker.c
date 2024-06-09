@@ -23,9 +23,9 @@ extern const int MAZE_WINDOW_WIDTH;
 extern const int MAZE_WINDOW_HEIGHT;
 
 // SEEKING CONSTANTS
-#define S_NUM_POINTS 20
-#define S_RADIUS 0.1
-#define NEW_SEEKERS_INTERVAL 60
+const int S_NUM_POINTS = 20;
+const int S_RADIUS  = 0.1;
+const int NEW_SEEKERS_INTERVAL = 60;
 
 const rgb_color_t SEEKER_COLOR = (rgb_color_t){0.1, 0.9, 0.2};
 
@@ -149,8 +149,8 @@ void render_bodies(list_t *bodies) {
  * valid adjacent cell.
  * @param seeker the body of the seeker to be moved.
 */
-static void generate_movement (body_t *seeker, vector_t centroid) {
-    SDL_Delay(750);
+// static void generate_movement (body_t *seeker, vector_t centroid) {
+//     SDL_Delay(750);
     // int direction = rand() % 4;
     
     // vector_t centroid = VEC_ZERO;
@@ -188,11 +188,11 @@ static void generate_movement (body_t *seeker, vector_t centroid) {
     //   }
     // }
     // list_free(shape);
-    // if(move_valid){
-      move_body(seeker, centroid);
-    // }
+//     // if(move_valid){
+//       move_body(seeker, centroid);
+//     // }
 
-}
+// }
 
 void seekers_random_movement(state_t *state) {
 for(size_t i = 1; i < scene_bodies(state->scene); i++) {
@@ -206,7 +206,9 @@ for(size_t i = 1; i < scene_bodies(state->scene); i++) {
                 // vector_t check = vec_add(center, body_centroid);
                 vector_t new_centroid = traverse_maze(state, body_centroid);
                 // printf("OLD x: %f y: %f NEW x: %f   y: %f \n", body_centroid.x, body_centroid.y, new_centroid.x, new_centroid.y);
-                generate_movement(seeker, new_centroid);
+                // generate_movement(seeker, new_centroid);
+                SDL_Delay(750);
+                move_body(seeker, new_centroid);
             }
             
         }
