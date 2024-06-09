@@ -44,7 +44,6 @@ struct state
 
 static void load_game_screen(state_t *state)
 {
-    printf("here\n");
     state->page = 2;
 }
 
@@ -69,7 +68,7 @@ state_t *emscripten_init()
     state->scene = scene_init();
     state->page = 1;
     state->maze_state = maze_init();
-    state->landing_page_state = landing_page_init(&btn_elements);
+    state->landing_page_state = landing_page_init(btn_elements);
     state->sound_effect = sound_effect_init();
     state->body_assets = list_init(STARTING_SEEKERS, (free_func_t)asset_destroy);
     state->seeker = seeker_init(state);
