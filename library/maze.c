@@ -321,7 +321,7 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, int movement_direction)
                 };
                 vector_t possible_move[4];
                 int move_counts = 0;
-                 printf("CLOSED DIRECTION %d walls:  \n", movement_direction);
+       
                 if (movement_direction == -1)
                 {
                     for (size_t i = 0; i < 4; i++)
@@ -343,6 +343,7 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, int movement_direction)
                     {
                         valid_move = directions[movement_direction];
                     } else {
+                        printf("CLOSED DIRECTION %d walls:  \n", movement_direction);
                         valid_move = VEC_ZERO;
                     }
                      goto end;
