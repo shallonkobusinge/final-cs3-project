@@ -87,8 +87,8 @@ static void add_new_seeker(state_t *state, bool is_new) {
     seeker = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, seeker_pos, SEEKER_COLOR);
     state->seeker->last_seeker_time = 0;
     }else{
-      vector_t center = (vector_t){.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE)), 
-                                    .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE))};
+      vector_t center = (vector_t){.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), 
+                                    .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4)};
        seeker = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, center, SEEKER_COLOR);
     }
    
