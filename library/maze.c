@@ -74,7 +74,7 @@ maze_t *create_maze()
 /**
  * Traverse the maze
 */
-vector_t traverse_maze(state_t *state, vector_t new_vec) {
+vector_t traverse_maze(state_t *state, vector_t new_vec, int last_direction) {
     vector_t valid_move = VEC_ZERO;
     maze_t *maze = state->maze_state->maze;
 
@@ -103,13 +103,15 @@ vector_t traverse_maze(state_t *state, vector_t new_vec) {
                 vector_t possible_moves[4];
                 size_t move_count = 0;
                 for(size_t i = 0; i < 4; i++) {
-                    if(!walls[i]){
+                    if(!walls[i] && i != *last_direction){
                         // valid_move = directions[i];
                         possible_moves[move_count++] = directions[i];
                     }
                 }
                 if(move_count > 0) {
-                    valid_move = possible_moves[rand() % move_count];
+                    int new_direction = rand() % move_count;
+                    valid_move = possible_moves[new_direction];
+                    *last_direction = new_direction;
                     break;
                 }
             
