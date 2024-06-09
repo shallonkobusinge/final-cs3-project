@@ -77,6 +77,7 @@ maze_t *create_maze()
 vector_t traverse_maze(state_t *state, vector_t vec) {
     vector_t valid_move = VEC_ZERO;
     maze_t *maze = state->maze_state->maze;
+    
     for(size_t y = 0; y < GRID_HEIGHT; y++) {
         for(size_t x = 0; x < GRID_WIDTH; x++) {
         //    if((maze->cells[y][x].box.x == (int)vec.x) && (maze->cells[y][x].box.y == (int)vec.y)) {
