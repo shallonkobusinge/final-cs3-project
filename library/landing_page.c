@@ -47,7 +47,8 @@ typedef struct state
 
 } state_t;
 
-state_t *state_d = NULL;
+state_t *global_state = NULL;
+
 /**
  * Load game screen
  */
@@ -235,8 +236,9 @@ void show_landing_page(landing_page_state_t *page_state)
     }
 }
 
-landing_page_state_t *landing_page_init()
+landing_page_state_t *landing_page_init(state_t *state)
 {
+    global_state = state;
     landing_page_state_t *page_state = malloc(sizeof(landing_page_state_t));
 
     page_state->imgs = build_img_assets();

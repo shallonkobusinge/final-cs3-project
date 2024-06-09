@@ -51,7 +51,7 @@ state_t *emscripten_init()
     state->scene = scene_init();
     state->page = 1;
     state->maze_state = maze_init();
-    state->landing_page_state = landing_page_init();
+    state->landing_page_state = landing_page_init(state);
     state->sound_effect = sound_effect_init();
     state->body_assets = list_init(STARTING_SEEKERS, (free_func_t)asset_destroy);
     state->seeker = seeker_init(state);
@@ -67,7 +67,7 @@ bool emscripten_main(state_t *state)
 
     if (state->page == 1)
     {
-        show_landing_page(state);
+        show_landing_page(state->landing_page_state);
     }
     else if (state->page == 2)
     {
