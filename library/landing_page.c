@@ -13,6 +13,9 @@ const size_t LANDING_PAGE_IMG_ELEMENTS = 4;
 const size_t LANDING_PAGE_TEXT_ELEMENTS = 7;
 const size_t LANDING_PAGE_BTN_ELEMENTS = 1;
 
+const size_t END_PAGE_TEXT_ELEMENTS = 2;
+const size_t END_PAGE_BTN_ELEMENTS = 2;
+
 typedef struct end_page_state
 {
     list_t *imgs;
@@ -85,6 +88,15 @@ static text_element_t landing_text_elements[] = {
     },
 };
 
+static text_element_t end_text_elements[] = {
+    {
+        .text = "GAME OVER!.",
+        .font_path = "assets/fonts/Inter-Regular.ttf",
+        .color = (rgb_color_t){0, 0, 0},
+        .frame = (SDL_Rect){SCREEN_MAX.x - 180, 459, 150, 28},
+    },
+};
+
 static img_element_t landing_img_elements[] = {
     {
         .file_path = "assets/images/common/nav_line.png",
@@ -115,6 +127,27 @@ static btn_element_t landing_btn_elements[] = {
         .text.font_path = "assets/fonts/Inter-Regular.ttf",
         .text.color = (rgb_color_t){0, 0, 0},
         .text.text = "PLAY",
+        .img.file_path = "assets/images/landing-page/play_btn.png",
+        .img.frame = (SDL_Rect){SCREEN_CENTER.x - 50, SCREEN_CENTER.y + 30, 200, 80},
+        .handler = (void *)load_game_screen,
+    },
+};
+
+static btn_element_t end_btn_elements[] = {
+    {
+        .text.frame = (SDL_Rect){SCREEN_CENTER.x - 20, SCREEN_CENTER.y + 45, 90, 48},
+        .text.font_path = "assets/fonts/Inter-Regular.ttf",
+        .text.color = (rgb_color_t){0, 0, 0},
+        .text.text = "Restart Game",
+        .img.file_path = "assets/images/landing-page/play_btn.png",
+        .img.frame = (SDL_Rect){SCREEN_CENTER.x - 50, SCREEN_CENTER.y + 30, 200, 80},
+        .handler = (void *)load_game_screen,
+    },
+    {
+        .text.frame = (SDL_Rect){SCREEN_CENTER.x - 20, SCREEN_CENTER.y + 85, 90, 48},
+        .text.font_path = "assets/fonts/Inter-Regular.ttf",
+        .text.color = (rgb_color_t){0, 0, 0},
+        .text.text = "Go to Main Screen",
         .img.file_path = "assets/images/landing-page/play_btn.png",
         .img.frame = (SDL_Rect){SCREEN_CENTER.x - 50, SCREEN_CENTER.y + 30, 200, 80},
         .handler = (void *)load_game_screen,
@@ -246,12 +279,12 @@ landing_page_state_t *landing_page_init()
     return page_state;
 }
 
-// end_page_state_t *end_page_init()
-// {
-//     end_page_state_t *page_state = malloc(sizeof(end_page_state_t));
+end_page_state_t *end_page_init()
+{
+    end_page_state_t *page_state = malloc(sizeof(end_page_state_t));
 
-//     page_state->texts = build_text_assets();
-//     page_state->btns = build_btn_assets();
+    page_state->texts = build_text_assets(END_PAGE_TEXT_ELEMENTS, end_text_elements);
+    page_state->btns = build_btn_assets(END_PAGE_BTN_ELEMENTS, end_btn_elements);
 
-//     return page_state;
-// }
+    return page_state;
+}
