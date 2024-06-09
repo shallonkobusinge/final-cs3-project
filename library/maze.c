@@ -321,7 +321,7 @@ static vector_t traverse_maze(maze_t *maze, vector_t vec, int movement_direction
                 {
                     for (size_t i = 0; i < 4; i++)
                     {
-                        if (walls[i] == false)
+                        if (!walls[i])
                         {
                             possible_move[move_counts++] = directions[i];
                         }
@@ -331,9 +331,17 @@ static vector_t traverse_maze(maze_t *maze, vector_t vec, int movement_direction
                         valid_move = possible_move[rand() % move_counts];
                         goto end;
                     }
-                }else{
-                    valid_move = directions[movement_direction];
-                    goto end;
+                }
+                else
+                {
+                    if (!walls[movement_direction])
+                    {
+                        valid_move = directions[movement_direction];
+                    } else {
+                        printf("CLOSED ");
+                        valid_move = VEC_ZERO;
+                    }
+                     goto end;
                 }
             }
         }
@@ -344,27 +352,26 @@ end:
 
 void translate_body_movement(state_t *state, body_t *body, int movement_dir)
 {
-  vector_t new_vec = body_get_centroid(body);
-  maze_t *maze = state->maze_state->maze;
-  vector_t vec = (vector_t){
-      .x = (new_vec.x - GRID_CELL_SIZE / 4),
-      .y = (new_vec.y - GRID_CELL_SIZE / 4)};
-  vector_t new_centroid = traverse_maze(maze, vec, movement_dir);
-  if (movement_dir == -1)
-  {
-    SDL_Delay(750);
-    move_body(body, new_centroid);
-  }
-  else
-  {
-    move_body(body, new_centroid);
-  }
+    vector_t new_vec = body_get_centroid(body);
+    maze_t *maze = state->maze_state->maze;
+    vector_t vec = (vector_t){
+        .x = (new_vec.x - GRID_CELL_SIZE / 4),
+        .y = (new_vec.y - GRID_CELL_SIZE / 4)};
+    vector_t new_centroid = traverse_maze(maze, vec, movement_dir);
+    if (movement_dir == -1)
+    {
+        SDL_Delay(750);
+        move_body(body, new_centroid);
+    }
+    else
+    {
+        move_body(body, new_centroid);
+    }
 }
 
 void on_key(char key, key_event_type_t type, double held_time, state_t *state)
 {
     body_t *beaver = scene_get_body(state->scene, 0);
-    vector_t translation = body_get_centroid(beaver);
 
     if (type == KEY_PRESSED)
     {
