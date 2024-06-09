@@ -32,9 +32,8 @@ const rgb_color_t SEEKER_COLOR = (rgb_color_t){0.1, 0.9, 0.2};
 typedef struct maze_body
 {
   body_t *body;
-  vector_t position; 
-}maze_body_t;
-
+  vector_t position;
+} maze_body_t;
 
 typedef struct seeker
 {
@@ -57,26 +56,27 @@ body_t *make_body(vector_t center, rgb_color_t color)
   double size = (double)GRID_CELL_SIZE;
   list_t *c = list_init(4, free);
   vector_t *v1 = malloc(sizeof(vector_t));
-  *v1 = (vector_t){-size / 2, -size /2};
+  *v1 = (vector_t){-size / 2, -size / 2};
   list_add(c, v1);
 
   vector_t *v2 = malloc(sizeof(vector_t));
-  *v2 = (vector_t){size / 2, -size /2};
+  *v2 = (vector_t){size / 2, -size / 2};
   list_add(c, v2);
 
   vector_t *v3 = malloc(sizeof(vector_t));
-  *v3 = (vector_t){size / 2, size /2};
+  *v3 = (vector_t){size / 2, size / 2};
   list_add(c, v3);
 
   vector_t *v4 = malloc(sizeof(vector_t));
-  *v4 = (vector_t){-size / 2, size /2};
+  *v4 = (vector_t){-size / 2, size / 2};
   list_add(c, v4);
   body_t *seeker = body_init(c, 1, color);
   body_set_centroid(seeker, center);
   return seeker;
 }
 
-void add_to_scene(state_t *state, vector_t center, rgb_color_t color, const char *path) {
+void add_to_scene(state_t *state, vector_t center, rgb_color_t color, const char *path)
+{
   body_t *body = make_body(center, color);
   scene_add_body(state->scene, body);
   asset_t *asset_body = asset_make_image_with_body(path, body);
@@ -96,11 +96,11 @@ void move_body(body_t *body, vector_t vec)
 static void add_new_seeker(state_t *state, bool is_new)
 {
 
-   vector_t seeker_pos = VEC_ZERO;
+  vector_t seeker_pos = VEC_ZERO;
   if (is_new)
   {
     seeker_pos = (vector_t){
-        .x = (rand() % (GRID_WIDTH) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2,
+        .x = (rand() % (GRID_WIDTH)*GRID_CELL_SIZE) + GRID_CELL_SIZE / 2,
         .y = (rand() % (GRID_HEIGHT - 4) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10,
     };
     state->seeker->last_seeker_time = 0;
@@ -108,7 +108,7 @@ static void add_new_seeker(state_t *state, bool is_new)
   else
   {
     seeker_pos = (vector_t){.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2),
-                                 .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10)};
+                            .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10)};
   }
   add_to_scene(state, seeker_pos, SEEKER_COLOR, SEEKER_PATH);
 }
@@ -119,7 +119,6 @@ void render_another_seeker(state_t *state, double dt)
   if (state->seeker->last_seeker_time >= NEW_SEEKERS_INTERVAL)
   {
     add_new_seeker(state, true);
-    //  tagged_sound(state->sound_effect);
   }
   for (size_t i = 1; i < list_size(state->body_assets); i++)
   {
@@ -197,7 +196,12 @@ void seeker_collision(state_t *state)
   for (size_t i = 1; i < scene_bodies(state->scene); i++)
   {
     body_t *seeker = scene_get_body(state->scene, i);
-    create_collision(state->scene, scene_get_body(state->scene, 0), seeker, end_game, NULL, 0.0);
+    rgb_color_t *color = body_get_color(seeker);
+    if (color->r == 0.1 && color->g == 0.9 && color->b == 0.2)
+    {
+      create_collision(state->scene, scene_get_body(state->scene, 0), seeker, end_game, NULL, 0.0);
+      tagged_sound(state->sound_effect);
+    }
   }
 }
 
