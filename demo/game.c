@@ -56,7 +56,6 @@ btn_element_t btn_elements[] = {
         .text.text = "PLAY",
         .img.file_path = "assets/images/landing-page/play_btn.png",
         .img.frame = (SDL_Rect){MAX.x - 50, CENTER.y + 30, 200, 80},
-
         .handler = (void *)load_game_screen,
     },
 };

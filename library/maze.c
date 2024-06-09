@@ -25,6 +25,13 @@ const char *building_paths[] = {
     "assets/images/scenery/caltech-hall.png",
     "assets/images/scenery/beckman-auditorium.png"};
 
+typedef struct btn_element
+{
+    text_element_t text;
+    img_element_t img;
+    button_handler_t handler;
+} btn_element_t;
+
 typedef struct state
 {
     scene_t *scene;
