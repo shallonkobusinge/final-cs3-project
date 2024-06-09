@@ -55,7 +55,7 @@ state_t *global_state = NULL;
 static void
 load_game_screen(state_t *state)
 {
-    printf("State %zu", state->page);
+    printf("State %zu", global_state->page);
     // state->page = 2;
     // sdl_clear();
     // show_maze(state, 0);
