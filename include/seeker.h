@@ -25,7 +25,7 @@ seeker_t *seeker_init(state_t *state);
  * @param color color of the body.
  * @return the new body.
 */
-body_t *make_body(double width, double height, vector_t center, rgb_color_t color);
+body_t *make_body(vector_t center, rgb_color_t color);
 
 /*
 * Add a new seeker either at the start of the game or

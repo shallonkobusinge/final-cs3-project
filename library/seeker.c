@@ -10,7 +10,7 @@
 #include "forces.h"
 
 const char *SEEKER_PATH = "assets/images/scenery/seeker_bg.png";
-const char *BEAVER_PATH = "assets/images/scenery/beaver.png";
+// const char *BEAVER_PATH = "assets/images/scenery/beaver.png";
 
 const vector_t MIN_WINDOW = {0, 0};
 const vector_t MAX_WINDOW = {1000, 500};
@@ -29,6 +29,13 @@ const int NEW_SEEKERS_INTERVAL = 3;
 
 const rgb_color_t SEEKER_COLOR = (rgb_color_t){0.1, 0.9, 0.2};
 
+typedef struct maze_body
+{
+  body_t *body;
+  vector_t position; 
+}maze_body_t;
+
+
 typedef struct seeker
 {
   double last_seeker_time;
@@ -45,24 +52,24 @@ typedef struct state
   list_t *body_assets;
 } state_t;
 
-body_t *make_body(double w, double h, vector_t center, rgb_color_t color)
+body_t *make_body(vector_t center, rgb_color_t color)
 {
 
   list_t *c = list_init(4, free);
   vector_t *v1 = malloc(sizeof(vector_t));
-  *v1 = (vector_t){-w / 2, -h /2};
+  *v1 = (vector_t){-GRID_CELL_SIZE / 2, -GRID_CELL_SIZE /2};
   list_add(c, v1);
 
   vector_t *v2 = malloc(sizeof(vector_t));
-  *v2 = (vector_t){w / 2, -h /2};
+  *v2 = (vector_t){GRID_CELL_SIZE / 2, -GRID_CELL_SIZE /2};
   list_add(c, v2);
 
   vector_t *v3 = malloc(sizeof(vector_t));
-  *v3 = (vector_t){w / 2, h /2};
+  *v3 = (vector_t){GRID_CELL_SIZE / 2, GRID_CELL_SIZE /2};
   list_add(c, v3);
 
   vector_t *v4 = malloc(sizeof(vector_t));
-  *v4 = (vector_t){-w / 2, h /2};
+  *v4 = (vector_t){-GRID_CELL_SIZE / 2, GRID_CELL_SIZE /2};
   list_add(c, v4);
   body_t *seeker = body_init(c, 1, color);
   body_set_centroid(seeker, center);
@@ -72,6 +79,18 @@ body_t *make_body(double w, double h, vector_t center, rgb_color_t color)
 void move_body(body_t *body, vector_t vec)
 {
   body_set_centroid(body, vec_add(body_get_centroid(body), vec));
+}
+
+static maze_body_t *create_body(state_t *state, vector_t ){
+  maze_body_t *
+   vector_t center = (vector_t){.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2),
+                                 .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10)};
+    seeker = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, center, SEEKER_COLOR);
+  
+
+  scene_add_body(state->scene, seeker);
+  asset_t *new_asset_seeker = asset_make_image_with_body(SEEKER_PATH, seeker);
+  list_add(state->body_assets, new_asset_seeker);
 }
 
 /**
@@ -129,23 +148,23 @@ void render_another_seeker(state_t *state, double dt)
  * Creates and adds a body asset of the hider to the list of body_assets in the state.
  * @param state state struct of the game.
  */
-static void hider_init(state_t *state)
-{
-  vector_t center = (vector_t){.x = (((GRID_WIDTH - 24) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2),
-                               .y = (((GRID_HEIGHT - 11) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10)};
+// static void hider_init(state_t *state)
+// {
+//   vector_t center = (vector_t){.x = (((GRID_WIDTH - 24) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2),
+//                                .y = (((GRID_HEIGHT - 11) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10)};
 
-  body_t *beaver = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, center, (rgb_color_t){50, 129, 110});
-  scene_add_body(state->scene, beaver);
+//   body_t *beaver = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, center, (rgb_color_t){50, 129, 110});
+//   scene_add_body(state->scene, beaver);
 
-  asset_t *asset_beaver = asset_make_image_with_body(BEAVER_PATH, beaver);
-  list_add(state->body_assets, asset_beaver);
-}
+//   asset_t *asset_beaver = asset_make_image_with_body(BEAVER_PATH, beaver);
+//   list_add(state->body_assets, asset_beaver);
+// }
 
 seeker_t *seeker_init(state_t *state)
 {
   seeker_t *seeker = malloc(sizeof(seeker_t));
   seeker->last_seeker_time = 0;
-  hider_init(state);
+  // hider_init(state);
   add_new_seeker(state, false);
   return seeker;
 }
