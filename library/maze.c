@@ -22,13 +22,10 @@ const size_t MAZE_WINDOW_WIDTH = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
 const size_t MAZE_WINDOW_HEIGHT = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
 
 const size_t NUM_BUILDINGS = 2;
-extern const size_t STARTING_SEEKERS;
 
 const char *building_paths[] = {
     "assets/images/scenery/caltech-hall.png",
     "assets/images/scenery/beckman-auditorium.png"};
-
-const char *BEAVER_PATH = "assets/images/scenery/beaver.png";
 
 typedef struct state
 {
@@ -95,7 +92,7 @@ static void init_grid(state_t *state)
         render_line(0, y, MAZE_WINDOW_WIDTH, y);
     }
 
-    for (size_t i = 0; i < STARTING_SEEKERS; i++)
+    for (size_t i = 0; i < NUM_BUILDINGS; i++)
     {
         vector_t center = (vector_t){.x = maze_state->buildings[i].x, .y = maze_state->buildings[i].y};
         add_to_scene(state, center, (rgb_color_t){241, 108, 45}, building_paths[i]);
@@ -250,31 +247,13 @@ static void buildings_init(maze_state_t *maze_state)
         maze_state->buildings[i].path = building_paths[i];
     }
 }
-/**
- * Adds a hider body returned by make_body() to the scene.
- * Creates and adds a body asset of the hider to the list of body_assets in the state.
- * @param state state struct of the game.
- */
-static void hider_init(maze_state_t *maze_state)
-{
-  vector_t center = (vector_t){.x = (((GRID_WIDTH - 24) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2),
-                               .y = (((GRID_HEIGHT - 11) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10)};
-//   add_to_scene(state, center, (rgb_color_t){50, 129, 110}, BEAVER_PATH);
-  maze_state->buildings[0] = (building_t){
-    .x = center.x,
-    .y = center.y
-  };
-  maze_state->buildings[0].path = BEAVER_PATH;
-}
 
 maze_state_t *maze_init()
 {
     srand(time(NULL));
 
-    maze_state_t *maze_state = malloc(sizeof(maze_state_t) + (sizeof(cell_t) * STARTING_SEEKERS));
+    maze_state_t *maze_state = malloc(sizeof(maze_state_t) + (sizeof(cell_t) * NUM_BUILDINGS));
     maze_state->maze = create_maze();
-
-    hider_init(maze_state);
 
     buildings_init(maze_state);
 
@@ -343,7 +322,7 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_directi
                 {
                     for (size_t i = 0; i < 4; i++)
                     {
-                        if (!walls[i])
+                        if (!walls[i] && !maze->cells[y][x].visited)
                         {
                             possible_move[move_counts++] = directions[i];
                         }
@@ -356,7 +335,7 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_directi
                 }
                 else
                 {
-                    if (!walls[movement_direction])
+                    if (!walls[movement_direction] && !maze->cells[y][x].visited)
                     {
                         valid_move = directions[movement_direction];
                     }
