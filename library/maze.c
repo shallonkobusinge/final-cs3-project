@@ -23,7 +23,7 @@ const size_t GRID_CELL_SIZE = 40;
 const size_t MAZE_WINDOW_WIDTH = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
 const size_t MAZE_WINDOW_HEIGHT = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
 
-const size_t NUM_BUILDINGS = 3;
+const size_t NUM_BUILDINGS = 4;
 
 const char *building_paths[] = {
     "assets/images/scenery/caltech-hall.png",
