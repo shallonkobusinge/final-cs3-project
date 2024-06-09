@@ -74,7 +74,7 @@ maze_t *create_maze()
 /**
  * Traverse the maze
 */
-int traverse_maze(state_t *state, vector_t new_vec) {
+vector_t traverse_maze(state_t *state, vector_t new_vec) {
     vector_t valid_move = VEC_ZERO;
     maze_t *maze = state->maze_state->maze;
 
@@ -82,22 +82,18 @@ int traverse_maze(state_t *state, vector_t new_vec) {
         .x = (new_vec.x -  GRID_CELL_SIZE / 4),
         .y = (new_vec.y - GRID_CELL_SIZE / 4)
     };
+    
+    vector_t directions[] = {
+        {.x = 0, .y = -GRID_CELL_SIZE}, // north
+        {.x = 0, .y = GRID_CELL_SIZE}, // south
+        {.x = GRID_CELL_SIZE, .y = 0}, // east
+        {.x = -GRID_CELL_SIZE, .y = 0}, //west
+    };
     for(size_t y = 0; y < GRID_HEIGHT; y++) {
         for(size_t x = 0; x < GRID_WIDTH; x++) {
          if((maze->cells[y][x].box.x == (int)vec.x) && (maze->cells[y][x].box.y == (int)vec.y)) {
                 // printf(" MAZE x = %d y = %d VECTOR x = %d y = %d \n", maze->cells[y][x].box.x, maze->cells[y][x].box.y, (int)vec.x, (int)vec.y);
                 // printf("NORTH = %d SOUTH = %d EAST = %d WEST = %d  \n", maze->cells[y][x].north, maze->cells[y][x].south, maze->cells[y][x].east, maze->cells[y][x].west);
-
-                int directions[] = {
-                    2,
-                    3,
-                    1,
-                    0
-                    // {.x = 0, .y = -GRID_CELL_SIZE}, // north
-                    // {.x = 0, .y = GRID_CELL_SIZE}, // south
-                    // {.x = GRID_CELL_SIZE, .y = 0}, // east
-                    // {.x = -GRID_CELL_SIZE, .y = 0}, //west
-                };
                 bool walls[] = {
                     maze->cells[y][x].north,
                     maze->cells[y][x].south,
@@ -106,6 +102,7 @@ int traverse_maze(state_t *state, vector_t new_vec) {
                 };
                 for(size_t i = 0; i < 4; i++) {
                     if(!walls[i]){
+
                         // printf("BEFORE VECTOR x = %f y = %f \n", directions[].x, valid_move.y);
                         return directions[i];
                         // goto end_loops;
@@ -116,7 +113,7 @@ int traverse_maze(state_t *state, vector_t new_vec) {
         }
     }
     // end_loops:
-    return 9;
+    return VEC_ZERO;
 }
 
 /**

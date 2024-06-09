@@ -21,6 +21,6 @@ void show_maze(state_t *state, double dt);
  */
 maze_state_t *maze_init();
 
-int traverse_maze(state_t *state, vector_t vec);
+vector_t traverse_maze(state_t *state, vector_t vec);
 
 #endif // #ifndef __MAZE_H__
