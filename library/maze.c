@@ -325,24 +325,26 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_directi
         return VEC_ZERO;
     }
 
-    vector_t possible_move[4];
-    size_t move_counts = 0;
-
-    for (size_t i = 0; i < 4; i++)
+    if (movement_direction >= 0 && movement_direction < 4 && !walls[movement_direction])
     {
-        if (!walls[i])
+        printf(" DIRECTION %zu \n", movement_direction);
+        valid_move = directions[movement_direction];
+    }
+    else
+    {
+        vector_t possible_move[4];
+        size_t move_counts = 0;
+
+        for (size_t i = 0; i < 4; i++)
         {
-            possible_move[move_counts++] = directions[i];
+            if (!walls[i])
+            {
+                possible_move[move_counts++] = directions[i];
+            }
         }
+        valid_move = possible_move[rand() % move_counts];
     }
-    if(move_counts > 0){
-        if(movement_direction >= 0 && movement_direction < 4) {
-            printf(" MOVE COUNT %zu DIRECTION %zu \n", move_counts, movement_direction);
-            valid_move = directions[movement_direction];
-        }else{
-            valid_move = possible_move[rand() % move_counts];
-        }
-    }
+
     // if (movement_direction == -1)
     // {
     //     for (size_t i = 0; i < 4; i++)
