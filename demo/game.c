@@ -12,7 +12,6 @@
 #include "asset_cache.h"
 #include "sdl_wrapper.h"
 #include "landing_page.h"
-#include "end_page.h"
 #include "maze.h"
 #include "sound_effect.h"
 #include "seeker.h"
@@ -25,7 +24,6 @@ const vector_t SDL_CENTER = {500, 250};
 
 typedef struct maze_state maze_state_t;
 typedef struct landing_page_state landing_page_state_t;
-typedef struct end_page_state end_page_state_t;
 typedef struct seeker seeker_t;
 typedef struct sound_effect sound_effect_t;
 
@@ -35,7 +33,7 @@ struct state
     size_t page;
     maze_state_t *maze_state;
     landing_page_state_t *landing_page_state;
-    end_page_state_t *end_page_state;
+
     sound_effect_t *sound_effect;
     seeker_t *seeker;
     list_t *body_assets;
@@ -53,7 +51,6 @@ state_t *emscripten_init()
     state->seeker = seeker_init(state);
     state->maze_state = maze_init();
     state->landing_page_state = landing_page_init();
-    state->end_page_state = end_page_init();
     state->sound_effect = sound_effect_init();
 
     // game_sound(state->sound_effect);
@@ -75,7 +72,7 @@ bool emscripten_main(state_t *state)
     }
     else if (state->page == 3)
     {
-        show_end_page(state);
+        show_landing_page(state);
     }
     scene_tick(state->scene, dt);
 
