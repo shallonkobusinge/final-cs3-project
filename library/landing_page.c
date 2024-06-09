@@ -1,4 +1,5 @@
 #include "landing_page.h"
+#include "end_page.h"
 #include "asset.h"
 #include "state.h"
 #include "asset_cache.h"
@@ -26,6 +27,7 @@ typedef struct state
     size_t page;
     maze_state_t *maze_state;
     landing_page_state_t *landing_page_state;
+    end_page_state_t *end_game_state;
     sound_effect_t *sound_effect;
     seeker_t *seeker;
     list_t *body_assets;
