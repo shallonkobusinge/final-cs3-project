@@ -57,6 +57,8 @@ state_t *emscripten_init()
     state->seeker = seeker_init(state);
     game_sound(state->sound_effect);
 
+    set_state(state);
+
     return state;
 }
 

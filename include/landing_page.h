@@ -17,6 +17,8 @@ typedef struct landing_page_state landing_page_state_t;
  */
 void show_landing_page(landing_page_state_t *page_state);
 
+void set_state(state_t *state);
+
 /**
  * Initialize landing page images, buttons and texts.
  * @return state of the landing page.
