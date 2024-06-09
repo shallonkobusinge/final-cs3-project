@@ -229,7 +229,7 @@ void create_collision(scene_t *scene, body_t *body1, body_t *body2,
   list_add(aux_bodies, body2);
 
   collision_aux_t *collision_aux =
-      collision_aux_init(force_const, aux_bodies, handler, false, aux);
+      collision_aux_init(force_const, aux_bodies, handler, false, aux, state);
 
   scene_add_bodies_force_creator(scene, collision_force_creator, collision_aux,
                                  bodies);
