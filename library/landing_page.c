@@ -28,32 +28,6 @@ typedef struct state
 
 state_t *global_state = NULL;
 
-/**
- * Load game screen
- */
-static void
-load_game_screen(state_t *state)
-{
-    printf("here\n");
-    // state->page = 2;
-    // sdl_clear();
-    // show_maze(state, 0);
-    // printf("Next screen: %d\n", 0);
-}
-
-btn_element_t btn_elements[] = {
-    {
-        .text.frame = (SDL_Rect){SCREEN_CENTER.x - 20, SCREEN_CENTER.y + 45, 90, 48},
-        .text.font_path = "assets/fonts/Inter-Regular.ttf",
-        .text.color = (rgb_color_t){0, 0, 0},
-        .text.text = "PLAY",
-        .img.file_path = "assets/images/landing-page/play_btn.png",
-        .img.frame = (SDL_Rect){SCREEN_CENTER.x - 50, SCREEN_CENTER.y + 30, 200, 80},
-
-        .handler = (void *)load_game_screen,
-    },
-};
-
 text_element_t text_elements[] = {
     {
         .text = "Welcome to The Caltech Hideout",
