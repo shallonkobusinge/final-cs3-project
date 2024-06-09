@@ -2,6 +2,7 @@
 #define __LANDING_PAGE_H__
 
 #include "asset.h"
+#include "state.h"
 
 typedef struct text_element
 {
@@ -30,7 +31,7 @@ typedef struct landing_page_state landing_page_state_t;
  * Display and renders all the assets on the landing page.
  * @param page_state state of the page
  */
-void show_landing_page(landing_page_state_t *page_state);
+void show_landing_page(state_t *state);
 
 /**
  * Initialize landing page images, buttons and texts.
