@@ -304,12 +304,6 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_directi
     };
     size_t y = vec.y / GRID_CELL_SIZE;
     size_t x = vec.x / GRID_CELL_SIZE;
-    // for (size_t y = 0; y < GRID_HEIGHT; y++)
-    // {
-    //     for (size_t x = 0; x < GRID_WIDTH; x++)
-    //     {
-            if ((maze->cells[y][x].box.x == (int)vec.x) && (maze->cells[y][x].box.y == (int)vec.y))
-            {
                 printf(" ARRIVED ");
                 bool walls[] = {
                     maze->cells[y][x].north,
@@ -348,9 +342,6 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_directi
                     }
                     goto end;
                 }
-            }
-    //     }
-    // }
 end:
     return valid_move;
 }
