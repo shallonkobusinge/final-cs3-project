@@ -84,10 +84,10 @@ vector_t traverse_maze(state_t *state, vector_t new_vec) {
     };
     
     vector_t directions[] = {
-        {.x = 0.0, .y = -GRID_CELL_SIZE}, // north
-        {.x = 0.0, .y = GRID_CELL_SIZE}, // south
-        {.x = GRID_CELL_SIZE, .y = 0}, // east
-        {.x = -GRID_CELL_SIZE, .y = 0}, //west
+        {.x = 0.0, .y = valid_move.y -GRID_CELL_SIZE}, // north
+        {.x = 0.0, .y = valid_move.y + GRID_CELL_SIZE}, // south
+        {.x = valid_move.x + GRID_CELL_SIZE, .y = 0}, // east
+        {.x = valid_move.x - GRID_CELL_SIZE, .y = 0}, //west
     };
     for(size_t y = 0; y < GRID_HEIGHT; y++) {
         for(size_t x = 0; x < GRID_WIDTH; x++) {
