@@ -350,7 +350,7 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
     }
 }
 
-size_t show_maze(state_t *state, double dt)
+void show_maze(state_t *state, double dt)
 {
     sdl_on_key((key_handler_t)on_key);
 

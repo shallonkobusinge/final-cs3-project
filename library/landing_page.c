@@ -40,6 +40,12 @@ typedef struct landing_page_state
     list_t *texts;
 } landing_page_state_t;
 
+typedef struct state
+{
+    size_t page;
+    landing_page_state_t *landing_page_state;
+
+} state_t;
 /**
  * Load game screen
  */
@@ -205,8 +211,9 @@ static list_t *build_btn_assets()
     return assets;
 }
 
-void show_landing_page(landing_page_state_t *page_state)
+void show_landing_page(state_t *state)
 {
+    state = state;
     list_t *imgs = page_state->imgs;
     for (size_t i = 0; i < list_size(imgs); i++)
     {
