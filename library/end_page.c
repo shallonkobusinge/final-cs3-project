@@ -1,5 +1,4 @@
 #include "end_page.h"
-#include "landing_page.h"
 #include "asset.h"
 #include "state.h"
 #include "asset_cache.h"
@@ -19,12 +18,32 @@ typedef struct end_page_state
     list_t *texts;
 } end_page_state_t;
 
+typedef struct text_element
+{
+    const char *text;
+    const char *font_path;
+    rgb_color_t color;
+    SDL_Rect frame;
+} text_element_t;
+
+typedef struct img_element
+{
+    const char *file_path;
+    SDL_Rect frame;
+} img_element_t;
+
+typedef struct btn_element
+{
+    text_element_t text;
+    img_element_t img;
+    button_handler_t handler;
+} btn_element_t;
+
 typedef struct state
 {
     scene_t *scene;
     size_t page;
     maze_state_t *maze_state;
-    landing_page_state_t *landing_page_state;
     end_page_state_t *end_game_state;
     sound_effect_t *sound_effect;
     seeker_t *seeker;
