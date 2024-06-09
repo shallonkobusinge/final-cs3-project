@@ -116,7 +116,7 @@ int traverse_maze(state_t *state, vector_t new_vec) {
         }
     }
     // end_loops:
-    return VEC_ZERO;
+    return 9;
 }
 
 /**
