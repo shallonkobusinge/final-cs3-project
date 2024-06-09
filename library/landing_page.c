@@ -93,7 +93,7 @@ static text_element_t end_text_elements[] = {
         .text = "GAME OVER!.",
         .font_path = "assets/fonts/Inter-Regular.ttf",
         .color = (rgb_color_t){0, 0, 0},
-        .frame = (SDL_Rect){SCREEN_MAX.x - 180, 459, 150, 28},
+        .frame = (SDL_Rect){SCREEN_CENTER.x - 180, SCREEN_CENTER.y, 150, 28},
     },
 };
 
@@ -135,7 +135,7 @@ static btn_element_t landing_btn_elements[] = {
 
 static btn_element_t end_btn_elements[] = {
     {
-        .text.frame = (SDL_Rect){SCREEN_CENTER.x - 20, SCREEN_CENTER.y + 45, 90, 48},
+        .text.frame = (SDL_Rect){SCREEN_CENTER.x - 60, SCREEN_CENTER.y + 45, 90, 48},
         .text.font_path = "assets/fonts/Inter-Regular.ttf",
         .text.color = (rgb_color_t){0, 0, 0},
         .text.text = "Restart Game",
