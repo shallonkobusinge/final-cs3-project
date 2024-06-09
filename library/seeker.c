@@ -131,8 +131,8 @@ void render_another_seeker(state_t *state, double dt)
  */
 static void hider_init(state_t *state)
 {
-  vector_t center = (vector_t){.x = (((GRID_WIDTH)*GRID_CELL_SIZE) + GRID_CELL_SIZE / 4),
-                               .y = (((GRID_HEIGHT)*GRID_CELL_SIZE) + GRID_CELL_SIZE / 4)};
+  vector_t center = (vector_t){.x = (((GRID_WIDTH - 24) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4),
+                               .y = (((GRID_HEIGHT - 0) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4)};
   printf("LOCATION x = %f y = %f \n", center.x, center.y);
 
   body_t *beaver = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, center, (rgb_color_t){50, 129, 110});
@@ -140,7 +140,7 @@ static void hider_init(state_t *state)
 
   asset_t *asset_beaver = asset_make_image_with_body(BEAVER_PATH, beaver);
   printf(" SIZE %zu \n", list_size(state->body_assets));
-  list_add(state->body_assets, asset_beaver);
+  // list_add(state->body_assets, asset_beaver);
 }
 
 seeker_t *seeker_init(state_t *state)
@@ -148,6 +148,7 @@ seeker_t *seeker_init(state_t *state)
   seeker_t *seeker = malloc(sizeof(seeker_t));
   seeker->last_seeker_time = 0;
   hider_init(state);
+  printf(" SIZE %zu \n", state->page);
   add_new_seeker(state, false);
   return seeker;
 }
