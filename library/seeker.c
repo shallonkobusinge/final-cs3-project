@@ -96,8 +96,8 @@ static void add_new_seeker(state_t *state, bool is_new)
   else
   {
     vector_t center = (vector_t){.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2),
-                                 .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2)};
-    seeker = make_body(GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2, center, SEEKER_COLOR);
+                                 .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 2)};
+    seeker = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, center, SEEKER_COLOR);
   }
 
   scene_add_body(state->scene, seeker);
