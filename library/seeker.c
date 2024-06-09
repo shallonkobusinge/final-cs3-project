@@ -10,7 +10,6 @@
 #include "forces.h"
 
 const char *SEEKER_PATH = "assets/images/scenery/seeker_bg.png";
-const char *BEAVER_PATH = "assets/images/scenery/beaver.png";
 
 const vector_t MIN_WINDOW = {0, 0};
 const vector_t MAX_WINDOW = {1000, 500};
@@ -132,23 +131,23 @@ void render_another_seeker(state_t *state, double dt)
   }
 }
 
-/**
- * Adds a hider body returned by make_body() to the scene.
- * Creates and adds a body asset of the hider to the list of body_assets in the state.
- * @param state state struct of the game.
- */
-static void hider_init(state_t *state)
-{
-  vector_t center = (vector_t){.x = (((GRID_WIDTH - 24) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2),
-                               .y = (((GRID_HEIGHT - 11) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10)};
-  add_to_scene(state, center, (rgb_color_t){50, 129, 110}, BEAVER_PATH);
-}
+// /**
+//  * Adds a hider body returned by make_body() to the scene.
+//  * Creates and adds a body asset of the hider to the list of body_assets in the state.
+//  * @param state state struct of the game.
+//  */
+// static void hider_init(state_t *state)
+// {
+//   vector_t center = (vector_t){.x = (((GRID_WIDTH - 24) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2),
+//                                .y = (((GRID_HEIGHT - 11) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10)};
+//   add_to_scene(state, center, (rgb_color_t){50, 129, 110}, BEAVER_PATH);
+// }
 
 seeker_t *seeker_init(state_t *state)
 {
   seeker_t *seeker = malloc(sizeof(seeker_t));
   seeker->last_seeker_time = 0;
-  hider_init(state);
+  // hider_init(state);
   add_new_seeker(state, false);
   return seeker;
 }

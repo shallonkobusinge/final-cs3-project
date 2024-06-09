@@ -21,6 +21,16 @@ void show_maze(state_t *state, double dt);
  */
 maze_state_t *maze_init();
 
-vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_direction);
+/**
+ * Traverse traverse in the body's current.
+ * Finds the exact cell of the body in the maze.
+ * Finds the cell's open wall and return the direction.
+ * @param state state struct of the game
+ * @param vector current body centroid of the body.
+ * @param movement_direction movement direction of the body.
+ * 
+ * @return rotation direction vector.
+*/
+vector_t traverse_maze(state_t *state, vector_t vector, size_t movement_direction);
 
 #endif // #ifndef __MAZE_H__
