@@ -42,10 +42,13 @@ typedef struct landing_page_state
     list_t *texts;
 } landing_page_state_t;
 
-/**
- * Load game screen
- */
-static void load_game_screen(state_t *state)
+yoojung
+
+    /**
+     * Load game screen
+     */
+    static void
+    load_game_screen(state_t *state)
 {
     printf("Next screen: %d\n", 0);
     state->page = 2;
