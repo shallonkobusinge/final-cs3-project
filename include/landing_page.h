@@ -1,7 +1,7 @@
 #ifndef __LANDING_PAGE_H__
 #define __LANDING_PAGE_H__
 
-#include "state.h"
+#include "asset.h"
 
 typedef struct text_element
 {
