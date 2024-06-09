@@ -114,12 +114,11 @@ btn_element_t btn_elements[] = {
         .handler = (void *)load_game_screen,
     },
 };
-
 /**
  * Build text assets from text templates
  * @return list of text assets
  */
-static list_t *build_text_assets()
+static list_t *landing_build_text_assets()
 {
     list_t *assets = list_init(LANDING_PAGE_TEXT_ELEMENTS, free);
     for (size_t i = 0; i < LANDING_PAGE_TEXT_ELEMENTS; i++)
@@ -136,7 +135,7 @@ static list_t *build_text_assets()
  * Build image assets from image templates
  * @return list of image assets
  */
-static list_t *build_img_assets()
+static list_t *landing_build_img_assets()
 {
     list_t *assets = list_init(LANDING_PAGE_IMG_ELEMENTS, free);
     for (size_t i = 0; i < LANDING_PAGE_IMG_ELEMENTS; i++)
@@ -148,11 +147,7 @@ static list_t *build_img_assets()
     return assets;
 }
 
-/**
- * Create button assets from a button template
- * @return button asset
- */
-static asset_t *create_btn(btn_element_t btn_element)
+asset_t *create_btn(btn_element_t btn_element)
 {
     asset_t *img_asset = NULL;
     asset_t *text_asset = NULL;
@@ -178,7 +173,7 @@ static asset_t *create_btn(btn_element_t btn_element)
  * Build buttons assets from buttons templates
  * @return list of button assets
  */
-static list_t *build_btn_assets()
+static list_t *landing_build_btn_assets()
 {
     list_t *assets = list_init(LANDING_PAGE_BTN_ELEMENTS, (free_func_t)asset_destroy);
     for (size_t i = 0; i < LANDING_PAGE_BTN_ELEMENTS; i++)
@@ -215,9 +210,9 @@ landing_page_state_t *landing_page_init()
 {
     landing_page_state_t *page_state = malloc(sizeof(landing_page_state_t));
 
-    page_state->imgs = build_img_assets();
-    page_state->texts = build_text_assets();
-    page_state->btns = build_btn_assets();
+    page_state->imgs = landing_build_img_assets();
+    page_state->texts = landing_build_text_assets();
+    page_state->btns = landing_build_btn_assets();
 
     return page_state;
 }

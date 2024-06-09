@@ -6,7 +6,6 @@
 #include <color.h>
 #include <sdl_wrapper.h>
 #include <stddef.h>
-#include "landing_page.h"
 
 typedef enum
 {

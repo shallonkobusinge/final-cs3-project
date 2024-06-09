@@ -6,7 +6,6 @@
 #include "asset_cache.h"
 #include "color.h"
 #include "sdl_wrapper.h"
-#include "landing_page.h"
 
 typedef struct asset
 {
@@ -121,7 +120,11 @@ asset_t *asset_make_button(SDL_Rect bounding_box, asset_t *image_asset,
   return (asset_t *)asset;
 }
 
-asset_t *create_btn(btn_element_t btn_element)
+/**
+ * Create button assets from a button template
+ * @return button asset
+ */
+static asset_t *create_btn(btn_element_t btn_element)
 {
   asset_t *img_asset = NULL;
   asset_t *text_asset = NULL;
