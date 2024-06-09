@@ -23,7 +23,7 @@ const size_t GRID_CELL_SIZE = 40;
 const size_t MAZE_WINDOW_WIDTH = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
 const size_t MAZE_WINDOW_HEIGHT = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
 
-const size_t NUM_BUILDINGS = 2;
+const size_t NUM_BUILDINGS = 3;
 
 const char *building_paths[] = {
     "assets/images/scenery/caltech-hall.png",
@@ -129,7 +129,7 @@ static void init_grid(state_t *state)
     //     asset_t *asset_building = asset_make_image_with_body(maze_state->buildings[i].path, building);
     //     list_add(state->body_assets, asset_building);
     // }
-        add_maze_body_scene();
+        add_maze_body_scene(state);
 }
 
 /**
@@ -268,7 +268,7 @@ static void generate_maze(maze_t *maze)
  */
 static void buildings_init(maze_state_t *maze_state)
 {
-    for (size_t i = 0; i < NUM_BUILDINGS; i++)
+    for (size_t i = 1; i < NUM_BUILDINGS; i++)
     {
         size_t rand_x = (rand() % GRID_WIDTH) + 1;
         size_t rand_y = (rand() % GRID_HEIGHT) + 1;
@@ -276,7 +276,7 @@ static void buildings_init(maze_state_t *maze_state)
             .x = ((GRID_WIDTH - rand_x) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2,
             .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10,
         };
-        maze_state->buildings[i] = (maze_body_t){
+        maze_state->maze_bodies[i] = (maze_body_t){
           .x = center.x,
           .y = center.y,
           .body = make_body(center, (rgb_color_t){241, 108, 45}),
