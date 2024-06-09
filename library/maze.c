@@ -74,20 +74,6 @@ maze_t *create_maze()
 }
 
 /**
-<<<<<<< HEAD
-=======
- * Traverse the maze
- */
-// bool traversal(state_t *state, vector_t vec) {
-//     maze_t *maze = state->maze_state;
-//     bool is_valid_move = false;
-//     for(size_t i = 0; i < GRID_HEIGHT; i++) {
-//         if(maze->cells[i].box.x == vec.x && maze)
-//     }
-// }
-
-/**
->>>>>>> afd30975cfa06403a8da72cbcae63d61229b15e1
  * Initializes and draws the grid, draws buildings and hider.
  * @param state state struct.
  */
