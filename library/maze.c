@@ -293,7 +293,7 @@ static void draw_maze(maze_t *maze)
 /**
  * Traverse the maze
  */
-vector_t traverse_maze(maze_t *maze, vector_t vec, int movement_direction)
+static vector_t traverse_maze(maze_t *maze, vector_t vec, int movement_direction)
 {
     vector_t valid_move = VEC_ZERO;
 

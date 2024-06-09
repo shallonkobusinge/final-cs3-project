@@ -21,4 +21,6 @@ void show_maze(state_t *state, double dt);
  */
 maze_state_t *maze_init();
 
+void translate_body_movement(state_t *state, body_t *body, int movement_dir);
+
 #endif // #ifndef __MAZE_H__
