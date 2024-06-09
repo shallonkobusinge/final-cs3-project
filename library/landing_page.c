@@ -14,6 +14,13 @@ const size_t LANDING_PAGE_IMG_ELEMENTS = 4;
 const size_t LANDING_PAGE_TEXT_ELEMENTS = 7;
 const size_t LANDING_PAGE_BTN_ELEMENTS = 1;
 
+typedef struct end_page_state
+{
+    list_t *imgs;
+    list_t *btns;
+    list_t *texts;
+} end_page_state_t;
+
 typedef struct landing_page_state
 {
     list_t *imgs;
@@ -103,7 +110,7 @@ static void load_game_screen(state_t *state)
     state->page = 2;
 }
 
-static btn_element_t btn_elements[] = {
+static btn_element_t landing_btn_elements[] = {
     {
         .text.frame = (SDL_Rect){SCREEN_CENTER.x - 20, SCREEN_CENTER.y + 45, 90, 48},
         .text.font_path = "assets/fonts/Inter-Regular.ttf",
@@ -114,18 +121,19 @@ static btn_element_t btn_elements[] = {
         .handler = (void *)load_game_screen,
     },
 };
+
 /**
  * Build text assets from text templates
  * @return list of text assets
  */
-static list_t *landing_build_text_assets()
+static list_t *build_text_assets(size_t NUM_TEXT_ELEMENTS, text_element_t *text_elements)
 {
-    list_t *assets = list_init(LANDING_PAGE_TEXT_ELEMENTS, free);
-    for (size_t i = 0; i < LANDING_PAGE_TEXT_ELEMENTS; i++)
+    list_t *assets = list_init(NUM_TEXT_ELEMENTS, free);
+    for (size_t i = 0; i < NUM_TEXT_ELEMENTS; i++)
     {
         asset_t *asset =
-            asset_make_text(landing_text_elements[i].font_path, landing_text_elements[i].frame,
-                            landing_text_elements[i].text, landing_text_elements[i].color);
+            asset_make_text(text_elements[i].font_path, text_elements[i].frame,
+                            text_elements[i].text, text_elements[i].color);
         list_add(assets, asset);
     }
     return assets;
@@ -135,13 +143,13 @@ static list_t *landing_build_text_assets()
  * Build image assets from image templates
  * @return list of image assets
  */
-static list_t *landing_build_img_assets()
+static list_t *build_img_assets(size_t NUM_IMG_ELEMENTS, img_element_t *img_elements)
 {
-    list_t *assets = list_init(LANDING_PAGE_IMG_ELEMENTS, free);
-    for (size_t i = 0; i < LANDING_PAGE_IMG_ELEMENTS; i++)
+    list_t *assets = list_init(NUM_IMG_ELEMENTS, free);
+    for (size_t i = 0; i < NUM_IMG_ELEMENTS; i++)
     {
         asset_t *asset =
-            asset_make_image(landing_img_elements[i].file_path, landing_img_elements[i].frame);
+            asset_make_image(img_elements[i].file_path, img_elements[i].frame);
         list_add(assets, asset);
     }
     return assets;
@@ -173,12 +181,12 @@ asset_t *create_btn(btn_element_t btn_element)
  * Build buttons assets from buttons templates
  * @return list of button assets
  */
-static list_t *landing_build_btn_assets()
+static list_t *build_btn_assets(size_t NUM_BTN_ELEMENTS, btn_element_t *landing_btn_elements)
 {
-    list_t *assets = list_init(LANDING_PAGE_BTN_ELEMENTS, (free_func_t)asset_destroy);
-    for (size_t i = 0; i < LANDING_PAGE_BTN_ELEMENTS; i++)
+    list_t *assets = list_init(NUM_BTN_ELEMENTS, (free_func_t)asset_destroy);
+    for (size_t i = 0; i < NUM_BTN_ELEMENTS; i++)
     {
-        asset_t *asset = create_btn(btn_elements[i]);
+        asset_t *asset = create_btn(landing_btn_elements[i]);
         list_add(assets, asset);
     }
     return assets;
@@ -206,13 +214,45 @@ void show_landing_page(state_t *state)
     }
 }
 
+void show_end_page(state_t *state)
+{
+    list_t *imgs = state->end_game_state->imgs;
+    for (size_t i = 0; i < list_size(imgs); i++)
+    {
+        asset_render(list_get(imgs, i));
+    }
+
+    list_t *texts = state->end_game_state->texts;
+    for (size_t i = 0; i < list_size(texts); i++)
+    {
+
+        asset_render(list_get(texts, i));
+    }
+
+    list_t *btns = state->end_game_state->btns;
+    for (size_t i = 0; i < list_size(btns); i++)
+    {
+        asset_render(list_get(btns, i));
+    }
+}
+
 landing_page_state_t *landing_page_init()
 {
     landing_page_state_t *page_state = malloc(sizeof(landing_page_state_t));
 
-    page_state->imgs = landing_build_img_assets();
-    page_state->texts = landing_build_text_assets();
-    page_state->btns = landing_build_btn_assets();
+    page_state->imgs = build_img_assets(LANDING_PAGE_IMG_ELEMENTS, landing_img_elements);
+    page_state->texts = build_text_assets(LANDING_PAGE_TEXT_ELEMENTS, landing_text_elements);
+    page_state->btns = build_btn_assets(LANDING_PAGE_BTN_ELEMENTS, landing_btn_elements);
 
     return page_state;
 }
+
+// end_page_state_t *end_page_init()
+// {
+//     end_page_state_t *page_state = malloc(sizeof(end_page_state_t));
+
+//     page_state->texts = build_text_assets();
+//     page_state->btns = build_btn_assets();
+
+//     return page_state;
+// }

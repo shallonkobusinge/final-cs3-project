@@ -3,7 +3,6 @@
 
 #include "state.h"
 
-typedef struct end_page_state end_page_state_t;
 /**
  * Display and renders all the assets on the landing page.
  * @param state state of the game
