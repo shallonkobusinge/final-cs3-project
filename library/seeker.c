@@ -131,8 +131,8 @@ void render_another_seeker(state_t *state, double dt)
  */
 static void hider_init(state_t *state)
 {
-  vector_t center = (vector_t){.x = (((GRID_WIDTH - 24) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4),
-                               .y = (((GRID_HEIGHT - 11) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4)};
+  vector_t center = (vector_t){.x = (((GRID_WIDTH)*GRID_CELL_SIZE) + GRID_CELL_SIZE / 4),
+                               .y = (((GRID_HEIGHT)*GRID_CELL_SIZE) + GRID_CELL_SIZE / 4)};
   printf("LOCATION x = %f y = %f \n", center.x, center.y);
 
   body_t *beaver = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, center, (rgb_color_t){50, 129, 110});
@@ -237,15 +237,15 @@ void seekers_random_movement(state_t *state)
  * @param aux the auxiliary value passed to create_collision.
  * @param force_const the force constant passed to create_collision()
  */
-void end_game(body_t *body1, body_t *body2, vector_t axis, void *aux,
-              double force_const)
+static void end_game(body_t *body1, body_t *body2, vector_t axis, void *aux,
+                     double force_const)
 {
-  // state->page = 3;
-  printf("page: %s", (aux));
+  printf("GAME OVER");
 }
 
 void seeker_collision(state_t *state)
 {
+  printf("Collision: %d\n", state->page);
   for (size_t i = 1; i < scene_bodies(state->scene); i++)
   {
     body_t *seeker = scene_get_body(state->scene, i);
