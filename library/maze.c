@@ -74,7 +74,7 @@ maze_t *create_maze()
 /**
  * Traverse the maze
 */
-vector_t traverse_maze(state_t *state, vector_t new_vec, int *last_direction) {
+vector_t traverse_maze(state_t *state, vector_t new_vec) {
     vector_t valid_move = VEC_ZERO;
     maze_t *maze = state->maze_state->maze;
 
@@ -85,9 +85,9 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, int *last_direction) {
     
     vector_t directions[] = {
         {.x = 0.0, .y = valid_move.y + GRID_CELL_SIZE}, // north
-        {.x = valid_move.x - GRID_CELL_SIZE, .y = 0}, // east
+        {.x = valid_move.x + GRID_CELL_SIZE, .y = 0}, // east
         {.x = 0.0, .y = valid_move.y - GRID_CELL_SIZE}, // south
-        {.x = valid_move.x + GRID_CELL_SIZE, .y = 0}, //west
+        {.x = valid_move.x - GRID_CELL_SIZE, .y = 0}, //west
     };
     for(size_t y = 0; y < GRID_HEIGHT; y++) {
         for(size_t x = 0; x < GRID_WIDTH; x++) {
@@ -103,15 +103,13 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, int *last_direction) {
                 vector_t possible_moves[4];
                 size_t move_count = 0;
                 for(size_t i = 0; i < 4; i++) {
-                    if(!walls[i] && i != *last_direction){
+                    if(!walls[i]){
                         // valid_move = directions[i];
                         possible_moves[move_count++] = directions[i];
                     }
                 }
                 if(move_count > 0) {
-                    int new_direction = rand() % move_count;
-                    valid_move = possible_moves[new_direction];
-                    *last_direction = new_direction;
+                    valid_move = possible_moves[rand() % move_count];
                     break;
                 }
             

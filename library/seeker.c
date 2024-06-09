@@ -195,7 +195,6 @@ void render_bodies(list_t *bodies) {
 // }
 
 void seekers_random_movement(state_t *state) {
-  static int last_direction = -1;
 for(size_t i = 1; i < scene_bodies(state->scene); i++) {
       body_t *seeker = scene_get_body(state->scene, i);
         rgb_color_t *color = body_get_color(seeker);
@@ -205,7 +204,7 @@ for(size_t i = 1; i < scene_bodies(state->scene); i++) {
               // printf(" LOACATION x = ")
                 vector_t body_centroid = body_get_centroid(seeker);
                 // vector_t check = vec_add(center, body_centroid);
-                vector_t new_centroid = traverse_maze(state, body_centroid, &last_direction);
+                vector_t new_centroid = traverse_maze(state, body_centroid);
                 // printf("OLD x: %f y: %f NEW x: %f   y: %f \n", body_centroid.x, body_centroid.y, new_centroid.x, new_centroid.y);
                 // generate_movement(seeker, new_centroid);
                 SDL_Delay(750);
