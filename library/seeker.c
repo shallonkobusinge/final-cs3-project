@@ -86,8 +86,8 @@ static void add_new_seeker(state_t *state, bool is_new)
   if (is_new)
   {
     vector_t seeker_pos = (vector_t){
-        .x = (rand() % (GRID_WIDTH)*GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-        .y = (rand() % (GRID_HEIGHT - 4) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+        .x = (rand() % (GRID_WIDTH)*GRID_CELL_SIZE) + GRID_CELL_SIZE / 2,
+        .y = (rand() % (GRID_HEIGHT - 4) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10,
     };
 
     seeker = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, seeker_pos, SEEKER_COLOR);
@@ -95,8 +95,8 @@ static void add_new_seeker(state_t *state, bool is_new)
   }
   else
   {
-    vector_t center = (vector_t){.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4),
-                                 .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4)};
+    vector_t center = (vector_t){.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2),
+                                 .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10)};
     seeker = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, center, SEEKER_COLOR);
   }
 
