@@ -16,7 +16,7 @@
 #include "sound_effect.h"
 #include "seeker.h"
 
-const size_t STARTING_SEEKERS = 5;
+const size_t STARTING_SEEKERS = 50;
 
 const vector_t SDL_MIN = {0, 0};
 const vector_t SDL_MAX = {1000, 500};
