@@ -23,11 +23,11 @@ void init_sound() {
 
 sound_effect_t *sound_effect_init() {
   sound_effect_t *sounds = malloc(sizeof(sound_effect_t));
-  sounds->game_sound = Mix_LoadMUS(GAME_SOUND_EFFECT);
+  sounds->game_sound = Mix_LoadMUS(TAGGED_SOUND_PATH);
   if(sounds->game_sound == NULL) {
     printf("Failed to load game sound effect! SDL_mixer Error: %s \n", Mix_GetError());
   }
-  sounds->tagged_sound = Mix_LoadWAV(TAGGED_SOUND_PATH);
+  sounds->tagged_sound = Mix_LoadWAV(GAME_SOUND_EFFECT);
   if(sounds->tagged_sound == NULL) {
     printf(" %s \n", "EERROR HERE");
     printf("Failed to tagged sound effect! SDL_mixer Error: %s \n", Mix_GetError());
