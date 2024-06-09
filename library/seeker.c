@@ -87,7 +87,7 @@ static void add_new_seeker(state_t *state, bool is_new)
   {
     vector_t seeker_pos = (vector_t){
         .x = (rand() % (GRID_WIDTH)*GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-        .y = (rand() % (GRID_HEIGHT - 4) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+        .y = (rand() % (GRID_HEIGHT - 4) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10,
     };
 
     seeker = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, seeker_pos, SEEKER_COLOR);
@@ -132,7 +132,7 @@ void render_another_seeker(state_t *state, double dt)
 static void hider_init(state_t *state)
 {
   vector_t center = (vector_t){.x = (((GRID_WIDTH - 24) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4),
-                               .y = (((GRID_HEIGHT - 11) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4)};
+                               .y = (((GRID_HEIGHT - 11) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10)};
 
   body_t *beaver = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, center, (rgb_color_t){50, 129, 110});
   scene_add_body(state->scene, beaver);
@@ -157,56 +157,6 @@ void render_bodies(list_t *bodies)
     asset_render(list_get(bodies, i));
   }
 }
-
-/**
- * Moves the seeker cell to a random
- * valid adjacent cell.
-//  * @param seeker the body of the seeker to be moved.
-*/
-// static void generate_movement (body_t *seeker, vector_t centroid) {
-//     SDL_Delay(750);
-// int direction = rand() % 4;
-
-// vector_t centroid = VEC_ZERO;
-
-// switch (direction) {
-// case 0: { // move left
-//         centroid.x -= GRID_CELL_SIZE;
-//     break;
-// }
-// case 1: { // move right
-//         centroid.x += GRID_CELL_SIZE;
-//     break;
-// }
-// case 2: { // move up
-//         centroid.y -= GRID_CELL_SIZE;
-//     break;
-// }
-// case 3: { // move down
-//         centroid.y += GRID_CELL_SIZE;
-//     break;
-// }
-// default:
-//     break;
-// }
-// printf(" CENTROID x = %f y = %f \n", centroid.x, centroid.y);
-// list_t *shape = body_get_shape(seeker);
-// bool move_valid = true;
-// for(size_t i = 0; i < list_size(shape); i++) {
-//   vector_t vertex = *(vector_t *)list_get(shape, i);
-//   vector_t new_vertex = vec_add(vertex, centroid);
-//        move_body(seeker, centroid);
-//   if(new_vertex.x < 0 || new_vertex.y < 0 || new_vertex.x >= MAZE_WINDOW_WIDTH || new_vertex.y >= MAZE_WINDOW_HEIGHT){
-//     move_valid = false;
-//     break;
-//   }
-// }
-// list_free(shape);
-//     // if(move_valid){
-//       move_body(seeker, centroid);
-//     // }
-
-// }
 
 void seekers_random_movement(state_t *state)
 {

@@ -245,7 +245,7 @@ static void buildings_init(maze_state_t *maze_state)
 
         maze_state->buildings[i] = (building_t){
             .x = ((GRID_WIDTH - rand_x) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
-            .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
+            .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10,
         };
         maze_state->buildings[i].path = building_paths[i];
     }
@@ -299,7 +299,7 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, int movement_direction)
     maze_t *maze = state->maze_state->maze;
     vector_t vec = (vector_t){
         .x = (new_vec.x - GRID_CELL_SIZE / 4),
-        .y = (new_vec.y - GRID_CELL_SIZE / 4)};
+        .y = (new_vec.y + GRID_CELL_SIZE / 10)};
 
     vector_t directions[] = {
         {.x = 0.0, .y = valid_move.y + GRID_CELL_SIZE}, // north
