@@ -16,7 +16,7 @@
 #include "sound_effect.h"
 #include "seeker.h"
 
-const int STARTING_SEEKERS = 50;
+const size_t STARTING_SEEKERS = 50;
 
 const vector_t MIN = {0, 0};
 const vector_t MAX = {1000, 500};
@@ -42,6 +42,24 @@ struct state
     list_t *body_assets;
 };
 
+static void load_game_screen(state_t *state)
+{
+    printf("here\n");
+    state->page = 2;
+}
+
+btn_element_t btn_elements[] = {
+    {
+        .text.frame = (SDL_Rect){MAX.x - 20, CENTER.y + 45, 90, 48},
+        .text.font_path = "assets/fonts/Inter-Regular.ttf",
+        .text.color = (rgb_color_t){0, 0, 0},
+        .text.text = "PLAY",
+        .img.file_path = "assets/images/landing-page/play_btn.png",
+        .img.frame = (SDL_Rect){MAX.x - 50, CENTER.y + 30, 200, 80},
+        .handler = (void *)load_game_screen,
+    },
+};
+
 state_t *emscripten_init()
 {
     asset_cache_init();
@@ -51,7 +69,7 @@ state_t *emscripten_init()
     state->scene = scene_init();
     state->page = 2;
     state->maze_state = maze_init();
-    state->landing_page_state = landing_page_init();
+    state->landing_page_state = landing_page_init(&btn_elements);
     state->sound_effect = sound_effect_init();
     state->body_assets = list_init(STARTING_SEEKERS, (free_func_t)asset_destroy);
     state->seeker = seeker_init(state);
@@ -80,7 +98,8 @@ bool emscripten_main(state_t *state)
 }
 
 void emscripten_free(state_t *state)
-{   list_free(state->body_assets);
+{
+    list_free(state->body_assets);
     seeker_free(state->seeker);
     scene_free(state->scene);
     sound_free(state->sound_effect);

@@ -1,5 +1,6 @@
 #include "landing_page.h"
 #include "asset.h"
+#include "state.h"
 #include "asset_cache.h"
 
 const vector_t SCREEN_MAX = {1000, 500};
@@ -9,31 +10,7 @@ const size_t LANDING_PAGE_IMG_ELEMENTS = 4;
 const size_t LANDING_PAGE_TEXT_ELEMENTS = 7;
 const size_t LANDING_PAGE_BTN_ELEMENTS = 1;
 
-typedef struct state
-{
-    size_t page;
-} state_t;
-
-typedef struct text_element
-{
-    const char *text;
-    const char *font_path;
-    rgb_color_t color;
-    SDL_Rect frame;
-} text_element_t;
-
-typedef struct img_element
-{
-    const char *file_path;
-    SDL_Rect frame;
-} img_element_t;
-
-typedef struct btn_element
-{
-    text_element_t text;
-    img_element_t img;
-    button_handler_t handler;
-} btn_element_t;
+#include "maze.h"
 
 typedef struct landing_page_state
 {
@@ -42,29 +19,14 @@ typedef struct landing_page_state
     list_t *texts;
 } landing_page_state_t;
 
-/**
- * Load game screen
- */
-static void load_game_screen(state_t *state)
+typedef struct state
 {
-    state->page = 2;
-    sdl_clear();
-    
-    printf("Next screen: %zu\n", state->page);
-}
+    size_t page;
+    landing_page_state_t *landing_page_state;
 
-btn_element_t btn_elements[] = {
-    {
-        .text.frame = (SDL_Rect){SCREEN_CENTER.x - 20, SCREEN_CENTER.y + 45, 90, 48},
-        .text.font_path = "assets/fonts/Inter-Regular.ttf",
-        .text.color = (rgb_color_t){0, 0, 0},
-        .text.text = "PLAY",
-        .img.file_path = "assets/images/landing-page/play_btn.png",
-        .img.frame = (SDL_Rect){SCREEN_CENTER.x - 50, SCREEN_CENTER.y + 30, 200, 80},
+} state_t;
 
-        .handler = (void *)load_game_screen,
-    },
-};
+state_t *global_state = NULL;
 
 text_element_t text_elements[] = {
     {
@@ -194,7 +156,7 @@ static asset_t *create_btn(btn_element_t btn_element)
  * Build buttons assets from buttons templates
  * @return list of button assets
  */
-static list_t *build_btn_assets()
+static list_t *build_btn_assets(btn_element_t *btn_elements)
 {
     list_t *assets = list_init(LANDING_PAGE_BTN_ELEMENTS, (free_func_t)asset_destroy);
     for (size_t i = 0; i < LANDING_PAGE_BTN_ELEMENTS; i++)
@@ -227,13 +189,18 @@ void show_landing_page(landing_page_state_t *page_state)
     }
 }
 
-landing_page_state_t *landing_page_init()
+void set_state(state_t *state)
+{
+    printf("global_state: %d\n", state->page);
+}
+
+landing_page_state_t *landing_page_init(btn_element_t *btn_elements)
 {
     landing_page_state_t *page_state = malloc(sizeof(landing_page_state_t));
 
     page_state->imgs = build_img_assets();
     page_state->texts = build_text_assets();
-    page_state->btns = build_btn_assets();
+    page_state->btns = build_btn_assets(btn_elements);
 
     return page_state;
 }
