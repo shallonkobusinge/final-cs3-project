@@ -56,6 +56,7 @@ state_t *emscripten_init()
     state->body_assets = list_init(STARTING_SEEKERS, (free_func_t)asset_destroy);
     state->seeker = seeker_init(state);
     game_sound(state->sound_effect);
+
     return state;
 }
 
