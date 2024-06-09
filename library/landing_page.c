@@ -103,7 +103,7 @@ static void load_game_screen(state_t *state)
     state->page = 2;
 }
 
-btn_element_t btn_elements[] = {
+static btn_element_t btn_elements[] = {
     {
         .text.frame = (SDL_Rect){SCREEN_CENTER.x - 20, SCREEN_CENTER.y + 45, 90, 48},
         .text.font_path = "assets/fonts/Inter-Regular.ttf",
