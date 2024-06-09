@@ -8,7 +8,6 @@
 #include "landing_page.h"
 #include "maze.h"
 #include "forces.h"
-#include "traverse.h"
 
 const char *SEEKER_PATH = "assets/images/scenery/seeker_bg.png";
 const char *BEAVER_PATH = "assets/images/scenery/beaver.png";

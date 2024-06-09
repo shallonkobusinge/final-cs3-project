@@ -12,7 +12,6 @@
 #include "sound_effect.h"
 #include "seeker.h"
 #include "asset.h"
-#include "traverse.c"
 
 const size_t GRID_WIDTH = 25;
 const size_t GRID_HEIGHT = 12;
@@ -289,6 +288,77 @@ static void draw_maze(maze_t *maze)
                 render_line(cell->box.x, cell->box.y, cell->box.x, cell->box.y + cell->box.h);
         }
     }
+}
+
+/**
+ * Traverse the maze
+ */
+vector_t traverse_maze(maze_t *maze, vector_t vec, int movement_direction)
+{
+    vector_t valid_move = VEC_ZERO;
+
+    vector_t directions[] = {
+        {.x = 0.0, .y = valid_move.y + GRID_CELL_SIZE}, // north
+        {.x = valid_move.x + GRID_CELL_SIZE, .y = 0},   // east
+        {.x = 0.0, .y = valid_move.y - GRID_CELL_SIZE}, // south
+        {.x = valid_move.x - GRID_CELL_SIZE, .y = 0},   // west
+    };
+    for (size_t y = 0; y < GRID_HEIGHT; y++)
+    {
+        for (size_t x = 0; x < GRID_WIDTH; x++)
+        {
+            if ((maze->cells[y][x].box.x == (int)vec.x) && (maze->cells[y][x].box.y == (int)vec.y))
+            {
+                bool walls[] = {
+                    maze->cells[y][x].north,
+                    maze->cells[y][x].east,
+                    maze->cells[y][x].south,
+                    maze->cells[y][x].west,
+                };
+                vector_t possible_move[4];
+                int move_counts = 0;
+                if (movement_direction == -1)
+                {
+                    for (size_t i = 0; i < 4; i++)
+                    {
+                        if (walls[i] == false)
+                        {
+                            possible_move[move_counts++] = directions[i];
+                        }
+                    }
+                    if (move_counts > 0)
+                    {
+                        valid_move = possible_move[rand() % move_counts];
+                        goto end;
+                    }
+                }else{
+                    valid_move = directions[movement_direction];
+                    goto end;
+                }
+            }
+        }
+    }
+end:
+    return valid_move;
+}
+
+void translate_body_movement(state_t *state, body_t *body, int movement_dir)
+{
+  vector_t new_vec = body_get_centroid(body);
+  maze_t *maze = state->maze_state->maze;
+  vector_t vec = (vector_t){
+      .x = (new_vec.x - GRID_CELL_SIZE / 4),
+      .y = (new_vec.y - GRID_CELL_SIZE / 4)};
+  vector_t new_centroid = traverse_maze(maze, vec, movement_dir);
+  if (movement_dir == -1)
+  {
+    SDL_Delay(750);
+    move_body(body, new_centroid);
+  }
+  else
+  {
+    move_body(body, new_centroid);
+  }
 }
 
 void on_key(char key, key_event_type_t type, double held_time, state_t *state)
