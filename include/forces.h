@@ -3,7 +3,6 @@
 
 #include "collision.h"
 #include "scene.h"
-#include "state.h"
 
 typedef struct force_creator_data
 {
@@ -21,12 +20,12 @@ void force_creator_data_free(force_creator_data_t *data);
  * @param body1 the first body passed to create_collision()
  * @param body2 the second body passed to create_collision()
  * @param axis a unit vector pointing from body1 towards body2
- *   that defines the direction the two bodicreate_collisiones are colliding in
+ *   that defines the direction the two bodies are colliding in
  * @param aux the auxiliary value passed to create_collision()
  * @param force_const the force constant passed to create_collision()
  */
 typedef void (*collision_handler_t)(body_t *body1, body_t *body2, vector_t axis,
-                                    void *aux, double force_const, state_t *state);
+                                    void *aux, double force_const);
 
 /**
  * Adds a force creator to a scene that applies gravity between two bodies.
@@ -88,7 +87,7 @@ void create_drag(scene_t *scene, double gamma, body_t *body);
  */
 void create_collision(scene_t *scene, body_t *body1, body_t *body2,
                       collision_handler_t handler, void *aux,
-                      double force_const, state_t *state);
+                      double force_const);
 
 /**
  * Adds a force creator to a scene that destroys two bodies when they collide.
@@ -107,7 +106,7 @@ void create_destructive_collision(scene_t *scene, body_t *body1, body_t *body2);
  * bodies according to the elasticity in `aux`.
  */
 void physics_collision_handler(body_t *body1, body_t *body2, vector_t axis,
-                               void *aux, double force_const, state_t *state);
+                               void *aux, double force_const);
 
 /**
  * Adds a force creator to a scene that applies impulses

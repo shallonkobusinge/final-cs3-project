@@ -238,10 +238,10 @@ void seekers_random_movement(state_t *state)
  * @param force_const the force constant passed to create_collision()
  */
 void end_game(body_t *body1, body_t *body2, vector_t axis, void *aux,
-              double force_const, state_t *state)
+              double force_const)
 {
   // state->page = 3;
-  printf("page: %d\n", state->page);
+  printf("page: %d", (state_t)aux->page);
 }
 
 void seeker_collision(state_t *state)
@@ -249,7 +249,7 @@ void seeker_collision(state_t *state)
   for (size_t i = 1; i < scene_bodies(state->scene); i++)
   {
     body_t *seeker = scene_get_body(state->scene, i);
-    create_collision(state->scene, scene_get_body(state->scene, 0), seeker, end_game, NULL, 0.0, state);
+    create_collision(state->scene, scene_get_body(state->scene, 0), seeker, end_game, state, 0.0);
   }
 }
 

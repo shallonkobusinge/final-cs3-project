@@ -5,7 +5,6 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "state.h"
 
 const double MIN_DIST = 5;
 
@@ -21,7 +20,6 @@ typedef struct collision_aux
   list_t *bodies;
   collision_handler_t handler;
   bool collided;
-  state_t *state;
   void *aux; // aux (if allocated in memory) should be free'd by the caller
 } collision_aux_t;
 
@@ -61,7 +59,7 @@ void force_creator_data_free(force_creator_data_t *data)
 
 collision_aux_t *collision_aux_init(double force_const, list_t *bodies,
                                     collision_handler_t handler, bool collided,
-                                    void *aux, state_t *state)
+                                    void *aux)
 {
   collision_aux_t *collision_aux = malloc(sizeof(collision_aux_t));
   assert(collision_aux);
@@ -71,7 +69,6 @@ collision_aux_t *collision_aux_init(double force_const, list_t *bodies,
   collision_aux->handler = handler;
   collision_aux->collided = collided;
   collision_aux->aux = aux;
-  collision_aux->state = state;
   return collision_aux;
 }
 
@@ -207,7 +204,7 @@ static void collision_force_creator(void *collision_aux)
   {
     collision_handler_t handler = col_aux->handler;
 
-    handler(body1, body2, info.axis, col_aux->aux, col_aux->force_const, col_aux->state);
+    handler(body1, body2, info.axis, col_aux->aux, col_aux->force_const);
     col_aux->collided = true;
   }
   else if (!info.collided && prev_collision)
@@ -218,7 +215,7 @@ static void collision_force_creator(void *collision_aux)
 
 void create_collision(scene_t *scene, body_t *body1, body_t *body2,
                       collision_handler_t handler, void *aux,
-                      double force_const, state_t *state)
+                      double force_const)
 {
   list_t *bodies = list_init(2, NULL);
   list_add(bodies, body1);
@@ -229,7 +226,7 @@ void create_collision(scene_t *scene, body_t *body1, body_t *body2,
   list_add(aux_bodies, body2);
 
   collision_aux_t *collision_aux =
-      collision_aux_init(force_const, aux_bodies, handler, false, aux, state);
+      collision_aux_init(force_const, aux_bodies, handler, false, aux);
 
   scene_add_bodies_force_creator(scene, collision_force_creator, collision_aux,
                                  bodies);
@@ -251,7 +248,7 @@ void create_destructive_collision(scene_t *scene, body_t *body1,
 }
 
 void physics_collision_handler(body_t *body1, body_t *body2, vector_t axis,
-                               void *aux, double force_const, state_t *state)
+                               void *aux, double force_const)
 {
   // TODO: implement this
 }
@@ -260,5 +257,5 @@ void create_physics_collision(scene_t *scene, body_t *body1, body_t *body2,
                               double elasticity)
 {
   create_collision(scene, body1, body2, physics_collision_handler, NULL,
-                   elasticity, NULL);
+                   elasticity);
 }
