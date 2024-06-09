@@ -13,8 +13,6 @@
 #include "seeker.h"
 #include "asset.h"
 
-const char *BEAVER_PATH = "assets/images/scenery/beaver.png";
-
 const size_t GRID_WIDTH = 25;
 const size_t GRID_HEIGHT = 12;
 const size_t NUM_CELLS = GRID_WIDTH * GRID_HEIGHT;
@@ -23,7 +21,7 @@ const size_t GRID_CELL_SIZE = 40;
 const size_t MAZE_WINDOW_WIDTH = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
 const size_t MAZE_WINDOW_HEIGHT = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
 
-const size_t NUM_BUILDINGS = 19;
+const size_t NUM_BUILDINGS = 2;
 
 const char *building_paths[] = {
     "assets/images/scenery/caltech-hall.png",
@@ -47,20 +45,17 @@ typedef struct maze
     node_t *stack;
 } maze_t;
 
-typedef struct maze_body
+typedef struct building
 {
     size_t x;
     size_t y;
     const char *path;
-    body_t *body;
-} maze_body_t;
+} building_t;
 
 typedef struct maze_state
 {
     maze_t *maze;
-    // maze_body_t buildings[];
-    size_t num_bodies;
-    maze_body_t maze_bodies[];
+    building_t buildings[];
 } maze_state_t;
 
 /**
@@ -76,30 +71,6 @@ maze_t *create_maze()
         maze->cells[i] = malloc(GRID_WIDTH * sizeof(cell_t));
     }
     return maze;
-}
-
-static void hider_init(maze_state_t *maze_state) {
-    vector_t center = (vector_t){
-        .x = (((GRID_WIDTH - 24) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2),
-        .y = (((GRID_HEIGHT - 11) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10),
-    };
-    maze_state->maze_bodies[0] = (maze_body_t) {
-        .x = center.x,
-        .y = center.y,
-        .body = make_body(center, (rgb_color_t){50, 129, 110}),
-        .path = BEAVER_PATH
-    };
-    maze_state->num_bodies++;
-}
-
-static void add_maze_body_scene(state_t *state) {
-    maze_state_t *maze_state = state->maze_state;
-    for(size_t i = 0; i < maze_state->num_bodies; i++){
-        body_t *body = maze_state->maze_bodies[i].body;
-        scene_add_body(state->scene, body);
-        asset_t *asset_body = asset_make_image_with_body(maze_state->maze_bodies[i].path, body);
-        list_add(state->body_assets, asset_body);
-    }
 }
 
 /**
@@ -121,15 +92,14 @@ static void init_grid(state_t *state)
         render_line(0, y, MAZE_WINDOW_WIDTH, y);
     }
 
-    // for (size_t i = 0; i < NUM_BUILDINGS; i++)
-    // {
-    //     vector_t center = (vector_t){.x = maze_state->buildings[i].x, .y = maze_state->buildings[i].y};
-    //     body_t *building = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, center, (rgb_color_t){241, 108, 45});
-    //     scene_add_body(state->scene, building);
-    //     asset_t *asset_building = asset_make_image_with_body(maze_state->buildings[i].path, building);
-    //     list_add(state->body_assets, asset_building);
-    // }
-        add_maze_body_scene(state);
+    for (size_t i = 0; i < NUM_BUILDINGS; i++)
+    {
+        vector_t center = (vector_t){.x = maze_state->buildings[i].x, .y = maze_state->buildings[i].y};
+        body_t *building = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, center, (rgb_color_t){241, 108, 45});
+        scene_add_body(state->scene, building);
+        asset_t *asset_building = asset_make_image_with_body(maze_state->buildings[i].path, building);
+        list_add(state->body_assets, asset_building);
+    }
 }
 
 /**
@@ -272,17 +242,12 @@ static void buildings_init(maze_state_t *maze_state)
     {
         size_t rand_x = (rand() % GRID_WIDTH) + 1;
         size_t rand_y = (rand() % GRID_HEIGHT) + 1;
-        vector_t center = (vector_t){
+
+        maze_state->buildings[i] = (building_t){
             .x = ((GRID_WIDTH - rand_x) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2,
             .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10,
         };
-        maze_state->maze_bodies[i] = (maze_body_t){
-          .x = center.x,
-          .y = center.y,
-          .body = make_body(center, (rgb_color_t){241, 108, 45}),
-          .path = building_paths[i - 1]
-        };
-        maze_state->num_bodies++;
+        maze_state->buildings[i].path = building_paths[i];
     }
 }
 
@@ -292,7 +257,7 @@ maze_state_t *maze_init()
 
     maze_state_t *maze_state = malloc(sizeof(maze_state_t) + (sizeof(cell_t) * NUM_BUILDINGS));
     maze_state->maze = create_maze();
-    hider_init(maze_state);
+
     buildings_init(maze_state);
 
     init_maze(maze_state->maze);
@@ -428,7 +393,6 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
     }
      move_body(beaver, translation);
 }
-
 
 void show_maze(state_t *state, double dt)
 {

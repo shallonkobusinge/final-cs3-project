@@ -70,4 +70,13 @@ void seeker_collision(state_t *state);
 */
 void seekers_random_movement(state_t *state);
 
+/**
+ * Add a body to scene and add the body asset to list of body_assets in the state
+ * @param state state struct of the game.
+ * @param center vector of the center of the body.
+ * @param color color of the body.
+ * @param path file path of the image file.
+*/
+void add_to_scene(state_t *state, vector_t center, rgb_color_t color, const char *path);
+
 #endif // #ifndef __SEEKER_H__
