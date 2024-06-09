@@ -80,6 +80,7 @@ vector_t traverse_maze(state_t *state, vector_t vec) {
     for(size_t y = 0; y < GRID_HEIGHT; y++) {
         for(size_t x = 0; x < GRID_WIDTH; x++) {
             if((maze->cells[y][x].box.x == (int)vec.x) && (maze->cells[y][x].box.y == (int)vec.y)) {
+                printf("NORTH = %d SOUTH = %d EAST = %d WEST = %d  \n", maze->cells[y][x].north, maze->cells[y][x].south, maze->cells[y][x].east, maze->cells[y][x].west);
                 if(maze->cells[y][x].north == true) {
                     valid_move = (vector_t){.x = 0, .y = -GRID_CELL_SIZE};
                     break;
