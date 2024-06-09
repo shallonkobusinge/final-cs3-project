@@ -78,10 +78,6 @@ vector_t traverse_maze(state_t *state, vector_t new_vec) {
     vector_t valid_move = VEC_ZERO;
     maze_t *maze = state->maze_state->maze;
 
-    // vector_t vec = (vector_t){
-    //     .x = {new_vec.x - GRID_CELL_SIZE / 4},
-    //     .y = {new_vec.y - GRID_CELL_SIZE / 4}
-    // };
     vector_t vec = (vector_t){
         .x = (new_vec.x -  GRID_CELL_SIZE / 4),
         .y = (new_vec.y - GRID_CELL_SIZE / 4)
@@ -107,6 +103,7 @@ vector_t traverse_maze(state_t *state, vector_t new_vec) {
                 for(size_t i = 0; i < 4; i++) {
                     if(!walls[i]){
                         valid_move = directions[i];
+                        printf("THE VECTOR x = %f y = %f \n", directions[i].x, directions[i].y);
                         goto end_loops;
                     }
                 }
@@ -115,7 +112,7 @@ vector_t traverse_maze(state_t *state, vector_t new_vec) {
         }
     }
     end_loops:
-    printf("THE VECTOR x = %f y = %f \n", valid_move.x, valid_move.y);
+    
     return valid_move;
 }
 
