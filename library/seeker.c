@@ -149,32 +149,32 @@ void render_bodies(list_t *bodies) {
  * valid adjacent cell.
  * @param seeker the body of the seeker to be moved.
 */
-static void generate_movement (body_t *seeker, vector_t centroid) {
+static void generate_movement (body_t *seeker, double direction) {
     SDL_Delay(750);
     // int direction = rand() % 4;
     
-    // vector_t centroid = VEC_ZERO;
+    vector_t centroid = VEC_ZERO;
 
-    // switch (direction) {
-    // case 0: { // move left
-    //         centroid.x -= GRID_CELL_SIZE;
-    //     break;
-    // }
-    // case 1: { // move right
-    //         centroid.x += GRID_CELL_SIZE;
-    //     break;
-    // }
-    // case 2: { // move up
-    //         centroid.y -= GRID_CELL_SIZE;
-    //     break;
-    // }
-    // case 3: { // move down
-    //         centroid.y += GRID_CELL_SIZE;
-    //     break;
-    // }
-    // default:
-    //     break;
-    // }
+    switch (direction) {
+    case 0: { // move left
+            centroid.x -= GRID_CELL_SIZE;
+        break;
+    }
+    case 1: { // move right
+            centroid.x += GRID_CELL_SIZE;
+        break;
+    }
+    case 2: { // move up
+            centroid.y -= GRID_CELL_SIZE;
+        break;
+    }
+    case 3: { // move down
+            centroid.y += GRID_CELL_SIZE;
+        break;
+    }
+    default:
+        break;
+    }
     list_t *shape = body_get_shape(seeker);
     bool move_valid = true;
     for(size_t i = 0; i < list_size(shape); i++) {
@@ -206,7 +206,7 @@ for(size_t i = 1; i < scene_bodies(state->scene); i++) {
                 int new_centroid = traverse_maze(state, body_centroid);
                 // printf("OLD x: %f y: %f NEW x: %f   y: %f \n", body_centroid.x, body_centroid.y, new_centroid.x, new_centroid.y);
                 printf(" NEW %d \n", new_centroid);
-                // generate_movement(seeker, body_centroid);
+                generate_movement(seeker, new_centroid);
             }
             
         }
