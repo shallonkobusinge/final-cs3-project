@@ -97,6 +97,7 @@ vector_t traverse_maze(state_t *state, vector_t vec) {
             }
         }
     }
+    return VEC_ZERO;
 }
 
 /**
