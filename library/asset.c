@@ -121,32 +121,6 @@ asset_t *asset_make_button(SDL_Rect bounding_box, asset_t *image_asset,
 }
 
 /**
- * Create button assets from a button template
- * @return button asset
- */
-static asset_t *create_btn(btn_element_t btn_element)
-{
-  asset_t *img_asset = NULL;
-  asset_t *text_asset = NULL;
-
-  if (btn_element.img.file_path != NULL)
-  {
-    img_asset = asset_make_image(btn_element.img.file_path, btn_element.img.frame);
-  }
-  if (btn_element.text.font_path != NULL)
-  {
-    text_asset = asset_make_text(btn_element.text.font_path, btn_element.text.frame, btn_element.text.text,
-                                 btn_element.text.color);
-  }
-
-  asset_t *asset =
-      asset_make_button(btn_element.img.frame, img_asset, text_asset, btn_element.handler);
-  asset_cache_register_button(asset);
-
-  return asset;
-}
-
-/**
  * Helper function to check if a point (x, y) is within the bounding box.
  *
  * @param box the bounding box

@@ -100,12 +100,6 @@ void asset_on_button_click(asset_t *button, state_t *state, double x, double y);
 void asset_render(asset_t *asset);
 
 /**
- * Create button assets from a button template
- * @return button asset
- */
-asset_t *create_btn(btn_element_t btn_element);
-
-/**
  * Frees the memory allocated for the asset.
  * @param asset the asset to free
  */
