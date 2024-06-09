@@ -150,32 +150,32 @@ void render_bodies(list_t *bodies) {
  * valid adjacent cell.
  * @param seeker the body of the seeker to be moved.
 */
-static void generate_movement (body_t *seeker) {
+static void generate_movement (body_t *seeker, vector_t centroid) {
     SDL_Delay(750);
-    int direction = rand() % 4;
+    // int direction = rand() % 4;
     
-    vector_t centroid = VEC_ZERO;
+    // vector_t centroid = VEC_ZERO;
 
-    switch (direction) {
-    case 0: { // move left
-            centroid.x -= GRID_CELL_SIZE;
-        break;
-    }
-    case 1: { // move right
-            centroid.x += GRID_CELL_SIZE;
-        break;
-    }
-    case 2: { // move up
-            centroid.y -= GRID_CELL_SIZE;
-        break;
-    }
-    case 3: { // move down
-            centroid.y += GRID_CELL_SIZE;
-        break;
-    }
-    default:
-        break;
-    }
+    // switch (direction) {
+    // case 0: { // move left
+    //         centroid.x -= GRID_CELL_SIZE;
+    //     break;
+    // }
+    // case 1: { // move right
+    //         centroid.x += GRID_CELL_SIZE;
+    //     break;
+    // }
+    // case 2: { // move up
+    //         centroid.y -= GRID_CELL_SIZE;
+    //     break;
+    // }
+    // case 3: { // move down
+    //         centroid.y += GRID_CELL_SIZE;
+    //     break;
+    // }
+    // default:
+    //     break;
+    // }
     list_t *shape = body_get_shape(seeker);
     bool move_valid = true;
     for(size_t i = 0; i < list_size(shape); i++) {
@@ -198,7 +198,9 @@ for(size_t i = 1; i < scene_bodies(state->scene); i++) {
       body_t *seeker = scene_get_body(state->scene, i);
         rgb_color_t *color = body_get_color(seeker);
             if(color->r == 0.1 && color->g == 0.9 && color->b == 0.2) {
-                generate_movement(seeker);
+                vector_t body_centroid = body_get_centroid(seeker);
+                vector_t new_centroid = traverse_maze(state, body_centroid);
+                generate_movement(seeker, new_centroid);
             }
             
         }
