@@ -74,7 +74,7 @@ maze_t *create_maze()
 /**
  * Traverse the maze
 */
-vector_t traverse_maze(state_t *state, vector_t new_vec, int last_direction) {
+vector_t traverse_maze(state_t *state, vector_t new_vec, int *last_direction) {
     vector_t valid_move = VEC_ZERO;
     maze_t *maze = state->maze_state->maze;
 
