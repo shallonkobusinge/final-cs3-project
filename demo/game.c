@@ -47,7 +47,7 @@ state_t *emscripten_init()
     // init_sound();
     state_t *state = malloc(sizeof(state_t));
     state->scene = scene_init();
-    state->page = 1;
+    state->page = 3;
     state->body_assets = list_init(STARTING_SEEKERS, (free_func_t)asset_destroy);
     state->seeker = seeker_init(state);
     state->maze_state = maze_init();
