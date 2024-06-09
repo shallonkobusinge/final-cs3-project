@@ -23,10 +23,10 @@ const size_t MAZE_WINDOW_HEIGHT = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
 const size_t NUM_BUILDINGS = 2;
 const char *building_paths[] = {
     "assets/images/scenery/caltech-hall.png",
-    "assets/images/scenery/beckman-auditorium.png"
-};
+    "assets/images/scenery/beckman-auditorium.png"};
 
-typedef struct state {
+typedef struct state
+{
     scene_t *scene;
     size_t page;
     maze_state_t *maze_state;
@@ -34,7 +34,7 @@ typedef struct state {
     sound_effect_t *sound_effect;
     seeker_t *seeker;
     list_t *body_assets;
-}state_t;
+} state_t;
 
 typedef struct maze
 {
@@ -47,7 +47,7 @@ typedef struct building
 {
     size_t x;
     size_t y;
-    const char* path;
+    const char *path;
 } building_t;
 
 typedef struct maze_state
@@ -73,7 +73,7 @@ maze_t *create_maze()
 
 /**
  * Traverse the maze
-*/
+ */
 // bool traversal(state_t *state, vector_t vec) {
 //     maze_t *maze = state->maze_state;
 //     bool is_valid_move = false;
@@ -103,12 +103,11 @@ static void init_grid(state_t *state)
 
     for (size_t i = 0; i < NUM_BUILDINGS; i++)
     {
-        vector_t center = (vector_t){ .x = maze_state->buildings[i].x, .y = maze_state->buildings[i].y };
+        vector_t center = (vector_t){.x = maze_state->buildings[i].x, .y = maze_state->buildings[i].y};
         body_t *building = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, center, (rgb_color_t){241, 108, 45});
         scene_add_body(state->scene, building);
         asset_t *asset_building = asset_make_image_with_body(maze_state->buildings[i].path, building);
         list_add(state->body_assets, asset_building);
-        
     }
 }
 
@@ -311,7 +310,7 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
         {
         case LEFT_ARROW:
         {
-             translation.x -= GRID_CELL_SIZE;
+            translation.x -= GRID_CELL_SIZE;
             break;
         }
         case RIGHT_ARROW:
@@ -333,19 +332,21 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
     }
     list_t *shape = body_get_shape(beaver);
     bool move_valid = true;
-    for(size_t i = 0; i < list_size(shape); i++) {
-      vector_t vertex = *(vector_t *)list_get(shape, i);
-      vector_t new_vertex = vec_add(vertex, translation);
-      if(new_vertex.x < 0 || new_vertex.y < 0 || new_vertex.x >= MAZE_WINDOW_WIDTH || new_vertex.y >= MAZE_WINDOW_HEIGHT){
-        move_valid = false;
-        break;
-      }
+    for (size_t i = 0; i < list_size(shape); i++)
+    {
+        vector_t vertex = *(vector_t *)list_get(shape, i);
+        vector_t new_vertex = vec_add(vertex, translation);
+        if (new_vertex.x < 0 || new_vertex.y < 0 || new_vertex.x >= MAZE_WINDOW_WIDTH || new_vertex.y >= MAZE_WINDOW_HEIGHT)
+        {
+            move_valid = false;
+            break;
+        }
     }
     list_free(shape);
-    if(move_valid){
-      move_body(beaver, translation);
+    if (move_valid)
+    {
+        move_body(beaver, translation);
     }
-
 }
 
 void show_maze(state_t *state, double dt)
@@ -354,6 +355,7 @@ void show_maze(state_t *state, double dt)
 
     init_grid(state);
     draw_maze(state->maze_state->maze);
+
     seekers_random_movement(state);
     render_another_seeker(state, dt);
     render_bodies(state->body_assets);
