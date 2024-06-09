@@ -63,7 +63,7 @@ state_t *emscripten_init()
 {
     asset_cache_init();
     sdl_init(SDL_MIN, SDL_MAX);
-    init_sound();
+    // init_sound();
     state_t *state = malloc(sizeof(state_t));
     state->scene = scene_init();
     state->page = 1;
@@ -72,7 +72,7 @@ state_t *emscripten_init()
     state->sound_effect = sound_effect_init();
     state->body_assets = list_init(STARTING_SEEKERS, (free_func_t)asset_destroy);
     state->seeker = seeker_init(state);
-    game_sound(state->sound_effect);
+    // game_sound(state->sound_effect);
 
     return state;
 }
