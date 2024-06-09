@@ -114,6 +114,7 @@ btn_element_t btn_elements[] = {
         .handler = (void *)load_game_screen,
     },
 };
+
 /**
  * Build text assets from text templates
  * @return list of text assets
@@ -208,11 +209,6 @@ void show_landing_page(state_t *state)
     {
         asset_render(list_get(btns, i));
     }
-}
-
-void set_state(state_t *state)
-{
-    printf("global_state: %d\n", state->page);
 }
 
 landing_page_state_t *landing_page_init()

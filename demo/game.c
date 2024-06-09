@@ -71,9 +71,7 @@ bool emscripten_main(state_t *state)
     }
     else if (state->page == 3)
     {
-        SDL_Delay(300);
-        sdl_clear();
-    }
+       }
     scene_tick(state->scene, dt);
 
     sdl_show();

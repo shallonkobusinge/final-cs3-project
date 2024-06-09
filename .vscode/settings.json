@@ -23,6 +23,7 @@
         "seeker.h": "c",
         "sound_effect.h": "c",
         "sdl2_gfxprimitives.h": "c",
-        "scene.h": "c"
+        "scene.h": "c",
+        "end_page.h": "c"
     }
 }
