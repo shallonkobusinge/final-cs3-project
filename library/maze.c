@@ -75,35 +75,28 @@ maze_t *create_maze()
  * Traverse the maze
 */
 vector_t traverse_maze(state_t *state, vector_t vec) {
-    vector_t valid_move = VEC_ZERO;
+    // vector_t valid_move = VEC_ZERO;
     maze_t *maze = state->maze_state->maze;
     for(size_t y = 0; y < GRID_HEIGHT; y++) {
         for(size_t x = 0; x < GRID_WIDTH; x++) {
             if((maze->cells[y][x].box.x == (int)vec.x) && (maze->cells[y][x].box.y == (int)vec.y)) {
-                printf("MAZE x: %d y: %d VECTOR x: %d   y: %d \n", maze->cells[y][x].box.x, maze->cells[y][x].box.y, (int)vec.x, (int)vec.y);
+                if(maze->cells[y][x].north == true) {
+                    return (vector_t){.x = 0, .y = -GRID_CELL_SIZE};
+                }
+                if(maze->cells[y][x].east == true) {
+                    return (vector_t){.x = GRID_CELL_SIZE, .y = 0};
+                }
+
+                if(maze->cells[y][x].west == true) {
+                    return (vector_t){.x = -GRID_CELL_SIZE, .y = 0};
+                }
+
+                if(maze->cells[y][x].south == true) {
+                    return (vector_t){.x = GRID_CELL_SIZE, .y = 0};
+                }
             }
         }
-        
-        // if(maze->cells[i]->box.x == vec.x && maze->cells[i]->box.y == vec.y) {
-        //   if(maze->cells[i]->north == true) {
-        //         valid_move = (vector_t){.x = 0, .y = -GRID_CELL_SIZE};
-        //         break;
-        //   }  
-        //   if(maze->cells[i]->south == true) {
-        //         valid_move = (vector_t){.x = 0, .y = GRID_CELL_SIZE};
-        //         break;
-        //   }  
-        //   if(maze->cells[i]->east == true) {
-        //         valid_move = (vector_t){.x = GRID_CELL_SIZE, .y = 0};
-        //         break;
-        //   } 
-        //   if(maze->cells[i]->west == true) {
-        //         valid_move = (vector_t){.x = -GRID_CELL_SIZE, .y = 0};
-        //         break;
-        //   } 
-        // }
     }
-return valid_move;
 }
 
 /**
