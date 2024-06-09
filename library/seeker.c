@@ -25,7 +25,7 @@ extern const int MAZE_WINDOW_HEIGHT;
 // SEEKING CONSTANTS
 const int S_NUM_POINTS = 20;
 const double S_RADIUS = 0.1;
-const int NEW_SEEKERS_INTERVAL = 3;
+const int NEW_SEEKERS_INTERVAL = 30;
 
 const rgb_color_t SEEKER_COLOR = (rgb_color_t){0.1, 0.9, 0.2};
 
