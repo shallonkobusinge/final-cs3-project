@@ -240,6 +240,7 @@ void show_landing_page(landing_page_state_t *page_state)
 landing_page_state_t *landing_page_init(state_t *state)
 {
     global_state = state;
+    printf("global_state: %d\n", global_state->page);
     landing_page_state_t *page_state = malloc(sizeof(landing_page_state_t));
 
     page_state->imgs = build_img_assets();
