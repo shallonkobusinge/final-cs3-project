@@ -326,7 +326,7 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, int movement_direction)
                 {
                     for (size_t i = 0; i < 4; i++)
                     {
-                        if (!walls[i])
+                        if (!walls[i] && (!maze->cells[y][x].visited))
                         {
                             possible_move[move_counts++] = directions[i];
                         }
