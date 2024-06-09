@@ -13,7 +13,7 @@ const size_t LANDING_PAGE_IMG_ELEMENTS = 4;
 const size_t LANDING_PAGE_TEXT_ELEMENTS = 7;
 const size_t LANDING_PAGE_BTN_ELEMENTS = 1;
 
-const size_t END_PAGE_TEXT_ELEMENTS = 2;
+const size_t END_PAGE_TEXT_ELEMENTS = 1;
 const size_t END_PAGE_BTN_ELEMENTS = 2;
 
 typedef struct end_page_state
