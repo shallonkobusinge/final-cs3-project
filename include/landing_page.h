@@ -28,9 +28,9 @@ typedef struct btn_element
 typedef struct landing_page_state landing_page_state_t;
 /**
  * Display and renders all the assets on the landing page.
- * @param page_state state of the page
+ * @param page_state state
  */
-void show_landing_page(landing_page_state_t *page_state);
+void show_landing_page(state *state);
 
 /**
  * Create button assets from a button template
@@ -42,6 +42,6 @@ asset_t *create_btn(btn_element_t btn_element);
  * Initialize landing page images, buttons and texts.
  * @return state of the landing page.
  */
-landing_page_state_t *landing_page_init(btn_element_t *btn_elements);
+landing_page_state_t *landing_page_init();
 
 #endif // #ifndef __LANDING_PAGE_H__
