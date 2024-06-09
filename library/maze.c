@@ -111,14 +111,14 @@ vector_t traverse_maze(state_t *state, vector_t new_vec) {
                     }
                 }
 
-                        printf("SECOND VECTOR x = %f y = %f \n", valid_move.x, valid_move.y);
+                        // printf("SECOND VECTOR x = %f y = %f \n", valid_move.x, valid_move.y);
             
             }
 
-                        printf("THIRD VECTOR x = %f y = %f \n", valid_move.x, valid_move.y);
+                        // printf("THIRD VECTOR x = %f y = %f \n", valid_move.x, valid_move.y);
         }
 
-                        printf("FOURTH VECTOR x = %f y = %f \n", valid_move.x, valid_move.y);
+                        // printf("FOURTH VECTOR x = %f y = %f \n", valid_move.x, valid_move.y);
     }
 end_loops:
  printf("FIFTH VECTOR x = %f y = %f \n", valid_move.x, valid_move.y);
