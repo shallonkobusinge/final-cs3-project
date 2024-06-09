@@ -59,7 +59,7 @@ typedef struct maze_state
 {
     maze_t *maze;
     // maze_body_t buildings[];
-    maze_body_t *maze_bodies;
+    maze_body_t maze_bodies[];
     size_t num_bodies;
 } maze_state_t;
 
