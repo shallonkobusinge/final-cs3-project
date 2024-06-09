@@ -4,6 +4,7 @@
 #include "asset_cache.h"
 #include "sound_effect.h"
 #include "seeker.h"
+#include "maze.h"
 
 const vector_t SCREEN_MAX = {1000, 500};
 const vector_t SCREEN_CENTER = {500, 250};
