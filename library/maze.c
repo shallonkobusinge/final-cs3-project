@@ -12,6 +12,7 @@
 #include "sound_effect.h"
 #include "seeker.h"
 #include "asset.h"
+#include "traverse.c"
 
 const size_t GRID_WIDTH = 25;
 const size_t GRID_HEIGHT = 12;
@@ -25,11 +26,10 @@ const size_t NUM_BUILDINGS = 2;
 
 const char *building_paths[] = {
     "assets/images/scenery/caltech-hall.png",
-    "assets/images/scenery/beckman-auditorium.png"
-};
+    "assets/images/scenery/beckman-auditorium.png"};
 
-
-typedef struct state {
+typedef struct state
+{
     scene_t *scene;
     size_t page;
     maze_state_t *maze_state;
@@ -37,7 +37,7 @@ typedef struct state {
     sound_effect_t *sound_effect;
     seeker_t *seeker;
     list_t *body_assets;
-}state_t;
+} state_t;
 
 typedef struct maze
 {
@@ -50,7 +50,7 @@ typedef struct building
 {
     size_t x;
     size_t y;
-    const char* path;
+    const char *path;
 } building_t;
 
 typedef struct maze_state
@@ -74,57 +74,6 @@ maze_t *create_maze()
     return maze;
 }
 
-
-/**
- * Traverse the maze
-*/
-vector_t traverse_maze(state_t *state, vector_t new_vec) {
-    printf(" VECTOR x = %f y = %f \n",new_vec.x, new_vec.y);
-    vector_t valid_move = VEC_ZERO;
-    maze_t *maze = state->maze_state->maze;
-
-    vector_t vec = (vector_t){
-        .x = (new_vec.x -  GRID_CELL_SIZE / 4),
-        .y = (new_vec.y - GRID_CELL_SIZE / 4)
-    };
-    
-    vector_t directions[] = {
-         {.x = 0.0, .y = valid_move.y + GRID_CELL_SIZE}, // north
-        {.x = valid_move.x + GRID_CELL_SIZE, .y = 0}, // east
-        {.x = 0.0, .y = valid_move.y - GRID_CELL_SIZE}, // south
-        {.x = valid_move.x - GRID_CELL_SIZE, .y = 0}, //west
-    };
-    for(size_t y = 0; y < GRID_HEIGHT; y++) {
-        for(size_t x = 0; x < GRID_WIDTH; x++) {
-         if((maze->cells[y][x].box.x == (int)vec.x) && (maze->cells[y][x].box.y == (int)vec.y)) {
-                // printf(" MAZE x = %d y = %d VECTOR x = %d y = %d \n", maze->cells[y][x].box.x, maze->cells[y][x].box.y, (int)vec.x, (int)vec.y);
-                // printf("NORTH = %d SOUTH = %d EAST = %d WEST = %d  \n", maze->cells[y][x].north, maze->cells[y][x].south, maze->cells[y][x].east, maze->cells[y][x].west);
-                bool walls[] = {
-                    maze->cells[y][x].north,
-                    maze->cells[y][x].east,
-                    maze->cells[y][x].south,
-                    maze->cells[y][x].west,
-                };
-                vector_t possible_move[4];
-                int move_counts = 0;
-                for(size_t i = 0; i < 4; i++) {
-                    if(walls[i] == false){
-                    possible_move[move_counts++] = directions[i]; 
-                }
-                }
-                if(move_counts > 0 ){
-                    valid_move = possible_move[rand() % move_counts];
-                    goto end; 
-                }
-            
-            }
-        }
-    }
-end:
-//  printf("FIFTH VECTOR x = %f y = %f \n", valid_move.x, valid_move.y);
-    return valid_move;
-}
-
 /**
  * Initializes and draws the grid, draws buildings and hider.
  * @param state state struct.
@@ -146,12 +95,11 @@ static void init_grid(state_t *state)
 
     for (size_t i = 0; i < NUM_BUILDINGS; i++)
     {
-        vector_t center = (vector_t){ .x = maze_state->buildings[i].x, .y = maze_state->buildings[i].y };
+        vector_t center = (vector_t){.x = maze_state->buildings[i].x, .y = maze_state->buildings[i].y};
         body_t *building = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, center, (rgb_color_t){241, 108, 45});
         scene_add_body(state->scene, building);
         asset_t *asset_building = asset_make_image_with_body(maze_state->buildings[i].path, building);
         list_add(state->body_assets, asset_building);
-        
     }
 }
 
@@ -346,7 +294,7 @@ static void draw_maze(maze_t *maze)
 void on_key(char key, key_event_type_t type, double held_time, state_t *state)
 {
     body_t *beaver = scene_get_body(state->scene, 0);
-    vector_t translation = (vector_t){0, 0};
+    vector_t translation = body_get_centroid(beaver);
 
     if (type == KEY_PRESSED)
     {
@@ -354,41 +302,46 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
         {
         case LEFT_ARROW:
         {
-             translation.x -= GRID_CELL_SIZE;
+            translate_body_movement(state, beaver, 3);
             break;
         }
         case RIGHT_ARROW:
         {
-            translation.x += GRID_CELL_SIZE;
+            // translation.x += GRID_CELL_SIZE;
+            translate_body_movement(state, beaver, 1);
             break;
         }
         case UP_ARROW:
         {
-            translation.y += GRID_CELL_SIZE;
+            // translation.y += GRID_CELL_SIZE;
+            translate_body_movement(state, beaver, 0);
             break;
         }
         case DOWN_ARROW:
         {
-            translation.y -= GRID_CELL_SIZE;
+            // translation.y -= GRID_CELL_SIZE;
+            translate_body_movement(state, beaver, 2);
             break;
         }
         }
     }
-    list_t *shape = body_get_shape(beaver);
-    bool move_valid = true;
-    for(size_t i = 0; i < list_size(shape); i++) {
-      vector_t vertex = *(vector_t *)list_get(shape, i);
-      vector_t new_vertex = vec_add(vertex, translation);
-      if(new_vertex.x < 0 || new_vertex.y < 0 || new_vertex.x >= MAZE_WINDOW_WIDTH || new_vertex.y >= MAZE_WINDOW_HEIGHT){
-        move_valid = false;
-        break;
-      }
-    }
-    list_free(shape);
-    if(move_valid){
-      move_body(beaver, translation);
-    }
-
+    // list_t *shape = body_get_shape(beaver);
+    // bool move_valid = true;
+    // for (size_t i = 0; i < list_size(shape); i++)
+    // {
+    //     vector_t vertex = *(vector_t *)list_get(shape, i);
+    //     vector_t new_vertex = vec_add(vertex, translation);
+    //     if (new_vertex.x < 0 || new_vertex.y < 0 || new_vertex.x >= MAZE_WINDOW_WIDTH || new_vertex.y >= MAZE_WINDOW_HEIGHT)
+    //     {
+    //         move_valid = false;
+    //         break;
+    //     }
+    // }
+    // list_free(shape);
+    // if (move_valid)
+    // {
+    //     move_body(beaver, translation);
+    // }
 }
 
 void show_maze(state_t *state, double dt)
