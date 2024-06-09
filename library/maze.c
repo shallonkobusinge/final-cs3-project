@@ -106,7 +106,6 @@ vector_t traverse_maze(state_t *state, vector_t new_vec) {
                 };
                 for(size_t i = 0; i < 4; i++) {
                     if(walls[i] == false){
-                        printf('%d')
                     valid_move = directions[i];
                     goto end;  
                     }
