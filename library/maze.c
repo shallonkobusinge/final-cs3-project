@@ -22,10 +22,12 @@ const size_t MAZE_WINDOW_WIDTH = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
 const size_t MAZE_WINDOW_HEIGHT = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
 
 const size_t NUM_BUILDINGS = 2;
+
 const char *building_paths[] = {
     "assets/images/scenery/caltech-hall.png",
     "assets/images/scenery/beckman-auditorium.png"
 };
+
 
 typedef struct state {
     scene_t *scene;
@@ -72,6 +74,7 @@ maze_t *create_maze()
     return maze;
 }
 
+
 /**
  * Traverse the maze
 */
@@ -101,12 +104,17 @@ vector_t traverse_maze(state_t *state, vector_t new_vec) {
                     maze->cells[y][x].south,
                     maze->cells[y][x].west,
                 };
+                vector_t possible_moves[4];
+                size_t move_count = 0;
                 for(size_t i = 0; i < 4; i++) {
                     if(walls[i] == false){
-                        valid_move = directions[i];
-                        goto end;
+                        possible_moves[move_count++] = directions[i];
                         
                     }
+                }
+                if(move_count > 0) {
+                    valid_move = possible_moves[rand() % move_count];
+                    goto end;
                 }
             
             }
