@@ -16,7 +16,7 @@
 #include "sound_effect.h"
 #include "seeker.h"
 
-#define STARTING_SEEKERS 50
+const size_t STARTING_SEEKERS = 50;
 
 const vector_t MIN = {0, 0};
 const vector_t MAX = {1000, 500};
@@ -49,7 +49,7 @@ state_t *emscripten_init()
     init_sound();
     state_t *state = malloc(sizeof(state_t));
     state->scene = scene_init();
-    state->page = 2;
+    state->page = 1;
     state->maze_state = maze_init();
     state->landing_page_state = landing_page_init();
     state->sound_effect = sound_effect_init();
@@ -80,7 +80,8 @@ bool emscripten_main(state_t *state)
 }
 
 void emscripten_free(state_t *state)
-{   list_free(state->body_assets);
+{
+    list_free(state->body_assets);
     seeker_free(state->seeker);
     scene_free(state->scene);
     sound_free(state->sound_effect);
