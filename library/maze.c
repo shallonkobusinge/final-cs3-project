@@ -103,7 +103,7 @@ vector_t traverse_maze(state_t *state, vector_t new_vec) {
                 for(size_t i = 0; i < 4; i++) {
                     if(!walls[i]){
                         valid_move = directions[i];
-                        printf("THE VECTOR x = %f y = %f \n", directions[i].x, directions[i].y);
+                        printf("BEFORE VECTOR x = %f y = %f \n", valid_move.x, valid_move.y);
                         goto end_loops;
                     }
                 }
@@ -112,7 +112,7 @@ vector_t traverse_maze(state_t *state, vector_t new_vec) {
         }
     }
     end_loops:
-    
+    printf("AFTER VECTOR x = %f y = %f \n", valid_move.x, valid_move.y);
     return valid_move;
 }
 
