@@ -18,9 +18,9 @@ const vector_t MAX_WINDOW = {1000, 500};
 extern const size_t GRID_WIDTH;
 extern const size_t GRID_HEIGHT;
 extern const size_t NUM_CELLS;
-extern const size_t GRID_CELL_SIZE;
-extern const int MAZE_WINDOW_WIDTH;
-extern const int MAZE_WINDOW_HEIGHT;
+extern const int GRID_CELL_SIZE;
+extern const size_t MAZE_WINDOW_WIDTH;
+extern const size_t MAZE_WINDOW_HEIGHT;
 
 // SEEKING CONSTANTS
 const size_t S_NUM_POINTS = 20;
