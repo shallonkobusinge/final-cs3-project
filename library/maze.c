@@ -75,6 +75,7 @@ maze_t *create_maze()
  * Traverse the maze
 */
 vector_t traverse_maze(state_t *state, vector_t new_vec) {
+    vector_t valid_move = VEC_ZERO;
     maze_t *maze = state->maze_state->maze;
 
     vector_t vec = (vector_t){
@@ -101,7 +102,8 @@ vector_t traverse_maze(state_t *state, vector_t new_vec) {
                 };
                 for(size_t i = 0; i < 4; i++) {
                     if(!walls[i]){
-                        return directions[i];
+                        valid_move = directions[i];
+                        break;
                         
                     }
                 }
@@ -109,7 +111,9 @@ vector_t traverse_maze(state_t *state, vector_t new_vec) {
             }
         }
     }
-    return VEC_ZERO;
+// end_loops:
+ printf("FIFTH VECTOR x = %f y = %f \n", valid_move.x, valid_move.y);
+    return valid_move;
 }
 
 /**
