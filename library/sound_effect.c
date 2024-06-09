@@ -42,7 +42,7 @@ void sound_free(sound_effect_t *sound_effect){
 }
 
 void game_sound(sound_effect_t *sound_effect){
-     Mix_PlayMusic(sound_effect->game_sound, -1);
+     Mix_PlayMusic(sound_effect->game_sound, 0);
 }
 
 void tagged_sound(sound_effect_t *sound_effect) {
