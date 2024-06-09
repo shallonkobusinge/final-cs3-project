@@ -62,7 +62,7 @@ body_t *make_body(double w, double h, vector_t center, rgb_color_t color) {
   *v4 = (vector_t){0, h};
   list_add(c, v4);
   body_t *seeker = body_init(c, 1, color);
-  body_set_centroid(seeker, (vector_t){.x = center.x / 2, .y = center.y / 2});
+  body_set_centroid(seeker, center);
   return seeker;
 }
 
@@ -89,7 +89,6 @@ static void add_new_seeker(state_t *state, bool is_new) {
     }else{
       vector_t center = (vector_t){.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), 
                                     .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4)};
-      printf("SEEKER LOCATION x = %f y = %f \n", center.x, center.y);
        seeker = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, center, SEEKER_COLOR);
     }
    
