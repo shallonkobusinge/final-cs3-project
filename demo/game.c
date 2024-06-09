@@ -71,7 +71,7 @@ bool emscripten_main(state_t *state)
     }
     else if (state->page == 2)
     {
-        show_maze(state, dt);
+        state->page = show_maze(state, dt);
     }
     scene_tick(state->scene, dt);
 

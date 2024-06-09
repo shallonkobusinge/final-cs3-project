@@ -11,7 +11,7 @@ typedef struct maze_state maze_state_t;
  * Calls the init_maze function, creates and marks the first cell as visited.
  * Runs the DFS using a stack and it processes the cells until the stack is emptied.
  */
-void show_maze(state_t *state, double dt);
+size_t show_maze(state_t *state, double dt);
 
 /**
  * Initializes maze components and generates maze using DFS.
