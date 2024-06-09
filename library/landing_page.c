@@ -93,7 +93,7 @@ static text_element_t end_text_elements[] = {
         .text = "GAME OVER!.",
         .font_path = "assets/fonts/Inter-Regular.ttf",
         .color = (rgb_color_t){0, 0, 0},
-        .frame = (SDL_Rect){SCREEN_CENTER.x - 180, SCREEN_CENTER.y - 200, 150, 28},
+        .frame = (SDL_Rect){SCREEN_CENTER.x, SCREEN_CENTER.y - 200, 150, 28},
     },
 };
 
