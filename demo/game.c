@@ -35,7 +35,7 @@ struct state
     size_t page;
     maze_state_t *maze_state;
     landing_page_state_t *landing_page_state;
-    // end_page_state_t *end_page_state;
+    end_page_state_t *end_page_state;
     sound_effect_t *sound_effect;
     seeker_t *seeker;
     list_t *body_assets;
@@ -51,6 +51,7 @@ state_t *emscripten_init()
     state->page = 3;
     state->maze_state = maze_init();
     state->landing_page_state = landing_page_init();
+    state->end_page_state = end_page_init();
     state->sound_effect = sound_effect_init();
     state->body_assets = list_init(STARTING_SEEKERS, (free_func_t)asset_destroy);
     state->seeker = seeker_init(state);
