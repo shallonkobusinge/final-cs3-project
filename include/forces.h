@@ -3,6 +3,7 @@
 
 #include "collision.h"
 #include "scene.h"
+#include "state.h"
 
 typedef struct force_creator_data
 {
@@ -25,7 +26,7 @@ void force_creator_data_free(force_creator_data_t *data);
  * @param force_const the force constant passed to create_collision()
  */
 typedef void (*collision_handler_t)(body_t *body1, body_t *body2, vector_t axis,
-                                    void *aux, double force_const);
+                                    void *aux, double force_const, state_t *state);
 
 /**
  * Adds a force creator to a scene that applies gravity between two bodies.

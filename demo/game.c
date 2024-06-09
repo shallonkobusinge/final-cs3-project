@@ -86,6 +86,10 @@ bool emscripten_main(state_t *state)
     {
         show_maze(state, dt);
     }
+    else if (state->page == 3)
+    {
+        sdl_clear();
+    }
     scene_tick(state->scene, dt);
 
     sdl_show();
