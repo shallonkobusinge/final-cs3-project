@@ -2,6 +2,7 @@
 #include "asset.h"
 #include "state.h"
 #include "asset_cache.h"
+#include "sound_effect.h"
 
 const vector_t SCREEN_MAX = {1000, 500};
 const vector_t SCREEN_CENTER = {500, 250};
@@ -9,8 +10,6 @@ const vector_t SCREEN_CENTER = {500, 250};
 const size_t LANDING_PAGE_IMG_ELEMENTS = 4;
 const size_t LANDING_PAGE_TEXT_ELEMENTS = 7;
 const size_t LANDING_PAGE_BTN_ELEMENTS = 1;
-
-#include "maze.h"
 
 typedef struct landing_page_state
 {
