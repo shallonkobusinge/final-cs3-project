@@ -88,7 +88,7 @@ void create_drag(scene_t *scene, double gamma, body_t *body);
  */
 void create_collision(scene_t *scene, body_t *body1, body_t *body2,
                       collision_handler_t handler, void *aux,
-                      double force_const);
+                      double force_const, state_t *state);
 
 /**
  * Adds a force creator to a scene that destroys two bodies when they collide.
