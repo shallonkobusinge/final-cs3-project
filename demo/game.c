@@ -48,6 +48,13 @@ static void load_game_screen(state_t *state)
     state->page = 2;
 }
 
+typedef struct btn_element
+{
+    text_element_t text;
+    img_element_t img;
+    button_handler_t handler;
+} btn_element_t;
+
 btn_element_t btn_elements[] = {
     {
         .text.frame = (SDL_Rect){MAX.x - 20, CENTER.y + 45, 90, 48},
