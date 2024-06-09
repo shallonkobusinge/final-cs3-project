@@ -30,7 +30,7 @@ typedef struct landing_page_state landing_page_state_t;
  * Display and renders all the assets on the landing page.
  * @param page_state state
  */
-void show_landing_page(state *state);
+void show_landing_page(state_t *state);
 
 /**
  * Create button assets from a button template
