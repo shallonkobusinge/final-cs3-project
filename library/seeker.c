@@ -148,7 +148,7 @@ seeker_t *seeker_init(state_t *state)
   seeker_t *seeker = malloc(sizeof(seeker_t));
   seeker->last_seeker_time = 0;
   // hider_init(state);
-  printf(" SIZE %zu \n", list_size(state->body_assets));
+  printf(" SIZE %zu \n", state->page);
   // add_new_seeker(state, false);
   return seeker;
 }
