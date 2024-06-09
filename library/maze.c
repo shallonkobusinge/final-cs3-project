@@ -78,9 +78,13 @@ vector_t traverse_maze(state_t *state, vector_t new_vec) {
     vector_t valid_move = VEC_ZERO;
     maze_t *maze = state->maze_state->maze;
 
+    // vector_t vec = (vector_t){
+    //     .x = {new_vec.x - GRID_CELL_SIZE / 4},
+    //     .y = {new_vec.y - GRID_CELL_SIZE / 4}
+    // };
     vector_t vec = (vector_t){
-        .x = {new_vec.x - GRID_CELL_SIZE / 4},
-        .y = {new_vec.y - GRID_CELL_SIZE / 4}
+        .x = (new_vec.x -  GRID_CELL_SIZE / 4),
+        .y = (new_vec.y - GRID_CELL_SIZE / 4)
     };
     for(size_t y = 0; y < GRID_HEIGHT; y++) {
         for(size_t x = 0; x < GRID_WIDTH; x++) {
