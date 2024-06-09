@@ -176,21 +176,21 @@ static void generate_movement (body_t *seeker, vector_t centroid) {
     //     break;
     // }
     printf(" CENTROID x = %f y = %f \n", centroid.x, centroid.y);
-    list_t *shape = body_get_shape(seeker);
-    bool move_valid = true;
-    for(size_t i = 0; i < list_size(shape); i++) {
-      vector_t vertex = *(vector_t *)list_get(shape, i);
-      vector_t new_vertex = vec_add(vertex, centroid);
-           move_body(seeker, centroid);
-      if(new_vertex.x < 0 || new_vertex.y < 0 || new_vertex.x >= MAZE_WINDOW_WIDTH || new_vertex.y >= MAZE_WINDOW_HEIGHT){
-        move_valid = false;
-        break;
-      }
-    }
-    list_free(shape);
-    if(move_valid){
+    // list_t *shape = body_get_shape(seeker);
+    // bool move_valid = true;
+    // for(size_t i = 0; i < list_size(shape); i++) {
+    //   vector_t vertex = *(vector_t *)list_get(shape, i);
+    //   vector_t new_vertex = vec_add(vertex, centroid);
+    //        move_body(seeker, centroid);
+    //   if(new_vertex.x < 0 || new_vertex.y < 0 || new_vertex.x >= MAZE_WINDOW_WIDTH || new_vertex.y >= MAZE_WINDOW_HEIGHT){
+    //     move_valid = false;
+    //     break;
+    //   }
+    // }
+    // list_free(shape);
+    // if(move_valid){
       move_body(seeker, centroid);
-    }
+    // }
 
 }
 
