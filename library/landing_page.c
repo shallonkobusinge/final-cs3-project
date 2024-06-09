@@ -46,6 +46,8 @@ typedef struct state
     landing_page_state_t *landing_page_state;
 
 } state_t;
+
+state_t *state = NULL;
 /**
  * Load game screen
  */
