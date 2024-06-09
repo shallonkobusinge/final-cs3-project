@@ -65,7 +65,7 @@ body_t *make_body(double w, double h, vector_t center, rgb_color_t color)
   *v4 = (vector_t){0, h};
   list_add(c, v4);
   body_t *seeker = body_init(c, 1, color);
-  body_set_centroid(seeker, (vector_t){.x = center.x / 2, .y = center.y / 2});
+  body_set_centroid(seeker, center);
   return seeker;
 }
 
