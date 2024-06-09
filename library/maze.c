@@ -14,7 +14,7 @@
 #include "asset.h"
 
 const size_t GRID_WIDTH = 25;
-const size_t GRID_HEIGHT = 20;
+const size_t GRID_HEIGHT = 12;
 const size_t NUM_CELLS = GRID_WIDTH * GRID_HEIGHT;
 const size_t GRID_CELL_SIZE = 40;
 
@@ -242,7 +242,7 @@ static void buildings_init(maze_state_t *maze_state)
 
         maze_state->buildings[i] = (building_t){
             .x = ((GRID_WIDTH - rand_x) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2,
-            .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10,
+            .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 12,
         };
         maze_state->buildings[i].path = building_paths[i];
     }
