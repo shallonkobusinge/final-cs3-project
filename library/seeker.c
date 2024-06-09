@@ -216,8 +216,10 @@ void seekers_random_movement(state_t *state)
     rgb_color_t *color = body_get_color(seeker);
     if (color->r == 0.1 && color->g == 0.9 && color->b == 0.2)
     {
-      translate_body_movement(state, seeker, -1);
-      
+      vector_t body_centroid = body_get_centroid(seeker);
+      vector_t new_centroid = traverse_maze(state, body_centroid, -1);
+      SDL_Delay(750);
+      move_body(seeker, new_centroid);
     }
   }
 }
