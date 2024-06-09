@@ -102,18 +102,19 @@ vector_t traverse_maze(state_t *state, vector_t new_vec) {
                 };
                 for(size_t i = 0; i < 4; i++) {
                     if(!walls[i]){
-                        valid_move = directions[i];
-                        printf("BEFORE VECTOR x = %f y = %f \n", valid_move.x, valid_move.y);
-                        goto end_loops;
+
+                        // printf("BEFORE VECTOR x = %f y = %f \n", directions[].x, valid_move.y);
+                        return directions[i];
+                        // goto end_loops;
                     }
                 }
             
             }
         }
     }
-    end_loops:
-    printf("AFTER VECTOR x = %f y = %f \n", valid_move.x, valid_move.y);
-    return valid_move;
+    // end_loops:
+    // printf("AFTER VECTOR x = %f y = %f \n", valid_move.x, valid_move.y);
+    return VEC_ZERO;
 }
 
 /**
