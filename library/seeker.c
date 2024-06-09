@@ -237,16 +237,15 @@ void seekers_random_movement(state_t *state)
  * @param aux the auxiliary value passed to create_collision.
  * @param force_const the force constant passed to create_collision()
  */
-static void end_game(body_t *body1, body_t *body2, vector_t axis, void *aux,
-                     double force_const)
+void end_game(body_t *body1, body_t *body2, vector_t axis, void *aux,
+              double force_const, state_t *state)
 {
   // state->page = 3;
-  printf("page");
+  printf("page: %d\n", state->page);
 }
 
 void seeker_collision(state_t *state)
 {
-  printf("Collision: %d\n", state->page);
   for (size_t i = 1; i < scene_bodies(state->scene); i++)
   {
     body_t *seeker = scene_get_body(state->scene, i);
