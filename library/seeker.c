@@ -238,9 +238,8 @@ void seekers_random_movement(state_t *state)
  * @param force_const the force constant passed to create_collision()
  */
 static void end_game(body_t *body1, body_t *body2, vector_t axis, void *aux,
-                     double force_const, state_t *state)
+                     double force_const)
 {
-  printf("GAME OVER: %d", state->page);
   state->page = 3;
 }
 
