@@ -107,6 +107,7 @@ vector_t traverse_maze(state_t *state, vector_t new_vec) {
                  }
             }
     }
+    }
     // printf("THE VECTOR x = %f y = %f \n", valid_move.x, valid_move.y);
     return valid_move;
 }
