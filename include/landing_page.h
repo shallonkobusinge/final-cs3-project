@@ -24,6 +24,8 @@ typedef struct btn_element
     button_handler_t handler;
 } btn_element_t;
 
+typedef struct landing_page_state landing_page_state_t;
+
 /**
  * Display and renders all the assets on the landing page.
  * @param page_state state of the page
