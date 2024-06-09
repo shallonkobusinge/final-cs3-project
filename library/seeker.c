@@ -175,7 +175,7 @@ static void generate_movement (body_t *seeker, vector_t centroid) {
     // default:
     //     break;
     // }
-    printf(" CENTROID x = %d y = %d \n", centroid.x, centroid.y);
+    printf(" CENTROID x = %f y = %f \n", centroid.x, centroid.y);
     // list_t *shape = body_get_shape(seeker);
     // bool move_valid = true;
     // for(size_t i = 0; i < list_size(shape); i++) {
