@@ -304,45 +304,74 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_directi
     };
     size_t y = vec.y / GRID_CELL_SIZE;
     size_t x = vec.x / GRID_CELL_SIZE;
-                printf(" ARRIVED ");
-                bool walls[] = {
-                    maze->cells[y][x].north,
-                    maze->cells[y][x].east,
-                    maze->cells[y][x].south,
-                    maze->cells[y][x].west,
-                };
-                vector_t possible_move[4];
-                size_t move_counts = 0;
 
-                if (movement_direction == -1)
-                {
-                    for (size_t i = 0; i < 4; i++)
-                    {
-                        if (!walls[i])
-                        {
-                            possible_move[move_counts++] = directions[i];
-                        }
-                    }
-                    if (move_counts > 0)
-                    {
-                        valid_move = possible_move[rand() % move_counts];
-                        goto end;
-                    }
-                }
-                else
-                {
-                    if (!walls[movement_direction])
-                    {
-                        valid_move = directions[movement_direction];
-                    }
-                    else
-                    {
-                        printf("CLOSED DIRECTION %zu walls: %d \n", movement_direction, walls[movement_direction]);
-                        valid_move = VEC_ZERO;
-                    }
-                    goto end;
-                }
-end:
+    bool walls[] = {
+        maze->cells[y][x].north,
+        maze->cells[y][x].east,
+        maze->cells[y][x].south,
+        maze->cells[y][x].west,
+    };
+    bool all_wall_closed = true;
+    for (size_t i = 0; i < 4; i++)
+    {
+        if (!walls[i])
+        {
+            all_wall_closed = false;
+            break;
+        }
+    }
+    if (all_wall_closed)
+    {
+        return VEC_ZERO;
+    }
+
+    vector_t possible_move[4];
+    size_t move_counts = 0;
+
+    for (size_t i = 0; i < 4; i++)
+    {
+        if (!walls[i])
+        {
+            possible_move[move_counts++] = directions[i];
+        }
+    }
+    if(move_counts > 0){
+        if(movement_direction >= 0 && movement_direction < 4) {
+            printf(" MOVE COUNT %zu DIRECTION %zu \n", move_counts, movement_direction);
+            valid_move = directions[movement_direction];
+        }else{
+            valid_move = possible_move[rand() % move_counts];
+        }
+    }
+    // if (movement_direction == -1)
+    // {
+    //     for (size_t i = 0; i < 4; i++)
+    //     {
+    //         if (!walls[i])
+    //         {
+    //             possible_move[move_counts++] = directions[i];
+    //         }
+    //     }
+    //     if (move_counts > 0)
+    //     {
+    //         valid_move = possible_move[rand() % move_counts];
+    //         goto end;
+    //     }
+    // }
+    // else
+    // {
+    //     if (!walls[movement_direction])
+    //     {
+    //         valid_move = directions[movement_direction];
+    //     }
+    //     else
+    //     {
+    //         printf("CLOSED DIRECTION %zu walls: %d \n", movement_direction, walls[movement_direction]);
+    //         valid_move = VEC_ZERO;
+    //     }
+    //     goto end;
+    // }
+    // end:
     return valid_move;
 }
 
