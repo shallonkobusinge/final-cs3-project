@@ -3,21 +3,32 @@
 
 #include "state.h"
 
-typedef struct text_element text_element_t;
+typedef struct text_element
+{
+    const char *text;
+    const char *font_path;
+    rgb_color_t color;
+    SDL_Rect frame;
+} text_element_t;
 
-typedef struct img_element img_element_t;
+typedef struct img_element
+{
+    const char *file_path;
+    SDL_Rect frame;
+} img_element_t;
 
-typedef struct btn_element btn_element_t;
-
-typedef struct landing_page_state landing_page_state_t;
+typedef struct btn_element
+{
+    text_element_t text;
+    img_element_t img;
+    button_handler_t handler;
+} btn_element_t;
 
 /**
  * Display and renders all the assets on the landing page.
  * @param page_state state of the page
  */
 void show_landing_page(landing_page_state_t *page_state);
-
-void set_state(state_t *state);
 
 /**
  * Initialize landing page images, buttons and texts.
