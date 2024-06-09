@@ -87,8 +87,8 @@ static void add_new_seeker(state_t *state, bool is_new) {
     seeker = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, seeker_pos, SEEKER_COLOR);
     state->seeker->last_seeker_time = 0;
     }else{
-      vector_t center = (vector_t){.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4), 
-                                    .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4)};
+      vector_t center = (vector_t){.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE)), 
+                                    .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE))};
        seeker = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, center, SEEKER_COLOR);
     }
    
@@ -197,12 +197,12 @@ for(size_t i = 1; i < scene_bodies(state->scene); i++) {
       body_t *seeker = scene_get_body(state->scene, i);
         rgb_color_t *color = body_get_color(seeker);
             if(color->r == 0.1 && color->g == 0.9 && color->b == 0.2) {
-              vector_t center = (vector_t){.x = ((((GRID_WIDTH - 1) * GRID_CELL_SIZE) )), 
-                                    .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE))};
+              // vector_t center = (vector_t){.x = ((((GRID_WIDTH - 1) * GRID_CELL_SIZE) )), 
+              //                       .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE))};
               // printf(" LOACATION x = ")
                 vector_t body_centroid = body_get_centroid(seeker);
                 // vector_t check = vec_add(center, body_centroid);
-                vector_t new_centroid = traverse_maze(state, center);
+                vector_t new_centroid = traverse_maze(state, body_centroid);
                 // printf("OLD x: %f y: %f NEW x: %f   y: %f \n", body_centroid.x, body_centroid.y, new_centroid.x, new_centroid.y);
                 // generate_movement(seeker, new_centroid);
             }
