@@ -49,6 +49,7 @@ state_t *emscripten_init()
     state->scene = scene_init();
     state->page = 3;
     state->body_assets = list_init(STARTING_SEEKERS, (free_func_t)asset_destroy);
+    printf(" SIZE %zu \n", list_size(state->body_assets));
     state->seeker = seeker_init(state);
     state->maze_state = maze_init();
     state->landing_page_state = landing_page_init();
