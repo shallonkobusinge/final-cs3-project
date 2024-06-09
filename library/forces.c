@@ -251,7 +251,7 @@ void create_destructive_collision(scene_t *scene, body_t *body1,
 }
 
 void physics_collision_handler(body_t *body1, body_t *body2, vector_t axis,
-                               void *aux, double force_const)
+                               void *aux, double force_const, state_t *state)
 {
   // TODO: implement this
 }
@@ -259,7 +259,6 @@ void physics_collision_handler(body_t *body1, body_t *body2, vector_t axis,
 void create_physics_collision(scene_t *scene, body_t *body1, body_t *body2,
                               double elasticity)
 {
-  state_t *state;
   create_collision(scene, body1, body2, physics_collision_handler, NULL,
-                   elasticity, state);
+                   elasticity, NULL);
 }
