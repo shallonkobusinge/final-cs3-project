@@ -31,9 +31,7 @@ typedef struct state
     list_t *body_assets;
 } state_t;
 
-state_t *global_state = NULL;
-
-text_element_t landing_text_elements[] = {
+static text_element_t landing_text_elements[] = {
     {
         .text = "Welcome to The Caltech Hideout",
         .font_path = "assets/fonts/Inter-Regular.ttf",
@@ -79,7 +77,7 @@ text_element_t landing_text_elements[] = {
     },
 };
 
-img_element_t landing_img_elements[] = {
+static img_element_t landing_img_elements[] = {
     {
         .file_path = "assets/images/common/nav_line.png",
         .frame = (SDL_Rect){0, 80, SCREEN_MAX.x, 1},

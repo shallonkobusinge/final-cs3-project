@@ -45,7 +45,7 @@ state_t *emscripten_init()
     // init_sound();
     state_t *state = malloc(sizeof(state_t));
     state->scene = scene_init();
-    state->page = 1;
+    state->page = 3;
     state->maze_state = maze_init();
     state->landing_page_state = landing_page_init();
     state->sound_effect = sound_effect_init();
@@ -71,7 +71,7 @@ bool emscripten_main(state_t *state)
     }
     else if (state->page == 3)
     {
-       }
+    }
     scene_tick(state->scene, dt);
 
     sdl_show();
