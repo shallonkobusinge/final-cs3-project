@@ -61,8 +61,8 @@ body_t *make_body(double w, double h, vector_t center, rgb_color_t color) {
   vector_t *v4 = malloc(sizeof(vector_t));
   *v4 = (vector_t){0, h};
   list_add(c, v4);
-  body_t *seeker = body_init(c, 6, color);
-  body_set_centroid(seeker, center);
+  body_t *seeker = body_init(c, 1, color);
+  body_set_centroid(seeker, center / 4);
   return seeker;
 }
 
