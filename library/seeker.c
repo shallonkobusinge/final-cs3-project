@@ -149,7 +149,7 @@ void render_bodies(list_t *bodies) {
  * valid adjacent cell.
  * @param seeker the body of the seeker to be moved.
 */
-static void generate_movement (body_t *seeker, double direction) {
+static void generate_movement (body_t *seeker, int direction) {
     SDL_Delay(750);
     // int direction = rand() % 4;
     
