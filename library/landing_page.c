@@ -48,6 +48,8 @@ typedef struct landing_page_state
 static void load_game_screen(state_t *state)
 {
     state->page = 2;
+    sdl_clear();
+    
     printf("Next screen: %zu\n", state->page);
 }
 
