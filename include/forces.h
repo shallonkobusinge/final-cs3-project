@@ -107,7 +107,7 @@ void create_destructive_collision(scene_t *scene, body_t *body1, body_t *body2);
  * bodies according to the elasticity in `aux`.
  */
 void physics_collision_handler(body_t *body1, body_t *body2, vector_t axis,
-                               void *aux, double force_const);
+                               void *aux, double force_const, state_t *state);
 
 /**
  * Adds a force creator to a scene that applies impulses
