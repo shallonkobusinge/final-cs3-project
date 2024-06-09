@@ -99,7 +99,7 @@ static void init_grid(state_t *state)
         // scene_add_body(state->scene, building);
         // asset_t *asset_building = asset_make_image_with_body(maze_state->buildings[i].path, building);
         // list_add(state->body_assets, asset_building);
-        add_to_scene(state, center, (rgb_color_t){241, 108, 45}, building_paths[i])
+        add_to_scene(state, center, (rgb_color_t){241, 108, 45}, building_paths[i]);
     }
 }
 
