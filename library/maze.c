@@ -58,7 +58,7 @@ typedef struct maze_body
 typedef struct maze_state
 {
     maze_t *maze;
-    maze_body_t buildings[];
+    // maze_body_t buildings[];
     maze_body_t *maze_bodies;
     size_t num_bodies;
 } maze_state_t;
@@ -76,6 +76,30 @@ maze_t *create_maze()
         maze->cells[i] = malloc(GRID_WIDTH * sizeof(cell_t));
     }
     return maze;
+}
+
+static void hider_init(maze_state_t *maze_state) {
+    vector_t center = (vector_t){
+        .x = (((GRID_WIDTH - 24) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2),
+        .y = (((GRID_HEIGHT - 11) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10),
+    };
+    maze_state->maze_bodies[0] = (maze_body_t) {
+        .x = center.x,
+        .y = center.y,
+        .body = make_body(center, (rgb_color_t){50, 129, 110}),
+        .path = BEAVER_PATH
+    };
+    maze_state->num_bodies++;
+}
+
+static void add_maze_body_scene(state_t *state) {
+    maze_state_t *maze_state = state->maze_state;
+    for(size_t i = 0; i < maze_state->num_bodies; i++){
+        body_t *body = maze_state->maze_bodies[i].body;
+        scene_add_body(state->scene, body);
+        asset_t *asset_body = asset_make_image_with_body(maze_state->maze_bodies[i].path, body);
+        list_add(state->body_assets, asset_body);
+    }
 }
 
 /**
@@ -405,29 +429,7 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
      move_body(beaver, translation);
 }
 
-static void hider_init(maze_state_t *maze_state) {
-    vector_t center = (vector_t){
-        .x = (((GRID_WIDTH - 24) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2),
-        .y = (((GRID_HEIGHT - 11) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10),
-    };
-    maze_state->maze_bodies[0] = (maze_body_t) {
-        .x = center.x,
-        .y = center.y,
-        .body = make_body(center, (rgb_color_t){50, 129, 110}),
-        .path = BEAVER_PATH
-    };
-    maze_state->num_bodies++;
-}
 
-static void add_maze_body_scene(state_t *state) {
-    maze_state_t *maze_state = state->maze_state;
-    for(size_t i = 0; i < maze_state->num_bodies; i++){
-        body_t *body = maze_state->maze_bodies[i].body;
-        scene_add_body(state->scene, body);
-        asset_t *asset_body = asset_make_image_with_body(maze_state->maze_bodies[i].path, body);
-        list_add(state->body_assets, asset_body);
-    }
-}
 void show_maze(state_t *state, double dt)
 {
     sdl_on_key((key_handler_t)on_key);
