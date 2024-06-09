@@ -12,7 +12,7 @@ const size_t LANDING_PAGE_BTN_ELEMENTS = 1;
 
 #include "maze.h"
 
-extern typedef struct text_element
+typedef struct text_element
 {
     const char *text;
     const char *font_path;
@@ -20,13 +20,13 @@ extern typedef struct text_element
     SDL_Rect frame;
 } text_element_t;
 
-extern typedef struct img_element
+typedef struct img_element
 {
     const char *file_path;
     SDL_Rect frame;
 } img_element_t;
 
-extern typedef struct btn_element
+typedef struct btn_element
 {
     text_element_t text;
     img_element_t img;
