@@ -313,6 +313,7 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, int movement_direction)
         {
             if ((maze->cells[y][x].box.x == (int)vec.x) && (maze->cells[y][x].box.y == (int)vec.y))
             {
+                printf(" ARRIVED ");
                 bool walls[] = {
                     maze->cells[y][x].north,
                     maze->cells[y][x].east,
