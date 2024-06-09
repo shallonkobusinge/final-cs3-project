@@ -139,7 +139,8 @@ static void hider_init(state_t *state)
   scene_add_body(state->scene, beaver);
 
   asset_t *asset_beaver = asset_make_image_with_body(BEAVER_PATH, beaver);
-  list_add(state->body_assets, asset_beaver);
+  printf(" SIZE %zu \n", list_size(state->body_assets));
+  // list_add(state->body_assets, asset_beaver);
 }
 
 seeker_t *seeker_init(state_t *state)
