@@ -85,8 +85,8 @@ vector_t traverse_maze(state_t *state, vector_t new_vec) {
     
     vector_t directions[] = {
         {.x = 0.0, .y = valid_move.y - GRID_CELL_SIZE}, // north
-        {.x = 0.0, .y = valid_move.y + GRID_CELL_SIZE}, // south
         {.x = valid_move.x + GRID_CELL_SIZE, .y = 0}, // east
+        {.x = 0.0, .y = valid_move.y + GRID_CELL_SIZE}, // south
         {.x = valid_move.x - GRID_CELL_SIZE, .y = 0}, //west
     };
     for(size_t y = 0; y < GRID_HEIGHT; y++) {
@@ -96,29 +96,19 @@ vector_t traverse_maze(state_t *state, vector_t new_vec) {
                 // printf("NORTH = %d SOUTH = %d EAST = %d WEST = %d  \n", maze->cells[y][x].north, maze->cells[y][x].south, maze->cells[y][x].east, maze->cells[y][x].west);
                 bool walls[] = {
                     maze->cells[y][x].north,
-                    maze->cells[y][x].south,
                     maze->cells[y][x].east,
+                    maze->cells[y][x].south,
                     maze->cells[y][x].west,
                 };
                 for(size_t i = 0; i < 4; i++) {
                     if(!walls[i]){
-
-                       
-                        // return directions[i];
                         valid_move = directions[i];
-                        //  printf("FIRST VECTOR x = %f y = %f \n", valid_move.x, valid_move.y);
                         goto end_loops;
                     }
                 }
-
-                        // printf("SECOND VECTOR x = %f y = %f \n", valid_move.x, valid_move.y);
             
             }
-
-                        // printf("THIRD VECTOR x = %f y = %f \n", valid_move.x, valid_move.y);
         }
-
-                        // printf("FOURTH VECTOR x = %f y = %f \n", valid_move.x, valid_move.y);
     }
 end_loops:
  printf("FIFTH VECTOR x = %f y = %f \n", valid_move.x, valid_move.y);
