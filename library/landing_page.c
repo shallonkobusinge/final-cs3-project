@@ -33,7 +33,7 @@ typedef struct state
 
 state_t *global_state = NULL;
 
-text_element_t text_elements[] = {
+text_element_t landing_text_elements[] = {
     {
         .text = "Welcome to The Caltech Hideout",
         .font_path = "assets/fonts/Inter-Regular.ttf",
@@ -79,7 +79,7 @@ text_element_t text_elements[] = {
     },
 };
 
-img_element_t img_elements[] = {
+img_element_t landing_img_elements[] = {
     {
         .file_path = "assets/images/common/nav_line.png",
         .frame = (SDL_Rect){0, 80, SCREEN_MAX.x, 1},
@@ -124,8 +124,8 @@ static list_t *landing_build_text_assets()
     for (size_t i = 0; i < LANDING_PAGE_TEXT_ELEMENTS; i++)
     {
         asset_t *asset =
-            asset_make_text(text_elements[i].font_path, text_elements[i].frame,
-                            text_elements[i].text, text_elements[i].color);
+            asset_make_text(landing_text_elements[i].font_path, landing_text_elements[i].frame,
+                            landing_text_elements[i].text, landing_text_elements[i].color);
         list_add(assets, asset);
     }
     return assets;
@@ -141,7 +141,7 @@ static list_t *landing_build_img_assets()
     for (size_t i = 0; i < LANDING_PAGE_IMG_ELEMENTS; i++)
     {
         asset_t *asset =
-            asset_make_image(img_elements[i].file_path, img_elements[i].frame);
+            asset_make_image(landing_img_elements[i].file_path, landing_img_elements[i].frame);
         list_add(assets, asset);
     }
     return assets;
