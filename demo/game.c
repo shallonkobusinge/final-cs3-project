@@ -47,7 +47,7 @@ state_t *emscripten_init()
     // init_sound();
     state_t *state = malloc(sizeof(state_t));
     state->scene = scene_init();
-    state->page = 3;
+    state->page = 2;
     state->landing_page_state = landing_page_init();
     state->end_page_state = end_page_init();
     state->maze_state = maze_init();
