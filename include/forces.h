@@ -21,7 +21,7 @@ void force_creator_data_free(force_creator_data_t *data);
  * @param body1 the first body passed to create_collision()
  * @param body2 the second body passed to create_collision()
  * @param axis a unit vector pointing from body1 towards body2
- *   that defines the direction the two bodies are colliding in
+ *   that defines the direction the two bodicreate_collisiones are colliding in
  * @param aux the auxiliary value passed to create_collision()
  * @param force_const the force constant passed to create_collision()
  */
