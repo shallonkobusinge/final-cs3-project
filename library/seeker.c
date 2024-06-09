@@ -241,12 +241,11 @@ static void end_game(body_t *body1, body_t *body2, vector_t axis, void *aux,
                      double force_const)
 {
   state_t *state = aux;
-  printf("GAME OVER: %s\n", state->page);
+  printf("GAME OVER: %d\n", state->page);
 }
 
 void seeker_collision(state_t *state)
 {
-  printf("Collision: %d\n", state->page);
   for (size_t i = 1; i < scene_bodies(state->scene); i++)
   {
     body_t *seeker = scene_get_body(state->scene, i);
