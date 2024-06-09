@@ -414,7 +414,6 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
 
 void show_maze(state_t *state, double dt)
 {
-    game_sound(state->sound_effect);
     sdl_on_key((key_handler_t)on_key);
 
     init_grid(state);
