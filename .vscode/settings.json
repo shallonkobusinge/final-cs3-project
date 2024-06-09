@@ -22,6 +22,8 @@
         "maze.h": "c",
         "seeker.h": "c",
         "sound_effect.h": "c",
-        "sdl2_gfxprimitives.h": "c"
+        "sdl2_gfxprimitives.h": "c",
+        "scene.h": "c",
+        "forces.h": "c"
     }
 }

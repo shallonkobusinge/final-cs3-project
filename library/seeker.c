@@ -18,7 +18,7 @@ const vector_t MAX_WINDOW = {1000, 500};
 extern const size_t GRID_WIDTH;
 extern const size_t GRID_HEIGHT;
 extern const size_t NUM_CELLS;
-extern const int GRID_CELL_SIZE;
+extern const size_t GRID_CELL_SIZE;
 extern const size_t MAZE_WINDOW_WIDTH;
 extern const size_t MAZE_WINDOW_HEIGHT;
 
@@ -54,22 +54,22 @@ typedef struct state
 
 body_t *make_body(vector_t center, rgb_color_t color)
 {
-
+  double size = (double)GRID_CELL_SIZE;
   list_t *c = list_init(4, free);
   vector_t *v1 = malloc(sizeof(vector_t));
-  *v1 = (vector_t){-GRID_CELL_SIZE / 2, -GRID_CELL_SIZE /2};
+  *v1 = (vector_t){-size / 2, -size /2};
   list_add(c, v1);
 
   vector_t *v2 = malloc(sizeof(vector_t));
-  *v2 = (vector_t){GRID_CELL_SIZE / 2, -GRID_CELL_SIZE /2};
+  *v2 = (vector_t){size / 2, -size /2};
   list_add(c, v2);
 
   vector_t *v3 = malloc(sizeof(vector_t));
-  *v3 = (vector_t){GRID_CELL_SIZE / 2, GRID_CELL_SIZE /2};
+  *v3 = (vector_t){size / 2, size /2};
   list_add(c, v3);
 
   vector_t *v4 = malloc(sizeof(vector_t));
-  *v4 = (vector_t){-GRID_CELL_SIZE / 2, GRID_CELL_SIZE /2};
+  *v4 = (vector_t){-size / 2, size /2};
   list_add(c, v4);
   body_t *seeker = body_init(c, 1, color);
   body_set_centroid(seeker, center);
@@ -100,7 +100,7 @@ static void add_new_seeker(state_t *state, bool is_new)
   if (is_new)
   {
     seeker_pos = (vector_t){
-        .x = (rand() % (GRID_WIDTH)*GRID_CELL_SIZE) + GRID_CELL_SIZE / 2,
+        .x = (rand() % (GRID_WIDTH) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2,
         .y = (rand() % (GRID_HEIGHT - 4) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10,
     };
     state->seeker->last_seeker_time = 0;
