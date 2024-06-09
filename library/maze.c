@@ -290,6 +290,7 @@ static void draw_maze(maze_t *maze)
 
 vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_direction)
 {
+    printf("HERE ");
     vector_t valid_move = VEC_ZERO;
     maze_t *maze = state->maze_state->maze;
     vector_t vec = (vector_t){
