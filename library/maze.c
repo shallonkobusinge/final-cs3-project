@@ -252,7 +252,6 @@ static void buildings_init(maze_state_t *maze_state)
     {
         size_t rand_x = (rand() % GRID_WIDTH) + 1;
         size_t rand_y = (rand() % GRID_HEIGHT) + 1;
-        printf(" X = %zu Y = %zu \n", rand_x, rand_y);
 
         maze_state->buildings[i] = (building_t){
             .x = ((GRID_WIDTH - rand_x) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4,
