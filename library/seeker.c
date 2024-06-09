@@ -147,7 +147,7 @@ void render_bodies(list_t *bodies) {
 /**
  * Moves the seeker cell to a random
  * valid adjacent cell.
- * @param seeker the body of the seeker to be moved.
+//  * @param seeker the body of the seeker to be moved.
 */
 // static void generate_movement (body_t *seeker, vector_t centroid) {
 //     SDL_Delay(750);
@@ -175,7 +175,7 @@ void render_bodies(list_t *bodies) {
     // default:
     //     break;
     // }
-    printf(" CENTROID x = %f y = %f \n", centroid.x, centroid.y);
+    // printf(" CENTROID x = %f y = %f \n", centroid.x, centroid.y);
     // list_t *shape = body_get_shape(seeker);
     // bool move_valid = true;
     // for(size_t i = 0; i < list_size(shape); i++) {
