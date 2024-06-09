@@ -78,24 +78,26 @@ vector_t traverse_maze(state_t *state, vector_t vec) {
     vector_t valid_move = VEC_ZERO;
     maze_t *maze = state->maze_state->maze;
     for(size_t i = 0; i < GRID_HEIGHT; i++) {
+        printf("I AM IN ");
+        printf("MAZE x: %f y: %f VECTOR x: %f   y: %f \n", maze->cells[i]->box.x, maze->cells[i]->box.y, vec.x, vec.y);
+
         if(maze->cells[i]->box.x == vec.x && maze->cells[i]->box.y == vec.y) {
-            printf("I AM IN ");
           if(maze->cells[i]->north == true) {
                 valid_move = (vector_t){.x = 0, .y = -GRID_CELL_SIZE};
                 break;
-          } else if(maze->cells[i]->south == true) {
+          }  
+          if(maze->cells[i]->south == true) {
                 valid_move = (vector_t){.x = 0, .y = GRID_CELL_SIZE};
                 break;
-          } else if(maze->cells[i]->east == true) {
+          }  
+          if(maze->cells[i]->east == true) {
                 valid_move = (vector_t){.x = GRID_CELL_SIZE, .y = 0};
                 break;
-          } else if(maze->cells[i]->west == true) {
+          } 
+          if(maze->cells[i]->west == true) {
                 valid_move = (vector_t){.x = -GRID_CELL_SIZE, .y = 0};
                 break;
-          } else {
-                valid_move = VEC_ZERO;
-                break;
-          }
+          } 
         }
     }
 return valid_move;
