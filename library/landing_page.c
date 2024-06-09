@@ -216,20 +216,20 @@ static list_t *build_btn_assets()
 void show_landing_page(state_t *_state)
 {
     state_d = _state;
-    list_t *imgs = state_d->imgs;
+    list_t *imgs = state_d->landing_page_state->imgs;
     for (size_t i = 0; i < list_size(imgs); i++)
     {
         asset_render(list_get(imgs, i));
     }
 
-    list_t *texts = state_d->texts;
+    list_t *texts = state_d->landing_page_state->texts;
     for (size_t i = 0; i < list_size(texts); i++)
     {
 
         asset_render(list_get(texts, i));
     }
 
-    list_t *btns = state_d->btns;
+    list_t *btns = state_d->landing_page_state->btns;
     for (size_t i = 0; i < list_size(btns); i++)
     {
         asset_render(list_get(btns, i));
