@@ -21,9 +21,13 @@ typedef struct landing_page_state
 
 typedef struct state
 {
+    scene_t *scene;
     size_t page;
+    maze_state_t *maze_state;
     landing_page_state_t *landing_page_state;
-
+    sound_effect_t *sound_effect;
+    seeker_t *seeker;
+    list_t *body_assets;
 } state_t;
 
 state_t *global_state = NULL;
@@ -167,22 +171,22 @@ static list_t *build_btn_assets(btn_element_t *btn_elements)
     return assets;
 }
 
-void show_landing_page(landing_page_state_t *page_state)
+void show_landing_page(state_t *state)
 {
-    list_t *imgs = page_state->imgs;
+    list_t *imgs = state->landing_page_state->imgs;
     for (size_t i = 0; i < list_size(imgs); i++)
     {
         asset_render(list_get(imgs, i));
     }
 
-    list_t *texts = page_state->texts;
+    list_t *texts = state->landing_page_state->texts;
     for (size_t i = 0; i < list_size(texts); i++)
     {
 
         asset_render(list_get(texts, i));
     }
 
-    list_t *btns = page_state->btns;
+    list_t *btns = state->landing_page_state->btns;
     for (size_t i = 0; i < list_size(btns); i++)
     {
         asset_render(list_get(btns, i));
