@@ -79,6 +79,7 @@ maze_t *create_maze()
  * Traverse the maze
 */
 vector_t traverse_maze(state_t *state, vector_t new_vec) {
+    printf(" VECTOR x = %f y = %f \n",new_vec.x, new_vec.y);
     vector_t valid_move = VEC_ZERO;
     maze_t *maze = state->maze_state->maze;
 
@@ -97,7 +98,7 @@ vector_t traverse_maze(state_t *state, vector_t new_vec) {
         for(size_t x = 0; x < GRID_WIDTH; x++) {
          if((maze->cells[y][x].box.x == (int)vec.x) && (maze->cells[y][x].box.y == (int)vec.y)) {
                 // printf(" MAZE x = %d y = %d VECTOR x = %d y = %d \n", maze->cells[y][x].box.x, maze->cells[y][x].box.y, (int)vec.x, (int)vec.y);
-                printf("NORTH = %d SOUTH = %d EAST = %d WEST = %d  \n", maze->cells[y][x].north, maze->cells[y][x].south, maze->cells[y][x].east, maze->cells[y][x].west);
+                // printf("NORTH = %d SOUTH = %d EAST = %d WEST = %d  \n", maze->cells[y][x].north, maze->cells[y][x].south, maze->cells[y][x].east, maze->cells[y][x].west);
                 bool walls[] = {
                     maze->cells[y][x].north,
                     maze->cells[y][x].east,
@@ -115,7 +116,7 @@ vector_t traverse_maze(state_t *state, vector_t new_vec) {
         }
     }
 end:
- printf("FIFTH VECTOR x = %f y = %f \n", valid_move.x, valid_move.y);
+//  printf("FIFTH VECTOR x = %f y = %f \n", valid_move.x, valid_move.y);
     return valid_move;
 }
 
