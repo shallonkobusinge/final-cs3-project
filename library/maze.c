@@ -84,8 +84,8 @@ vector_t traverse_maze(state_t *state, vector_t new_vec) {
     };
     
     vector_t directions[] = {
-        {.x = 0, .y = -GRID_CELL_SIZE}, // north
-        {.x = 0, .y = GRID_CELL_SIZE}, // south
+        {.x = 0.0, .y = -GRID_CELL_SIZE}, // north
+        {.x = 0.0, .y = GRID_CELL_SIZE}, // south
         {.x = GRID_CELL_SIZE, .y = 0}, // east
         {.x = -GRID_CELL_SIZE, .y = 0}, //west
     };
@@ -103,16 +103,23 @@ vector_t traverse_maze(state_t *state, vector_t new_vec) {
                 for(size_t i = 0; i < 4; i++) {
                     if(!walls[i]){
 
-                        // printf("BEFORE VECTOR x = %f y = %f \n", directions[].x, valid_move.y);
-                        return directions[i];
-                        // goto end_loops;
+                        printf("FIRST VECTOR x = %f y = %f \n", valid_move.x, valid_move.y);
+                        // return directions[i];
+                        valid_move = directions[i];
+                        goto end_loops;
                     }
                 }
+
+                        printf("SECOND VECTOR x = %f y = %f \n", valid_move.x, valid_move.y);
             
             }
+
+                        printf("THIRD VECTOR x = %f y = %f \n", valid_move.x, valid_move.y);
         }
+
+                        printf("FOURTH VECTOR x = %f y = %f \n", valid_move.x, valid_move.y);
     }
-    // end_loops:
+end_loops:
     return VEC_ZERO;
 }
 
