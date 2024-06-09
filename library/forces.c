@@ -260,5 +260,5 @@ void create_physics_collision(scene_t *scene, body_t *body1, body_t *body2,
                               double elasticity)
 {
   create_collision(scene, body1, body2, physics_collision_handler, NULL,
-                   elasticity);
+                   elasticity, NULL);
 }
