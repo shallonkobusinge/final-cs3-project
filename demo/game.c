@@ -73,7 +73,7 @@ bool emscripten_main(state_t *state)
     }
     else if (state->page == 3)
     {
-        show_end_page(state);
+        // show_end_page(state);
     }
     scene_tick(state->scene, dt);
 
