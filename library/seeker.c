@@ -150,7 +150,7 @@ seeker_t *seeker_init(state_t *state)
   // hider_init(state);
   printf(" PAGE %zu \n", state->page);
   // add_new_seeker(state, false);
-  printf(" SIZE %zu \n", list_size(state->body_assets));
+  // printf(" SIZE %zu \n", list_size(state->body_assets));
   return seeker;
 }
 
