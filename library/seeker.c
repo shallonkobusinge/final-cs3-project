@@ -215,8 +215,8 @@ void hider_seeker_collision(state_t *state)
   {
 
     body_t *seeker = scene_get_body(state->scene, i);
-    rgb_color_t color = body_get_color(seeker);
-    if (color.r == 0.0 && color.g == 0.0 && color.b)
+    rgb_color_t *color = body_get_color(seeker);
+    if (color->r == 0.0 && color->g == 0.0 && color->b == 0.0)
     {
       create_collision(state->scene, scene_get_body(state->scene, 0), seeker, end_game, &state->page, 0.0);
     }
