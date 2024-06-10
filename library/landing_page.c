@@ -121,6 +121,12 @@ static void load_game_screen(state_t *state)
     state->page = 2;
 }
 
+static void restart_game(state_t *state)
+{
+    state->maze_state = maze_init();
+    state->page = 2;
+}
+
 static void load_landing_page(state_t *state)
 {
     state->page = 1;
@@ -146,7 +152,7 @@ static btn_element_t end_btn_elements[] = {
         .text.text = "RESTART GAME",
         .img.file_path = "assets/images/landing-page/fill_btn.png",
         .img.frame = (SDL_Rect){SCREEN_CENTER.x - 80, SCREEN_CENTER.y - 70, 200, 80},
-        .handler = (void *)load_game_screen,
+        .handler = (void *)restart_game,
     },
     {
         .text.frame = (SDL_Rect){SCREEN_CENTER.x - 60, SCREEN_CENTER.y + 55, 150, 40},
