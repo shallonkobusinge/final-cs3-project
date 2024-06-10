@@ -354,6 +354,16 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
     }
 }
 
+static void display_time_elapsed(int32_t remaining_seconds)
+{
+    int32_t time_elapsed = TOTAL_GAME_TIME - remaining_seconds;
+
+    int32_t minutes = time_elapsed / 60;
+    int32_t seconds = time_elapsed % 60;
+
+    printf("TIME REMAINING: %d min %d sec\n", minutes, seconds);
+}
+
 void show_maze(state_t *state, double dt)
 {
     sdl_on_key((key_handler_t)on_key);
@@ -369,14 +379,4 @@ void show_maze(state_t *state, double dt)
     render_another_seeker(state, dt);
     render_bodies(state->body_assets);
     seeker_collision(state);
-}
-
-static void display_time_elapsed(int32_t remaining_seconds)
-{
-    int32_t time_elapsed = TOTAL_GAME_TIME - remaining_seconds;
-
-    int32_t minutes = time_elapsed / 60;
-    int32_t seconds = time_elapsed % 60;
-
-    printf("TIME REMAINING: %d min %d sec\n", minutes, seconds);
 }
