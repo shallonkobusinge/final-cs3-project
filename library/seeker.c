@@ -25,7 +25,7 @@ extern const size_t MAZE_WINDOW_HEIGHT;
 // SEEKING CONSTANTS
 const size_t S_NUM_POINTS = 20;
 const double S_RADIUS = 0.1;
-const size_t NEW_SEEKERS_INTERVAL = 30;
+const size_t NEW_SEEKERS_INTERVAL = 60;
 
 const rgb_color_t SEEKER_COLOR = (rgb_color_t){0.1, 0.9, 0.2};
 
@@ -171,7 +171,7 @@ void seekers_random_movement(state_t *state)
     {
       vector_t body_centroid = body_get_centroid(seeker);
       vector_t new_centroid = traverse_maze(state, body_centroid, -1);
-      SDL_Delay(90);
+      SDL_Delay(100);
       move_body(seeker, new_centroid);
     }
   }
