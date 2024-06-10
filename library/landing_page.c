@@ -90,7 +90,7 @@ static text_element_t landing_text_elements[] = {
 
 static text_element_t end_text_elements[] = {
     {
-        .text = "GAME OVER!.",
+        .text = "GAME OVER",
         .font_path = "assets/fonts/Inter-Regular.ttf",
         .color = (rgb_color_t){0, 0, 0},
         .frame = (SDL_Rect){SCREEN_CENTER.x - 80, SCREEN_CENTER.y - 200, 150, 28},
