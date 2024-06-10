@@ -293,16 +293,14 @@ static void draw_maze(maze_t *maze)
     }
 }
 
-cell_t *get_coordinates(maze_t *maze, size_t x, size_t y) {
+cell_t *get_coordinates(maze_t *maze, size x, int y) {
     cell_t *cell = NULL;
-   
     for(size_t h = 0; h < GRID_HEIGHT; h++) {
         for(size_t w = 0; w < GRID_WIDTH; w++) {
-            printf(" X = %d Y = %d \n", maze->cells[h][w].box.y, maze->cells[h][w].box.x);
-            if((maze->cells[h][w].box.x == x ) && (maze->cells[h][w].box.y == y)){
-                 printf(" HERE ");
-            //     cell = &maze->cells[h][w];
-            //     break;
+            if(((maze->cells[h][w].box.x / GRID_CELL_SIZE) == x) && ((maze->cells[h][w].box.y / GRID_CELL_SIZE) == y)){
+                printf(" HERE ");
+                cell = &maze->cells[h][w];
+                break;
             }
         }
     }
@@ -311,11 +309,11 @@ cell_t *get_coordinates(maze_t *maze, size_t x, size_t y) {
 
 vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_direction)
 {
-    printf(" VECTOR X = %f Y = %f \n", new_vec.x, new_vec.y);
+    
     vector_t valid_move = VEC_ZERO;
     maze_t *maze = state->maze_state->maze;
-    printf(" LOCATION X = %zu Y = %zu \n", (size_t)new_vec.x / GRID_CELL_SIZE, GRID_HEIGHT - ((size_t)new_vec.y / GRID_CELL_SIZE));
-    cell_t *cell = get_coordinates(maze, (size_t)new_vec.x / GRID_CELL_SIZE, GRID_HEIGHT - ((size_t)new_vec.y / GRID_CELL_SIZE));
+    // printf(" LOCATION X = %zu Y = %zu \n", (size_t)new_vec.x / GRID_CELL_SIZE, (size_t)new_vec.y / GRID_CELL_SIZE);
+    cell_t *cell = get_coordinates(maze, (size_t)new_vec.x, (size_t)new_vec.y);
     printf(" NORTH: %d SOUTH: %d WEST: %d EAST: %d \n", cell->north, cell->south, cell->west, cell->east);
     // printf(" X = %d Y = %d \n", cell->box.x, cell->box.y);
  
