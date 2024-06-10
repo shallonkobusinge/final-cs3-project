@@ -29,12 +29,6 @@ const size_t NEW_SEEKERS_INTERVAL = 60;
 
 const rgb_color_t SEEKER_COLOR = (rgb_color_t){0.1, 0.9, 0.2};
 
-typedef struct maze_body
-{
-  body_t *body;
-  vector_t position;
-} maze_body_t;
-
 typedef struct seeker
 {
   double last_seeker_time;
@@ -46,6 +40,7 @@ typedef struct state
   size_t page;
   maze_state_t *maze_state;
   landing_page_state_t *landing_page_state;
+  end_page_state_t *end_page_state;
   sound_effect_t *sound_effect;
   seeker_t *seeker;
   list_t *body_assets;
@@ -89,6 +84,23 @@ void move_body(body_t *body, vector_t vec)
 }
 
 /**
+ * Display the time elapsed in a human-readable format.
+ *
+ * This function takes the remaining time in seconds and calculates the
+ * time elapsed from a predefined total game time. It then formats and
+ * prints the remaining time in minutes and seconds if at least one minute
+ * has passed, or just seconds if less than a minute has passed.
+ *
+ * @param remaining_seconds The remaining time in seconds.
+ */
+static void display_time_elapsed(int32_t remaining_seconds)
+{
+  int32_t time_elapsed = NEW_SEEKERS_INTERVAL - remaining_seconds;
+
+  printf("TIME UNTIL NEXT SEEKER: %d sec\n", time_elapsed);
+}
+
+/**
  * Adding a seeker to the scene.
  * @param state struct state of the game.
  * @param is_new determine if is it's the after 30 sec or initial seeker to be added.
@@ -115,7 +127,9 @@ static void add_new_seeker(state_t *state, bool is_new)
 
 void render_seeker(state_t *state, double dt)
 {
+
   state->seeker->last_seeker_time += dt;
+  display_time_elapsed(state->seeker->last_seeker_time);
   if (state->seeker->last_seeker_time >= NEW_SEEKERS_INTERVAL)
   {
     add_new_seeker(state, true);
@@ -189,7 +203,8 @@ void seekers_random_movement(state_t *state)
 static void end_game(body_t *body1, body_t *body2, vector_t axis, void *aux,
                      double force_const)
 {
-  printf("GAME OVER");
+  state_t *state = aux;
+  state->page = 3;
 }
 
 void seeker_collision(state_t *state)
@@ -197,11 +212,7 @@ void seeker_collision(state_t *state)
   for (size_t i = 1; i < scene_bodies(state->scene); i++)
   {
     body_t *seeker = scene_get_body(state->scene, i);
-    rgb_color_t *color = body_get_color(seeker);
-    if (color->r == 0.1 && color->g == 0.9 && color->b == 0.2)
-    {
-      create_collision(state->scene, scene_get_body(state->scene, 0), seeker, end_game, NULL, 0.0);
-    }
+    create_collision(state->scene, scene_get_body(state->scene, 0), seeker, end_game, state, 0.0);
   }
 }
 
