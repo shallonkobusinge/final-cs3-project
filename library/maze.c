@@ -77,7 +77,7 @@ static text_element_t mission_text_elements[] = {
         .text = "Your Target building: ",
         .font_path = "assets/fonts/Inter-Regular.ttf",
         .color = (rgb_color_t){0, 0, 0},
-        .frame = (SDL_Rect){SDL_SCREEN_CENTER.x - 80, SDL_SCREEN_CENTER.y - 250, 150, 28},
+        .frame = (SDL_Rect){SDL_SCREEN_CENTER.x - 80, SDL_SCREEN_CENTER.y - 200, 150, 28},
     },
 };
 
