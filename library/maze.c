@@ -18,7 +18,7 @@ const size_t GRID_HEIGHT = 12;
 const size_t NUM_CELLS = GRID_WIDTH * GRID_HEIGHT;
 const size_t GRID_CELL_SIZE = 40;
 
-extern const vector_t SDL_SDL_SCREEN_CENTER = {500, 250};
+extern const vector_t SDL_SCREEN_CENTER = {500, 250};
 
 const size_t MAZE_WINDOW_WIDTH = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
 const size_t MAZE_WINDOW_HEIGHT = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
