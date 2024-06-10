@@ -27,6 +27,14 @@ const char *building_paths[] = {
     "assets/images/scenery/caltech-hall.png",
     "assets/images/scenery/beckman-auditorium.png"};
 
+typedef struct maze_state
+{
+    maze_t *maze;
+    double time_elapsed;
+    asset_t *random_building;
+    building_t buildings[];
+} maze_state_t;
+
 typedef struct state
 {
     scene_t *scene;
@@ -53,14 +61,6 @@ typedef struct building
     const char *path;
     rgb_color_t *color;
 } building_t;
-
-typedef struct maze_state
-{
-    maze_t *maze;
-    double time_elapsed;
-    asset_t *random_building;
-    building_t buildings[];
-} maze_state_t;
 
 /**
  * Create memory for the maze.
