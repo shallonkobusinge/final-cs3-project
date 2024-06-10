@@ -202,8 +202,8 @@ void seekers_random_movement(state_t *state)
 static void end_game(body_t *body1, body_t *body2, vector_t axis, void *aux,
                      double force_const)
 {
-  // state_t *state = aux;
-  // state->page = 3;
+  size_t *page_ptr = (size_t *)aux;
+  *page_ptr = 4;
 }
 
 void seeker_collision(state_t *state)
@@ -212,11 +212,7 @@ void seeker_collision(state_t *state)
   {
 
     body_t *seeker = scene_get_body(state->scene, i);
-    rgb_color_t *color = body_get_color(seeker);
-    if (color->r == 0.0 && color->g == 0.0 && color->b == 0.0)
-    {
-      create_collision(state->scene, scene_get_body(state->scene, 0), seeker, end_game, NULL, 0.0);
-    }
+    create_collision(state->scene, scene_get_body(state->scene, 0), seeker, end_game, &state->page, 0.0);
   }
 }
 
