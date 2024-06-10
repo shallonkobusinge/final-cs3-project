@@ -115,15 +115,15 @@ static void add_new_seeker(state_t *state, bool is_new)
   if (is_new)
   {
     seeker_pos = (vector_t){
-        .x = (rand() % (GRID_WIDTH)*GRID_CELL_SIZE) + GRID_CELL_SIZE / 2,
-        .y = (rand() % (GRID_HEIGHT - 4) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10,
+        .x = (rand() % (GRID_WIDTH)*GRID_CELL_SIZE) + (GRID_CELL_SIZE) / 2,
+        .y = (rand() % (GRID_HEIGHT - 4) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 2),
     };
     state->seeker->last_render = 0;
   }
   else
   {
-    seeker_pos = (vector_t){.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2),
-                            .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10)};
+    seeker_pos = (vector_t){.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE) + (GRID_CELL_SIZE) / 2),
+                            .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 2))};
   }
   add_to_scene(state, seeker_pos, SEEKER_COLOR, SEEKER_PATH);
 }
