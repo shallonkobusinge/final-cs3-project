@@ -53,21 +53,22 @@ typedef struct state
 
 body_t *make_body(vector_t center, rgb_color_t color)
 {
+  double size = (double)GRID_CELL_SIZE;
   list_t *c = list_init(4, free);
   vector_t *v1 = malloc(sizeof(vector_t));
-  *v1 = (vector_t){-GRID_CELL_SIZE / 2, -GRID_CELL_SIZE / 2};
+  *v1 = (vector_t){-size / 2, -size / 2};
   list_add(c, v1);
 
   vector_t *v2 = malloc(sizeof(vector_t));
-  *v2 = (vector_t){GRID_CELL_SIZE / 2, -GRID_CELL_SIZE / 2};
+  *v2 = (vector_t){size / 2, -size / 2};
   list_add(c, v2);
 
   vector_t *v3 = malloc(sizeof(vector_t));
-  *v3 = (vector_t){GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2};
+  *v3 = (vector_t){size / 2, size / 2};
   list_add(c, v3);
 
   vector_t *v4 = malloc(sizeof(vector_t));
-  *v4 = (vector_t){-GRID_CELL_SIZE / 2, GRID_CELL_SIZE / 2};
+  *v4 = (vector_t){-size / 2, size / 2};
   list_add(c, v4);
   body_t *seeker = body_init(c, 1, color);
   body_set_centroid(seeker, center);
