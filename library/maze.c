@@ -574,7 +574,6 @@ static void win_game(body_t *body1, body_t *body2, vector_t axis, void *aux,
 void hider_building_collision(state_t *state)
 {
     maze_state_t *maze_state = state->maze_state;
-    // printf(" %s \n", maze_state->random_building.)
     create_collision(state->scene, scene_get_body(state->scene, 0), maze_state->random_building, win_game, &state->page, 0.0);
 }
 void show_maze(state_t *state, double dt)
