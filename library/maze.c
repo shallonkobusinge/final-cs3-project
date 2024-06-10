@@ -13,7 +13,7 @@
 #include "seeker.h"
 #include "asset.h"
 
-const size_t GRID_WIDTH = 12;
+const size_t GRID_WIDTH = 20;
 const size_t GRID_HEIGHT = 10;
 const size_t NUM_CELLS = GRID_WIDTH * GRID_HEIGHT;
 const size_t GRID_CELL_SIZE = 50;
