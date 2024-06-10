@@ -59,20 +59,20 @@ static text_element_t landing_text_elements[] = {
     {
         .text = "The hider (beaver) navigates the maze using the arrow keys, with the spacebar providing a speed boost. The seeker's movements are controlled by the computer, ",
         .color = (rgb_color_t){255, 255, 255},
-        .frame = (SDL_Rect){48, 150, 940, 60},
+        .frame = (SDL_Rect){48, 150, 920, 40},
         .font_path = "assets/fonts/Inter-Regular.ttf",
     },
     {
         .text = "progressively becoming more challenging as new seekers are added every 30 seconds. If the hider is tagged by a seeker or fails to reach the target building within the remaining time,",
         .color = (rgb_color_t){255, 255, 255},
-        .frame = (SDL_Rect){48, 175, 710, 30},
+        .frame = (SDL_Rect){48, 185, 920, 30},
         .font_path = "assets/fonts/Inter-Regular.ttf",
     },
 
     {
         .text = "the game ends, displaying a screen that shows the total time used, the number of seekers, and options to retry the game or return to the main page. Also, if the hider successfully reaches the target building, a victory screen appears with similar details, celebrating the achievement.",
         .color = (rgb_color_t){255, 255, 255},
-        .frame = (SDL_Rect){48, 200, 680, 30},
+        .frame = (SDL_Rect){48, 230, 920, 30},
         .font_path = "assets/fonts/Inter-Regular.ttf",
     },
     {
