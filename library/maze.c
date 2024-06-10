@@ -264,16 +264,16 @@ static void buildings_init(maze_state_t *maze_state)
         size_t rand_x = (rand() % GRID_WIDTH) + 1;
         size_t rand_y = (rand() % GRID_HEIGHT) + 1;
 
-        rgb_color_t color;
+        rgb_color_t *random_color = NULL;
         do
         {
-            &color = color_get_random();
+            random_color = color_get_random();
         } while (color->r == 0 && color->g == 0 && color->b == 0);
 
         maze_state->buildings[i] = (building_t){
             .x = ((GRID_WIDTH - rand_x) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2,
             .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 20,
-            .color = color,
+            .color = *random_color,
         };
         maze_state->buildings[i].path = building_paths[i];
     }
