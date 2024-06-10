@@ -223,6 +223,14 @@ void seeker_collision(state_t *state)
   }
 }
 
+void hider_building_collision(state_t *state) {
+  for(size_t i = 1; i < scene_bodies(state->scene); i++) {
+    body_t *seeker = scene_get_body(state->scene, i);
+    rgb_color_t *color = body_get_color(seeker);
+    
+  }
+}
+
 void seeker_free(seeker_t *seeker)
 {
   free(seeker);
