@@ -277,10 +277,12 @@ static void buildings_init(maze_state_t *maze_state)
         };
         maze_state->buildings[i].path = building_paths[i];
     }
+
     size_t rand = generate_random(0, NUM_BUILDINGS);
 
     vector_t center = (vector_t){.x = maze_state->buildings[rand].x, .y = maze_state->buildings[rand].y};
     body_t *body = make_body(center, maze_state->buildings[rand].color);
+
     asset_t *mission_building = asset_make_image_with_body(maze_state->buildings[rand].path, body);
     maze_state->random_building = mission_building;
 }
@@ -441,7 +443,10 @@ static void display_time_elapsed(int32_t remaining_seconds)
 
 void show_mission(state_t *state)
 {
-    asset_render(state->maze_state->random_building);
+    if (state->maze_state->random_building != NULL)
+    {
+        asset_render(state->maze_state->random_building);
+    }
 }
 
 void show_maze(state_t *state, double dt)
