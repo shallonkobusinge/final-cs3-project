@@ -140,7 +140,7 @@ static btn_element_t end_btn_elements[] = {
         .text.color = (rgb_color_t){0, 0, 0},
         .text.text = "Restart Game",
         .img.file_path = "assets/images/landing-page/play_btn.png",
-        .img.frame = (SDL_Rect){SCREEN_CENTER.x, SCREEN_CENTER.y + 20, 200, 80},
+        .img.frame = (SDL_Rect){SCREEN_CENTER.x, SCREEN_CENTER.y - 50, 200, 80},
         .handler = (void *)load_game_screen,
     },
     {
