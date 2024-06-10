@@ -298,11 +298,12 @@ cell_t *get_coordinates(maze_t *maze, size_t x, size_t y) {
    
     for(size_t h = 0; h < GRID_HEIGHT; h++) {
         for(size_t w = 0; w < GRID_WIDTH; w++) {
-            if((maze->cells[h][w].box.x == x ) && (maze->cells[h][w].box.y == y)){
-                 printf(" HERE ");
-                cell = &maze->cells[h][w];
-                break;
-            }
+            printf(" X = %d Y = %d \n", maze->cells[h][w].box.y, maze->cells[h][w].box.x);
+            // if((maze->cells[h][w].box.x == x ) && (maze->cells[h][w].box.y == y)){
+            //      printf(" HERE ");
+            //     cell = &maze->cells[h][w];
+            //     break;
+            // }
         }
     }
     return cell;
