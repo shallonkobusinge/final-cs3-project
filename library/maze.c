@@ -18,6 +18,8 @@ const size_t GRID_HEIGHT = 12;
 const size_t NUM_CELLS = GRID_WIDTH * GRID_HEIGHT;
 const size_t GRID_CELL_SIZE = 40;
 
+extern const vector_t SDL_SDL_SCREEN_CENTER = {500, 250};
+
 const size_t MAZE_WINDOW_WIDTH = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
 const size_t MAZE_WINDOW_HEIGHT = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
 
@@ -73,7 +75,7 @@ static text_element_t mission_text_elements[] = {
         .text = "Your Target building: ",
         .font_path = "assets/fonts/Inter-Regular.ttf",
         .color = (rgb_color_t){0, 0, 0},
-        .frame = (SDL_Rect){SCREEN_CENTER.x - 80, SCREEN_CENTER.y - 200, 150, 28},
+        .frame = (SDL_Rect){SDL_SCREEN_CENTER.x - 80, SDL_SCREEN_CENTER.y - 200, 150, 28},
     },
 };
 
@@ -84,12 +86,12 @@ static void start_game_screen(state_t *state)
 
 static btn_element_t mission_btn_elements[] = {
     {
-        .text.frame = (SDL_Rect){SCREEN_CENTER.x - 20, SCREEN_CENTER.y + 45, 90, 48},
+        .text.frame = (SDL_Rect){SDL_SCREEN_CENTER.x - 20, SDL_SCREEN_CENTER.y + 45, 90, 48},
         .text.font_path = "assets/fonts/Inter-Regular.ttf",
         .text.color = (rgb_color_t){0, 0, 0},
         .text.text = "PLAY",
         .img.file_path = "assets/images/landing-page/play_btn.png",
-        .img.frame = (SDL_Rect){SCREEN_CENTER.x - 50, SCREEN_CENTER.y + 30, 200, 80},
+        .img.frame = (SDL_Rect){SDL_SCREEN_CENTER.x - 50, SDL_SCREEN_CENTER.y + 30, 200, 80},
         .handler = (void *)start_game_screen,
     },
 };
