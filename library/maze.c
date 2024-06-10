@@ -18,7 +18,7 @@ const size_t GRID_HEIGHT = 12;
 const size_t NUM_CELLS = GRID_WIDTH * GRID_HEIGHT;
 const size_t GRID_CELL_SIZE = 40;
 
-extern const vector_t SDL_SCREEN_CENTER = {500, 250};
+const vector_t SDL_SCREEN_CENTER = {500, 250};
 
 const size_t MAZE_WINDOW_WIDTH = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
 const size_t MAZE_WINDOW_HEIGHT = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
@@ -28,6 +28,7 @@ const size_t TOTAL_GAME_TIME = 120; // IN SECONDS
 
 const size_t MISSION_PAGE_TEXT_ELEMENTS = 1;
 const size_t MISSION_PAGE_BTN_ELEMENTS = 1;
+const size_t MISSION_PAGE_IMG_ELEMENTS = 1;
 
 const char *building_paths[] = {
     "assets/images/scenery/caltech-hall.png",
@@ -53,6 +54,7 @@ typedef struct maze_state
     maze_t *maze;
     double time_elapsed;
     asset_t *random_building;
+    list_t *imgs;
     list_t *texts;
     list_t *btns;
     building_t buildings[];
@@ -305,6 +307,22 @@ static list_t *build_text_assets(size_t NUM_TEXT_ELEMENTS, text_element_t *text_
 }
 
 /**
+ * Build image assets from image templates
+ * @return list of image assets
+ */
+static list_t *build_img_assets(size_t NUM_IMG_ELEMENTS, img_element_t *img_elements)
+{
+    list_t *assets = list_init(NUM_IMG_ELEMENTS, free);
+    for (size_t i = 0; i < NUM_IMG_ELEMENTS; i++)
+    {
+        asset_t *asset =
+            asset_make_image(img_elements[i].file_path, img_elements[i].frame);
+        list_add(assets, asset);
+    }
+    return assets;
+}
+
+/**
  * Build buttons assets from buttons templates
  * @return list of button assets
  */
@@ -352,6 +370,13 @@ static void buildings_init(maze_state_t *maze_state)
     asset_t *mission_building = asset_make_image_with_body(maze_state->buildings[rand].path, body);
     maze_state->random_building = mission_building;
 
+    static img_element_t mission_img_elements[] = {
+        {
+            .file_path = maze_state->buildings[rand].path,
+            .frame = (SDL_Rect){SDL_SCREEN_CENTER.x, SDL_SCREEN_CENTER.y, 200, 100},
+        };
+
+    maze_state->imgs = build_img_assets(MISSION_PAGE_IMG_ELEMENTS, mission_img_elements);
     maze_state->texts = build_text_assets(MISSION_PAGE_TEXT_ELEMENTS, mission_text_elements);
     maze_state->btns = build_btn_assets(MISSION_PAGE_BTN_ELEMENTS, mission_btn_elements);
 }
@@ -513,10 +538,11 @@ static void display_time_elapsed(int32_t remaining_seconds)
 void show_mission(state_t *state)
 {
 
-    if (state->maze_state->random_building != NULL)
+    list_t *imgs = state->maze_state->imgs;
+    for (size_t i = 0; i < list_size(imgs); i++)
     {
-        printf("showing mission");
-        asset_render(state->maze_state->random_building);
+
+        asset_render(list_get(imgs, i));
     }
 
     list_t *texts = state->maze_state->texts;
