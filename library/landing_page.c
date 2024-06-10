@@ -121,6 +121,11 @@ static void load_game_screen(state_t *state)
     state->page = 2;
 }
 
+static void load_landing_page(state_t *state)
+{
+    state->page = 1;
+}
+
 static btn_element_t landing_btn_elements[] = {
     {
         .text.frame = (SDL_Rect){SCREEN_CENTER.x - 20, SCREEN_CENTER.y + 45, 90, 48},
@@ -150,7 +155,7 @@ static btn_element_t end_btn_elements[] = {
         .text.text = "Go to Home",
         .img.file_path = "assets/images/landing-page/white_btn.png",
         .img.frame = (SDL_Rect){SCREEN_CENTER.x - 80, SCREEN_CENTER.y + 40, 200, 80},
-        .handler = (void *)load_game_screen,
+        .handler = (void *)load_landing_page,
     },
 };
 
