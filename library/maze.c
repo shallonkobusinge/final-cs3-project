@@ -357,9 +357,9 @@ void show_maze(state_t *state, double dt)
 {
     sdl_on_key((key_handler_t)on_key);
 
-    maze_state->remaining_time += dt;
+    state->maze_state->remaining_time += dt;
 
-    int32_t current_second = (int32_t)maze_state->remaining_time;
+    int32_t current_second = (int32_t)state->maze_state->remaining_time;
 
     printf("Time remaining: %d\n", current_second);
 
