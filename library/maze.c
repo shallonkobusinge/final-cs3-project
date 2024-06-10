@@ -297,8 +297,8 @@ cell_t *get_coordinates(maze_t *maze, size_t x, size_t y) {
     cell_t *cell = NULL;
     for(size_t h = 0; h < GRID_HEIGHT; h++) {
         for(size_t w = 0; w < GRID_WIDTH; w++) {
-            if((maze->cells[h][w].box.x == x / GRID_CELL_SIZE ) && (maze->cells[h][w]->box.y == y / GRID_CELL_SIZE)){
-                cell = maze->cells[h][w];
+            if((maze->cells[h][w].box.x == x / GRID_CELL_SIZE ) && (maze->cells[h][w].box.y == y / GRID_CELL_SIZE)){
+                cell = &maze->cells[h][w];
                 break;
             }
         }
@@ -309,7 +309,7 @@ cell_t *get_coordinates(maze_t *maze, size_t x, size_t y) {
 vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_direction)
 {
     
-    // vector_t valid_move = VEC_ZERO;
+    vector_t valid_move = VEC_ZERO;
     maze_t *maze = state->maze_state->maze;
     cell_t *cell = get_coordinates(maze, (size_t)new_vec.x, (size_t)new_vec.y);
     printf(" NORTH: %d SOUTH: %d WEST: %d EAST: %d \n", cell->north, cell->south, cell->west, cell->east);
