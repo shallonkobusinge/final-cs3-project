@@ -72,7 +72,7 @@ static text_element_t landing_text_elements[] = {
     {
         .text = "the number of seekers, and options to retry the game or return to the main page. Also, if the hider successfully reaches the target building, a victory screen appears with similar details, celebrating the achievement.",
         .color = (rgb_color_t){255, 255, 255},
-        .frame = (SDL_Rect){48, 230, 920, 30},
+        .frame = (SDL_Rect){48, 210, 920, 30},
         .font_path = "assets/fonts/Inter-Regular.ttf",
     },
     {
