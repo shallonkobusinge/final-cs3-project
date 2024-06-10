@@ -293,23 +293,6 @@ static void draw_maze(maze_t *maze)
     }
 }
 
-// cell_t *get_coordinates(maze_t *maze, size_t x, size_t y)
-// {
-//     cell_t *cell = NULL;
-//     for (size_t h = 0; h < GRID_HEIGHT; h++)
-//     {
-//         for (size_t w = 0; w < GRID_WIDTH; w++)
-//         {
-//             if (((maze->cells[h][w].box.x / GRID_CELL_SIZE) == x) && ((maze->cells[h][w].box.y / GRID_CELL_SIZE) == y))
-//             {
-//                 cell = &maze->cells[h][w];
-//                 break;
-//             }
-//         }
-//     }
-//     return cell;
-// }
-
 vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_direction)
 {
 
@@ -319,7 +302,6 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_directi
     
     size_t x = (size_t)new_vec.x / GRID_CELL_SIZE;
     size_t y = GRID_HEIGHT - 1 - ((size_t)new_vec.y / GRID_CELL_SIZE);
-    // cell_t *cell = get_coordinates(maze, (size_t)new_vec.x / GRID_CELL_SIZE, GRID_HEIGHT - 1 - ((size_t)new_vec.y / GRID_CELL_SIZE));
     cell_t *cell = &maze->cells[y][x];
     printf(" NORTH: %d SOUTH: %d WEST: %d EAST: %d \n", cell->north, cell->south, cell->west, cell->east);
 
@@ -335,19 +317,7 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_directi
         cell->south,
         cell->west,
     };
-    bool all_wall_closed = true;
-    for (size_t i = 0; i < 4; i++)
-    {
-        if (!walls[i])
-        {
-            all_wall_closed = false;
-            break;
-        }
-    }
-    if (all_wall_closed)
-    {
-        return VEC_ZERO;
-    }
+
     if (movement_direction == -1)
     {
         vector_t possible_move[4];
