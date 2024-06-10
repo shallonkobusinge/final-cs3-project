@@ -1,6 +1,7 @@
 #ifndef __LANDING_PAGE_H__
 #define __LANDING_PAGE_H__
 
+#include "state.h"
 #include "asset.h"
 
 typedef struct text_element
@@ -25,17 +26,36 @@ typedef struct btn_element
 } btn_element_t;
 
 typedef struct landing_page_state landing_page_state_t;
+typedef struct end_page_state end_page_state_t;
 
 /**
  * Display and renders all the assets on the landing page.
- * @param page_state state of the page
+ * @param state state of the game
  */
-void show_landing_page(landing_page_state_t *page_state);
+void show_landing_page(state_t *state);
+
+/**
+ * Display and renders all the assets on the end page.
+ * @param state state of the game
+ */
+void show_end_page(state_t *state);
+
+/**
+ * Create button assets from a button template
+ * @return button asset
+ */
+asset_t *create_btn(btn_element_t btn_element);
 
 /**
  * Initialize landing page images, buttons and texts.
  * @return state of the landing page.
  */
-landing_page_state_t *landing_page_init(btn_element_t *btn_elements);
+landing_page_state_t *landing_page_init();
+
+/**
+ * Initialize end page images, buttons and texts.
+ * @return state of game.
+ */
+end_page_state_t *end_page_init();
 
 #endif // #ifndef __LANDING_PAGE_H__
