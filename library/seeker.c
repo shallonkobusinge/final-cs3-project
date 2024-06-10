@@ -203,8 +203,8 @@ void seekers_random_movement(state_t *state)
 static void end_game(body_t *body1, body_t *body2, vector_t axis, void *aux,
                      double force_const)
 {
-  size_t *page = aux;
-  page = 4;
+  size_t *page_ptr = (size_t *)aux;
+  *page_ptr = 4;
 }
 
 void seeker_collision(state_t *state)
