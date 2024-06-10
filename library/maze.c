@@ -21,6 +21,7 @@ const size_t MAZE_WINDOW_WIDTH = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
 const size_t MAZE_WINDOW_HEIGHT = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
 
 const size_t NUM_BUILDINGS = 2;
+const size_t TOTAL_GAME_TIME = 120; // IN SECONDS
 const char *building_paths[] = {
     "assets/images/scenery/caltech-hall.png",
     "assets/images/scenery/beckman-auditorium.png"};
@@ -54,7 +55,7 @@ typedef struct building
 typedef struct maze_state
 {
     maze_t *maze;
-    double remaining_time;
+    double time_elapsed;
     building_t buildings[];
 } maze_state_t;
 
@@ -268,7 +269,7 @@ maze_state_t *maze_init()
 
     maze_state_t *maze_state = malloc(sizeof(maze_state_t) + (sizeof(cell_t) * NUM_BUILDINGS));
     maze_state->maze = create_maze();
-    maze_state->remaining_time = 0;
+    maze_state->time_elapsed = 0;
 
     buildings_init(maze_state);
 
@@ -357,11 +358,9 @@ void show_maze(state_t *state, double dt)
 {
     sdl_on_key((key_handler_t)on_key);
 
-    state->maze_state->remaining_time += dt;
+    state->maze_state->time_elapsed += dt;
 
-    int32_t current_second = (int32_t)state->maze_state->remaining_time;
-
-    printf("Time remaining: %d\n", current_second);
+    display_time_elapsed((int32_t)state->maze_state->time_elapsed);
 
     init_grid(state);
     draw_maze(state->maze_state->maze);
@@ -370,4 +369,14 @@ void show_maze(state_t *state, double dt)
     render_another_seeker(state, dt);
     render_bodies(state->body_assets);
     seeker_collision(state);
+}
+
+static void display_time_elapsed(int32_t remaining_seconds)
+{
+    int32_t time_elapsed = TOTAL_GAME_TIME - remaining_seconds;
+
+    int32_t minutes = time_elapsed / 60;
+    int32_t seconds = time_elapsed % 60;
+
+    printf("TIME REMAINING: %d min %d sec\n", minutes, seconds);
 }
