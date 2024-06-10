@@ -138,8 +138,8 @@ void render_another_seeker(state_t *state, double dt)
  */
 static void hider_init(state_t *state)
 {
-  vector_t center = (vector_t){.x = (((GRID_WIDTH - 6) * GRID_CELL_SIZE) ),
-                               .y = (((GRID_HEIGHT - 4) * GRID_CELL_SIZE))};
+  vector_t center = (vector_t){.x = (((GRID_WIDTH - 24) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2),
+                               .y = (((GRID_HEIGHT - 2) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10)};
   add_to_scene(state, center, (rgb_color_t){50, 129, 110}, BEAVER_PATH);
 }
 
