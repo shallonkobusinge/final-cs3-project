@@ -12,11 +12,12 @@
 #include "sound_effect.h"
 #include "seeker.h"
 #include "asset.h"
+#include "forces.h"
 
-const size_t GRID_WIDTH = 25;
-const size_t GRID_HEIGHT = 12;
+const size_t GRID_WIDTH = 22;
+const size_t GRID_HEIGHT = 11;
 const size_t NUM_CELLS = GRID_WIDTH * GRID_HEIGHT;
-const size_t GRID_CELL_SIZE = 40;
+const size_t GRID_CELL_SIZE = 45;
 
 const vector_t SDL_SCREEN_CENTER = {500, 250};
 
@@ -53,7 +54,7 @@ typedef struct maze_state
 {
     maze_t *maze;
     double time_elapsed;
-    asset_t *random_building;
+    body_t *random_building;
     list_t *imgs;
     list_t *texts;
     list_t *btns;
@@ -355,20 +356,18 @@ static void buildings_init(maze_state_t *maze_state)
         } while (random_color->r == 0 && random_color->g == 0 && random_color->b == 0);
 
         maze_state->buildings[i] = (building_t){
-            .x = ((GRID_WIDTH - rand_x) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2,
-            .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 20,
-            .color = random_color,
+            .x = ((GRID_WIDTH - rand_x) * GRID_CELL_SIZE) + (GRID_CELL_SIZE) / 2,
+            .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 3),
         };
         maze_state->buildings[i].path = building_paths[i];
     }
 
-    size_t rand = generate_random(0, NUM_BUILDINGS);
+    size_t rand = generate_random(0, NUM_BUILDINGS - 1);
 
     vector_t center = (vector_t){.x = maze_state->buildings[rand].x, .y = maze_state->buildings[rand].y};
     body_t *body = make_body(center, *maze_state->buildings[rand].color);
 
-    asset_t *mission_building = asset_make_image_with_body(maze_state->buildings[rand].path, body);
-    maze_state->random_building = mission_building;
+    maze_state->random_building = body;
 
     img_element_t mission_img_elements[] = {
         {
@@ -560,6 +559,19 @@ void show_mission(state_t *state)
     }
 }
 
+/**
+ * 
+*/
+static void win_game(body_t *body1, body_t *body2, vector_t axis, void *aux,
+                     double force_const)
+{
+  size_t *page_ptr = (size_t *)aux;
+  *page_ptr = 4;
+}
+void hider_building_collision(state_t *state) {
+    maze_state_t *maze_state = state->maze_state;
+    create_collision(state->scene, maze_state->random_building, scene_get_body(state->scene, 0), win_game, &state->page, 0.0);
+    }
 void show_maze(state_t *state, double dt)
 {
     sdl_on_key((key_handler_t)on_key);
@@ -569,9 +581,9 @@ void show_maze(state_t *state, double dt)
 
     init_grid(state);
     draw_maze(state->maze_state->maze);
-
-    seekers_random_movement(state);
     render_seeker(state, dt);
     render_bodies(state->body_assets);
-    seeker_collision(state);
+    seekers_random_movement(state);
+    hider_seeker_collision(state);
+    hider_building_collision(state);
 }

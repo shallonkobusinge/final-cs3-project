@@ -101,7 +101,10 @@ static void display_time_elapsed(int32_t remaining_seconds)
 }
 
 /**
- * Adding a seeker to the scene.
+ * Adding a seeker body to the scene.
+ * Add seeker's bodies asset to the state->list_body_asset
+ * Generate a random seeker position if it's a new seeker to be added after the 30 seconds.
+ * If it's the initial seeker use a defined position.
  * @param state struct state of the game.
  * @param is_new determine if is it's the after 30 sec or initial seeker to be added.
  */
@@ -112,15 +115,15 @@ static void add_new_seeker(state_t *state, bool is_new)
   if (is_new)
   {
     seeker_pos = (vector_t){
-        .x = (rand() % (GRID_WIDTH)*GRID_CELL_SIZE) + GRID_CELL_SIZE / 2,
-        .y = (rand() % (GRID_HEIGHT - 4) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10,
+        .x = (rand() % (GRID_WIDTH)*GRID_CELL_SIZE) + (GRID_CELL_SIZE) / 2,
+        .y = (rand() % (GRID_HEIGHT - 4) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 3),
     };
     state->seeker->last_render = 0;
   }
   else
   {
-    seeker_pos = (vector_t){.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2),
-                            .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10)};
+    seeker_pos = (vector_t){.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE) + (GRID_CELL_SIZE) / 2),
+                            .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 3))};
   }
   add_to_scene(state, seeker_pos, SEEKER_COLOR, SEEKER_PATH);
 }
@@ -152,7 +155,7 @@ void render_seeker(state_t *state, double dt)
  */
 static void hider_init(state_t *state)
 {
-  vector_t center = (vector_t){.y = (((GRID_HEIGHT - 10) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 10)),
+  vector_t center = (vector_t){.y = (((GRID_HEIGHT - 10) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 3)),
                                .x = (((GRID_WIDTH - 10) * GRID_CELL_SIZE) + (GRID_CELL_SIZE) / 2)};
   add_to_scene(state, center, (rgb_color_t){50, 129, 110}, BEAVER_PATH);
 }
@@ -206,7 +209,7 @@ static void end_game(body_t *body1, body_t *body2, vector_t axis, void *aux,
   *page_ptr = 4;
 }
 
-void seeker_collision(state_t *state)
+void hider_seeker_collision(state_t *state)
 {
   for (size_t i = 1; i < scene_bodies(state->scene); i++)
   {

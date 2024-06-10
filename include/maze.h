@@ -36,9 +36,16 @@ maze_state_t *maze_init();
  * @param state state struct of the game
  * @param vector current body centroid of the body.
  * @param movement_direction movement direction of the body.
- *
+ *              0 -> North, 1 -> West, 2 -> South , 3 -> East, -1 -> seleect a random movement.
+ * 
  * @return rotation direction vector.
  */
 vector_t traverse_maze(state_t *state, vector_t vector, size_t movement_direction);
+
+/**
+ * Randomly moves only the seeker bodies in the scene.
+ * @param state state struct of the game.s
+*/
+void seekers_random_movement(state_t *state);
 
 #endif // #ifndef __MAZE_H__

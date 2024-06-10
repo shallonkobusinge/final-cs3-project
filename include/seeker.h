@@ -61,16 +61,16 @@ void render_bodies(list_t *bodies);
 void move_body(body_t *body, vector_t vec);
 
 /**
- * Creates collision between the the seeeker and hider in the state.
+ * Creates collision between the seeker and hider in the state.
  * @param state state struct of the game.
 */
-void seeker_collision(state_t *state);
+void hider_seeker_collision(state_t *state);
 
 /**
- * Randomly moves only the seeker bodies in the scene.
- * @param state state struct of the game.s
+ * Creates collision between the hider and a building.
+ * @param state state struct of the game
 */
-void seekers_random_movement(state_t *state);
+void hider_building_collision(state_t *state);
 
 /**
  * Add a body to scene and add the body asset to list of body_assets in the state
