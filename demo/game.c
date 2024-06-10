@@ -44,7 +44,7 @@ state_t *emscripten_init()
 {
     asset_cache_init();
     sdl_init(SDL_MIN, SDL_MAX);
-    // init_sound();
+    init_sound();
     state_t *state = malloc(sizeof(state_t));
     state->scene = scene_init();
     state->page = 1;
@@ -54,8 +54,7 @@ state_t *emscripten_init()
     state->landing_page_state = landing_page_init();
     state->end_game_state = end_page_init();
     state->sound_effect = sound_effect_init();
-
-    // game_sound(state->sound_effect);
+    game_sound(state->sound_effect);
     return state;
 }
 
