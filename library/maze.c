@@ -581,6 +581,6 @@ void show_maze(state_t *state, double dt)
     render_seeker(state, dt);
     render_bodies(state->body_assets);
     seekers_random_movement(state);
-    seeker_collision(state);
+    seeker_hider_collision(state);
     hider_building_collision(state);
 }
