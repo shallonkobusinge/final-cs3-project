@@ -307,50 +307,49 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_directi
         {.x = 0.0, .y = valid_move.y - GRID_CELL_SIZE}, // south
         {.x = valid_move.x - GRID_CELL_SIZE, .y = 0},   // west
     };
-    size_t x = (new_vec.x / GRID_CELL_SIZE) - GRID_CELL_SIZE / 2;
-    size_t y = (new_vec.y / GRID_CELL_SIZE) + GRID_CELL_SIZE / 10;
+    size_t x = (new_vec.x / GRID_CELL_SIZE);
+    size_t y = (new_vec.y / GRID_CELL_SIZE);
     bool walls[] = {
         maze->cells[y][x].north,
         maze->cells[y][x].east,
         maze->cells[y][x].south,
         maze->cells[y][x].west,
     };
-    printf(" NORTH %d SOUTH: %d WEST: %d EAST: %d \n", maze->cells[y][x].north, maze->cells[y][x].south, maze->cells[y][x].west, maze->cells[y][x].east);
-    //   printf(" X: %f Y: %f \n", vec.x, vec.y);
     printf(" X: %zu Y: %zu \n", x, y);
-    bool all_wall_closed = true;
-    for (size_t i = 0; i < 4; i++)
-    {
-        if (!walls[i])
-        {
-            all_wall_closed = false;
-            break;
-        }
-    }
-    if (all_wall_closed)
-    {
-        return VEC_ZERO;
-    }
+    printf(" NORTH %d SOUTH: %d WEST: %d EAST: %d \n", maze->cells[y][x].north, maze->cells[y][x].south, maze->cells[y][x].west, maze->cells[y][x].east);
+    // bool all_wall_closed = true;
+    // for (size_t i = 0; i < 4; i++)
+    // {
+    //     if (!walls[i])
+    //     {
+    //         all_wall_closed = false;
+    //         break;
+    //     }
+    // }
+    // if (all_wall_closed)
+    // {
+    //     return VEC_ZERO;
+    // }
 
-    if (movement_direction >= 0 && movement_direction < 4)
-    {
-        printf(" DIRECTION %zu OPEN: %d \n", movement_direction, walls[movement_direction]);
-        valid_move = directions[movement_direction];
-    }
-    else
-    {
-        vector_t possible_move[4];
-        size_t move_counts = 0;
+    // if (movement_direction >= 0 && movement_direction < 4)
+    // {
+    //     printf(" DIRECTION %zu OPEN: %d \n", movement_direction, walls[movement_direction]);
+    //     valid_move = directions[movement_direction];
+    // }
+    // else
+    // {
+    //     vector_t possible_move[4];
+    //     size_t move_counts = 0;
 
-        for (size_t i = 0; i < 4; i++)
-        {
-            if (!walls[i])
-            {
-                possible_move[move_counts++] = directions[i];
-            }
-        }
-        valid_move = possible_move[rand() % move_counts];
-    }
+    //     for (size_t i = 0; i < 4; i++)
+    //     {
+    //         if (!walls[i])
+    //         {
+    //             possible_move[move_counts++] = directions[i];
+    //         }
+    //     }
+    //     valid_move = possible_move[rand() % move_counts];
+    // }
 
     // if (movement_direction == -1)
     // {
