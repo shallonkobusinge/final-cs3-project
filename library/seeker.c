@@ -70,9 +70,9 @@ body_t *make_body(vector_t center, rgb_color_t color)
   vector_t *v4 = malloc(sizeof(vector_t));
   *v4 = (vector_t){-size / 2, size / 2};
   list_add(c, v4);
-  body_t *seeker = body_init(c, 1, color);
-  body_set_centroid(seeker, center);
-  return seeker;
+  body_t *body = body_init(c, 1, color);
+  body_set_centroid(body, center);
+  return body;
 }
 
 void add_to_scene(state_t *state, vector_t center, rgb_color_t color, const char *path)
