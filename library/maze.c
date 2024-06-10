@@ -55,6 +55,7 @@ typedef struct maze_state
 {
     maze_t *maze;
     building_t buildings[];
+    double remaining_time;
 } maze_state_t;
 
 /**
@@ -267,6 +268,7 @@ maze_state_t *maze_init()
 
     maze_state_t *maze_state = malloc(sizeof(maze_state_t) + (sizeof(cell_t) * NUM_BUILDINGS));
     maze_state->maze = create_maze();
+    maze_state->remaining_time = 0;
 
     buildings_init(maze_state);
 
@@ -354,6 +356,12 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
 void show_maze(state_t *state, double dt)
 {
     sdl_on_key((key_handler_t)on_key);
+
+    maze_state->remaining_time += dt;
+
+    int32_t current_second = (int32_t)maze_state->remaining_time;
+
+    printf("Time remaining: %d\n", current_second);
 
     init_grid(state);
     draw_maze(state->maze_state->maze);
