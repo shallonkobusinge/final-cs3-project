@@ -62,7 +62,7 @@ void *list_get(list_t *list, size_t index)
 
 void list_add(list_t *list, void *value)
 {
-  printf("List: size %zu\n", list->size);
+
   assert(list != NULL);
   assert(list->data);
   assert(list->size <= list->capacity);
