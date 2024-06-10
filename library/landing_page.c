@@ -144,7 +144,7 @@ static btn_element_t end_btn_elements[] = {
         .handler = (void *)load_game_screen,
     },
     {
-        .text.frame = (SDL_Rect){SCREEN_CENTER.x - 65, SCREEN_CENTER.y + 50, 150, 40},
+        .text.frame = (SDL_Rect){SCREEN_CENTER.x - 65, SCREEN_CENTER.y + 55, 150, 40},
         .text.font_path = "assets/fonts/Inter-Regular.ttf",
         .text.color = (rgb_color_t){230, 91, 47},
         .text.text = "Go to Home",
