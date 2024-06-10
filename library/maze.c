@@ -14,9 +14,9 @@
 #include "asset.h"
 
 const size_t GRID_WIDTH = 25;
-const size_t GRID_HEIGHT = 20;
+const size_t GRID_HEIGHT = 10;
 const size_t NUM_CELLS = GRID_WIDTH * GRID_HEIGHT;
-const size_t GRID_CELL_SIZE = 24;
+const size_t GRID_CELL_SIZE = 25;
 
 const size_t MAZE_WINDOW_WIDTH = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
 const size_t MAZE_WINDOW_HEIGHT = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
