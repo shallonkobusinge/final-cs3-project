@@ -26,18 +26,22 @@ extern const size_t MAZE_WINDOW_HEIGHT;
 const size_t S_NUM_POINTS = 20;
 const double S_RADIUS = 0.1;
 const size_t NEW_SEEKERS_INTERVAL = 30;
+const size_t STARTING_SEEKERS = 50;
 
 const rgb_color_t SEEKER_COLOR = (rgb_color_t){0.1, 0.9, 0.2};
 
-typedef struct maze_body
+typedef struct seeker_body
 {
   body_t *body;
   vector_t position;
-} maze_body_t;
+  asset_t *body_asset;
+} seeker_body_t;
 
 typedef struct seeker
 {
   double last_seeker_time;
+  size_t num_of_seekers;
+  seeker_body_t seekers[];
 } seeker_t;
 
 typedef struct state
@@ -83,6 +87,11 @@ void add_to_scene(state_t *state, vector_t center, rgb_color_t color, const char
   list_add(state->body_assets, asset_body);
 }
 
+// static void add_seeker_to_scene(state_t *state, seeker_body_t *seeker, const char *path)
+// {
+
+// }
+
 void move_body(body_t *body, vector_t vec)
 {
   body_set_centroid(body, vec_add(body_get_centroid(body), vec));
@@ -95,22 +104,36 @@ void move_body(body_t *body, vector_t vec)
  */
 static void add_new_seeker(state_t *state, bool is_new)
 {
-
+  seeker_t *seeker = state->seeker;
   vector_t seeker_pos = VEC_ZERO;
+  seeker_body_t *seeker_body = malloc(sizeof(seeker_body_t));
+
   if (is_new)
   {
+
     seeker_pos = (vector_t){
         .x = (rand() % (GRID_WIDTH)*GRID_CELL_SIZE) + GRID_CELL_SIZE / 2,
         .y = (rand() % (GRID_HEIGHT - 4) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10,
     };
+    seeker_body->position = seeker_pos;
+    seeker->num_of_seekers += 1;
     state->seeker->last_seeker_time = 0;
   }
   else
   {
     seeker_pos = (vector_t){.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2),
                             .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10)};
+    seeker_body->position = seeker_pos;
+    seeker->num_of_seekers += 1;
+    seeker->seekers[seeker->num_of_seekers] = seeker_body;
   }
-  add_to_scene(state, seeker_pos, SEEKER_COLOR, SEEKER_PATH);
+  body_t *body = make_body(seeker->position, SEEKER_COLOR);
+  seeker_body->body = body;
+  add_seeker_to_scene(state, seeker_body, SEEKER_PATH);
+  scene_add_body(state->scene, seeker_body->body);
+  seeker_body->body_asset = asset_make_image_with_body(SEEKER_PATH, seeker_body->body);
+  list_add(state->body_assets, seeker_body->body_asset);
+  seeker->seekers[seeker->num_of_seekers] = seeker_body;
 }
 
 void render_another_seeker(state_t *state, double dt)
@@ -120,14 +143,9 @@ void render_another_seeker(state_t *state, double dt)
   {
     add_new_seeker(state, true);
   }
-  for (size_t i = 1; i < list_size(state->body_assets); i++)
+  for (size_t i = 1; i < state->seeker->num_of_seekers; i++)
   {
-
-    rgb_color_t *color = body_get_color(scene_get_body(state->scene, i));
-    if (color->r == 0.1 && color->g == 0.9 && color->b == 0.2)
-    {
-      asset_render(list_get(state->body_assets, i));
-    }
+    asset_render(list_get(state->body_assets, i));
   }
 }
 
@@ -148,6 +166,8 @@ seeker_t *seeker_init(state_t *state)
 {
   seeker_t *seeker = malloc(sizeof(seeker_t));
   seeker->last_seeker_time = 0;
+  seeker->seekers = malloc(sizeof(seeker_t) + (sizeof(seeker_t) * STARTING_SEEKERS));
+  seeker->num_of_seekers = 0;
   hider_init(state);
   add_new_seeker(state, false);
   return seeker;

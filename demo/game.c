@@ -16,7 +16,6 @@
 #include "sound_effect.h"
 #include "seeker.h"
 
-const size_t STARTING_SEEKERS = 50;
 
 const vector_t MIN = {0, 0};
 const vector_t MAX = {1000, 500};
@@ -25,6 +24,8 @@ const vector_t CENTER = {500, 250};
 const vector_t SDL_MIN = {0, 0};
 const vector_t SDL_MAX = {1000, 500};
 const vector_t SDL_CENTER = {500, 250};
+
+extern const size_t STARTING_SEEKERS;
 
 typedef struct maze_state maze_state_t;
 typedef struct landing_page_state landing_page_state_t;

@@ -1,29 +1,6 @@
 {
     "files.associations": {
-        "state.h": "c",
-        "math.h": "c",
-        "sdl.h": "c",
-        "asset_cache.h": "c",
         "landing_page.h": "c",
-        "asset.h": "c",
-        "string.h": "c",
-        "stdlib.h": "c",
-        "sdl_wrapper.h": "c",
-        "generate_maze.h": "c",
-        "vector.h": "c",
-        "stack.h": "c",
-        "time.h": "c",
-        "cell.h": "c",
-        "stdio.h": "c",
-        "stdbool.h": "c",
-        "body.h": "c",
-        "list.h": "c",
-        "assert.h": "c",
-        "maze.h": "c",
-        "seeker.h": "c",
-        "sound_effect.h": "c",
-        "sdl2_gfxprimitives.h": "c",
-        "scene.h": "c",
-        "forces.h": "c"
+        "sound_effect.h": "c"
     }
 }
