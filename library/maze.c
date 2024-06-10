@@ -310,7 +310,7 @@ cell_t *get_coordinates(maze_t *maze, size_t x, size_t y) {
 
 vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_direction)
 {
-    
+    printf(" VECTOR X = %f Y = %f \n", new_vec.x, new_vec.y);
     vector_t valid_move = VEC_ZERO;
     maze_t *maze = state->maze_state->maze;
     printf(" LOCATION X = %zu Y = %zu \n", (size_t)new_vec.x / GRID_CELL_SIZE, (size_t)new_vec.y / GRID_CELL_SIZE);
