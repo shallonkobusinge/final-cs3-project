@@ -129,7 +129,7 @@ void render_seeker(state_t *state, double dt)
 {
 
   state->seeker->last_seeker_time += dt;
-  display_time_elapsed(state->seeker->last_seeker_time);
+  // display_time_elapsed(state->seeker->last_seeker_time);
   if (state->seeker->last_seeker_time >= NEW_SEEKERS_INTERVAL)
   {
     add_new_seeker(state, true);
@@ -154,7 +154,6 @@ static void hider_init(state_t *state)
 {
   vector_t center = (vector_t){.y = (((GRID_HEIGHT - 10) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 10)),
                                .x = (((GRID_WIDTH - 10) * GRID_CELL_SIZE) + (GRID_CELL_SIZE) / 2)};
-  //  SDL_Rect hider = (SDL_Rect){(((GRID_WIDTH - 10) * GRID_CELL_SIZE) + (GRID_CELL_SIZE) / 4), (((GRID_HEIGHT - 10) * GRID_CELL_SIZE) + (GRID_CELL_SIZE / 4)), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
   add_to_scene(state, center, (rgb_color_t){50, 129, 110}, BEAVER_PATH);
 }
 
