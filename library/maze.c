@@ -21,6 +21,7 @@ const size_t MAZE_WINDOW_WIDTH = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
 const size_t MAZE_WINDOW_HEIGHT = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
 
 const size_t NUM_BUILDINGS = 2;
+const size_t TOTAL_GAME_TIME = 120; // IN SECONDS
 const char *building_paths[] = {
     "assets/images/scenery/caltech-hall.png",
     "assets/images/scenery/beckman-auditorium.png"};
@@ -54,6 +55,7 @@ typedef struct building
 typedef struct maze_state
 {
     maze_t *maze;
+    double time_elapsed;
     building_t buildings[];
 } maze_state_t;
 
@@ -267,6 +269,7 @@ maze_state_t *maze_init()
 
     maze_state_t *maze_state = malloc(sizeof(maze_state_t) + (sizeof(cell_t) * NUM_BUILDINGS));
     maze_state->maze = create_maze();
+    maze_state->time_elapsed = 0;
 
     buildings_init(maze_state);
 
@@ -351,9 +354,43 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
     }
 }
 
+/**
+ * Display the time elapsed in a human-readable format.
+ *
+ * This function takes the remaining time in seconds and calculates the
+ * time elapsed from a predefined total game time. It then formats and
+ * prints the remaining time in minutes and seconds if at least one minute
+ * has passed, or just seconds if less than a minute has passed.
+ *
+ * @param remaining_seconds The remaining time in seconds.
+ */
+static void display_time_elapsed(int32_t remaining_seconds)
+{
+    int32_t time_elapsed = TOTAL_GAME_TIME - remaining_seconds;
+
+    int32_t minutes = time_elapsed / 60;
+    int32_t seconds = time_elapsed % 60;
+
+    if (minutes < 2)
+    {
+        if (minutes == 1)
+        {
+            printf("TIME REMAINING: %d min %d sec\n", minutes, seconds);
+        }
+        else
+        {
+            printf("TIME REMAINING: %d sec\n", seconds);
+        }
+    }
+}
+
 void show_maze(state_t *state, double dt)
 {
     sdl_on_key((key_handler_t)on_key);
+
+    state->maze_state->time_elapsed += dt;
+
+    display_time_elapsed((int32_t)state->maze_state->time_elapsed);
 
     init_grid(state);
     draw_maze(state->maze_state->maze);

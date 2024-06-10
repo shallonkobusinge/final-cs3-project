@@ -106,9 +106,29 @@ static void add_new_seeker(state_t *state, bool is_new)
   list_add(state->body_assets, new_asset_seeker);
 }
 
+/**
+ * Display the time elapsed in a human-readable format.
+ *
+ * This function takes the remaining time in seconds and calculates the
+ * time elapsed from a predefined total game time. It then formats and
+ * prints the remaining time in minutes and seconds if at least one minute
+ * has passed, or just seconds if less than a minute has passed.
+ *
+ * @param remaining_seconds The remaining time in seconds.
+ */
+static void display_time_elapsed(int32_t remaining_seconds)
+{
+  int32_t time_elapsed = NEW_SEEKERS_INTERVAL - remaining_seconds;
+
+  printf("TIME UNTIL NEXT SEEKER: %d sec\n", time_elapsed);
+}
+
 void render_another_seeker(state_t *state, double dt)
 {
   state->seeker->last_seeker_time += dt;
+
+  display_time_elapsed(state->seeker->last_seeker_time);
+
   if (state->seeker->last_seeker_time >= NEW_SEEKERS_INTERVAL)
   {
     add_new_seeker(state, true);
@@ -116,7 +136,6 @@ void render_another_seeker(state_t *state, double dt)
   }
   for (size_t i = 1; i < list_size(state->body_assets); i++)
   {
-
     rgb_color_t *color = body_get_color(scene_get_body(state->scene, i));
     if (color->r == 0.1 && color->g == 0.9 && color->b == 0.2)
     {
@@ -125,22 +144,25 @@ void render_another_seeker(state_t *state, double dt)
   }
 }
 
+void display_seek_time()
+{
+}
+
 /**
  * Adds a hider body returned by make_body() to the scene.
  * Creates and adds a body asset of the hider to the list of body_assets in the state.
  * @param state state struct of the game.
  */
-static void hider_init(state_t *state)
+static void
+hider_init(state_t *state)
 {
   vector_t center = (vector_t){.x = (((GRID_WIDTH - 24) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4),
                                .y = (((GRID_HEIGHT - 0) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4)};
-  printf("LOCATION x = %f y = %f \n", center.x, center.y);
 
   body_t *beaver = make_body(GRID_CELL_SIZE, GRID_CELL_SIZE, center, (rgb_color_t){50, 129, 110});
   scene_add_body(state->scene, beaver);
 
   asset_t *asset_beaver = asset_make_image_with_body(BEAVER_PATH, beaver);
-  printf(" SIZE %zu \n", list_size(state->body_assets));
   list_add(state->body_assets, asset_beaver);
 }
 
@@ -149,9 +171,7 @@ seeker_t *seeker_init(state_t *state)
   seeker_t *seeker = malloc(sizeof(seeker_t));
   seeker->last_seeker_time = 0;
   hider_init(state);
-  printf(" PAGE %zu \n", state->page);
   add_new_seeker(state, false);
-  printf(" SIZE %zu \n", list_size(state->body_assets));
   return seeker;
 }
 
@@ -245,7 +265,6 @@ static void end_game(body_t *body1, body_t *body2, vector_t axis, void *aux,
                      double force_const)
 {
   state_t *state = aux;
-  printf("GAME OVER: %d\n", state->page);
   state->page = 3;
 }
 
