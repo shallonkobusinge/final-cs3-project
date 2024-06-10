@@ -88,7 +88,7 @@ static void start_game_screen(state_t *state)
 
 static btn_element_t mission_btn_elements[] = {
     {
-        .text.frame = (SDL_Rect){SDL_SCREEN_CENTER.x - 20, SDL_SCREEN_CENTER.y - 45, 90, 48},
+        .text.frame = (SDL_Rect){SDL_SCREEN_CENTER.x - 20, SDL_SCREEN_CENTER.y - 20, 90, 48},
         .text.font_path = "assets/fonts/Inter-Regular.ttf",
         .text.color = (rgb_color_t){255, 255, 255},
         .text.text = "START",
@@ -326,12 +326,12 @@ static list_t *build_img_assets(size_t NUM_IMG_ELEMENTS, img_element_t *img_elem
  * Build buttons assets from buttons templates
  * @return list of button assets
  */
-static list_t *build_btn_assets(size_t NUM_BTN_ELEMENTS, btn_element_t *landing_btn_elements)
+static list_t *build_btn_assets(size_t NUM_BTN_ELEMENTS, btn_element_t *btn_elements)
 {
     list_t *assets = list_init(NUM_BTN_ELEMENTS, (free_func_t)asset_destroy);
     for (size_t i = 0; i < NUM_BTN_ELEMENTS; i++)
     {
-        asset_t *asset = create_btn(landing_btn_elements[i]);
+        asset_t *asset = create_btn(btn_elements[i]);
         list_add(assets, asset);
     }
     return assets;
