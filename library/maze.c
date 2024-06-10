@@ -319,7 +319,6 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_directi
 
     cell_t *cell = get_coordinates(maze, (size_t)new_vec.x / GRID_CELL_SIZE, GRID_HEIGHT - 1 - ((size_t)new_vec.y / GRID_CELL_SIZE));
     printf(" NORTH: %d SOUTH: %d WEST: %d EAST: %d \n", cell->north, cell->south, cell->west, cell->east);
-    // printf(" X = %d Y = %d \n", cell->box.x, cell->box.y);
 
     vector_t directions[] = {
         {.x = 0.0, .y = valid_move.y + GRID_CELL_SIZE}, // north
@@ -327,16 +326,12 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_directi
         {.x = 0.0, .y = valid_move.y - GRID_CELL_SIZE}, // south
         {.x = valid_move.x - GRID_CELL_SIZE, .y = 0},   // west
     };
-    // size_t x = new_vec.x / GRID_CELL_SIZE;
-    // size_t y = new_vec.y / GRID_CELL_SIZE;
     bool walls[] = {
         cell->north,
         cell->east,
         cell->south,
         cell->west,
     };
-    // printf(" X: %zu Y: %zu \n", x, y);
-    // printf(" NORTH %d SOUTH: %d WEST: %d EAST: %d \n", maze->cells[y][x].north, maze->cells[y][x].south, maze->cells[y][x].west, maze->cells[y][x].east);
     bool all_wall_closed = true;
     for (size_t i = 0; i < 4; i++)
     {
@@ -367,43 +362,12 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_directi
 
     else if (movement_direction >= 0 && movement_direction < 4 && !walls[movement_direction])
     {
-        printf(" DIRECTION %zu OPEN: %d \n", movement_direction, walls[movement_direction]);
         valid_move = directions[movement_direction];
     }
     else
     {
         valid_move = VEC_ZERO;
     }
-
-    // if (movement_direction == -1)
-    // {
-    //     for (size_t i = 0; i < 4; i++)
-    //     {
-    //         if (!walls[i])
-    //         {
-    //             possible_move[move_counts++] = directions[i];
-    //         }
-    //     }
-    //     if (move_counts > 0)
-    //     {
-    //         valid_move = possible_move[rand() % move_counts];
-    //         goto end;
-    //     }
-    // }
-    // else
-    // {
-    //     if (!walls[movement_direction])
-    //     {
-    //         valid_move = directions[movement_direction];
-    //     }
-    //     else
-    //     {
-    //         printf("CLOSED DIRECTION %zu walls: %d \n", movement_direction, walls[movement_direction]);
-    //         valid_move = VEC_ZERO;
-    //     }
-    //     goto end;
-    // }
-    // end:
     return valid_move;
 }
 
@@ -450,8 +414,8 @@ void show_maze(state_t *state, double dt)
     init_grid(state);
     draw_maze(state->maze_state->maze);
 
-    // seekers_random_movement(state);
-    // render_another_seeker(state, dt);
+    seekers_random_movement(state);
+    render_another_seeker(state, dt);
     render_bodies(state->body_assets);
     seeker_collision(state);
 }
