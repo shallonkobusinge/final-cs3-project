@@ -361,7 +361,17 @@ static void display_time_elapsed(int32_t remaining_seconds)
     int32_t minutes = time_elapsed / 60;
     int32_t seconds = time_elapsed % 60;
 
-    printf("TIME REMAINING: %d min %d sec\n", minutes, seconds);
+    if (minutes < 2)
+    {
+        if (minutes == 1)
+        {
+            printf("TIME REMAINING: %d min %d sec\n", minutes, seconds);
+        }
+        else
+        {
+            printf("TIME REMAINING: %d sec\n", seconds);
+        }
+    }
 }
 
 void show_maze(state_t *state, double dt)
