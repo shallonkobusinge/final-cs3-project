@@ -106,9 +106,29 @@ static void add_new_seeker(state_t *state, bool is_new)
   list_add(state->body_assets, new_asset_seeker);
 }
 
+/**
+ * Display the time elapsed in a human-readable format.
+ *
+ * This function takes the remaining time in seconds and calculates the
+ * time elapsed from a predefined total game time. It then formats and
+ * prints the remaining time in minutes and seconds if at least one minute
+ * has passed, or just seconds if less than a minute has passed.
+ *
+ * @param remaining_seconds The remaining time in seconds.
+ */
+static void display_time_elapsed(int32_t remaining_seconds)
+{
+  int32_t time_elapsed = NEW_SEEKERS_INTERVAL - remaining_seconds;
+
+  printf("TIME UNTIL NEXT SEEKER: %d sec\n", time_elapsed);
+}
+
 void render_another_seeker(state_t *state, double dt)
 {
   state->seeker->last_seeker_time += dt;
+
+  display_time_elapsed(state->seeker->last_seeker_time);
+
   if (state->seeker->last_seeker_time >= NEW_SEEKERS_INTERVAL)
   {
     add_new_seeker(state, true);
@@ -116,7 +136,6 @@ void render_another_seeker(state_t *state, double dt)
   }
   for (size_t i = 1; i < list_size(state->body_assets); i++)
   {
-
     rgb_color_t *color = body_get_color(scene_get_body(state->scene, i));
     if (color->r == 0.1 && color->g == 0.9 && color->b == 0.2)
     {
@@ -125,12 +144,17 @@ void render_another_seeker(state_t *state, double dt)
   }
 }
 
+void display_seek_time()
+{
+}
+
 /**
  * Adds a hider body returned by make_body() to the scene.
  * Creates and adds a body asset of the hider to the list of body_assets in the state.
  * @param state state struct of the game.
  */
-static void hider_init(state_t *state)
+static void
+hider_init(state_t *state)
 {
   vector_t center = (vector_t){.x = (((GRID_WIDTH - 24) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4),
                                .y = (((GRID_HEIGHT - 0) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 4)};

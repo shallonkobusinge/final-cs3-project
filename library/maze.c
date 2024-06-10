@@ -354,6 +354,16 @@ void on_key(char key, key_event_type_t type, double held_time, state_t *state)
     }
 }
 
+/**
+ * Display the time elapsed in a human-readable format.
+ *
+ * This function takes the remaining time in seconds and calculates the
+ * time elapsed from a predefined total game time. It then formats and
+ * prints the remaining time in minutes and seconds if at least one minute
+ * has passed, or just seconds if less than a minute has passed.
+ *
+ * @param remaining_seconds The remaining time in seconds.
+ */
 static void display_time_elapsed(int32_t remaining_seconds)
 {
     int32_t time_elapsed = TOTAL_GAME_TIME - remaining_seconds;
