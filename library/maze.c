@@ -559,6 +559,9 @@ void show_mission(state_t *state)
     }
 }
 
+/**
+ * 
+*/
 static void win_game(body_t *body1, body_t *body2, vector_t axis, void *aux,
                      double force_const)
 {
