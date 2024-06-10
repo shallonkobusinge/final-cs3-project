@@ -243,8 +243,8 @@ static void buildings_init(maze_state_t *maze_state)
         size_t rand_y = (rand() % GRID_HEIGHT) + 1;
 
         maze_state->buildings[i] = (building_t){
-            .x = ((GRID_WIDTH - rand_x) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2,
-            .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 20,
+            .x = ((GRID_WIDTH - rand_x) * GRID_CELL_SIZE) + (GRID_CELL_SIZE) / 2,
+            .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 10),
         };
         maze_state->buildings[i].path = building_paths[i];
     }
