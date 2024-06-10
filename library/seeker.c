@@ -171,7 +171,7 @@ void seekers_random_movement(state_t *state)
     {
       vector_t body_centroid = body_get_centroid(seeker);
       vector_t new_centroid = traverse_maze(state, body_centroid, -1);
-      SDL_Delay(100);
+      SDL_Delay(96);
       move_body(seeker, new_centroid);
     }
   }
