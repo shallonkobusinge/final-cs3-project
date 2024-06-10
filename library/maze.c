@@ -293,12 +293,13 @@ static void draw_maze(maze_t *maze)
     }
 }
 
-cell_t *get_coordinates(maze_t *maze, int x, int y) {
+cell_t *get_coordinates(maze_t *maze, size_t x, size_t y) {
     cell_t *cell = NULL;
-    printf(" HERE ");
+   
     for(size_t h = 0; h < GRID_HEIGHT; h++) {
         for(size_t w = 0; w < GRID_WIDTH; w++) {
             if((maze->cells[h][w].box.x == x / GRID_CELL_SIZE ) && (maze->cells[h][w].box.y == y / GRID_CELL_SIZE)){
+                 printf(" HERE ");
                 cell = &maze->cells[h][w];
                 break;
             }
