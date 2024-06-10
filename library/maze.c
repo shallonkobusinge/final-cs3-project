@@ -14,7 +14,7 @@
 #include "asset.h"
 
 const size_t GRID_WIDTH = 10;
-const size_t GRID_HEIGHT = 8;
+const size_t GRID_HEIGHT = 10;
 const size_t NUM_CELLS = GRID_WIDTH * GRID_HEIGHT;
 const size_t GRID_CELL_SIZE = 50;
 
