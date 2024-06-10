@@ -113,7 +113,7 @@ static void add_new_seeker(state_t *state, bool is_new)
   add_to_scene(state, seeker_pos, SEEKER_COLOR, SEEKER_PATH);
 }
 
-void render_another_seeker(state_t *state, double dt)
+void render_seeker(state_t *state, double dt)
 {
   state->seeker->last_seeker_time += dt;
   if (state->seeker->last_seeker_time >= NEW_SEEKERS_INTERVAL)

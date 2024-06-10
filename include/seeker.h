@@ -37,7 +37,7 @@ body_t *make_body(vector_t center, rgb_color_t color);
  * @param state state struct of the game.
  * @param dt the number of seconds that have elapsed.
 */
-void render_another_seeker(state_t *state, double dt);
+void render_seeker(state_t *state, double dt);
 
 /**
  * Release memory allocated for a given seeker.

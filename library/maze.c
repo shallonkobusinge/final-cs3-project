@@ -293,22 +293,22 @@ static void draw_maze(maze_t *maze)
     }
 }
 
-cell_t *get_coordinates(maze_t *maze, size_t x, size_t y)
-{
-    cell_t *cell = NULL;
-    for (size_t h = 0; h < GRID_HEIGHT; h++)
-    {
-        for (size_t w = 0; w < GRID_WIDTH; w++)
-        {
-            if (((maze->cells[h][w].box.x / GRID_CELL_SIZE) == x) && ((maze->cells[h][w].box.y / GRID_CELL_SIZE) == y))
-            {
-                cell = &maze->cells[h][w];
-                break;
-            }
-        }
-    }
-    return cell;
-}
+// cell_t *get_coordinates(maze_t *maze, size_t x, size_t y)
+// {
+//     cell_t *cell = NULL;
+//     for (size_t h = 0; h < GRID_HEIGHT; h++)
+//     {
+//         for (size_t w = 0; w < GRID_WIDTH; w++)
+//         {
+//             if (((maze->cells[h][w].box.x / GRID_CELL_SIZE) == x) && ((maze->cells[h][w].box.y / GRID_CELL_SIZE) == y))
+//             {
+//                 cell = &maze->cells[h][w];
+//                 break;
+//             }
+//         }
+//     }
+//     return cell;
+// }
 
 vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_direction)
 {
@@ -316,8 +316,11 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_directi
     vector_t valid_move = VEC_ZERO;
     maze_t *maze = state->maze_state->maze;
     printf(" LOCATION X = %zu Y = %zu \n", (size_t)new_vec.x / GRID_CELL_SIZE, GRID_HEIGHT - 1 - ((size_t)new_vec.y / GRID_CELL_SIZE));
-
-    cell_t *cell = get_coordinates(maze, (size_t)new_vec.x / GRID_CELL_SIZE, GRID_HEIGHT - 1 - ((size_t)new_vec.y / GRID_CELL_SIZE));
+    
+    size_t x = (size_t)new_vec.x / GRID_CELL_SIZE;
+    size_t y = GRID_HEIGHT - 1 - ((size_t)new_vec.y / GRID_CELL_SIZE);
+    // cell_t *cell = get_coordinates(maze, (size_t)new_vec.x / GRID_CELL_SIZE, GRID_HEIGHT - 1 - ((size_t)new_vec.y / GRID_CELL_SIZE));
+    cell_t *cell = maze->cells[y][x];
     printf(" NORTH: %d SOUTH: %d WEST: %d EAST: %d \n", cell->north, cell->south, cell->west, cell->east);
 
     vector_t directions[] = {
@@ -414,7 +417,7 @@ void show_maze(state_t *state, double dt)
     init_grid(state);
     draw_maze(state->maze_state->maze);
 
-    seekers_random_movement(state);
+    // seekers_random_movement(state);
     render_another_seeker(state, dt);
     render_bodies(state->body_assets);
     // seeker_collision(state);
