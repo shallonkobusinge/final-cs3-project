@@ -13,19 +13,21 @@ typedef struct seeker seeker_t;
 /**
  * Allocates memory for an empty seeker.
  * Adds one seeker and one hider to the scene.
+ * @param state state struct of the game.
+ * 
  * @return the new seeker.
 */
 seeker_t *seeker_init(state_t *state);
 
 /**
  * Create a four vector shaped body.
- * @param width width of the body.
- * @param height height of the body.
- * @param center center of the body.
- * @param color color of the body.
+ * Translates the body to the new position.
+ * @param position cell position to place the body in the maze.
+ * @param color body color
+ * 
  * @return the new body.
 */
-body_t *make_body(vector_t center, rgb_color_t color);
+body_t *make_body(vector_t position, rgb_color_t color);
 
 /*
 * Add a new seeker either at the start of the game or

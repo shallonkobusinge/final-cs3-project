@@ -31,7 +31,7 @@ const rgb_color_t SEEKER_COLOR = (rgb_color_t){0.0, 0.0, 0.0};
 
 typedef struct seeker
 {
-  double last_seeker_time;
+  double last_render;
 } seeker_t;
 
 typedef struct state
@@ -115,7 +115,7 @@ static void add_new_seeker(state_t *state, bool is_new)
         .x = (rand() % (GRID_WIDTH)*GRID_CELL_SIZE) + GRID_CELL_SIZE / 2,
         .y = (rand() % (GRID_HEIGHT - 4) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 10,
     };
-    state->seeker->last_seeker_time = 0;
+    state->seeker->last_render = 0;
   }
   else
   {
@@ -128,9 +128,9 @@ static void add_new_seeker(state_t *state, bool is_new)
 void render_seeker(state_t *state, double dt)
 {
 
-  state->seeker->last_seeker_time += dt;
-  display_time_elapsed(state->seeker->last_seeker_time);
-  if (state->seeker->last_seeker_time >= NEW_SEEKERS_INTERVAL)
+  state->seeker->last_render += dt;
+  display_time_elapsed(state->seeker->last_render);
+  if (state->seeker->last_render >= NEW_SEEKERS_INTERVAL)
   {
     add_new_seeker(state, true);
   }
@@ -160,7 +160,7 @@ static void hider_init(state_t *state)
 seeker_t *seeker_init(state_t *state)
 {
   seeker_t *seeker = malloc(sizeof(seeker_t));
-  seeker->last_seeker_time = 0;
+  seeker->last_render = 0;
   hider_init(state);
   add_new_seeker(state, false);
   return seeker;
