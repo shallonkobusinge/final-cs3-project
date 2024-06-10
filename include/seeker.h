@@ -73,12 +73,6 @@ void seeker_hider_collision(state_t *state);
 void hider_building_collision(state_t *state);
 
 /**
- * Randomly moves only the seeker bodies in the scene.
- * @param state state struct of the game.s
-*/
-void seekers_random_movement(state_t *state);
-
-/**
  * Add a body to scene and add the body asset to list of body_assets in the state
  * @param state state struct of the game.
  * @param center vector of the center of the body.

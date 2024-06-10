@@ -42,4 +42,10 @@ maze_state_t *maze_init();
  */
 vector_t traverse_maze(state_t *state, vector_t vector, size_t movement_direction);
 
+/**
+ * Randomly moves only the seeker bodies in the scene.
+ * @param state state struct of the game.s
+*/
+void seekers_random_movement(state_t *state);
+
 #endif // #ifndef __MAZE_H__
