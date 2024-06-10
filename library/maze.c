@@ -299,7 +299,7 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_directi
     vector_t valid_move = VEC_ZERO;
     maze_t *maze = state->maze_state->maze;
     printf(" LOCATION X = %zu Y = %zu \n", (size_t)new_vec.x / GRID_CELL_SIZE, GRID_HEIGHT - 1 - ((size_t)new_vec.y / GRID_CELL_SIZE));
-    
+
     size_t x = (size_t)new_vec.x / GRID_CELL_SIZE;
     size_t y = GRID_HEIGHT - 1 - ((size_t)new_vec.y / GRID_CELL_SIZE);
     cell_t *cell = &maze->cells[y][x];
