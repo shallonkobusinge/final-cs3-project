@@ -24,7 +24,7 @@ const vector_t SDL_SCREEN_CENTER = {500, 250};
 const size_t MAZE_WINDOW_WIDTH = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
 const size_t MAZE_WINDOW_HEIGHT = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
 
-const size_t NUM_BUILDINGS = 2;
+const size_t NUM_BUILDINGS = 5;
 const size_t TOTAL_GAME_TIME = 120; // IN SECONDS
 
 const size_t MISSION_PAGE_TEXT_ELEMENTS = 1;
@@ -33,6 +33,9 @@ const size_t MISSION_PAGE_IMG_ELEMENTS = 1;
 
 const char *building_paths[] = {
     "assets/images/scenery/caltech-hall.png",
+    "assets/images/scenery/cahill.jpeg",
+    "assets/images/scenery/chen.jpeg",
+    "assets/images/scenery/annenberg.jpg",
     "assets/images/scenery/beckman-auditorium.png"};
 
 typedef struct maze
@@ -136,7 +139,7 @@ static void init_grid(state_t *state)
     for (size_t i = 0; i < NUM_BUILDINGS; i++)
     {
         vector_t center = (vector_t){.x = maze_state->buildings[i].x, .y = maze_state->buildings[i].y};
-        add_to_scene(state, center, *maze_state->buildings[i].color, building_paths[i]);
+        add_to_scene(state, center, (rgb_color_t){200, 200, 200}, building_paths[i]);
     }
 }
 
@@ -365,7 +368,7 @@ static void buildings_init(maze_state_t *maze_state)
     size_t rand = generate_random(0, NUM_BUILDINGS - 1);
 
     vector_t center = (vector_t){.x = maze_state->buildings[rand].x, .y = maze_state->buildings[rand].y};
-    body_t *body = make_body(center, *maze_state->buildings[rand].color);
+    body_t *body = make_body(center, (rgb_color_t){200, 200, 200});
 
     maze_state->random_building = body;
 
@@ -559,6 +562,7 @@ void show_mission(state_t *state)
     }
 }
 /**
+<<<<<<< HEAD
  * Function handler when game is won
  * @param body1 the first body.
  * @param body2 the second body.
@@ -566,17 +570,21 @@ void show_mission(state_t *state)
  *    that defines the direction the two bodies are colliding in
  * @param aux the auxiliary value passed to create_collision.
  * @param force_const the force constant passed to create_collision()
+=======
+ *
+>>>>>>> 4cf7a5d1379d328b42d81af3ab4971489e30eff0
  */
 static void win_game(body_t *body1, body_t *body2, vector_t axis, void *aux,
                      double force_const)
 {
-  size_t *page_ptr = (size_t *)aux;
-  *page_ptr = 4;
+    size_t *page_ptr = (size_t *)aux;
+    *page_ptr = 4;
 }
-void hider_building_collision(state_t *state) {
+void hider_building_collision(state_t *state)
+{
     maze_state_t *maze_state = state->maze_state;
-    create_collision(state->scene, maze_state->random_building, scene_get_body(state->scene, 0), win_game, &state->page, 0.0);
-    }
+    create_collision(state->scene, scene_get_body(state->scene, 0), maze_state->random_building, win_game, &state->page, 0.0);
+}
 void show_maze(state_t *state, double dt)
 {
     sdl_on_key((key_handler_t)on_key);
