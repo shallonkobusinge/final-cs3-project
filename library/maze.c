@@ -281,7 +281,7 @@ static void buildings_init(maze_state_t *maze_state)
     size_t rand = generate_random(0, NUM_BUILDINGS);
 
     vector_t center = (vector_t){.x = maze_state->buildings[rand].x, .y = maze_state->buildings[rand].y};
-    body_t *body = make_body(center, maze_state->buildings[rand].color);
+    body_t *body = make_body(center, *maze_state->buildings[rand].color);
 
     asset_t *mission_building = asset_make_image_with_body(maze_state->buildings[rand].path, body);
     maze_state->random_building = mission_building;
