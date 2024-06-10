@@ -312,9 +312,9 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_directi
     
     vector_t valid_move = VEC_ZERO;
     maze_t *maze = state->maze_state->maze;
-    printf(" LOCATION X = %f Y = %f \n", new_vec.x / GRID_CELL_SIZE, new_vec.y / GRID_CELL_SIZE);
-    // cell_t *cell = get_coordinates(maze, new_vec.x, new_vec.y);
-    // printf(" NORTH: %d SOUTH: %d WEST: %d EAST: %d \n", cell->north, cell->south, cell->west, cell->east);
+    printf(" LOCATION X = %f Y = %f \n", (size_t)new_vec.x / GRID_CELL_SIZE, (size_t)new_vec.y / GRID_CELL_SIZE);
+    cell_t *cell = get_coordinates(maze, (size_t)new_vec.x, (size_t)new_vec.y);
+    printf(" NORTH: %d SOUTH: %d WEST: %d EAST: %d \n", cell->north, cell->south, cell->west, cell->east);
     // printf(" X = %d Y = %d \n", cell->box.x, cell->box.y);
  
     // vector_t directions[] = {
