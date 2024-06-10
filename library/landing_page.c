@@ -16,6 +16,7 @@ const size_t LANDING_PAGE_BTN_ELEMENTS = 1;
 const size_t END_PAGE_TEXT_ELEMENTS = 1;
 const size_t END_PAGE_BTN_ELEMENTS = 2;
 
+const size_t MAZE_STARTING_SEEKERS = 50;
 typedef struct end_page_state
 {
     list_t *imgs;
@@ -123,6 +124,9 @@ static void load_game_screen(state_t *state)
 
 static void restart_game(state_t *state)
 {
+    state->scene = scene_init();
+    state->body_assets = list_init(MAZE_STARTING_SEEKERS, (free_func_t)asset_destroy);
+    state->seeker = seeker_init(state);
     state->maze_state = maze_init();
     state->page = 2;
 }
