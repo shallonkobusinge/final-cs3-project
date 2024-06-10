@@ -10,8 +10,16 @@ typedef struct maze_state maze_state_t;
  * Generates maze using DFS.
  * Calls the init_maze function, creates and marks the first cell as visited.
  * Runs the DFS using a stack and it processes the cells until the stack is emptied.
+ * @param state state of game
+ * @param dt elapsed time
  */
 void show_maze(state_t *state, double dt);
+
+/**
+ * Show target building for an instance of a game play
+ * @param state state of game
+ */
+void show_mission(state_t *state);
 
 /**
  * Initializes maze components and generates maze using DFS.
@@ -31,7 +39,7 @@ maze_state_t *maze_init();
  *              0 -> North, 1 -> West, 2 -> South , 3 -> East, -1 -> seleect a random movement.
  * 
  * @return rotation direction vector.
-*/
+ */
 vector_t traverse_maze(state_t *state, vector_t vector, size_t movement_direction);
 
 #endif // #ifndef __MAZE_H__
