@@ -77,7 +77,7 @@ static text_element_t mission_text_elements[] = {
         .text = "Your Target building: ",
         .font_path = "assets/fonts/Inter-Regular.ttf",
         .color = (rgb_color_t){0, 0, 0},
-        .frame = (SDL_Rect){SDL_SCREEN_CENTER.x - 80, SDL_SCREEN_CENTER.y - 200, 150, 28},
+        .frame = (SDL_Rect){SDL_SCREEN_CENTER.x - 80, SDL_SCREEN_CENTER.y - 150, 150, 28},
     },
 };
 
@@ -88,12 +88,12 @@ static void start_game_screen(state_t *state)
 
 static btn_element_t mission_btn_elements[] = {
     {
-        .text.frame = (SDL_Rect){SDL_SCREEN_CENTER.x - 40, SDL_SCREEN_CENTER.y + 95, 90, 48},
+        .text.frame = (SDL_Rect){SDL_SCREEN_CENTER.x - 40, SDL_SCREEN_CENTER.y + 145, 90, 48},
         .text.font_path = "assets/fonts/Inter-Regular.ttf",
         .text.color = (rgb_color_t){255, 255, 255},
         .text.text = "START",
         .img.file_path = "assets/images/landing-page/fill_btn.png",
-        .img.frame = (SDL_Rect){SDL_SCREEN_CENTER.x - 70, SDL_SCREEN_CENTER.y + 80, 200, 80},
+        .img.frame = (SDL_Rect){SDL_SCREEN_CENTER.x - 70, SDL_SCREEN_CENTER.y + 130, 200, 80},
         .handler = (void *)start_game_screen,
     },
 };
