@@ -268,7 +268,7 @@ static void buildings_init(maze_state_t *maze_state)
         do
         {
             random_color = color_get_random();
-        } while (colrandom_coloror->r == 0 && random_color->g == 0 && random_color->b == 0);
+        } while (random_color->r == 0 && random_color->g == 0 && random_color->b == 0);
 
         maze_state->buildings[i] = (building_t){
             .x = ((GRID_WIDTH - rand_x) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2,
