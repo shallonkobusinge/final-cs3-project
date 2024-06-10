@@ -59,7 +59,7 @@ static text_element_t landing_text_elements[] = {
     {
         .text = "The hider (beaver) navigates the maze using the arrow keys, with the spacebar providing a speed boost. The seeker's movements are controlled by the computer, ",
         .color = (rgb_color_t){255, 255, 255},
-        .frame = (SDL_Rect){48, 150, 900, 40},
+        .frame = (SDL_Rect){48, 150, 940, 60},
         .font_path = "assets/fonts/Inter-Regular.ttf",
     },
     {
