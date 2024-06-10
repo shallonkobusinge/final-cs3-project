@@ -351,7 +351,7 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_directi
         return VEC_ZERO;
     }
 
-    if (movement_direction >= 0 && movement_direction < 4 && walls[movement_direction])
+    if (movement_direction >= 0 && movement_direction < 4 && !walls[movement_direction])
     {
         printf(" DIRECTION %zu OPEN: %d \n", movement_direction, walls[movement_direction]);
         valid_move = directions[movement_direction];
