@@ -54,6 +54,7 @@ state_t *emscripten_init()
     state->landing_page_state = landing_page_init();
     state->end_game_state = end_page_init();
     state->sound_effect = sound_effect_init();
+    game_sound(state->sound_effect);
     return state;
 }
 
