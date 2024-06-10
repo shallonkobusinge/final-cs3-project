@@ -101,7 +101,10 @@ static void display_time_elapsed(int32_t remaining_seconds)
 }
 
 /**
- * Adding a seeker to the scene.
+ * Adding a seeker body to the scene.
+ * Add seeker's bodies asset to the state->list_body_asset
+ * Generate a random seeker position if it's a new seeker to be added after the 30 seconds.
+ * If it's the initial seeker use a defined position.
  * @param state struct state of the game.
  * @param is_new determine if is it's the after 30 sec or initial seeker to be added.
  */
