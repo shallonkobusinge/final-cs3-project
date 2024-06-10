@@ -129,7 +129,7 @@ void render_seeker(state_t *state, double dt)
 {
 
   state->seeker->last_seeker_time += dt;
-  // display_time_elapsed(state->seeker->last_seeker_time);
+  display_time_elapsed(state->seeker->last_seeker_time);
   if (state->seeker->last_seeker_time >= NEW_SEEKERS_INTERVAL)
   {
     add_new_seeker(state, true);
