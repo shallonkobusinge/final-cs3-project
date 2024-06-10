@@ -293,7 +293,7 @@ static void draw_maze(maze_t *maze)
     }
 }
 
-cell_t *get_coordinates(maze_t *maze, size x, size_t y) {
+cell_t *get_coordinates(maze_t *maze, size_t x, size_t y) {
     cell_t *cell = NULL;
     for(size_t h = 0; h < GRID_HEIGHT; h++) {
         for(size_t w = 0; w < GRID_WIDTH; w++) {
