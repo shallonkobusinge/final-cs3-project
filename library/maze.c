@@ -373,7 +373,7 @@ static void buildings_init(maze_state_t *maze_state)
     img_element_t mission_img_elements[] = {
         {
             .file_path = maze_state->buildings[rand].path,
-            .frame = (SDL_Rect){SDL_SCREEN_CENTER.x - 150, SDL_SCREEN_CENTER.y + 100, 300, 300},
+            .frame = (SDL_Rect){SDL_SCREEN_CENTER.x - 150, SDL_SCREEN_CENTER.y - 200, 300, 300},
         },
     };
 
