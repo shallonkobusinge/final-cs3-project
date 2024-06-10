@@ -209,7 +209,7 @@ static void end_game(body_t *body1, body_t *body2, vector_t axis, void *aux,
   *page_ptr = 4;
 }
 
-void seeker_collision(state_t *state)
+void hider_seeker_collision(state_t *state)
 {
   for (size_t i = 1; i < scene_bodies(state->scene); i++)
   {

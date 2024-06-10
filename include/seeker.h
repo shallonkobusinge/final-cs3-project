@@ -64,7 +64,7 @@ void move_body(body_t *body, vector_t vec);
  * Creates collision between the seeker and hider in the state.
  * @param state state struct of the game.
 */
-void seeker_hider_collision(state_t *state);
+void hider_seeker_collision(state_t *state);
 
 /**
  * Creates collision between the hider and a building.
