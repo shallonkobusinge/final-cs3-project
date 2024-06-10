@@ -24,7 +24,7 @@ const vector_t SDL_SCREEN_CENTER = {500, 250};
 const size_t MAZE_WINDOW_WIDTH = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
 const size_t MAZE_WINDOW_HEIGHT = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
 
-const size_t NUM_BUILDINGS = 2;
+const size_t NUM_BUILDINGS = 5;
 const size_t TOTAL_GAME_TIME = 120; // IN SECONDS
 
 const size_t MISSION_PAGE_TEXT_ELEMENTS = 1;
@@ -33,6 +33,9 @@ const size_t MISSION_PAGE_IMG_ELEMENTS = 1;
 
 const char *building_paths[] = {
     "assets/images/scenery/caltech-hall.png",
+    "assets/images/scenery/cahill.jpeg",
+    "assets/images/scenery/chen.jpeg",
+    "assets/images/scenery/annenberg.jpg",
     "assets/images/scenery/beckman-auditorium.png"};
 
 typedef struct maze
