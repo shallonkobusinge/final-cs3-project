@@ -13,10 +13,15 @@
 #include "seeker.h"
 #include "asset.h"
 
-const size_t GRID_WIDTH = 10;
-const size_t GRID_HEIGHT = 9;
+// const size_t GRID_WIDTH = 10;
+// const size_t GRID_HEIGHT = 9;
+// const size_t NUM_CELLS = GRID_WIDTH * GRID_HEIGHT;
+// const size_t GRID_CELL_SIZE = 50;
+
+const size_t GRID_WIDTH = 25;
+const size_t GRID_HEIGHT = 12;
 const size_t NUM_CELLS = GRID_WIDTH * GRID_HEIGHT;
-const size_t GRID_CELL_SIZE = 50;
+const size_t GRID_CELL_SIZE = 40;
 
 const size_t MAZE_WINDOW_WIDTH = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
 const size_t MAZE_WINDOW_HEIGHT = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
@@ -312,7 +317,7 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_directi
         maze->cells[y][x].west,
     };
       printf(" NORTH %d SOUTH: %d WEST: %d EAST: %d \n", maze->cells[y][x].north, maze->cells[y][x].south, maze->cells[y][x].west, maze->cells[y][x].east);
-      printf(" X: %f Y: %f \n", vec.x, vec.y);
+    //   printf(" X: %f Y: %f \n", vec.x, vec.y);
       printf(" WIDTH: %zu HEIGHT: %zu \n", x, y);
     bool all_wall_closed = true;
     for (size_t i = 0; i < 4; i++)
