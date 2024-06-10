@@ -362,7 +362,8 @@ static void buildings_init(maze_state_t *maze_state)
         maze_state->buildings[i].path = building_paths[i];
     }
 
-    size_t rand = generate_random(0, NUM_BUILDINGS - 1);
+    // size_t rand = generate_random(0, NUM_BUILDINGS - 1);
+    size_t rand = 0;
 
     vector_t center = (vector_t){.x = maze_state->buildings[rand].x, .y = maze_state->buildings[rand].y};
     body_t *body = make_body(center, *maze_state->buildings[rand].color);
@@ -560,18 +561,19 @@ void show_mission(state_t *state)
 }
 
 /**
- * 
-*/
+ *
+ */
 static void win_game(body_t *body1, body_t *body2, vector_t axis, void *aux,
                      double force_const)
 {
-  size_t *page_ptr = (size_t *)aux;
-  *page_ptr = 4;
+    size_t *page_ptr = (size_t *)aux;
+    *page_ptr = 4;
 }
-void hider_building_collision(state_t *state) {
+void hider_building_collision(state_t *state)
+{
     maze_state_t *maze_state = state->maze_state;
     create_collision(state->scene, maze_state->random_building, scene_get_body(state->scene, 0), win_game, &state->page, 0.0);
-    }
+}
 void show_maze(state_t *state, double dt)
 {
     sdl_on_key((key_handler_t)on_key);
