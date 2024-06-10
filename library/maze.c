@@ -371,10 +371,10 @@ static void buildings_init(maze_state_t *maze_state)
     maze_state->random_building = mission_building;
 
     static img_element_t mission_img_elements[] = {
-        {
-            .file_path = maze_state->buildings[rand].path,
-            .frame = (SDL_Rect){SDL_SCREEN_CENTER.x, SDL_SCREEN_CENTER.y, 200, 100},
-        };
+
+        .file_path = maze_state->buildings[rand].path,
+        .frame = (SDL_Rect){SDL_SCREEN_CENTER.x, SDL_SCREEN_CENTER.y, 200, 100},
+    };
 
     maze_state->imgs = build_img_assets(MISSION_PAGE_IMG_ELEMENTS, mission_img_elements);
     maze_state->texts = build_text_assets(MISSION_PAGE_TEXT_ELEMENTS, mission_text_elements);
