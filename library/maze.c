@@ -54,8 +54,8 @@ typedef struct building
 typedef struct maze_state
 {
     maze_t *maze;
-    building_t buildings[];
     double remaining_time;
+    building_t buildings[];
 } maze_state_t;
 
 /**
