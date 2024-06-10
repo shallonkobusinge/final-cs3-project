@@ -116,14 +116,14 @@ static void add_new_seeker(state_t *state, bool is_new)
   {
     seeker_pos = (vector_t){
         .x = (rand() % (GRID_WIDTH)*GRID_CELL_SIZE) + (GRID_CELL_SIZE) / 2,
-        .y = (rand() % (GRID_HEIGHT - 4) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 2),
+        .y = (rand() % (GRID_HEIGHT - 4) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 3),
     };
     state->seeker->last_render = 0;
   }
   else
   {
     seeker_pos = (vector_t){.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE) + (GRID_CELL_SIZE) / 2),
-                            .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 2))};
+                            .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 3))};
   }
   add_to_scene(state, seeker_pos, SEEKER_COLOR, SEEKER_PATH);
 }
@@ -155,7 +155,7 @@ void render_seeker(state_t *state, double dt)
  */
 static void hider_init(state_t *state)
 {
-  vector_t center = (vector_t){.y = (((GRID_HEIGHT - 10) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 2)),
+  vector_t center = (vector_t){.y = (((GRID_HEIGHT - 10) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 3)),
                                .x = (((GRID_WIDTH - 10) * GRID_CELL_SIZE) + (GRID_CELL_SIZE) / 2)};
   add_to_scene(state, center, (rgb_color_t){50, 129, 110}, BEAVER_PATH);
 }
