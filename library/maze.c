@@ -443,8 +443,10 @@ static void display_time_elapsed(int32_t remaining_seconds)
 
 void show_mission(state_t *state)
 {
+
     if (state->maze_state->random_building != NULL)
     {
+        printf("showing mission");
         asset_render(state->maze_state->random_building);
     }
 }
