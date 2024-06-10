@@ -16,7 +16,7 @@
 const size_t GRID_WIDTH = 22;
 const size_t GRID_HEIGHT = 11;
 const size_t NUM_CELLS = GRID_WIDTH * GRID_HEIGHT;
-const size_t GRID_CELL_SIZE = 46;
+const size_t GRID_CELL_SIZE = 45;
 
 const size_t MAZE_WINDOW_WIDTH = (GRID_WIDTH * GRID_CELL_SIZE) + 1;
 const size_t MAZE_WINDOW_HEIGHT = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
