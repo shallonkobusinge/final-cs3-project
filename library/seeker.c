@@ -41,7 +41,7 @@ typedef struct seeker
 {
   double last_seeker_time;
   size_t num_of_seekers;
-  seeker_body_t seekers[];
+  seeker_body_t *seekers;
 } seeker_t;
 
 typedef struct state
@@ -106,7 +106,7 @@ static void add_new_seeker(state_t *state, bool is_new)
 {
   seeker_t *seeker = state->seeker;
   vector_t seeker_pos = VEC_ZERO;
-  seeker_body_t seeker_body;
+  seeker_body_t *seeker_body = malloc(sizeof(seeker_body_t));
 
   if (is_new)
   {
