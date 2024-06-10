@@ -135,7 +135,7 @@ static btn_element_t landing_btn_elements[] = {
 
 static btn_element_t end_btn_elements[] = {
     {
-        .text.frame = (SDL_Rect){SCREEN_CENTER.x + 5, SCREEN_CENTER.y - 60, 100, 48},
+        .text.frame = (SDL_Rect){SCREEN_CENTER.x - 20, SCREEN_CENTER.y - 60, 100, 48},
         .text.font_path = "assets/fonts/Inter-Regular.ttf",
         .text.color = (rgb_color_t){0, 0, 0},
         .text.text = "Restart Game",
