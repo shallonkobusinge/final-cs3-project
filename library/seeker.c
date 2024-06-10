@@ -122,8 +122,8 @@ static void add_new_seeker(state_t *state, bool is_new)
   }
   else
   {
-    seeker_pos = (vector_t){.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE) + (GRID_CELL_SIZE) / 2),
-                            .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 3))};
+    seeker_pos = (vector_t){.x = (((GRID_WIDTH - 23) * GRID_CELL_SIZE) + (GRID_CELL_SIZE) / 2),
+                            .y = (((GRID_HEIGHT - 9) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 3))};
   }
   add_to_scene(state, seeker_pos, SEEKER_COLOR, SEEKER_PATH);
 }
