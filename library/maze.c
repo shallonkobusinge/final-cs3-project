@@ -297,9 +297,9 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_directi
 {
     vector_t valid_move = VEC_ZERO;
     maze_t *maze = state->maze_state->maze;
-    vector_t vec = (vector_t){
-        .x = (new_vec.x) + GRID_CELL_SIZE / 2,
-        .y = (new_vec.y) - GRID_CELL_SIZE / 10};
+    // vector_t vec = (vector_t){
+    //     .x = (new_vec.x) + GRID_CELL_SIZE / 2,
+    //     .y = (new_vec.y) - GRID_CELL_SIZE / 10};
 
     vector_t directions[] = {
         {.x = 0.0, .y = valid_move.y + GRID_CELL_SIZE}, // north
@@ -307,9 +307,8 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_directi
         {.x = 0.0, .y = valid_move.y - GRID_CELL_SIZE}, // south
         {.x = valid_move.x - GRID_CELL_SIZE, .y = 0},   // west
     };
-    size_t y = vec.y / GRID_CELL_SIZE;
-    size_t x = vec.x / GRID_CELL_SIZE;
-
+    size_t y = (vec.y / GRID_CELL_SIZE) - GRID_CELL_SIZE / 2;
+    size_t x = (vec.x / GRID_CELL_SIZE) + GRID_CELL_SIZE / 10;
     bool walls[] = {
         maze->cells[y][x].north,
         maze->cells[y][x].east,
