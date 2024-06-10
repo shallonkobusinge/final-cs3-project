@@ -88,12 +88,12 @@ static void start_game_screen(state_t *state)
 
 static btn_element_t mission_btn_elements[] = {
     {
-        .text.frame = (SDL_Rect){SDL_SCREEN_CENTER.x - 20, SDL_SCREEN_CENTER.y - 20, 90, 48},
+        .text.frame = (SDL_Rect){SDL_SCREEN_CENTER.x - 20, SDL_SCREEN_CENTER.y, 90, 48},
         .text.font_path = "assets/fonts/Inter-Regular.ttf",
         .text.color = (rgb_color_t){255, 255, 255},
         .text.text = "START",
         .img.file_path = "assets/images/landing-page/fill_btn.png",
-        .img.frame = (SDL_Rect){SDL_SCREEN_CENTER.x - 50, SDL_SCREEN_CENTER.y - 30, 200, 80},
+        .img.frame = (SDL_Rect){SDL_SCREEN_CENTER.x - 50, SDL_SCREEN_CENTER.y - 10, 200, 80},
         .handler = (void *)start_game_screen,
     },
 };
