@@ -71,9 +71,12 @@ bool emscripten_main(state_t *state)
     else if (state->page == 2)
     {
         show_mission(state);
-        show_maze(state, dt);
     }
     else if (state->page == 3)
+    {
+        show_maze(state, dt);
+    }
+    else if (state->page == 4)
     {
         show_end_page(state);
     }
