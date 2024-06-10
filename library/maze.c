@@ -13,7 +13,6 @@
 #include "seeker.h"
 #include "asset.h"
 
-
 const size_t GRID_WIDTH = 25;
 const size_t GRID_HEIGHT = 12;
 const size_t NUM_CELLS = GRID_WIDTH * GRID_HEIGHT;
@@ -52,12 +51,14 @@ typedef struct building
     size_t x;
     size_t y;
     const char *path;
+    rgb_color_t color;
 } building_t;
 
 typedef struct maze_state
 {
     maze_t *maze;
     double time_elapsed;
+    asset_t *random_building;
     building_t buildings[];
 } maze_state_t;
 
@@ -98,7 +99,7 @@ static void init_grid(state_t *state)
     for (size_t i = 0; i < NUM_BUILDINGS; i++)
     {
         vector_t center = (vector_t){.x = maze_state->buildings[i].x, .y = maze_state->buildings[i].y};
-        add_to_scene(state, center, (rgb_color_t){241, 108, 45}, building_paths[i]);
+        add_to_scene(state, center, maze_state->buildings[i].color, building_paths[i]);
     }
 }
 
@@ -233,6 +234,26 @@ static void generate_maze(maze_t *maze)
 }
 
 /**
+ * Generates a random integer between lower and upper bounds (inclusive).
+ *
+ *
+ * @param lower The lower bound of the range.
+ * @param upper The upper bound of the range.
+ * @return size_t A random integer between lower and upper bounds.
+ */
+static size_t generate_random(size_t lower, size_t upper)
+{
+    if (lower > upper)
+    {
+        int temp = lower;
+        lower = upper;
+        upper = temp;
+    }
+
+    return (rand() % (upper - lower + 1)) + lower;
+}
+
+/**
  * Initialize and randomly generate a buildings
  * @param maze_state state of the maze
  */
@@ -243,12 +264,25 @@ static void buildings_init(maze_state_t *maze_state)
         size_t rand_x = (rand() % GRID_WIDTH) + 1;
         size_t rand_y = (rand() % GRID_HEIGHT) + 1;
 
+        rgb_color_t *color = NULL;
+        do
+        {
+            color = color_get_random();
+        } while (color->r == 0 && color->g == 0 && color->b == 0);
+
         maze_state->buildings[i] = (building_t){
             .x = ((GRID_WIDTH - rand_x) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2,
             .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 20,
+            .color = color,
         };
         maze_state->buildings[i].path = building_paths[i];
     }
+    size_t rand = generate_random(0, NUM_BUILDINGS);
+
+    vector_t center = (vector_t){.x = maze_state->buildings[rand].x, .y = maze_state->buildings[rand].y};
+    body_t *body = make_body(center, maze_state->buildings[rand].color);
+    asset_t *mission_building = asset_make_image_with_body(maze_state->buildings[rand].path, body);
+    maze_state->random_building = mission_building;
 }
 
 maze_state_t *maze_init()
@@ -403,6 +437,11 @@ static void display_time_elapsed(int32_t remaining_seconds)
             printf("TIME REMAINING: %d sec\n", seconds);
         }
     }
+}
+
+void show_mission(state_t *state)
+{
+    asset_render(state->maze_state->random_building);
 }
 
 void show_maze(state_t *state, double dt)

@@ -55,8 +55,10 @@ state_t *emscripten_init()
     state->end_game_state = end_page_init();
     state->sound_effect = sound_effect_init();
 
-    // game_sound(state->sound_effect);
-    return state;
+    random_building =
+
+        // game_sound(state->sound_effect);
+        return state;
 }
 
 bool emscripten_main(state_t *state)
@@ -70,6 +72,7 @@ bool emscripten_main(state_t *state)
     }
     else if (state->page == 2)
     {
+        show_mission();
         show_maze(state, dt);
     }
     else if (state->page == 3)
