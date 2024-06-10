@@ -55,10 +55,8 @@ state_t *emscripten_init()
     state->end_game_state = end_page_init();
     state->sound_effect = sound_effect_init();
 
-    random_building =
-
-        // game_sound(state->sound_effect);
-        return state;
+    // game_sound(state->sound_effect);
+    return state;
 }
 
 bool emscripten_main(state_t *state)
