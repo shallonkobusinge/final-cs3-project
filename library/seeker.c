@@ -27,7 +27,7 @@ const size_t S_NUM_POINTS = 20;
 const double S_RADIUS = 0.1;
 const size_t NEW_SEEKERS_INTERVAL = 60;
 
-const rgb_color_t SEEKER_COLOR = (rgb_color_t){0.1, 0.9, 0.2};
+const rgb_color_t SEEKER_COLOR = (rgb_color_t){0.0, 0.0, 0.0};
 
 typedef struct seeker
 {
@@ -138,7 +138,7 @@ void render_seeker(state_t *state, double dt)
   {
 
     rgb_color_t *color = body_get_color(scene_get_body(state->scene, i));
-    if (color->r == 0.1 && color->g == 0.9 && color->b == 0.2)
+    if (color->r == 0.0 && color->g == 0.0 && color->b == 0.0)
     {
       asset_render(list_get(state->body_assets, i));
     }
@@ -154,7 +154,6 @@ static void hider_init(state_t *state)
 {
   vector_t center = (vector_t){.y = (((GRID_HEIGHT - 10) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 10)),
                                .x = (((GRID_WIDTH - 10) * GRID_CELL_SIZE) + (GRID_CELL_SIZE) / 2)};
-  //  SDL_Rect hider = (SDL_Rect){(((GRID_WIDTH - 10) * GRID_CELL_SIZE) + (GRID_CELL_SIZE) / 4), (((GRID_HEIGHT - 10) * GRID_CELL_SIZE) + (GRID_CELL_SIZE / 4)), (GRID_CELL_SIZE / 2), (GRID_CELL_SIZE / 2)};
   add_to_scene(state, center, (rgb_color_t){50, 129, 110}, BEAVER_PATH);
 }
 
@@ -181,7 +180,7 @@ void seekers_random_movement(state_t *state)
   {
     body_t *seeker = scene_get_body(state->scene, i);
     rgb_color_t *color = body_get_color(seeker);
-    if (color->r == 0.1 && color->g == 0.9 && color->b == 0.2)
+    if (color->r == 0.0 && color->g == 0.0 && color->b == 0.0)
     {
       vector_t body_centroid = body_get_centroid(seeker);
       vector_t new_centroid = traverse_maze(state, body_centroid, -1);

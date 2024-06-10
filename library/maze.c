@@ -563,7 +563,6 @@ void show_mission(state_t *state)
 void show_maze(state_t *state, double dt)
 {
     sdl_on_key((key_handler_t)on_key);
-
     state->maze_state->time_elapsed += dt;
 
     display_time_elapsed((int32_t)state->maze_state->time_elapsed);
