@@ -308,16 +308,16 @@ vector_t traverse_maze(state_t *state, vector_t new_vec, size_t movement_directi
         {.x = valid_move.x - GRID_CELL_SIZE, .y = 0},   // west
     };
     size_t x = (new_vec.x / GRID_CELL_SIZE) - GRID_CELL_SIZE / 2;
-     size_t y = (new_vec.y / GRID_CELL_SIZE) + GRID_CELL_SIZE / 10;
+    size_t y = (new_vec.y / GRID_CELL_SIZE) + GRID_CELL_SIZE / 10;
     bool walls[] = {
         maze->cells[y][x].north,
         maze->cells[y][x].east,
         maze->cells[y][x].south,
         maze->cells[y][x].west,
     };
-      printf(" NORTH %d SOUTH: %d WEST: %d EAST: %d \n", maze->cells[y][x].north, maze->cells[y][x].south, maze->cells[y][x].west, maze->cells[y][x].east);
+    printf(" NORTH %d SOUTH: %d WEST: %d EAST: %d \n", maze->cells[y][x].north, maze->cells[y][x].south, maze->cells[y][x].west, maze->cells[y][x].east);
     //   printf(" X: %f Y: %f \n", vec.x, vec.y);
-      printf(" X: %zu Y: %zu \n", x, y);
+    printf(" X: %zu Y: %zu \n", x, y);
     bool all_wall_closed = true;
     for (size_t i = 0; i < 4; i++)
     {
