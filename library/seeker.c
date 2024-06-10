@@ -201,7 +201,6 @@ void seeker_collision(state_t *state)
     if (color->r == 0.1 && color->g == 0.9 && color->b == 0.2)
     {
       create_collision(state->scene, scene_get_body(state->scene, 0), seeker, end_game, NULL, 0.0);
-      tagged_sound(state->sound_effect);
     }
   }
 }
