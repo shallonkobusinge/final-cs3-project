@@ -144,12 +144,12 @@ static btn_element_t end_btn_elements[] = {
         .handler = (void *)load_game_screen,
     },
     {
-        .text.frame = (SDL_Rect){SCREEN_CENTER.x - 65, SCREEN_CENTER.y + 30, 150, 40},
+        .text.frame = (SDL_Rect){SCREEN_CENTER.x - 65, SCREEN_CENTER.y + 50, 150, 40},
         .text.font_path = "assets/fonts/Inter-Regular.ttf",
         .text.color = (rgb_color_t){230, 91, 47},
         .text.text = "Go to Home",
         .img.file_path = "assets/images/landing-page/white_btn.png",
-        .img.frame = (SDL_Rect){SCREEN_CENTER.x - 80, SCREEN_CENTER.y + 50, 200, 80},
+        .img.frame = (SDL_Rect){SCREEN_CENTER.x - 80, SCREEN_CENTER.y + 40, 200, 80},
         .handler = (void *)load_game_screen,
     },
 };
