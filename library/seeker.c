@@ -180,7 +180,6 @@ void render_bodies(list_t *bodies)
     asset_render(list_get(bodies, i));
   }
 }
-
 void seekers_random_movement(state_t *state)
 {
   for (size_t i = 1; i < scene_bodies(state->scene); i++)
