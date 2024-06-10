@@ -563,7 +563,13 @@ void show_mission(state_t *state)
 }
 
 /**
- *
+ * Function handler when game is won
+ * @param body1 the first body.
+ * @param body2 the second body.
+ * @param axis unit vector pointing from body1 toward body2 that
+ *    that defines the direction the two bodies are colliding in
+ * @param aux the auxiliary value passed to create_collision.
+ * @param force_const the force constant passed to create_collision()
  */
 static void win_game(body_t *body1, body_t *body2, vector_t axis, void *aux,
                      double force_const)
