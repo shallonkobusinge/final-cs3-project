@@ -411,7 +411,7 @@ void show_maze(state_t *state, double dt)
 
     state->maze_state->time_elapsed += dt;
 
-    display_time_elapsed((int32_t)state->maze_state->time_elapsed);
+    // display_time_elapsed((int32_t)state->maze_state->time_elapsed);
 
     init_grid(state);
     draw_maze(state->maze_state->maze);
