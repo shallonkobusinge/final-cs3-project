@@ -51,7 +51,7 @@ typedef struct building
     size_t x;
     size_t y;
     const char *path;
-    rgb_color_t color;
+    rgb_color_t *color;
 } building_t;
 
 typedef struct maze_state
@@ -273,7 +273,7 @@ static void buildings_init(maze_state_t *maze_state)
         maze_state->buildings[i] = (building_t){
             .x = ((GRID_WIDTH - rand_x) * GRID_CELL_SIZE) + GRID_CELL_SIZE / 2,
             .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) - GRID_CELL_SIZE / 20,
-            .color = *random_color,
+            .color = random_color,
         };
         maze_state->buildings[i].path = building_paths[i];
     }
