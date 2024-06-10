@@ -23,6 +23,10 @@ const size_t MAZE_WINDOW_HEIGHT = (GRID_HEIGHT * GRID_CELL_SIZE) + 1;
 
 const size_t NUM_BUILDINGS = 2;
 const size_t TOTAL_GAME_TIME = 120; // IN SECONDS
+
+const size_t MISSION_PAGE_TEXT_ELEMENTS = 1;
+const size_t MISSION_PAGE_BTN_ELEMENTS = 1;
+
 const char *building_paths[] = {
     "assets/images/scenery/caltech-hall.png",
     "assets/images/scenery/beckman-auditorium.png"};
@@ -47,6 +51,8 @@ typedef struct maze_state
     maze_t *maze;
     double time_elapsed;
     asset_t *random_building;
+    list_t *texts;
+    list_t *btns;
     building_t buildings[];
 } maze_state_t;
 
@@ -61,6 +67,32 @@ typedef struct state
     seeker_t *seeker;
     list_t *body_assets;
 } state_t;
+
+static text_element_t mission_text_elements[] = {
+    {
+        .text = "Your Target building: ",
+        .font_path = "assets/fonts/Inter-Regular.ttf",
+        .color = (rgb_color_t){0, 0, 0},
+        .frame = (SDL_Rect){SCREEN_CENTER.x - 80, SCREEN_CENTER.y - 200, 150, 28},
+    },
+};
+
+static void start_game_screen(state_t *state)
+{
+    state->page = 3;
+}
+
+static btn_element_t mission_btn_elements[] = {
+    {
+        .text.frame = (SDL_Rect){SCREEN_CENTER.x - 20, SCREEN_CENTER.y + 45, 90, 48},
+        .text.font_path = "assets/fonts/Inter-Regular.ttf",
+        .text.color = (rgb_color_t){0, 0, 0},
+        .text.text = "PLAY",
+        .img.file_path = "assets/images/landing-page/play_btn.png",
+        .img.frame = (SDL_Rect){SCREEN_CENTER.x - 50, SCREEN_CENTER.y + 30, 200, 80},
+        .handler = (void *)start_game_screen,
+    },
+};
 
 /**
  * Create memory for the maze.
@@ -254,6 +286,38 @@ static size_t generate_random(size_t lower, size_t upper)
 }
 
 /**
+ * Build text assets from text templates
+ * @return list of text assets
+ */
+static list_t *build_text_assets(size_t NUM_TEXT_ELEMENTS, text_element_t *text_elements)
+{
+    list_t *assets = list_init(NUM_TEXT_ELEMENTS, free);
+    for (size_t i = 0; i < NUM_TEXT_ELEMENTS; i++)
+    {
+        asset_t *asset =
+            asset_make_text(text_elements[i].font_path, text_elements[i].frame,
+                            text_elements[i].text, text_elements[i].color);
+        list_add(assets, asset);
+    }
+    return assets;
+}
+
+/**
+ * Build buttons assets from buttons templates
+ * @return list of button assets
+ */
+static list_t *build_btn_assets(size_t NUM_BTN_ELEMENTS, btn_element_t *landing_btn_elements)
+{
+    list_t *assets = list_init(NUM_BTN_ELEMENTS, (free_func_t)asset_destroy);
+    for (size_t i = 0; i < NUM_BTN_ELEMENTS; i++)
+    {
+        asset_t *asset = create_btn(landing_btn_elements[i]);
+        list_add(assets, asset);
+    }
+    return assets;
+}
+
+/**
  * Initialize and randomly generate a buildings
  * @param maze_state state of the maze
  */
@@ -285,6 +349,9 @@ static void buildings_init(maze_state_t *maze_state)
 
     asset_t *mission_building = asset_make_image_with_body(maze_state->buildings[rand].path, body);
     maze_state->random_building = mission_building;
+
+    maze_state->texts = build_text_assets(MISSION_PAGE_TEXT_ELEMENTS, mission_text_elements);
+    maze_state->btns = build_btn_assets(MISSION_PAGE_BTN_ELEMENTS, mission_btn_elements);
 }
 
 maze_state_t *maze_init()
@@ -448,6 +515,19 @@ void show_mission(state_t *state)
     {
         printf("showing mission");
         asset_render(state->maze_state->random_building);
+    }
+
+    list_t *texts = state->maze_state->texts;
+    for (size_t i = 0; i < list_size(texts); i++)
+    {
+
+        asset_render(list_get(texts, i));
+    }
+
+    list_t *btns = state->maze_state->btns;
+    for (size_t i = 0; i < list_size(btns); i++)
+    {
+        asset_render(list_get(btns, i));
     }
 }
 
