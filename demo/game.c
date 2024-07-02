@@ -14,7 +14,6 @@
 #include "landing_page.h"
 #include "maze.h"
 #include "sound_effect.h"
-#include "seeker.h"
 
 const size_t STARTING_SEEKERS = 50;
 
@@ -25,7 +24,6 @@ const vector_t SDL_CENTER = {500, 250};
 typedef struct maze_state maze_state_t;
 typedef struct landing_page_state landing_page_state_t;
 typedef struct end_game_state end_game_state_t;
-typedef struct seeker seeker_t;
 typedef struct sound_effect sound_effect_t;
 
 struct state
