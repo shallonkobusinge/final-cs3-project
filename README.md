@@ -32,6 +32,3 @@ In the main game, the hider navigates the maze using the arrow keys. The seeker'
 
   
   
-
-<u>Joint Statement</u>: We have put most of our important features in Week 1 and Week 2 so that when unforeseen circumstances happen, there is some time in Week 3 to catch up. We are also eager to start the next task once one is finished in order to be ahead of time as a way to be in the safe zone when disaster occurs. We are planning to use a task management tool (Jira or Trello or Pivotal Tracker) for a more collaborative experience.
-# final-cs3-project
