@@ -10,7 +10,6 @@
 #include "landing_page.h"
 #include "maze.h"
 #include "sound_effect.h"
-#include "seeker.h"
 #include "asset.h"
 #include "forces.h"
 #include "maze_body.h"
