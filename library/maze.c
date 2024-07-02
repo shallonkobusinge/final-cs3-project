@@ -47,7 +47,8 @@ typedef struct maze
 
 typedef struct building
 {
-    vector_t position;
+    size_t x;
+    size_t y;
     const char *path;
     rgb_color_t color;
 } building_t;
