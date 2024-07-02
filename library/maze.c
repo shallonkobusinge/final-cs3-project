@@ -47,9 +47,10 @@ typedef struct maze
 
 typedef struct building
 {
-    vector_t position;
-    const char *img_path;
-    rgb_color_t color;
+    size_t x;
+    size_t y;
+    const char *path;
+    rgb_color_t *color;
 } building_t;
 
 typedef struct maze_state
@@ -60,7 +61,7 @@ typedef struct maze_state
     list_t *imgs;
     list_t *texts;
     list_t *btns;
-    // maze_bodies_state_t *maze_bodies;
+    // maze_body_t *maze_bodies;
     building_t buildings[];
 } maze_state_t;
 
@@ -134,15 +135,12 @@ static void init_grid(state_t *state)
     {
         render_line(0, y, MAZE_WINDOW_WIDTH, y);
     }
-    for (size_t i = 0; i < NUM_BUILDINGS; i++)
-    {
-        
-        add_to_scene(state,
-                     &(maze_body_t){.color = (rgb_color_t){200, 200, 200},
-                                  .img_path = building_paths[i],
-                                  .position = (vector_t){.x = maze_state->buildings[i].position.x,
-                                                         .y = maze_state->buildings[i].position.y}});
-    }
+
+    // for (size_t i = 0; i < NUM_BUILDINGS; i++)
+    // {
+    //     vector_t center = (vector_t){.x = maze_state->buildings[i].x, .y = maze_state->buildings[i].y};
+    //     add_to_scene(state, center, (rgb_color_t){200, 200, 200}, building_paths[i]);
+    // }
 }
 
 /**
@@ -361,23 +359,22 @@ static void buildings_init(maze_state_t *maze_state)
         } while (random_color->r == 0 && random_color->g == 0 && random_color->b == 0);
 
         maze_state->buildings[i] = (building_t){
-            .position = (vector_t){
-                .x = ((GRID_WIDTH - rand_x) * GRID_CELL_SIZE) + (GRID_CELL_SIZE) / 2,
-                .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 3)},
+            .x = ((GRID_WIDTH - rand_x) * GRID_CELL_SIZE) + (GRID_CELL_SIZE) / 2,
+            .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 3),
         };
-        maze_state->buildings[i].img_path = building_paths[i];
+        maze_state->buildings[i].path = building_paths[i];
     }
 
     size_t rand = generate_random(0, NUM_BUILDINGS - 1);
 
-    vector_t center = (vector_t){.x = maze_state->buildings[rand].position.x, .y = maze_state->buildings[rand].position.y};
+    vector_t center = (vector_t){.x = maze_state->buildings[rand].x, .y = maze_state->buildings[rand].y};
     body_t *body = make_body(center, (rgb_color_t){200, 200, 200});
 
     maze_state->random_building = body;
 
     img_element_t mission_img_elements[] = {
         {
-            .file_path = maze_state->buildings[rand].img_path,
+            .file_path = maze_state->buildings[rand].path,
             .frame = (SDL_Rect){SDL_SCREEN_CENTER.x - 150, SDL_SCREEN_CENTER.y - 200, 300, 300},
         },
     };
@@ -394,7 +391,8 @@ maze_state_t *maze_init(state_t *state)
     maze_state_t *maze_state = malloc(sizeof(maze_state_t) + (sizeof(cell_t) * NUM_BUILDINGS));
     maze_state->maze = create_maze();
     maze_state->time_elapsed = 0;
-    buildings_init(maze_state);
+    // hider_seeker_init(state);
+    buildings_init(state);
 
     init_maze(maze_state->maze);
     generate_maze(maze_state->maze);
@@ -592,8 +590,8 @@ void show_maze(state_t *state, double dt)
 
     init_grid(state);
     draw_maze(state->maze_state->maze);
-    // render_seeker(state, state->maze_state->maze_bodies, dt);
-    render_bodies(state->body_assets);
+    // render_seeker(state, dt);
+    // render_bodies(state->body_assets);
     // seekers_random_movement(state);
     // hider_seeker_collision(state);
     // hider_building_collision(state);
