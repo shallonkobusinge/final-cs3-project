@@ -3,7 +3,6 @@
 #include "state.h"
 #include "asset_cache.h"
 #include "sound_effect.h"
-#include "seeker.h"
 #include "maze.h"
 
 const vector_t SCREEN_MAX = {1000, 500};
@@ -39,7 +38,6 @@ typedef struct state
     landing_page_state_t *landing_page_state;
     end_page_state_t *end_game_state;
     sound_effect_t *sound_effect;
-    seeker_t *seeker;
     list_t *body_assets;
 } state_t;
 

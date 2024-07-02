@@ -2,6 +2,10 @@
     "files.associations": {
         "landing_page.h": "c",
         "sound_effect.h": "c",
-        "sdl_wrapper.h": "c"
+        "sdl_wrapper.h": "c",
+        "stdbool.h": "c",
+        "forces.h": "c",
+        "maze_body.h": "c",
+        "list.h": "c"
     }
 }

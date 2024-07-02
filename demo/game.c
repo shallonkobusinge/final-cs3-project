@@ -36,7 +36,6 @@ struct state
     landing_page_state_t *landing_page_state;
     end_page_state_t *end_game_state;
     sound_effect_t *sound_effect;
-    seeker_t *seeker;
     list_t *body_assets;
 };
 
@@ -49,12 +48,11 @@ state_t *emscripten_init()
     state->scene = scene_init();
     state->page = 1;
     state->body_assets = list_init(STARTING_SEEKERS, (free_func_t)asset_destroy);
-    state->seeker = seeker_init(state);
-    state->maze_state = maze_init();
+    state->maze_state = maze_init(state);
     state->landing_page_state = landing_page_init();
     state->end_game_state = end_page_init();
     state->sound_effect = sound_effect_init();
-    game_sound(state->sound_effect);
+    // game_sound(state->sound_effect);
     return state;
 }
 
