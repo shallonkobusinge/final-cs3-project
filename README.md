@@ -1,5 +1,3 @@
-# No member of the Caltech community shall take unfair advantage of any other member of the Caltech community.
-
 # The Caltech Hideout
 ## SUMMARY
   
