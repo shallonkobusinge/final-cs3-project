@@ -393,7 +393,7 @@ maze_state_t *maze_init(state_t *state)
     maze_state->maze = create_maze();
     maze_state->time_elapsed = 0;
     hider_seeker_init(state);
-    buildings_init(state);
+    buildings_init(maze_state);
 
     init_maze(maze_state->maze);
     generate_maze(maze_state->maze);
