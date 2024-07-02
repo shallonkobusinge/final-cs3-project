@@ -137,7 +137,7 @@ static void init_grid(state_t *state)
     {
         
         add_to_scene(state,
-                     (building_t){.color = (rgb_color_t){200, 200, 200},
+                     &(building_t){.color = (rgb_color_t){200, 200, 200},
                                   .img_path = building_paths[i],
                                   .position = (vector_t){.x = maze_state->buildings[i].position.x,
                                                          .y = maze_state->buildings[i].position.y}});
