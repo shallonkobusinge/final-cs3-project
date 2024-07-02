@@ -85,7 +85,6 @@ bool emscripten_main(state_t *state)
 void emscripten_free(state_t *state)
 {
     list_free(state->body_assets);
-    seeker_free(state->seeker);
     scene_free(state->scene);
     sound_free(state->sound_effect);
     asset_cache_destroy();
