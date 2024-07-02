@@ -10,9 +10,9 @@
 #include "landing_page.h"
 #include "maze.h"
 #include "sound_effect.h"
-#include "seeker.h"
 #include "asset.h"
 #include "forces.h"
+#include "maze_body.h"
 
 const size_t GRID_WIDTH = 22;
 const size_t GRID_HEIGHT = 11;
@@ -61,6 +61,7 @@ typedef struct maze_state
     list_t *imgs;
     list_t *texts;
     list_t *btns;
+    maze_bodies_state_t *maze_bodies;
     building_t buildings[];
 } maze_state_t;
 
@@ -72,7 +73,6 @@ typedef struct state
     landing_page_state_t *landing_page_state;
     end_page_state_t *end_game_state;
     sound_effect_t *sound_effect;
-    seeker_t *seeker;
     list_t *body_assets;
 } state_t;
 
@@ -139,7 +139,10 @@ static void init_grid(state_t *state)
     for (size_t i = 0; i < NUM_BUILDINGS; i++)
     {
         vector_t center = (vector_t){.x = maze_state->buildings[i].x, .y = maze_state->buildings[i].y};
-        add_to_scene(state, center, (rgb_color_t){200, 200, 200}, building_paths[i]);
+        add_to_scene(state, &(maze_body_t){
+                                .color = (rgb_color_t){200, 200, 200},
+                                .img_path = building_paths[i],
+                                .position = center});
     }
 }
 
@@ -384,14 +387,14 @@ static void buildings_init(maze_state_t *maze_state)
     maze_state->btns = build_btn_assets(MISSION_PAGE_BTN_ELEMENTS, mission_btn_elements);
 }
 
-maze_state_t *maze_init()
+maze_state_t *maze_init(state_t *state)
 {
     srand(time(NULL));
 
     maze_state_t *maze_state = malloc(sizeof(maze_state_t) + (sizeof(cell_t) * NUM_BUILDINGS));
     maze_state->maze = create_maze();
     maze_state->time_elapsed = 0;
-
+    maze_state->maze_bodies = hider_seeker_init(state);
     buildings_init(maze_state);
 
     init_maze(maze_state->maze);
@@ -590,7 +593,7 @@ void show_maze(state_t *state, double dt)
 
     init_grid(state);
     draw_maze(state->maze_state->maze);
-    render_seeker(state, dt);
+    render_seeker(state, state->maze_state->maze_bodies, dt);
     render_bodies(state->body_assets);
     seekers_random_movement(state);
     hider_seeker_collision(state);

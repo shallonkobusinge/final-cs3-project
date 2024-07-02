@@ -1,6 +1,6 @@
+#include "maze_body.h"
 #include "stdbool.h"
 #include "stdlib.h"
-#include "seeker.h"
 #include "scene.h"
 #include "list.h"
 #include "asset.h"
@@ -21,18 +21,14 @@ extern const size_t NUM_CELLS;
 extern const size_t GRID_CELL_SIZE;
 extern const size_t MAZE_WINDOW_WIDTH;
 extern const size_t MAZE_WINDOW_HEIGHT;
+extern const size_t NUM_BUILDINGS;
 
 // SEEKING CONSTANTS
 const size_t S_NUM_POINTS = 20;
 const double S_RADIUS = 0.1;
-const size_t NEW_SEEKERS_INTERVAL = 60;
+const size_t NEW_SEEKERS_INTERVAL = 30;
 
 const rgb_color_t SEEKER_COLOR = (rgb_color_t){0.0, 0.0, 0.0};
-
-typedef struct seeker
-{
-  double last_render;
-} seeker_t;
 
 typedef struct state
 {
@@ -42,7 +38,6 @@ typedef struct state
   landing_page_state_t *landing_page_state;
   end_page_state_t *end_page_state;
   sound_effect_t *sound_effect;
-  seeker_t *seeker;
   list_t *body_assets;
 } state_t;
 
@@ -70,11 +65,11 @@ body_t *make_body(vector_t center, rgb_color_t color)
   return body;
 }
 
-void add_to_scene(state_t *state, vector_t center, rgb_color_t color, const char *path)
+void add_to_scene(state_t *state, maze_body_t *maze_body)
 {
-  body_t *body = make_body(center, color);
+  body_t *body = make_body(maze_body->position, maze_body->color);
   scene_add_body(state->scene, body);
-  asset_t *asset_body = asset_make_image_with_body(path, body);
+  asset_t *asset_body = asset_make_image_with_body(maze_body->img_path, body);
   list_add(state->body_assets, asset_body);
 }
 
@@ -106,36 +101,32 @@ static void display_time_elapsed(int32_t remaining_seconds)
  * Generate a random seeker position if it's a new seeker to be added after the 30 seconds.
  * If it's the initial seeker use a defined position.
  * @param state struct state of the game.
- * @param is_new determine if is it's the after 30 sec or initial seeker to be added.
+ * @param maze_bodies_state_t state representation of maze bodies.
  */
-static void add_new_seeker(state_t *state, bool is_new)
+static void add_new_body(state_t *state, maze_bodies_state_t *maze_bodies)
 {
+  maze_body_t *body = malloc(sizeof(maze_body_t));
+  vector_t seeker_pos = (vector_t){
+      .x = (rand() % (GRID_WIDTH)*GRID_CELL_SIZE) + (GRID_CELL_SIZE) / 2,
+      .y = (rand() % (GRID_HEIGHT - 4) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 3),
+  };
+  body->position = seeker_pos;
+  body->color = SEEKER_COLOR;
+  body->img_path = SEEKER_PATH;
+  maze_bodies->bodies[maze_bodies->num_bodies++] = *body;
+  maze_bodies->last_render = 0;
 
-  vector_t seeker_pos = VEC_ZERO;
-  if (is_new)
-  {
-    seeker_pos = (vector_t){
-        .x = (rand() % (GRID_WIDTH)*GRID_CELL_SIZE) + (GRID_CELL_SIZE) / 2,
-        .y = (rand() % (GRID_HEIGHT - 4) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 3),
-    };
-    state->seeker->last_render = 0;
-  }
-  else
-  {
-    seeker_pos = (vector_t){.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE) + (GRID_CELL_SIZE) / 2),
-                            .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 3))};
-  }
-  add_to_scene(state, seeker_pos, SEEKER_COLOR, SEEKER_PATH);
+  add_to_scene(state, body);
 }
 
-void render_seeker(state_t *state, double dt)
+void render_seeker(state_t *state, maze_bodies_state_t *maze_bodies, double dt)
 {
 
-  state->seeker->last_render += dt;
-  display_time_elapsed(state->seeker->last_render);
-  if (state->seeker->last_render >= NEW_SEEKERS_INTERVAL)
+  maze_bodies->last_render += dt;
+  display_time_elapsed(maze_bodies->last_render);
+  if (maze_bodies->last_render >= NEW_SEEKERS_INTERVAL)
   {
-    add_new_seeker(state, true);
+    add_new_body(state, maze_bodies);
   }
   for (size_t i = 1; i < list_size(state->body_assets); i++)
   {
@@ -148,26 +139,6 @@ void render_seeker(state_t *state, double dt)
   }
 }
 
-/**
- * Adds a hider body returned by make_body() to the scene.
- * Creates and adds a body asset of the hider to the list of body_assets in the state.
- * @param state state struct of the game.
- */
-static void hider_init(state_t *state)
-{
-  vector_t center = (vector_t){.y = (((GRID_HEIGHT - 1) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 3)),
-                               .x = (((GRID_WIDTH - 22) * GRID_CELL_SIZE) + (GRID_CELL_SIZE) / 2)};
-  add_to_scene(state, center, (rgb_color_t){50, 129, 110}, BEAVER_PATH);
-}
-
-seeker_t *seeker_init(state_t *state)
-{
-  seeker_t *seeker = malloc(sizeof(seeker_t));
-  seeker->last_render = 0;
-  hider_init(state);
-  add_new_seeker(state, false);
-  return seeker;
-}
 
 void render_bodies(list_t *bodies)
 {
@@ -223,7 +194,33 @@ void hider_seeker_collision(state_t *state)
   }
 }
 
-void seeker_free(seeker_t *seeker)
-{
-  free(seeker);
+maze_bodies_state_t *hider_seeker_init(state_t *state)
+{ 
+  maze_body_t BODIES_DATA[] = {
+      {.color = (rgb_color_t){10, 0, 0},
+       .img_path = BEAVER_PATH,
+       .position = {.x = (((GRID_WIDTH - 22) * GRID_CELL_SIZE) + (GRID_CELL_SIZE) / 2),
+                    .y = (((GRID_HEIGHT - 1) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 3))}},
+      {.color = (rgb_color_t){0, 0, 0},
+       .img_path = SEEKER_PATH,
+       .position = {.x = (((GRID_WIDTH - 2) * GRID_CELL_SIZE) + (GRID_CELL_SIZE) / 2),
+                    .y = (((GRID_HEIGHT - 6) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 3))}}};
+
+  maze_bodies_state_t *maze_bodies = malloc(sizeof(maze_bodies_state_t) + (sizeof(maze_body_t) * 50));
+  maze_bodies->num_bodies = 0;
+  for (int i = 0; i < 2; i++)
+  {
+    maze_bodies->bodies[maze_bodies->num_bodies++] = (maze_body_t){
+        .color = BODIES_DATA[i].color,
+        .img_path = BODIES_DATA[i].img_path,
+        .position = BODIES_DATA[i].position};
+    add_to_scene(state, &maze_bodies->bodies[i]);
+  }
+  maze_bodies->last_render = 0;
+  return maze_bodies;
+}
+
+void bodies_free(maze_bodies_state_t *bodies){
+  free(bodies->bodies);
+  free(bodies);
 }

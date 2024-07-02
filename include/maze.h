@@ -27,7 +27,7 @@ void show_mission(state_t *state);
  * Runs the DFS using a stack and it processes the cells until the stack is emptied.
  * @return state of the maze
  */
-maze_state_t *maze_init();
+maze_state_t *maze_init(state_t *state);
 
 /**
  * Traverse traverse in the body's current.

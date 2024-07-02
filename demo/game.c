@@ -14,7 +14,6 @@
 #include "landing_page.h"
 #include "maze.h"
 #include "sound_effect.h"
-#include "seeker.h"
 
 const size_t STARTING_SEEKERS = 50;
 
@@ -25,7 +24,6 @@ const vector_t SDL_CENTER = {500, 250};
 typedef struct maze_state maze_state_t;
 typedef struct landing_page_state landing_page_state_t;
 typedef struct end_game_state end_game_state_t;
-typedef struct seeker seeker_t;
 typedef struct sound_effect sound_effect_t;
 
 struct state
@@ -36,7 +34,6 @@ struct state
     landing_page_state_t *landing_page_state;
     end_page_state_t *end_game_state;
     sound_effect_t *sound_effect;
-    seeker_t *seeker;
     list_t *body_assets;
 };
 
@@ -49,12 +46,11 @@ state_t *emscripten_init()
     state->scene = scene_init();
     state->page = 1;
     state->body_assets = list_init(STARTING_SEEKERS, (free_func_t)asset_destroy);
-    state->seeker = seeker_init(state);
-    state->maze_state = maze_init();
+    state->maze_state = maze_init(state);
     state->landing_page_state = landing_page_init();
     state->end_game_state = end_page_init();
     state->sound_effect = sound_effect_init();
-    game_sound(state->sound_effect);
+    // game_sound(state->sound_effect);
     return state;
 }
 
@@ -89,7 +85,6 @@ bool emscripten_main(state_t *state)
 void emscripten_free(state_t *state)
 {
     list_free(state->body_assets);
-    seeker_free(state->seeker);
     scene_free(state->scene);
     sound_free(state->sound_effect);
     asset_cache_destroy();
