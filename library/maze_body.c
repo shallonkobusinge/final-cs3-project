@@ -26,7 +26,7 @@ extern const size_t NUM_BUILDINGS;
 // SEEKING CONSTANTS
 const size_t S_NUM_POINTS = 20;
 const double S_RADIUS = 0.1;
-const size_t NEW_SEEKERS_INTERVAL = 2;
+const size_t NEW_SEEKERS_INTERVAL = 30;
 
 const rgb_color_t SEEKER_COLOR = (rgb_color_t){0.0, 0.0, 0.0};
 
