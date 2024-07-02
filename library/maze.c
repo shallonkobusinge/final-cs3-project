@@ -136,11 +136,12 @@ static void init_grid(state_t *state)
         render_line(0, y, MAZE_WINDOW_WIDTH, y);
     }
 
-    for (size_t i = 0; i < NUM_BUILDINGS; i++)
-    {
-        vector_t center = (vector_t){.x = maze_state->buildings[i].x, .y = maze_state->buildings[i].y};
-        add_to_scene(state, center, (rgb_color_t){200, 200, 200}, building_paths[i]);
-    }
+    // for (size_t i = 0; i < NUM_BUILDINGS; i++)
+    // {
+        // vector_t center = (vector_t){.x = maze_state->buildings[i].x, .y = maze_state->buildings[i].y};
+//  center, (rgb_color_t){200, 200, 200}, building_paths[i]
+        // add_to_scene(state, (maze_body_t){.});
+    // }
 }
 
 /**
