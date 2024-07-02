@@ -60,7 +60,7 @@ typedef struct maze_state
     list_t *imgs;
     list_t *texts;
     list_t *btns;
-    maze_bodies_state_t *maze_bodies;
+    // maze_bodies_state_t *maze_bodies;
     building_t buildings[];
 } maze_state_t;
 
