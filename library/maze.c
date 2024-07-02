@@ -135,7 +135,7 @@ static void init_grid(state_t *state)
     }
     for (size_t i = 0; i < NUM_BUILDINGS; i++)
     {
-
+        
         add_to_scene(state,
                      (building_t){.color = (rgb_color_t){200, 200, 200},
                                   .img_path = building_paths[i],
@@ -364,7 +364,7 @@ static void buildings_init(maze_state_t *maze_state)
                 .x = ((GRID_WIDTH - rand_x) * GRID_CELL_SIZE) + (GRID_CELL_SIZE) / 2,
                 .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 3)},
         };
-        maze_state->buildings[i].path = building_paths[i];
+        maze_state->buildings[i].img_path = building_paths[i];
     }
 
     size_t rand = generate_random(0, NUM_BUILDINGS - 1);
@@ -376,7 +376,7 @@ static void buildings_init(maze_state_t *maze_state)
 
     img_element_t mission_img_elements[] = {
         {
-            .file_path = maze_state->buildings[rand].path,
+            .file_path = maze_state->buildings[rand].img_path,
             .frame = (SDL_Rect){SDL_SCREEN_CENTER.x - 150, SDL_SCREEN_CENTER.y - 200, 300, 300},
         },
     };
