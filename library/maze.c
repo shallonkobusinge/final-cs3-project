@@ -47,8 +47,7 @@ typedef struct maze
 
 typedef struct building
 {
-    size_t x;
-    size_t y;
+    vector_t position;
     const char *path;
     rgb_color_t color;
 } building_t;
@@ -138,10 +137,10 @@ static void init_grid(state_t *state)
     {
 
         add_to_scene(state,
-                     (void *){.color = (rgb_color_t){200, 200, 200},
-                                    .path = building_paths[i],
-                                    .position = (vector_t){.x = maze_state->buildings[i].x,
-                                                           .y = maze_state->buildings[i].y}});
+                     (building_t){.color = (rgb_color_t){200, 200, 200},
+                                  .path = building_paths[i],
+                                  .position = (vector_t){.x = maze_state->buildings[i].x,
+                                                         .y = maze_state->buildings[i].y}});
     }
 }
 
@@ -361,8 +360,9 @@ static void buildings_init(maze_state_t *maze_state)
         } while (random_color->r == 0 && random_color->g == 0 && random_color->b == 0);
 
         maze_state->buildings[i] = (building_t){
-            .x = ((GRID_WIDTH - rand_x) * GRID_CELL_SIZE) + (GRID_CELL_SIZE) / 2,
-            .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 3),
+            .position = (vector_t){
+                .x = ((GRID_WIDTH - rand_x) * GRID_CELL_SIZE) + (GRID_CELL_SIZE) / 2,
+                .y = ((GRID_HEIGHT - rand_y) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 3)},
         };
         maze_state->buildings[i].path = building_paths[i];
     }
