@@ -48,7 +48,7 @@ typedef struct maze
 typedef struct building
 {
     vector_t position;
-    const char *path;
+    const char *img_path;
     rgb_color_t color;
 } building_t;
 
@@ -138,7 +138,7 @@ static void init_grid(state_t *state)
 
         add_to_scene(state,
                      (building_t){.color = (rgb_color_t){200, 200, 200},
-                                  .path = building_paths[i],
+                                  .img_path = building_paths[i],
                                   .position = (vector_t){.x = maze_state->buildings[i].position.x,
                                                          .y = maze_state->buildings[i].position.y}});
     }
