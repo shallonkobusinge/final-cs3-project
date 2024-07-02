@@ -60,6 +60,7 @@ typedef struct maze_state
     list_t *imgs;
     list_t *texts;
     list_t *btns;
+    maze_bodies_state_t *maze_bodies;
     building_t buildings[];
 } maze_state_t;
 
@@ -393,7 +394,7 @@ maze_state_t *maze_init(state_t *state)
     maze_state_t *maze_state = malloc(sizeof(maze_state_t) + (sizeof(cell_t) * NUM_BUILDINGS));
     maze_state->maze = create_maze();
     maze_state->time_elapsed = 0;
-    hider_seeker_init(state);
+    maze_state->maze_bodies = hider_seeker_init(state);
     buildings_init(maze_state);
 
     init_maze(maze_state->maze);
@@ -592,7 +593,7 @@ void show_maze(state_t *state, double dt)
 
     init_grid(state);
     draw_maze(state->maze_state->maze);
-    // render_seeker(state, dt);
+    render_seeker(state, state->maze_state->maze_bodies, dt);
     render_bodies(state->body_assets);
     // seekers_random_movement(state);
     // hider_seeker_collision(state);
