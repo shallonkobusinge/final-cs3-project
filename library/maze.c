@@ -369,7 +369,7 @@ static void buildings_init(maze_state_t *maze_state)
 
     size_t rand = generate_random(0, NUM_BUILDINGS - 1);
 
-    vector_t center = (vector_t){.x = maze_state->buildings[rand].x, .y = maze_state->buildings[rand].y};
+    vector_t center = (vector_t){.x = maze_state->buildings[rand].position.x, .y = maze_state->buildings[rand].position.y};
     body_t *body = make_body(center, (rgb_color_t){200, 200, 200});
 
     maze_state->random_building = body;
