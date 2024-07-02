@@ -61,7 +61,6 @@ typedef struct maze_state
     list_t *imgs;
     list_t *texts;
     list_t *btns;
-    maze_body_t *maze_bodies;
     building_t buildings[];
 } maze_state_t;
 
@@ -136,12 +135,11 @@ static void init_grid(state_t *state)
         render_line(0, y, MAZE_WINDOW_WIDTH, y);
     }
 
-    // for (size_t i = 0; i < NUM_BUILDINGS; i++)
-    // {
-        // vector_t center = (vector_t){.x = maze_state->buildings[i].x, .y = maze_state->buildings[i].y};
-//  center, (rgb_color_t){200, 200, 200}, building_paths[i]
-        // add_to_scene(state, (maze_body_t){.});
-    // }
+    for (size_t i = 0; i < NUM_BUILDINGS; i++)
+    {
+
+        add_to_scene(state, (maze_body_t){.color = (rgb_color_t){200, 200, 200}, .img_path = building_paths[i], .position = (vector_t){.x = maze_state->buildings[i].x, .y = maze_state->buildings[i].y}});
+    }
 }
 
 /**
