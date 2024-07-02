@@ -124,7 +124,6 @@ static void restart_game(state_t *state)
 {
     state->scene = scene_init();
     state->body_assets = list_init(MAZE_STARTING_SEEKERS, (free_func_t)asset_destroy);
-    state->seeker = seeker_init(state);
     state->maze_state = maze_init();
     state->page = 2;
 }
@@ -133,7 +132,6 @@ static void load_landing_page(state_t *state)
 {
     state->scene = scene_init();
     state->body_assets = list_init(MAZE_STARTING_SEEKERS, (free_func_t)asset_destroy);
-    state->seeker = seeker_init(state);
     state->maze_state = maze_init();
     state->page = 1;
 }
