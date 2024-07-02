@@ -25,15 +25,6 @@ typedef struct maze_bodies
 void seekers_random_movement(state_t *state);
 
 /**
- * Allocates memory for an empty seeker.
- * Adds one seeker and one hider to the scene.
- * @param state state struct of the game.
- *
- * @return the new seeker.
- */
-// seeker_t *seeker_init(state_t *state);
-
-/**
  * Create a four vector shaped body.
  * Translates the body to the new position.
  * @param position cell position to place the body in the maze.
@@ -59,7 +50,7 @@ void render_seeker(state_t *state, maze_bodies_state_t *bodies, double dt);
  * Release memory allocated for a given seeker.
  * @param seeker a pointer to a seeker returned from seeker_init();
  */
-// void seeker_free(seeker_t *seeker);
+void bodies_free(maze_bodies_state_t *bodies);
 
 /**
  * Renders all bodies (seeker, buildings, hider) in the scene.

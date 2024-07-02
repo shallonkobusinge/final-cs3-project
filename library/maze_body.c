@@ -139,26 +139,6 @@ void render_seeker(state_t *state, maze_bodies_state_t *maze_bodies, double dt)
   }
 }
 
-/**
- * Adds a hider body returned by make_body() to the scene.
- * Creates and adds a body asset of the hider to the list of body_assets in the state.
- * @param state state struct of the game.
- */
-// static void hider_init(state_t *state)
-// {
-//   vector_t center = (vector_t){.y = (((GRID_HEIGHT - 1) * GRID_CELL_SIZE) - (GRID_CELL_SIZE / 3)),
-//                                .x = (((GRID_WIDTH - 22) * GRID_CELL_SIZE) + (GRID_CELL_SIZE) / 2)};
-//   add_to_scene(state, center, (rgb_color_t){50, 129, 110}, BEAVER_PATH);
-// }
-
-// seeker_t *seeker_init(state_t *state)
-// {
-//   seeker_t *seeker = malloc(sizeof(seeker_t));
-//   seeker->last_render = 0;
-//   hider_init(state);
-//   add_new_seeker(state, false);
-//   return seeker;
-// }
 
 void render_bodies(list_t *bodies)
 {
@@ -240,7 +220,7 @@ maze_bodies_state_t *hider_seeker_init(state_t *state)
   return maze_bodies;
 }
 
-// void seeker_free(seeker_t *seeker)
-// {
-//   free(seeker);
-// }
+void bodies_free(maze_bodies_state_t *bodies){
+  free(bodies->bodies);
+  free(bodies);
+}
