@@ -136,11 +136,14 @@ static void init_grid(state_t *state)
         render_line(0, y, MAZE_WINDOW_WIDTH, y);
     }
 
-    // for (size_t i = 0; i < NUM_BUILDINGS; i++)
-    // {
-    //     vector_t center = (vector_t){.x = maze_state->buildings[i].x, .y = maze_state->buildings[i].y};
-    //     add_to_scene(state, center, (rgb_color_t){200, 200, 200}, building_paths[i]);
-    // }
+    for (size_t i = 0; i < NUM_BUILDINGS; i++)
+    {
+        vector_t center = (vector_t){.x = maze_state->buildings[i].x, .y = maze_state->buildings[i].y};
+        add_to_scene(state, (maze_body_t){
+                                .color = (rgb_color_t){200, 200, 200},
+                                .img_path = building_paths[i],
+                                .position = center});
+    }
 }
 
 /**
@@ -590,7 +593,7 @@ void show_maze(state_t *state, double dt)
 
     init_grid(state);
     draw_maze(state->maze_state->maze);
-    // render_seeker(state, dt);
+    render_seeker(state, state->maze_state->maze_bodies, dt);
     render_bodies(state->body_assets);
     // seekers_random_movement(state);
     // hider_seeker_collision(state);
