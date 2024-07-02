@@ -49,7 +49,7 @@ typedef struct building
 {
     vector_t position;
     const char *path;
-    rgb_color_t *color;
+    rgb_color_t color;
 } building_t;
 
 typedef struct maze_state
